@@ -1,7 +1,8 @@
 import React from "react";
 
 function Bertille() {
-  return <div>Bertille</div>;
+  let test = "Bertille";
+  return <div>{test} : Modification du fichier</div>;
 }
 
 export default Bertille;
