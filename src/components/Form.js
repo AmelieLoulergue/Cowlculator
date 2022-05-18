@@ -98,61 +98,53 @@ function Form(props) {
       american_bison: false,
       other: { value: "", selected: false },
     },
-    farm_dairy_cattle: {
-      rep12_numb: { value: 0, selected: false },
-      rep24_numb: { value: 0, selected: false },
-      matur_numb: { value: 0, selected: false },
-    },
-    farm_beef_cattle: {
-      rep12_numb: { value: 0, selected: false },
-      rep24_numb: { value: 0, selected: false },
-      matur_numb: { value: 0, selected: false },
-    },
-    farm_sheeps: {
-      rep12_numb: { value: 0, selected: false },
-      rep24_numb: { value: 0, selected: false },
-      matur_numb: { value: 0, selected: false },
-    },
-    farm_goats: {
-      rep12_numb: { value: 0, selected: false },
-      rep24_numb: { value: 0, selected: false },
-      matur_numb: { value: 0, selected: false },
-    },
-    farm_swine: {
-      rep12_numb: { value: 0, selected: false },
-      rep24_numb: { value: 0, selected: false },
-      matur_numb: { value: 0, selected: false },
-    },
-    farm_horses: {
-      rep12_numb: { value: 0, selected: false },
-      rep24_numb: { value: 0, selected: false },
-      matur_numb: { value: 0, selected: false },
-    },
-    farm_mules: {
-      rep12_numb: { value: 0, selected: false },
-      rep24_numb: { value: 0, selected: false },
-      matur_numb: { value: 0, selected: false },
-    },
-    farm_water_buffalo: {
-      rep12_numb: { value: 0, selected: false },
-      rep24_numb: { value: 0, selected: false },
-      matur_numb: { value: 0, selected: false },
-    },
-    farm_poultry: {
-      rep12_numb: { value: 0, selected: false },
-      rep24_numb: { value: 0, selected: false },
-      matur_numb: { value: 0, selected: false },
-    },
-    farm_american_bison: {
-      rep12_numb: { value: 0, selected: false },
-      rep24_numb: { value: 0, selected: false },
-      matur_numb: { value: 0, selected: false },
-    },
-    farm_other: {
-      rep12_numb: { value: 0, selected: false },
-      rep24_numb: { value: 0, selected: false },
-      matur_numb: { value: 0, selected: false },
-    },
+
+    farm_dairy_cattle_rep12_numb: { value: 0, selected: false },
+    farm_dairy_cattle_rep24_numb: { value: 0, selected: false },
+    farm_dairy_cattle_matur_numb: { value: 0, selected: false },
+
+    farm_beef_cattle_rep12_numb: { value: 0, selected: false },
+    farm_beef_cattle_rep24_numb: { value: 0, selected: false },
+    farm_beef_cattle_matur_numb: { value: 0, selected: false },
+    farm_beef_cattle_weanling_numb: { value: 0, selected: false },
+    farm_beef_cattle_yearling_numb: { value: 0, selected: false },
+    farm_beef_cattle_bulls_numb: { value: 0, selected: false },
+
+    farm_sheeps_rep12_numb: { value: 0, selected: false },
+    farm_sheeps_rep24_numb: { value: 0, selected: false },
+    farm_sheeps_matur_numb: { value: 0, selected: false },
+
+    farm_goats_rep12_numb: { value: 0, selected: false },
+    farm_goats_rep24_numb: { value: 0, selected: false },
+    farm_goats_matur_numb: { value: 0, selected: false },
+
+    farm_swine_rep12_numb: { value: 0, selected: false },
+    farm_swine_rep24_numb: { value: 0, selected: false },
+    farm_swine_matur_numb: { value: 0, selected: false },
+
+    farm_horses_rep12_numb: { value: 0, selected: false },
+    farm_horses_rep24_numb: { value: 0, selected: false },
+    farm_horses_matur_numb: { value: 0, selected: false },
+
+    farm_mules_rep12_numb: { value: 0, selected: false },
+    farm_mules_rep24_numb: { value: 0, selected: false },
+    farm_mules_matur_numb: { value: 0, selected: false },
+
+    farm_water_buffalo_rep12_numb: { value: 0, selected: false },
+    farm_water_buffalo_rep24_numb: { value: 0, selected: false },
+    farm_water_buffalo_matur_numb: { value: 0, selected: false },
+
+    farm_poultry_rep12_numb: { value: 0, selected: false },
+    farm_poultry_rep24_numb: { value: 0, selected: false },
+    farm_poultry_matur_numb: { value: 0, selected: false },
+
+    farm_american_bison_rep12_numb: { value: 0, selected: false },
+    farm_american_bison_rep24_numb: { value: 0, selected: false },
+    farm_american_bison_matur_numb: { value: 0, selected: false },
+
+    farm_other_rep12_numb: { value: 0, selected: false },
+    farm_other_rep24_numb: { value: 0, selected: false },
+    farm_other_matur_numb: { value: 0, selected: false },
   });
   const handleChangeDate = (event) => {
     let date = event.target.value.split("-");
@@ -219,6 +211,7 @@ function Form(props) {
       });
     }
     if (other) {
+      console.log(event);
       setFormDatas({
         ...formDatas,
         [event.target.name]: {
@@ -255,22 +248,16 @@ function Form(props) {
       });
     }
     if (animal) {
-      let key1 = event.target.name.split(".")[0];
-      let key2 = event.target.name.split(".")[1];
-      console.log(key1, key2);
-      console.log(event.target.checked);
+      console.log(event.target.name, event.target.value);
       setFormDatas({
         ...formDatas,
-        [key1]: {
-          ...formDatas[key1],
-          [key2]: {
-            ...formDatas[key1][key2],
-            selected: event.target.checked,
-          },
+        [event.target.name]: {
+          ...formDatas[event.target.name],
+          selected: event.target.checked,
         },
       });
     }
-    if (!both && !other && !none) {
+    if (!both && !other && !none && !animal) {
       setFormDatas({
         ...formDatas,
         [event.target.name]: {
@@ -936,6 +923,7 @@ function Form(props) {
               </legend>
 
               {Object.entries(formDatas.farm_type_animals).map((choice) => {
+                console.log(choice);
                 if (choice[0] !== "other") {
                   return (
                     <div>
@@ -996,10 +984,10 @@ function Form(props) {
           )}
           {Object.entries(formDatas.farm_type_animals).map((choice) => {
             if (
-              formDatas[`farm_${choice[0]}`] &&
+              formDatas[`farm_type_animals`][choice[0]] &&
               choice[0] !== "other" &&
-              formDatas.farm_type_animals[choice[0]]
-            )
+              choice[0] !== "beef_cattle"
+            ) {
               return (
                 <div>
                   <label htmlFor={`farm_${choice[0]}`}>
@@ -1014,46 +1002,341 @@ function Form(props) {
                   <div>
                     <input
                       type="checkbox"
-                      name={`farm_${choice[0]}.rep12_numb`}
+                      name={`farm_${choice[0]}_rep12_numb`}
                       checked={
-                        formDatas[`farm_${choice[0]}`].rep12_numb.selected
+                        formDatas[`farm_${choice[0]}_rep12_numb`].selected
                       }
                       onChange={(event) =>
                         handleChangeRadio({ event: event, animal: true })
                       }
                     />{" "}
-                    <label htmlFor={`farm_${choice[0]}.rep12_numb`}>
+                    <label htmlFor={`farm_${choice[0]}_rep12_numb`}>
                       Replacements 0-12mois
                     </label>
                     <input
                       type="checkbox"
-                      name={`farm_${choice[0]}.rep24_numb`}
+                      name={`farm_${choice[0]}_rep24_numb`}
                       checked={
-                        formDatas[`farm_${choice[0]}`].rep24_numb.selected
+                        formDatas[`farm_${choice[0]}_rep24_numb`].selected
                       }
                       onChange={(event) =>
                         handleChangeRadio({ event: event, animal: true })
                       }
                     />{" "}
-                    <label htmlFor={`farm_${choice[0]}.rep24_numb`}>
-                      Replacements 0-12mois
+                    <label htmlFor={`farm_${choice[0]}_rep24_numb`}>
+                      Replacements 0-24mois
                     </label>
                     <input
                       type="checkbox"
-                      name={`farm_${choice[0]}.matur_numb`}
+                      name={`farm_${choice[0]}_matur_numb`}
                       checked={
-                        formDatas[`farm_${choice[0]}`].matur_numb.selected
+                        formDatas[`farm_${choice[0]}_matur_numb`].selected
                       }
                       onChange={(event) =>
                         handleChangeRadio({ event: event, animal: true })
                       }
                     />{" "}
-                    <label htmlFor={`farm_${choice[0]}.matur_numb`}>
-                      Replacements 0-12mois
+                    <label htmlFor={`farm_${choice[0]}_matur_numb`}>
+                      Mature cows
                     </label>
                   </div>
+                  {formDatas[`farm_${choice[0]}_rep12_numb`].selected ? (
+                    <div>
+                      <label>
+                        How many heads of replacements 0-12mois do you farm? NB:
+                        in the time frame reported
+                      </label>
+                      <input
+                        type="number"
+                        name={`farm_${choice[0]}_rep12_numb`}
+                        value={
+                          formDatas[`farm_${choice[0]}_rep12_numb`]["value"] ===
+                          0
+                            ? ""
+                            : formDatas[`farm_${choice[0]}_rep12_numb`]["value"]
+                        }
+                        onChange={(event) => handleChangeNumber(event)}
+                      />{" "}
+                    </div>
+                  ) : (
+                    false
+                  )}
+                  {formDatas[`farm_${choice[0]}_rep24_numb`].selected ? (
+                    <div>
+                      <label>
+                        How many heads of replacements 12-24mois do you farm?
+                        NB: in the time frame reported
+                      </label>
+                      <input
+                        type="number"
+                        name={`farm_${choice[0]}_rep24_numb`}
+                        value={
+                          formDatas[`farm_${choice[0]}_rep24_numb`]["value"] ===
+                          0
+                            ? ""
+                            : formDatas[`farm_${choice[0]}_rep24_numb`]["value"]
+                        }
+                        onChange={(event) => handleChangeNumber(event)}
+                      />{" "}
+                    </div>
+                  ) : (
+                    false
+                  )}
+                  {formDatas[`farm_${choice[0]}_matur_numb`].selected ? (
+                    <div>
+                      <label>
+                        How many heads of mature cows do you farm? NB: in the
+                        time frame reported
+                      </label>
+                      <input
+                        type="number"
+                        name={`farm_${choice[0]}_matur_numb`}
+                        value={
+                          formDatas[`farm_${choice[0]}_matur_numb`]["value"] ===
+                          0
+                            ? ""
+                            : formDatas[`farm_${choice[0]}_matur_numb`]["value"]
+                        }
+                        onChange={(event) => handleChangeNumber(event)}
+                      />{" "}
+                    </div>
+                  ) : (
+                    false
+                  )}
                 </div>
               );
+            } else if (
+              formDatas[`farm_type_animals`][choice[0]] &&
+              choice[0] !== "other" &&
+              choice[0] === "beef_cattle"
+            ) {
+              console.log(choice[0]);
+              return (
+                <div>
+                  <label htmlFor={`farm_${choice[0]}`}>
+                    Select all animals composing your{" "}
+                    {choice[0].replaceAll("_", " ")} in the time frame reported
+                    :<br />
+                    NB: A portion of the offspring are retained to replace
+                    mature cows that die or are removed from the herd (culled)
+                    each year. Those represents a very fast movement of cattle
+                    called "replacements".
+                  </label>
+                  <div>
+                    <input
+                      type="checkbox"
+                      name={`farm_${choice[0]}_rep12_numb`}
+                      checked={
+                        formDatas[`farm_${choice[0]}_rep12_numb`].selected
+                      }
+                      onChange={(event) =>
+                        handleChangeRadio({ event: event, animal: true })
+                      }
+                    />{" "}
+                    <label htmlFor={`farm_${choice[0]}_rep12_numb`}>
+                      Replacements 0-12mois
+                    </label>
+                    <input
+                      type="checkbox"
+                      name={`farm_${choice[0]}_rep24_numb`}
+                      checked={
+                        formDatas[`farm_${choice[0]}_rep24_numb`].selected
+                      }
+                      onChange={(event) =>
+                        handleChangeRadio({ event: event, animal: true })
+                      }
+                    />{" "}
+                    <label htmlFor={`farm_${choice[0]}_rep24_numb`}>
+                      Replacements 0-24mois
+                    </label>
+                    <input
+                      type="checkbox"
+                      name={`farm_${choice[0]}_matur_numb`}
+                      checked={
+                        formDatas[`farm_${choice[0]}_matur_numb`].selected
+                      }
+                      onChange={(event) =>
+                        handleChangeRadio({ event: event, animal: true })
+                      }
+                    />{" "}
+                    <label htmlFor={`farm_${choice[0]}_matur_numb`}>
+                      Mature cows
+                    </label>
+                    <input
+                      type="checkbox"
+                      name={`farm_${choice[0]}_weanling_numb`}
+                      checked={
+                        formDatas[`farm_${choice[0]}_weanling_numb`].selected
+                      }
+                      onChange={(event) =>
+                        handleChangeRadio({ event: event, animal: true })
+                      }
+                    />{" "}
+                    <label htmlFor={`farm_${choice[0]}_weanling_numb`}>
+                      Weanling system steers/heifers
+                    </label>
+                    <input
+                      type="checkbox"
+                      name={`farm_${choice[0]}_yearling_numb`}
+                      checked={
+                        formDatas[`farm_${choice[0]}_yearling_numb`].selected
+                      }
+                      onChange={(event) =>
+                        handleChangeRadio({ event: event, animal: true })
+                      }
+                    />{" "}
+                    <label htmlFor={`farm_${choice[0]}_yearling_numb`}>
+                      Yearling system steers/heifers
+                    </label>
+                    <input
+                      type="checkbox"
+                      name={`farm_${choice[0]}_bulls_numb`}
+                      checked={
+                        formDatas[`farm_${choice[0]}_bulls_numb`].selected
+                      }
+                      onChange={(event) =>
+                        handleChangeRadio({ event: event, animal: true })
+                      }
+                    />{" "}
+                    <label htmlFor={`farm_${choice[0]}_bulls_numb`}>
+                      Bulls
+                    </label>
+                  </div>
+                  {formDatas[`farm_${choice[0]}_rep12_numb`].selected ? (
+                    <div>
+                      <label>
+                        How many heads of replacements 0-12mois do you farm? NB:
+                        in the time frame reported
+                      </label>
+                      <input
+                        type="number"
+                        name={`farm_${choice[0]}_rep12_numb`}
+                        value={
+                          formDatas[`farm_${choice[0]}_rep12_numb`]["value"] ===
+                          0
+                            ? ""
+                            : formDatas[`farm_${choice[0]}_rep12_numb`]["value"]
+                        }
+                        onChange={(event) => handleChangeNumber(event)}
+                      />{" "}
+                    </div>
+                  ) : (
+                    false
+                  )}
+                  {formDatas[`farm_${choice[0]}_rep24_numb`].selected ? (
+                    <div>
+                      <label>
+                        How many heads of replacements 12-24mois do you farm?
+                        NB: in the time frame reported
+                      </label>
+                      <input
+                        type="number"
+                        name={`farm_${choice[0]}_rep24_numb`}
+                        value={
+                          formDatas[`farm_${choice[0]}_rep24_numb`]["value"] ===
+                          0
+                            ? ""
+                            : formDatas[`farm_${choice[0]}_rep24_numb`]["value"]
+                        }
+                        onChange={(event) => handleChangeNumber(event)}
+                      />{" "}
+                    </div>
+                  ) : (
+                    false
+                  )}
+                  {formDatas[`farm_${choice[0]}_matur_numb`].selected ? (
+                    <div>
+                      <label>
+                        How many heads of mature cows do you farm? NB: in the
+                        time frame reported
+                      </label>
+                      <input
+                        type="number"
+                        name={`farm_${choice[0]}_matur_numb`}
+                        value={
+                          formDatas[`farm_${choice[0]}_matur_numb`]["value"] ===
+                          0
+                            ? ""
+                            : formDatas[`farm_${choice[0]}_matur_numb`]["value"]
+                        }
+                        onChange={(event) => handleChangeNumber(event)}
+                      />{" "}
+                    </div>
+                  ) : (
+                    false
+                  )}
+                  {formDatas[`farm_${choice[0]}_weanling_numb`].selected ? (
+                    <div>
+                      <label>
+                        How many heads of weanling system steers/heifers do you
+                        farm? NB: in the time frame reported
+                      </label>
+                      <input
+                        type="number"
+                        name={`farm_${choice[0]}_weanling_numb`}
+                        value={
+                          formDatas[`farm_${choice[0]}_weanling_numb`][
+                            "value"
+                          ] === 0
+                            ? ""
+                            : formDatas[`farm_${choice[0]}_weanling_numb`][
+                                "value"
+                              ]
+                        }
+                        onChange={(event) => handleChangeNumber(event)}
+                      />{" "}
+                    </div>
+                  ) : (
+                    false
+                  )}
+                  {formDatas[`farm_${choice[0]}_yearling_numb`].selected ? (
+                    <div>
+                      <label>
+                        How many heads of yearling system steers/heifers do you
+                        farm? NB: in the time frame reported
+                      </label>
+                      <input
+                        type="number"
+                        name={`farm_${choice[0]}_yearling_numb`}
+                        value={
+                          formDatas[`farm_${choice[0]}_yearling_numb`][
+                            "value"
+                          ] === 0
+                            ? ""
+                            : formDatas[`farm_${choice[0]}_yearling_numb`][
+                                "value"
+                              ]
+                        }
+                        onChange={(event) => handleChangeNumber(event)}
+                      />{" "}
+                    </div>
+                  ) : (
+                    false
+                  )}
+                  {formDatas[`farm_${choice[0]}_bulls_numb`].selected ? (
+                    <div>
+                      <label>
+                        How many heads of bulls do you farm? NB: in the time
+                        frame reported
+                      </label>
+                      <input
+                        type="number"
+                        name={`farm_${choice[0]}_bulls_numb`}
+                        value={
+                          formDatas[`farm_${choice[0]}_bulls_numb`]["value"] ===
+                          0
+                            ? ""
+                            : formDatas[`farm_${choice[0]}_bulls_numb`]["value"]
+                        }
+                        onChange={(event) => handleChangeNumber(event)}
+                      />{" "}
+                    </div>
+                  ) : (
+                    false
+                  )}
+                </div>
+              );
+            }
           })}
         </div>
         <div>
