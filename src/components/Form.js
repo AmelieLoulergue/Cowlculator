@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import calculs from "../utils/calculs";
 function Form(props) {
   let dateNow = new Date().toISOString().split("T")[0].split("-");
   const [formDatas, setFormDatas] = useState({
@@ -211,7 +212,7 @@ function Form(props) {
       });
     }
     if (other) {
-      console.log(event);
+      //console.log(event);
       setFormDatas({
         ...formDatas,
         [event.target.name]: {
@@ -224,7 +225,7 @@ function Form(props) {
       });
     }
     if (both) {
-      console.log(formDatas[event.target.name]);
+      //console.log(formDatas[event.target.name]);
       setFormDatas({
         ...formDatas,
         [event.target.name]: {
@@ -248,7 +249,7 @@ function Form(props) {
       });
     }
     if (animal) {
-      console.log(event.target.name, event.target.value);
+      //console.log(event.target.name, event.target.value);
       setFormDatas({
         ...formDatas,
         [event.target.name]: {
@@ -295,7 +296,8 @@ function Form(props) {
   const handleSubmit = (event) => {
     // prevents the submit button from refreshing the page
     event.preventDefault();
-    console.log(formDatas);
+    //console.log(formDatas);
+    calculs(formDatas);
   };
   return (
     <>
@@ -923,10 +925,10 @@ function Form(props) {
               </legend>
 
               {Object.entries(formDatas.farm_type_animals).map((choice) => {
-                console.log(choice);
+                //console.log(choice);
                 if (choice[0] !== "other") {
                   return (
-                    <div>
+                    <div key={choice[0]}>
                       <input
                         type="checkbox"
                         id={choice[0]}
@@ -982,14 +984,14 @@ function Form(props) {
               })}
             </fieldset>
           )}
-          {Object.entries(formDatas.farm_type_animals).map((choice) => {
+          {Object.entries(formDatas.farm_type_animals).map((choice, index) => {
             if (
               formDatas[`farm_type_animals`][choice[0]] &&
               choice[0] !== "other" &&
               choice[0] !== "beef_cattle"
             ) {
               return (
-                <div>
+                <div key={index}>
                   <label htmlFor={`farm_${choice[0]}`}>
                     Select all animals composing your{" "}
                     {choice[0].replaceAll("_", " ")} in the time frame reported
@@ -1110,9 +1112,9 @@ function Form(props) {
               choice[0] !== "other" &&
               choice[0] === "beef_cattle"
             ) {
-              console.log(choice[0]);
+              //console.log(choice[0]);
               return (
-                <div>
+                <div key={index}>
                   <label htmlFor={`farm_${choice[0]}`}>
                     Select all animals composing your{" "}
                     {choice[0].replaceAll("_", " ")} in the time frame reported
