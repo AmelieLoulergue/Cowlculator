@@ -1,6 +1,27 @@
 import React from "react";
 import { useState } from "react";
 import calculs from "../utils/calculs";
+import BlocElectricity from "./form_components/BlocElectricity";
+import BlocGas from "./form_components/BlocGas";
+import BlocNaturalGas from "./form_components/BlocNaturalGas";
+import BlocFuel from "./form_components/BlocFuel";
+import BlocWater from "./form_components/BlocWater";
+import BlocOther from "./form_components/BlocOther";
+import BlocAnimals from "./form_components/BlocAnimals";
+import BlocPlants from "./form_components/BlocPlants";
+import BlocPractices from "./form_components/BlocPractices";
+import BlocSoilTesting from "./form_components/BlocSoilTesting";
+import coeff_reduction_ghg from "../coeff/coeff_reduction_ghg.json";
+import elec_state_coeff from "../coeff/elec_state_coeff.json";
+import enteric_EF from "../coeff/enteric_EF.json";
+import fuel_coeff from "../coeff/fuel_coeff.json";
+import gas_coeff from "../coeff/gas_coeff.json";
+import manure from "../coeff/manure.json";
+import natgas_coeff from "../coeff/natgas_coeff.json";
+import other_coeff from "../coeff/other_coeff.json";
+import reductionEF_coeff from "../coeff/reductionEF_coeff.json";
+import regions from "../coeff/regions.json";
+import water_coeff from "../coeff/water_coeff.json";
 function Form(props) {
   let dateNow = new Date().toISOString().split("T")[0].split("-");
   const [formDatas, setFormDatas] = useState({
@@ -146,6 +167,357 @@ function Form(props) {
     farm_other_rep12_numb: { value: 0, selected: false },
     farm_other_rep24_numb: { value: 0, selected: false },
     farm_other_matur_numb: { value: 0, selected: false },
+    farm_type_plants: {
+      farm_grassland: false,
+      farm_grain: false,
+      farm_forage: false,
+      farm_fv: false,
+      farm_flowers: false,
+      farm_herbs: false,
+    },
+    farm_grassland: {
+      unit: [
+        { value: "acre", selected: true },
+        { value: "sq feet", selected: false },
+      ],
+      size: 0,
+      orga: false,
+    },
+    farm_grain: {
+      unit: [
+        { value: "acre", selected: true },
+        { value: "sq feet", selected: false },
+      ],
+      size: 0,
+      orga: false,
+    },
+    farm_forage: {
+      unit: [
+        { value: "acre", selected: true },
+        { value: "sq feet", selected: false },
+      ],
+      size: 0,
+      orga: false,
+    },
+    farm_fv: {
+      unit: [
+        { value: "acre", selected: true },
+        { value: "sq feet", selected: false },
+      ],
+      size: 0,
+      orga: false,
+    },
+    farm_flowers: {
+      unit: [
+        { value: "acre", selected: true },
+        { value: "sq feet", selected: false },
+      ],
+      size: 0,
+      orga: false,
+    },
+    farm_herbs: {
+      unit: [
+        { value: "acre", selected: true },
+        { value: "sq feet", selected: false },
+      ],
+      size: 0,
+      orga: false,
+    },
+    soil_testing: {
+      soil_test: false,
+      soil_test_number: { one_test: true, more_than_one_test: false },
+      more_than_one_message:
+        "Contact us to work out how much carbon you are storing. climateresearchgnv2@gmail.com. Please, include the name of the farm in the email subject : 'carbon storage _ farm name'",
+    },
+    practices: {
+      practice_anim: [
+        {
+          value:
+            "Improved feeding practice e.g. replacing roughage with concentrate, feeding, extra dietary oil",
+          selected: false,
+          dairy_cow: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+          beef_cattle: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+          sheeps: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+        },
+        {
+          value:
+            "Specific agents and dietary additives e.g. bST, growth hormones, ionophores, propionate precursors",
+          selected: false,
+          dairy_cow: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+          beef_cattle: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+          sheeps: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+        },
+        {
+          value:
+            "Long term structural/management and animal breeding e.g. lifetime management of beef cattle, improved productivity through animal breeding",
+          selected: false,
+          dairy_cow: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+          beef_cattle: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+          sheeps: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+        },
+        { value: "none", selected: false },
+      ],
+      practice_plant: [
+        {
+          value:
+            "Agronomy i.e cover crops, crops rotations, perennial crops(applies for croplands)",
+          selected: false,
+          croplands: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+          grasslands: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+          organic_soils: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+        },
+        {
+          value:
+            "Nutrient management i.e. adjusting application rates, slow- or controlled-release fertilizer forms or nitrification inhibitors (applies for croplands)",
+          selected: false,
+          croplands: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+          grasslands: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+          organic_soils: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+        },
+        {
+          value:
+            "Tillage and residue management i.e. reduced or no tillage (apply for croplands)",
+          selected: false,
+          croplands: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+          grasslands: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+          organic_soils: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+        },
+        {
+          value:
+            "Water management i.e. more effective irrigation measures  (applies for croplands)",
+          selected: false,
+          croplands: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+          grasslands: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+          organic_soils: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+        },
+        {
+          value:
+            "Set aside and LUC (land-use change) i.e. allow or encourage the reversion of cropland to another land cover, typically one similar to the native vegetation. (apply for croplands)",
+          selected: false,
+          croplands: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+          grasslands: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+          organic_soils: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+        },
+        {
+          value:
+            "Agro forestry i.e. production of livestock or food crops on land that also grows trees for timber, fire- wood, or other tree products (applies for croplands)",
+          selected: false,
+          croplands: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+          grasslands: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+          organic_soils: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+        },
+        {
+          value:
+            "Grazing (adapted intensity and timing of grazing), fertilization (alleviating nutrient deficiencies by fertilizer or organic amendments), no fire (apply for grasslands)",
+          selected: false,
+          croplands: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+          grasslands: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+          organic_soils: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+        },
+        {
+          value: "Restoration ( applies to degraded lands)",
+          selected: false,
+          croplands: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+          grasslands: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+          organic_soils: {
+            selected: false,
+            all_of_them: true,
+            portion_of_them: false,
+            portion_numb: 0,
+          },
+          unit: [
+            { value: "acre", selected: true },
+            { value: "sq feet", selected: false },
+          ],
+          size: 0,
+        },
+        {
+          value: "Application of manure/biosolids",
+          selected: false,
+          unit: [
+            { value: "acre", selected: true },
+            { value: "sq feet", selected: false },
+          ],
+          size: 0,
+        },
+        {
+          value: "Soils under bio-energy",
+          selected: false,
+          unit: [
+            { value: "acre", selected: true },
+            { value: "sq feet", selected: false },
+          ],
+          size: 0,
+        },
+        { value: "none", selected: false },
+      ],
+    },
+    demographics: {
+      address: "",
+      zip_code: "",
+      state: "",
+      contact_info: { website: "", email: "", phone: "" },
+    },
   });
   const handleChangeDate = (event) => {
     let date = event.target.value.split("-");
@@ -268,36 +640,114 @@ function Form(props) {
       });
     }
   };
-  const handleChangeCheckbox = (event) => {
-    setFormDatas({
-      ...formDatas,
-      [event.target.name]: event.target.checked,
-    });
+  const handleChangeCheckbox = ({ event, plant, soil }) => {
+    if (plant) {
+      setFormDatas({
+        ...formDatas,
+        [event.target.name]: {
+          ...formDatas[event.target.name],
+          orga: event.target.checked,
+        },
+      });
+    } else if (soil) {
+      // console.log(event.target.name, event.target.value, event.target.data);
+      // console.log(event.target.value.split("."));
+      if (
+        event.target.value.split(".")[1] === "one_test" ||
+        event.target.value.split(".")[1] === "more_than_one_test"
+      ) {
+        // console.log("premier cas");
+        setFormDatas({
+          ...formDatas,
+          [event.target.name]: {
+            ...formDatas[event.target.name],
+            [event.target.value.split(".")[0]]: {
+              ...formDatas[`${event.target.name}`][
+                event.target.value.split(".")[0]
+              ],
+              [event.target.value.split(".")[1]]: event.target.checked,
+            },
+          },
+        });
+      } else {
+        // console.log("deuxieme cas");
+        setFormDatas({
+          ...formDatas,
+          [event.target.name]: {
+            ...formDatas[event.target.name],
+            [event.target.value]: event.target.checked,
+          },
+        });
+      }
+    } else {
+      setFormDatas({
+        ...formDatas,
+        [event.target.name]: event.target.checked,
+      });
+    }
   };
-  const handleChangeSelect = ({ event }) => {
-    setFormDatas({
-      ...formDatas,
-      [event.target.name]: formDatas[event.target.name].map((element) =>
-        element.value === event.target.value
-          ? { value: element.value, selected: true }
-          : { value: element.value, selected: false }
-      ),
-    });
+  const handleChangeSelect = ({ event, plant }) => {
+    if (plant) {
+      // console.log(event.target.name, formDatas[event.target.name].unit);
+      setFormDatas({
+        ...formDatas,
+        [event.target.name]: {
+          ...formDatas[event.target.name],
+          unit: formDatas[event.target.name]["unit"].map((element) =>
+            element.value === event.target.value
+              ? { value: element.value, selected: true }
+              : { value: element.value, selected: false }
+          ),
+        },
+      });
+    } else {
+      setFormDatas({
+        ...formDatas,
+        [event.target.name]: formDatas[event.target.name].map((element) =>
+          element.value === event.target.value
+            ? { value: element.value, selected: true }
+            : { value: element.value, selected: false }
+        ),
+      });
+    }
   };
-  const handleChangeNumber = (event) => {
-    setFormDatas({
-      ...formDatas,
-      [event.target.name]: {
-        ...formDatas[event.target.name],
-        value: Number(event.target.value),
-      },
-    });
+  const handleChangeNumber = (event, size) => {
+    if (size) {
+      setFormDatas({
+        ...formDatas,
+        [event.target.name]: {
+          ...formDatas[event.target.name],
+          size: Number(event.target.value),
+        },
+      });
+    } else {
+      setFormDatas({
+        ...formDatas,
+        [event.target.name]: {
+          ...formDatas[event.target.name],
+          value: Number(event.target.value),
+        },
+      });
+    }
   };
   const handleSubmit = (event) => {
     // prevents the submit button from refreshing the page
     event.preventDefault();
     //console.log(formDatas);
-    calculs(formDatas);
+    calculs(
+      formDatas,
+      coeff_reduction_ghg,
+      elec_state_coeff,
+      enteric_EF,
+      fuel_coeff,
+      gas_coeff,
+      manure,
+      natgas_coeff,
+      other_coeff,
+      reductionEF_coeff,
+      regions,
+      water_coeff
+    );
   };
   return (
     <>
@@ -325,1023 +775,62 @@ function Form(props) {
             />
           </div>
         </div>
-        <div id="block_electricity">
-          <div>
-            <label htmlFor="elec_total">
-              What is your total electricity consumption? (Leave blank if non
-              applicable)
-            </label>
-            <input
-              type="number"
-              name="elec_total"
-              value={
-                formDatas.elec_total.value === 0
-                  ? ""
-                  : formDatas.elec_total.value
-              }
-              onChange={(event) => handleChangeNumber(event)}
-            />
-            {formDatas.elec_total.unit}
-          </div>
-          <div>
-            <label htmlFor="elec_generator">
-              Do you produce electricity from renewable energy (solar, wind...)
-              ?
-            </label>
-            <input
-              type="checkbox"
-              name="elec_generator"
-              defaultChecked={formDatas.elec_generator}
-              onChange={(event) => handleChangeCheckbox(event)}
-            />{" "}
-            YES
-          </div>
-
-          {formDatas.elec_generator && (
-            <div>
-              <label htmlFor="elec_generator_prod">
-                How much kWh of electricity do you produce ?
-              </label>
-              <input
-                type="number"
-                name="elec_generator_prod"
-                value={
-                  formDatas.elec_generator_prod.value === 0
-                    ? ""
-                    : formDatas.elec_generator_prod.value
-                }
-                onChange={(event) => handleChangeNumber(event)}
-              />{" "}
-              {formDatas.elec_generator_prod.unit}
-            </div>
-          )}
-        </div>
-        <div id="block_gas">
-          <div>
-            <label htmlFor="gas_butane_cons">
-              What is the butane consumption ?
-            </label>
-            <input
-              type="number"
-              name="gas_butane_cons"
-              value={
-                formDatas.gas_butane_cons.value === 0
-                  ? ""
-                  : formDatas.gas_butane_cons.value
-              }
-              onChange={(event) => handleChangeNumber(event)}
-            />{" "}
-            {formDatas.gas_butane_cons.unit}
-          </div>
-          <div>
-            <label htmlFor="gas_propane_cons">
-              What is the propane consumption ?
-            </label>
-            <input
-              type="number"
-              name="gas_propane_cons"
-              value={
-                formDatas.gas_propane_cons.value === 0
-                  ? ""
-                  : formDatas.gas_propane_cons.value
-              }
-              onChange={(event) => handleChangeNumber(event)}
-            />{" "}
-            {formDatas.gas_propane_cons.unit}
-          </div>
-          <div>
-            <label htmlFor="gas_mix_cons">
-              What is the mix butane/propane consumption ?
-            </label>
-            <input
-              type="number"
-              name="gas_mix_cons"
-              value={
-                formDatas.gas_mix_cons.value === 0
-                  ? ""
-                  : formDatas.gas_mix_cons.value
-              }
-              onChange={(event) => handleChangeNumber(event)}
-            />{" "}
-            {formDatas.gas_mix_cons.unit}
-          </div>
-        </div>
-        <div id="block_natural_gas">
-          <div>
-            <label htmlFor="natgas_unit">
-              Pick the unit for your natural gas consumption
-
-            </label>
-            <select
-              name="natgas_unit"
-              id="natgaz_unit"
-              onChange={(event) => handleChangeSelect({ event: event })}
-            >
-              {formDatas.natgas_unit.map((unit) => (
-                <option
-                  value={unit.value}
-                  selected={unit.selected}
-                  key={unit.value}
-                >
-                  {unit.value}
-                </option>
-              ))}
-            </select>
-          </div>
-          {formDatas.natgas_unit.find(
-            (unit) =>
-              unit.selected && unit.value !== "No natural gas consumption"
-          ) && (
-            <div>
-              <label htmlFor="natgas_cons">
-                What is the natural gas consumption ?
-              </label>
-              <input
-                type="number"
-                name="natgas_cons"
-                value={formDatas.natgas_cons === 0 ? "" : formDatas.natgas_cons}
-                onChange={(event) => handleChangeNumber(event)}
-              />{" "}
-              {formDatas.natgas_unit.find((unit) => unit.selected).value}
-            </div>
-          )}
-        </div>
-        <div id="block_fuel">
-          <div>
-            <fieldset>
-              <legend>
-                Select all the vehicles used on your production, transformation,
-                distribution business area:
-              </legend>
-
-              <div>
-                <input
-                  type="checkbox"
-                  id="Cars"
-                  name="fuel_vehicles"
-                  value="cars"
-                  checked={formDatas.fuel_vehicles.cars}
-                  onChange={(event) =>
-                    handleChangeRadio({ event: event, none: true })
-                  }
-                />
-                <label htmlFor="Cars">Car(s)</label>
-              </div>
-
-              <div>
-                <input
-                  type="checkbox"
-                  id="Trucks"
-                  name="fuel_vehicles"
-                  value="trucks"
-                  checked={formDatas.fuel_vehicles.trucks}
-                  onChange={(event) =>
-                    handleChangeRadio({ event: event, none: true })
-                  }
-                />
-                <label htmlFor="Trucks">Truck(s)</label>
-              </div>
-
-              <div>
-                <input
-                  type="checkbox"
-                  id="Tractors"
-                  name="fuel_vehicles"
-                  value="tractors"
-                  checked={formDatas.fuel_vehicles.tractors}
-                  onChange={(event) =>
-                    handleChangeRadio({ event: event, none: true })
-                  }
-                />
-                <label htmlFor="Tractors">Tractor(s)</label>
-              </div>
-              <div>
-                <input
-                  type="checkbox"
-                  id="None"
-                  name="fuel_vehicles"
-                  value="none"
-                  checked={formDatas.fuel_vehicles.none}
-                  onChange={(event) =>
-                    handleChangeRadio({ event: event, none: true })
-                  }
-                />
-                <label htmlFor="None">None</label>
-              </div>
-            </fieldset>
-          </div>
-
-          {formDatas.fuel_vehicles.cars && (
-            <div>
-              <fieldset>
-                <legend>For the car(s), do you use :</legend>
-
-                <div>
-                  <input
-                    type="checkbox"
-                    id="gasoline"
-                    name="fuel_car_type"
-                    value="gasoline"
-                    checked={formDatas.fuel_car_type.gasoline}
-                    onChange={(event) =>
-                      handleChangeRadio({ event: event, both: true })
-                    }
-                  />
-                  <label htmlFor="gasoline">Gasoline</label>
-                </div>
-
-                <div>
-                  <input
-                    type="checkbox"
-                    id="diesel"
-                    name="fuel_car_type"
-                    value="diesel"
-                    checked={formDatas.fuel_car_type.diesel}
-                    onChange={(event) =>
-                      handleChangeRadio({ event: event, both: true })
-                    }
-                  />
-                  <label htmlFor="diesel">Diesel</label>
-                </div>
-
-                <div>
-                  <input
-                    type="checkbox"
-                    id="both"
-                    name="fuel_car_type"
-                    value="both"
-                    checked={formDatas.fuel_car_type.both}
-                    onChange={(event) =>
-                      handleChangeRadio({ event: event, both: true })
-                    }
-                  />
-                  <label htmlFor="both">Both</label>
-                </div>
-              </fieldset>
-            </div>
-          )}
-          {(formDatas.fuel_car_type.both ||
-            formDatas.fuel_car_type.gasoline) && (
-            <div>
-              <label htmlFor="fuel_car_gaso_cons">
-                What is the gasoline consumption for the car(s) ?
-              </label>
-              <input
-                type="number"
-                name="fuel_car_gaso_cons"
-                value={
-                  formDatas.fuel_car_gaso_cons.value === 0
-                    ? ""
-                    : formDatas.fuel_car_gaso_cons.value
-                }
-                onChange={(event) => handleChangeNumber(event)}
-              />{" "}
-              {formDatas.fuel_car_gaso_cons.unit}
-            </div>
-          )}
-          {(formDatas.fuel_car_type.both || formDatas.fuel_car_type.diesel) && (
-            <div>
-              <label htmlFor="fuel_car_dies_cons">
-                What is the diesel consumption for the car(s) ?
-              </label>
-              <input
-                type="number"
-                name="fuel_car_dies_cons"
-                value={
-                  formDatas.fuel_car_dies_cons.value === 0
-                    ? ""
-                    : formDatas.fuel_car_dies_cons.value
-                }
-                onChange={(event) => handleChangeNumber(event)}
-              />{" "}
-              {formDatas.fuel_car_dies_cons.unit}
-            </div>
-          )}
-          {formDatas.fuel_vehicles.trucks && (
-            <div>
-              <fieldset>
-                <legend>For the truck(s), do you use :</legend>
-
-                <div>
-                  <input
-                    type="checkbox"
-                    id="gasoline"
-                    name="fuel_truck_type"
-                    value="gasoline"
-                    checked={formDatas.fuel_truck_type.gasoline}
-                    onChange={(event) =>
-                      handleChangeRadio({ event: event, both: true })
-                    }
-                  />
-                  <label htmlFor="gasoline">Gasoline</label>
-                </div>
-
-                <div>
-                  <input
-                    type="checkbox"
-                    id="diesel"
-                    name="fuel_truck_type"
-                    value="diesel"
-                    checked={formDatas.fuel_truck_type.diesel}
-                    onChange={(event) =>
-                      handleChangeRadio({ event: event, both: true })
-                    }
-                  />
-                  <label htmlFor="diesel">Diesel</label>
-                </div>
-
-                <div>
-                  <input
-                    type="checkbox"
-                    id="both"
-                    name="fuel_truck_type"
-                    value="both"
-                    checked={formDatas.fuel_truck_type.both}
-                    onChange={(event) =>
-                      handleChangeRadio({ event: event, both: true })
-                    }
-                  />
-                  <label htmlFor="both">Both</label>
-                </div>
-              </fieldset>
-            </div>
-          )}
-          {(formDatas.fuel_truck_type.both ||
-            formDatas.fuel_truck_type.gasoline) && (
-            <div>
-              <label htmlFor="fuel_truck_gaso_cons">
-                What is the gasoline consumption for the truck(s) ?
-              </label>
-              <input
-                type="number"
-                name="fuel_truck_gaso_cons"
-                value={
-                  formDatas.fuel_truck_gaso_cons.value === 0
-                    ? ""
-                    : formDatas.fuel_truck_gaso_cons.value
-                }
-                onChange={(event) => handleChangeNumber(event)}
-              />{" "}
-              {formDatas.fuel_truck_gaso_cons.unit}
-            </div>
-          )}
-          {(formDatas.fuel_truck_type.both ||
-            formDatas.fuel_truck_type.diesel) && (
-            <div>
-              <label htmlFor="fuel_truck_dies_cons">
-                What is the diesel consumption for the truck(s) ?
-              </label>
-              <input
-                type="number"
-                name="fuel_truck_dies_cons"
-                value={
-                  formDatas.fuel_truck_dies_cons.value === 0
-                    ? ""
-                    : formDatas.fuel_truck_dies_cons.value
-                }
-                onChange={(event) => handleChangeNumber(event)}
-              />{" "}
-              {formDatas.fuel_truck_dies_cons.unit}
-            </div>
-          )}
-          {formDatas.fuel_vehicles.tractors && (
-            <div>
-              <fieldset>
-                <legend>For the tractor(s), do you use :</legend>
-
-                <div>
-                  <input
-                    type="checkbox"
-                    id="gasoline"
-                    name="fuel_tract_type"
-                    value="gasoline"
-                    checked={formDatas.fuel_tract_type.gasoline}
-                    onChange={(event) =>
-                      handleChangeRadio({ event: event, both: true })
-                    }
-                  />
-                  <label htmlFor="gasoline">Gasoline</label>
-                </div>
-
-                <div>
-                  <input
-                    type="checkbox"
-                    id="diesel"
-                    name="fuel_tract_type"
-                    value="diesel"
-                    checked={formDatas.fuel_tract_type.diesel}
-                    onChange={(event) =>
-                      handleChangeRadio({ event: event, both: true })
-                    }
-                  />
-                  <label htmlFor="diesel">Diesel</label>
-                </div>
-
-                <div>
-                  <input
-                    type="checkbox"
-                    id="both"
-                    name="fuel_tract_type"
-                    value="both"
-                    checked={formDatas.fuel_tract_type.both}
-                    onChange={(event) =>
-                      handleChangeRadio({ event: event, both: true })
-                    }
-                  />
-                  <label htmlFor="both">Both</label>
-                </div>
-              </fieldset>
-            </div>
-          )}
-          {(formDatas.fuel_tract_type.both ||
-            formDatas.fuel_tract_type.gasoline) && (
-            <div>
-              <label htmlFor="fuel_tract_gaso_cons">
-                What is the gasoline consumption for the tractor(s) ?
-              </label>
-              <input
-                type="number"
-                name="fuel_tract_gaso_cons"
-                value={
-                  formDatas.fuel_tract_gaso_cons.value === 0
-                    ? ""
-                    : formDatas.fuel_tract_gaso_cons.value
-                }
-                onChange={(event) => handleChangeNumber(event)}
-              />{" "}
-              {formDatas.fuel_tract_gaso_cons.unit}
-            </div>
-          )}
-          {(formDatas.fuel_tract_type.both ||
-            formDatas.fuel_tract_type.diesel) && (
-            <div>
-              <label htmlFor="fuel_tract_dies_cons">
-                What is the diesel consumption for the tractor(s) ?
-              </label>
-              <input
-                type="number"
-                name="fuel_tract_dies_cons"
-                value={
-                  formDatas.fuel_tract_dies_cons.value === 0
-                    ? ""
-                    : formDatas.fuel_tract_dies_cons.value
-                }
-                onChange={(event) => handleChangeNumber(event)}
-              />{" "}
-              {formDatas.fuel_tract_dies_cons.unit}
-            </div>
-          )}
-        </div>
-        <div id="block_water">
-          <div>
-            <label htmlFor="water_drink_cons">
-              What is the tap water consumption ? <br />
-              NB: this data can be found on the utility bill or from meters.{" "}
-              <br />
-              If you have a well and the date about you well water flow, do not
-              include them in this total, leave blank.
-              <br />
-              e.g if your well water covers the totality of your water needs,
-              leave blank.
-              <br />
-            </label>
-            <input
-              type="number"
-              name="water_drink_cons"
-              value={
-                formDatas.water_drink_cons.value === 0
-                  ? ""
-                  : formDatas.water_drink_cons.value
-              }
-              onChange={(event) => handleChangeNumber(event)}
-            />{" "}
-            {formDatas.water_drink_cons.unit}
-          </div>
-          <div>
-            <label htmlFor="water_waste_cons">
-              What quantity of wastewater is treated? leave blank if non
-              applicable.
-            </label>
-            <input
-              type="number"
-              name="water_waste_cons"
-              value={
-                formDatas.water_waste_cons.value === 0
-                  ? ""
-                  : formDatas.water_waste_cons.value
-              }
-              onChange={(event) => handleChangeNumber(event)}
-            />{" "}
-            {formDatas.water_waste_cons.unit}
-          </div>
-        </div>
-        <div id="block_other">
-          <div>
-            <fieldset>
-              <legend>
-                Select any other carbon dioxide sources you use from the list :
-              </legend>
-
-              {Object.entries(formDatas.other_choice).map((choice) => (
-                <div>
-                  <input
-                    type="checkbox"
-                    id={choice[0]}
-                    name="other_choice"
-                    key={choice[0]}
-                    value={choice[0]}
-                    checked={choice[1]}
-                    onChange={(event) =>
-                      handleChangeRadio({ event: event, none: true })
-                    }
-                  />
-                  <label htmlFor={choice[0]} style={{ paddingRight: "2rem" }}>
-                    {choice[0].replaceAll("_", " ")}
-                  </label>
-                </div>
-              ))}
-            </fieldset>
-            {Object.entries(formDatas.other_choice).map((choice) => {
-              if (
-                formDatas[`other_${choice[0]}_cons`] &&
-                formDatas.other_choice[choice[0]]
-              )
-                return (
-                  <div>
-                    <label htmlFor={`other_${choice[0]}_cons`}>
-                      What is the {choice[0].replaceAll("_", " ")} consumption ?
-                    </label>
-                    <input
-                      type="number"
-                      name={`other_${choice[0]}_cons`}
-                      value={
-                        formDatas[`other_${choice[0]}_cons`]["value"] === 0
-                          ? ""
-                          : formDatas[`other_${choice[0]}_cons`]["value"]
-                      }
-                      onChange={(event) => handleChangeNumber(event)}
-                    />{" "}
-                    {formDatas[`other_${choice[0]}_cons`]["unit"]}
-                  </div>
-                );
-            })}
-          </div>
-        </div>
+        <BlocElectricity
+          handleChangeNumber={handleChangeNumber}
+          formDatas={formDatas}
+          handleChangeCheckbox={handleChangeCheckbox}
+        />
+        <BlocGas
+          formDatas={formDatas}
+          handleChangeNumber={handleChangeNumber}
+        />
+        <BlocNaturalGas
+          handleChangeNumber={handleChangeNumber}
+          handleChangeSelect={handleChangeSelect}
+          formDatas={formDatas}
+        />
+        <BlocFuel
+          handleChangeNumber={handleChangeNumber}
+          handleChangeSelect={handleChangeSelect}
+          formDatas={formDatas}
+        />
+        <BlocWater
+          formDatas={formDatas}
+          handleChangeNumber={handleChangeNumber}
+        />
+        <BlocOther
+          formDatas={formDatas}
+          handleChangeNumber={handleChangeNumber}
+          handleChangeRadio={handleChangeRadio}
+        />
         <div id="block_farm_information">
-          <div>
-            <label htmlFor="farm_name">What is the name of the farm ?</label>
-            <input
-              type="text"
-              name="farm_name"
-              value={formDatas.farm_name}
-              onChange={(event) => handleChange(event)}
-            />{" "}
-          </div>
-          <fieldset>
-            <legend>What type of products, do you produce ?</legend>
-
-            {Object.entries(formDatas.farm_type).map((choice) => (
-              <div>
-                <input
-                  type="checkbox"
-                  id={choice[0]}
-                  name="farm_type"
-                  key={choice[0]}
-                  value={choice[0]}
-                  checked={choice[1]}
-                  onChange={(event) =>
-                    handleChangeRadio({ event: event, both: true })
-                  }
-                />
-                <label htmlFor={choice[0]} style={{ paddingRight: "2rem" }}>
-                  {choice[0].replaceAll("_", " ")}
-                </label>
-              </div>
-            ))}
-          </fieldset>
-          {(formDatas.farm_type.animals || formDatas.farm_type.both) && (
-            <fieldset>
-              <legend>
-                What animal(s) do you farm ? NB: in the time frame reported.
-              </legend>
-
-              {Object.entries(formDatas.farm_type_animals).map((choice) => {
-                //console.log(choice);
-                if (choice[0] !== "other") {
-                  return (
-                    <div key={choice[0]}>
-                      <input
-                        type="checkbox"
-                        id={choice[0]}
-                        name="farm_type_animals"
-                        key={choice[0]}
-                        value={choice[0]}
-                        checked={choice[1]}
-                        onChange={(event) =>
-                          handleChangeRadio({ event: event })
-                        }
-                      />
-                      <label
-                        htmlFor={choice[0]}
-                        style={{ paddingRight: "2rem" }}
-                      >
-                        {choice[0].replaceAll("_", " ")}
-                      </label>
-                    </div>
-                  );
-                } else {
-                  return (
-                    <div>
-                      <input
-                        type="checkbox"
-                        id={choice[0]}
-                        name="farm_type_animals"
-                        key={choice[0]}
-                        value={choice[1].value}
-                        checked={choice[1].selected}
-                        onChange={(event) =>
-                          handleChangeRadio({ event: event, other: true })
-                        }
-                      />
-                      <label
-                        htmlFor={choice[0]}
-                        style={{ paddingRight: "2rem" }}
-                      >
-                        {choice[0]}
-                      </label>
-                      {choice[1].selected && (
-                        <input
-                          type="text"
-                          id={choice[0]}
-                          name="farm_type_animals"
-                          key={choice[0]}
-                          value={choice[1].value}
-                          onChange={(event) => handleChange({ event: event })}
-                        />
-                      )}
-                    </div>
-                  );
-                }
-              })}
-            </fieldset>
-          )}
-          {Object.entries(formDatas.farm_type_animals).map((choice, index) => {
-            if (
-              formDatas[`farm_type_animals`][choice[0]] &&
-              choice[0] !== "other" &&
-              choice[0] !== "beef_cattle"
-            ) {
-              return (
-                <div key={index}>
-                  <label htmlFor={`farm_${choice[0]}`}>
-                    Select all animals composing your{" "}
-                    {choice[0].replaceAll("_", " ")} in the time frame reported
-                    :<br />
-                    NB: A portion of the offspring are retained to replace
-                    mature cows that die or are removed from the herd (culled)
-                    each year. Those represents a very fast movement of cattle
-                    called "replacements".
-                  </label>
-                  <div>
-                    <input
-                      type="checkbox"
-                      name={`farm_${choice[0]}_rep12_numb`}
-                      checked={
-                        formDatas[`farm_${choice[0]}_rep12_numb`].selected
-                      }
-                      onChange={(event) =>
-                        handleChangeRadio({ event: event, animal: true })
-                      }
-                    />{" "}
-                    <label htmlFor={`farm_${choice[0]}_rep12_numb`}>
-                      Replacements 0-12mois
-                    </label>
-                    <input
-                      type="checkbox"
-                      name={`farm_${choice[0]}_rep24_numb`}
-                      checked={
-                        formDatas[`farm_${choice[0]}_rep24_numb`].selected
-                      }
-                      onChange={(event) =>
-                        handleChangeRadio({ event: event, animal: true })
-                      }
-                    />{" "}
-                    <label htmlFor={`farm_${choice[0]}_rep24_numb`}>
-                      Replacements 0-24mois
-                    </label>
-                    <input
-                      type="checkbox"
-                      name={`farm_${choice[0]}_matur_numb`}
-                      checked={
-                        formDatas[`farm_${choice[0]}_matur_numb`].selected
-                      }
-                      onChange={(event) =>
-                        handleChangeRadio({ event: event, animal: true })
-                      }
-                    />{" "}
-                    <label htmlFor={`farm_${choice[0]}_matur_numb`}>
-                      Mature cows
-                    </label>
-                  </div>
-                  {formDatas[`farm_${choice[0]}_rep12_numb`].selected ? (
-                    <div>
-                      <label>
-                        How many heads of replacements 0-12mois do you farm? NB:
-                        in the time frame reported
-                      </label>
-                      <input
-                        type="number"
-                        name={`farm_${choice[0]}_rep12_numb`}
-                        value={
-                          formDatas[`farm_${choice[0]}_rep12_numb`]["value"] ===
-                          0
-                            ? ""
-                            : formDatas[`farm_${choice[0]}_rep12_numb`]["value"]
-                        }
-                        onChange={(event) => handleChangeNumber(event)}
-                      />{" "}
-                    </div>
-                  ) : (
-                    false
-                  )}
-                  {formDatas[`farm_${choice[0]}_rep24_numb`].selected ? (
-                    <div>
-                      <label>
-                        How many heads of replacements 12-24mois do you farm?
-                        NB: in the time frame reported
-                      </label>
-                      <input
-                        type="number"
-                        name={`farm_${choice[0]}_rep24_numb`}
-                        value={
-                          formDatas[`farm_${choice[0]}_rep24_numb`]["value"] ===
-                          0
-                            ? ""
-                            : formDatas[`farm_${choice[0]}_rep24_numb`]["value"]
-                        }
-                        onChange={(event) => handleChangeNumber(event)}
-                      />{" "}
-                    </div>
-                  ) : (
-                    false
-                  )}
-                  {formDatas[`farm_${choice[0]}_matur_numb`].selected ? (
-                    <div>
-                      <label>
-                        How many heads of mature cows do you farm? NB: in the
-                        time frame reported
-                      </label>
-                      <input
-                        type="number"
-                        name={`farm_${choice[0]}_matur_numb`}
-                        value={
-                          formDatas[`farm_${choice[0]}_matur_numb`]["value"] ===
-                          0
-                            ? ""
-                            : formDatas[`farm_${choice[0]}_matur_numb`]["value"]
-                        }
-                        onChange={(event) => handleChangeNumber(event)}
-                      />{" "}
-                    </div>
-                  ) : (
-                    false
-                  )}
-                </div>
-              );
-            } else if (
-              formDatas[`farm_type_animals`][choice[0]] &&
-              choice[0] !== "other" &&
-              choice[0] === "beef_cattle"
-            ) {
-              //console.log(choice[0]);
-              return (
-                <div key={index}>
-                  <label htmlFor={`farm_${choice[0]}`}>
-                    Select all animals composing your{" "}
-                    {choice[0].replaceAll("_", " ")} in the time frame reported
-                    :<br />
-                    NB: A portion of the offspring are retained to replace
-                    mature cows that die or are removed from the herd (culled)
-                    each year. Those represents a very fast movement of cattle
-                    called "replacements".
-                  </label>
-                  <div>
-                    <input
-                      type="checkbox"
-                      name={`farm_${choice[0]}_rep12_numb`}
-                      checked={
-                        formDatas[`farm_${choice[0]}_rep12_numb`].selected
-                      }
-                      onChange={(event) =>
-                        handleChangeRadio({ event: event, animal: true })
-                      }
-                    />{" "}
-                    <label htmlFor={`farm_${choice[0]}_rep12_numb`}>
-                      Replacements 0-12mois
-                    </label>
-                    <input
-                      type="checkbox"
-                      name={`farm_${choice[0]}_rep24_numb`}
-                      checked={
-                        formDatas[`farm_${choice[0]}_rep24_numb`].selected
-                      }
-                      onChange={(event) =>
-                        handleChangeRadio({ event: event, animal: true })
-                      }
-                    />{" "}
-                    <label htmlFor={`farm_${choice[0]}_rep24_numb`}>
-                      Replacements 0-24mois
-                    </label>
-                    <input
-                      type="checkbox"
-                      name={`farm_${choice[0]}_matur_numb`}
-                      checked={
-                        formDatas[`farm_${choice[0]}_matur_numb`].selected
-                      }
-                      onChange={(event) =>
-                        handleChangeRadio({ event: event, animal: true })
-                      }
-                    />{" "}
-                    <label htmlFor={`farm_${choice[0]}_matur_numb`}>
-                      Mature cows
-                    </label>
-                    <input
-                      type="checkbox"
-                      name={`farm_${choice[0]}_weanling_numb`}
-                      checked={
-                        formDatas[`farm_${choice[0]}_weanling_numb`].selected
-                      }
-                      onChange={(event) =>
-                        handleChangeRadio({ event: event, animal: true })
-                      }
-                    />{" "}
-                    <label htmlFor={`farm_${choice[0]}_weanling_numb`}>
-                      Weanling system steers/heifers
-                    </label>
-                    <input
-                      type="checkbox"
-                      name={`farm_${choice[0]}_yearling_numb`}
-                      checked={
-                        formDatas[`farm_${choice[0]}_yearling_numb`].selected
-                      }
-                      onChange={(event) =>
-                        handleChangeRadio({ event: event, animal: true })
-                      }
-                    />{" "}
-                    <label htmlFor={`farm_${choice[0]}_yearling_numb`}>
-                      Yearling system steers/heifers
-                    </label>
-                    <input
-                      type="checkbox"
-                      name={`farm_${choice[0]}_bulls_numb`}
-                      checked={
-                        formDatas[`farm_${choice[0]}_bulls_numb`].selected
-                      }
-                      onChange={(event) =>
-                        handleChangeRadio({ event: event, animal: true })
-                      }
-                    />{" "}
-                    <label htmlFor={`farm_${choice[0]}_bulls_numb`}>
-                      Bulls
-                    </label>
-                  </div>
-                  {formDatas[`farm_${choice[0]}_rep12_numb`].selected ? (
-                    <div>
-                      <label>
-                        How many heads of replacements 0-12mois do you farm? NB:
-                        in the time frame reported
-                      </label>
-                      <input
-                        type="number"
-                        name={`farm_${choice[0]}_rep12_numb`}
-                        value={
-                          formDatas[`farm_${choice[0]}_rep12_numb`]["value"] ===
-                          0
-                            ? ""
-                            : formDatas[`farm_${choice[0]}_rep12_numb`]["value"]
-                        }
-                        onChange={(event) => handleChangeNumber(event)}
-                      />{" "}
-                    </div>
-                  ) : (
-                    false
-                  )}
-                  {formDatas[`farm_${choice[0]}_rep24_numb`].selected ? (
-                    <div>
-                      <label>
-                        How many heads of replacements 12-24mois do you farm?
-                        NB: in the time frame reported
-                      </label>
-                      <input
-                        type="number"
-                        name={`farm_${choice[0]}_rep24_numb`}
-                        value={
-                          formDatas[`farm_${choice[0]}_rep24_numb`]["value"] ===
-                          0
-                            ? ""
-                            : formDatas[`farm_${choice[0]}_rep24_numb`]["value"]
-                        }
-                        onChange={(event) => handleChangeNumber(event)}
-                      />{" "}
-                    </div>
-                  ) : (
-                    false
-                  )}
-                  {formDatas[`farm_${choice[0]}_matur_numb`].selected ? (
-                    <div>
-                      <label>
-                        How many heads of mature cows do you farm? NB: in the
-                        time frame reported
-                      </label>
-                      <input
-                        type="number"
-                        name={`farm_${choice[0]}_matur_numb`}
-                        value={
-                          formDatas[`farm_${choice[0]}_matur_numb`]["value"] ===
-                          0
-                            ? ""
-                            : formDatas[`farm_${choice[0]}_matur_numb`]["value"]
-                        }
-                        onChange={(event) => handleChangeNumber(event)}
-                      />{" "}
-                    </div>
-                  ) : (
-                    false
-                  )}
-                  {formDatas[`farm_${choice[0]}_weanling_numb`].selected ? (
-                    <div>
-                      <label>
-                        How many heads of weanling system steers/heifers do you
-                        farm? NB: in the time frame reported
-                      </label>
-                      <input
-                        type="number"
-                        name={`farm_${choice[0]}_weanling_numb`}
-                        value={
-                          formDatas[`farm_${choice[0]}_weanling_numb`][
-                            "value"
-                          ] === 0
-                            ? ""
-                            : formDatas[`farm_${choice[0]}_weanling_numb`][
-                                "value"
-                              ]
-                        }
-                        onChange={(event) => handleChangeNumber(event)}
-                      />{" "}
-                    </div>
-                  ) : (
-                    false
-                  )}
-                  {formDatas[`farm_${choice[0]}_yearling_numb`].selected ? (
-                    <div>
-                      <label>
-                        How many heads of yearling system steers/heifers do you
-                        farm? NB: in the time frame reported
-                      </label>
-                      <input
-                        type="number"
-                        name={`farm_${choice[0]}_yearling_numb`}
-                        value={
-                          formDatas[`farm_${choice[0]}_yearling_numb`][
-                            "value"
-                          ] === 0
-                            ? ""
-                            : formDatas[`farm_${choice[0]}_yearling_numb`][
-                                "value"
-                              ]
-                        }
-                        onChange={(event) => handleChangeNumber(event)}
-                      />{" "}
-                    </div>
-                  ) : (
-                    false
-                  )}
-                  {formDatas[`farm_${choice[0]}_bulls_numb`].selected ? (
-                    <div>
-                      <label>
-                        How many heads of bulls do you farm? NB: in the time
-                        frame reported
-                      </label>
-                      <input
-                        type="number"
-                        name={`farm_${choice[0]}_bulls_numb`}
-                        value={
-                          formDatas[`farm_${choice[0]}_bulls_numb`]["value"] ===
-                          0
-                            ? ""
-                            : formDatas[`farm_${choice[0]}_bulls_numb`]["value"]
-                        }
-                        onChange={(event) => handleChangeNumber(event)}
-                      />{" "}
-                    </div>
-                  ) : (
-                    false
-                  )}
-                </div>
-              );
-            }
-          })}
+          <BlocAnimals
+            formDatas={formDatas}
+            handleChange={handleChange}
+            handleChangeNumber={handleChangeNumber}
+            handleChangeRadio={handleChangeRadio}
+          />
+          <BlocPlants
+            formDatas={formDatas}
+            handleChangeRadio={handleChangeRadio}
+            handleChangeSelect={handleChangeSelect}
+            handleChangeNumber={handleChangeNumber}
+            handleChangeCheckbox={handleChangeCheckbox}
+          />
         </div>
+        <BlocSoilTesting
+          formDatas={formDatas}
+          handleChangeCheckbox={handleChangeCheckbox}
+          setFormDatas={setFormDatas}
+        />
+        <BlocPractices
+          formDatas={formDatas}
+          handleChangeRadio={handleChangeRadio}
+          handleChangeSelect={handleChangeSelect}
+          handleChangeNumber={handleChangeNumber}
+          handleChangeCheckbox={handleChangeCheckbox}
+          setFormDatas={setFormDatas}
+        />
         <div>
           <input type="submit" value="Envoyer" />
         </div>

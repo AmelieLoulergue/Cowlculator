@@ -1,0 +1,155 @@
+[
+  {
+    "name": "Dairy cattle",
+    "North_Atlantic": null,
+    "South_Atlantic": null,
+    "North_Central": null,
+    "South_Central": null,
+    "West": null,
+    "National Average": null
+  },
+  {
+    "name": "Replacements\n0-12 months",
+    "North_Atlantic": 19.5,
+    "South_Atlantic": 20.5,
+    "North_Central": 18.9,
+    "South_Central": 20.3,
+    "West": 20.6,
+    "National Average": 19.5
+  },
+  {
+    "name": "Replacements\n12-24 months",
+    "North_Atlantic": 58.3,
+    "South_Atlantic": 58.6,
+    "North_Central": 57.3,
+    "South_Central": 61.5,
+    "West": 61,
+    "National Average": 58.7
+  },
+  {
+    "name": "Mature cows",
+    "North_Atlantic": 117.2,
+    "South_Atlantic": 126.2,
+    "North_Central": 19.2,
+    "South_Central": 116.9,
+    "West": 119.1,
+    "National Average": 114.3
+  },
+  {
+    "name": "Beef cattle",
+    "North_Atlantic": null,
+    "South_Atlantic": null,
+    "North_Central": null,
+    "South_Central": null,
+    "West": null,
+    "National Average": null
+  },
+  {
+    "name": "Replacements\n0-12 months",
+    "North_Atlantic": 19.1,
+    "South_Atlantic": 22.6,
+    "North_Central": 20.3,
+    "South_Central": 23.5,
+    "West": 22.6,
+    "National Average": 22.3
+  },
+  {
+    "name": "Replacements\n12-24 months",
+    "North_Atlantic": 63.7,
+    "South_Atlantic": 67.4,
+    "North_Central": 60.7,
+    "South_Central": 67.5,
+    "West": 64.7,
+    "National Average": 64.9
+  },
+  {
+    "name": "Mature cows",
+    "North_Atlantic": 61.4,
+    "South_Atlantic": 69.8,
+    "North_Central": 59.4,
+    "South_Central": 0.7,
+    "West": 68.9,
+    "National Average": 66.5
+  },
+  {
+    "name": "Weanling system steers/ heifers",
+    "North_Atlantic": null,
+    "South_Atlantic": null,
+    "North_Central": 22.5,
+    "South_Central": 23.9,
+    "West": 23.4,
+    "National Average": 23
+  },
+  {
+    "name": "Yearling system steers/ heifers",
+    "North_Atlantic": null,
+    "South_Atlantic": null,
+    "North_Central": 46.9,
+    "South_Central": 47.5,
+    "West": 47.5,
+    "National Average": 47.2
+  },
+  {
+    "name": "Bulls",
+    "North_Atlantic": 99.8,
+    "South_Atlantic": 99.8,
+    "North_Central": 99.8,
+    "South_Central": 99.8,
+    "West": 99.8,
+    "National Average": 99.8
+  },
+  {
+    "name": "Sheeps",
+    "North_Atlantic": null,
+    "South_Atlantic": null,
+    "North_Central": null,
+    "South_Central": null,
+    "West": null,
+    "National Average": 8
+  },
+  {
+    "name": "Goats",
+    "North_Atlantic": null,
+    "South_Atlantic": null,
+    "North_Central": null,
+    "South_Central": null,
+    "West": null,
+    "National Average": 5
+  },
+  {
+    "name": "Swine",
+    "North_Atlantic": null,
+    "South_Atlantic": null,
+    "North_Central": null,
+    "South_Central": null,
+    "West": null,
+    "National Average": 1.5
+  },
+  {
+    "name": "Horses",
+    "North_Atlantic": null,
+    "South_Atlantic": null,
+    "North_Central": null,
+    "South_Central": null,
+    "West": null,
+    "National Average": 18
+  },
+  {
+    "name": "Mules/Asses",
+    "North_Atlantic": null,
+    "South_Atlantic": null,
+    "North_Central": null,
+    "South_Central": null,
+    "West": null,
+    "National Average": 10
+  },
+  {
+    "name": "Water Buffalo",
+    "North_Atlantic": null,
+    "South_Atlantic": null,
+    "North_Central": null,
+    "South_Central": null,
+    "West": null,
+    "National Average": 58
+  }
+]
