@@ -1,0 +1,359 @@
+[
+  {
+    "State": "Alabama",
+    "Code": "AL",
+    "Regions_EPA": "South Central",
+    "Regions_USDA_ERS": "Southeast",
+    "Climate": "warm moist"
+  },
+  {
+    "State": "Alaska",
+    "Code": "AK",
+    "Regions_EPA": "West",
+    "Regions_USDA_ERS": "Not included",
+    "Climate": "cool moist"
+  },
+  {
+    "State": "Arizona",
+    "Code": "AZ",
+    "Regions_EPA": "West",
+    "Regions_USDA_ERS": "Mountain",
+    "Climate": "warm dry"
+  },
+  {
+    "State": "Arkansas",
+    "Code": "AR",
+    "Regions_EPA": "South Central",
+    "Regions_USDA_ERS": "Delta",
+    "Climate": "warm moist"
+  },
+  {
+    "State": "California",
+    "Code": "CA",
+    "Regions_EPA": "West",
+    "Regions_USDA_ERS": "Pacific",
+    "Climate": "warm dry"
+  },
+  {
+    "State": "Colorado",
+    "Code": "CO",
+    "Regions_EPA": "West",
+    "Regions_USDA_ERS": "Mountain",
+    "Climate": "warm dry"
+  },
+  {
+    "State": "Connecticut",
+    "Code": "CT",
+    "Regions_EPA": "North Atlantic",
+    "Regions_USDA_ERS": "Northeast",
+    "Climate": "cool moist"
+  },
+  {
+    "State": "Delaware",
+    "Code": "DE",
+    "Regions_EPA": "South Atlantic",
+    "Regions_USDA_ERS": "Northeast",
+    "Climate": "warm moist"
+  },
+  {
+    "State": "Florida",
+    "Code": "FL",
+    "Regions_EPA": "South Atlantic",
+    "Regions_USDA_ERS": "Southeast",
+    "Climate": "warm moist"
+  },
+  {
+    "State": "Georgia",
+    "Code": "GA",
+    "Regions_EPA": "South Atlantic",
+    "Regions_USDA_ERS": "Southeast",
+    "Climate": "warm moist"
+  },
+  {
+    "State": "Hawaii",
+    "Code": "HI",
+    "Regions_EPA": "West",
+    "Regions_USDA_ERS": "Not included",
+    "Climate": "warm moist"
+  },
+  {
+    "State": "Idaho",
+    "Code": "ID",
+    "Regions_EPA": "West",
+    "Regions_USDA_ERS": "Mountain",
+    "Climate": "warm dry"
+  },
+  {
+    "State": "Illinois",
+    "Code": "IL",
+    "Regions_EPA": "North Central",
+    "Regions_USDA_ERS": "Corn Belt",
+    "Climate": "warm moist"
+  },
+  {
+    "State": "Indiana",
+    "Code": "IN",
+    "Regions_EPA": "North Central",
+    "Regions_USDA_ERS": "Corn Belt",
+    "Climate": "warm moist"
+  },
+  {
+    "State": "Iowa",
+    "Code": "IA",
+    "Regions_EPA": "North Central",
+    "Regions_USDA_ERS": "Corn Belt",
+    "Climate": "warm moist"
+  },
+  {
+    "State": "Kansas",
+    "Code": "KS",
+    "Regions_EPA": "North Central",
+    "Regions_USDA_ERS": "Northern Plains",
+    "Climate": "warm moist"
+  },
+  {
+    "State": "Kentucky",
+    "Code": "KY",
+    "Regions_EPA": "South Central",
+    "Regions_USDA_ERS": "Appalachia",
+    "Climate": "warm moist"
+  },
+  {
+    "State": "Louisiana",
+    "Code": "LA",
+    "Regions_EPA": "South Central",
+    "Regions_USDA_ERS": "Delta",
+    "Climate": "warm moist"
+  },
+  {
+    "State": "Maine",
+    "Code": "ME",
+    "Regions_EPA": "North Atlantic",
+    "Regions_USDA_ERS": "Northeast",
+    "Climate": "cool moist"
+  },
+  {
+    "State": "Maryland",
+    "Code": "MD",
+    "Regions_EPA": "South Atlantic",
+    "Regions_USDA_ERS": "Northeast",
+    "Climate": "warm moist"
+  },
+  {
+    "State": "Massachusetts",
+    "Code": "MA",
+    "Regions_EPA": "North Atlantic",
+    "Regions_USDA_ERS": "Northeast",
+    "Climate": "cool moist"
+  },
+  {
+    "State": "Michigan",
+    "Code": "MI",
+    "Regions_EPA": "North Central",
+    "Regions_USDA_ERS": "Lake States",
+    "Climate": "cool moist"
+  },
+  {
+    "State": "Minnesota",
+    "Code": "MN",
+    "Regions_EPA": "North Central",
+    "Regions_USDA_ERS": "Lake States",
+    "Climate": "cool moist"
+  },
+  {
+    "State": "Mississippi",
+    "Code": "MS",
+    "Regions_EPA": "South Central",
+    "Regions_USDA_ERS": "Delta",
+    "Climate": "warm moist"
+  },
+  {
+    "State": "Missouri",
+    "Code": "MO",
+    "Regions_EPA": "North Central",
+    "Regions_USDA_ERS": "Corn Belt",
+    "Climate": "warm moist"
+  },
+  {
+    "State": "Montana",
+    "Code": "MT",
+    "Regions_EPA": "West",
+    "Regions_USDA_ERS": "Mountain",
+    "Climate": "warm dry"
+  },
+  {
+    "State": "Nebraska",
+    "Code": "NE",
+    "Regions_EPA": "North Central",
+    "Regions_USDA_ERS": "Northern Plains",
+    "Climate": "cool moist"
+  },
+  {
+    "State": "Nevada",
+    "Code": "NV",
+    "Regions_EPA": "West",
+    "Regions_USDA_ERS": "Mountain",
+    "Climate": "warm dry"
+  },
+  {
+    "State": "New Hampshire",
+    "Code": "NH",
+    "Regions_EPA": "North Atlantic",
+    "Regions_USDA_ERS": "Northeast",
+    "Climate": "cool moist"
+  },
+  {
+    "State": "New Jersey",
+    "Code": "NJ",
+    "Regions_EPA": "North Atlantic",
+    "Regions_USDA_ERS": "Northeast",
+    "Climate": "cool moist"
+  },
+  {
+    "State": "New Mexico",
+    "Code": "NM",
+    "Regions_EPA": "West",
+    "Regions_USDA_ERS": "Mountain",
+    "Climate": "warm dry"
+  },
+  {
+    "State": "New York",
+    "Code": "NY",
+    "Regions_EPA": "North Atlantic",
+    "Regions_USDA_ERS": "Northeast",
+    "Climate": "cool moist"
+  },
+  {
+    "State": "North Carolina",
+    "Code": "NC",
+    "Regions_EPA": "South Atlantic",
+    "Regions_USDA_ERS": "Appalachia",
+    "Climate": "warm moist"
+  },
+  {
+    "State": "North Dakota",
+    "Code": "ND",
+    "Regions_EPA": "North Central",
+    "Regions_USDA_ERS": "Northern Plains",
+    "Climate": "cool moist"
+  },
+  {
+    "State": "Ohio",
+    "Code": "OH",
+    "Regions_EPA": "North Central",
+    "Regions_USDA_ERS": "Corn Belt",
+    "Climate": "cool moist"
+  },
+  {
+    "State": "Oklahoma",
+    "Code": "OK",
+    "Regions_EPA": "South Central",
+    "Regions_USDA_ERS": "Southern Plains",
+    "Climate": "cool moist"
+  },
+  {
+    "State": "Oregon",
+    "Code": "OR",
+    "Regions_EPA": "West",
+    "Regions_USDA_ERS": "Pacific",
+    "Climate": "cool dry"
+  },
+  {
+    "State": "Pennsylvania",
+    "Code": "PA",
+    "Regions_EPA": "North Atlantic",
+    "Regions_USDA_ERS": "Northeast",
+    "Climate": "cool moist"
+  },
+  {
+    "State": "Rhode Island",
+    "Code": "RI",
+    "Regions_EPA": "North Atlantic",
+    "Regions_USDA_ERS": "Northeast",
+    "Climate": "cool moist"
+  },
+  {
+    "State": "South Carolina",
+    "Code": "SC",
+    "Regions_EPA": "South Atlantic",
+    "Regions_USDA_ERS": "Southeast",
+    "Climate": "warm moist"
+  },
+  {
+    "State": "South Dakota",
+    "Code": "SD",
+    "Regions_EPA": "North Central",
+    "Regions_USDA_ERS": "Northern Plains",
+    "Climate": "cool moist"
+  },
+  {
+    "State": "Tennessee",
+    "Code": "TN",
+    "Regions_EPA": "South Central",
+    "Regions_USDA_ERS": "Appalachia",
+    "Climate": "warm moist"
+  },
+  {
+    "State": "Texas",
+    "Code": "TX",
+    "Regions_EPA": "South Central",
+    "Regions_USDA_ERS": "Southern Plains",
+    "Climate": "warm moist"
+  },
+  {
+    "State": "Utah",
+    "Code": "UT",
+    "Regions_EPA": "West",
+    "Regions_USDA_ERS": "Mountain",
+    "Climate": "warm dry"
+  },
+  {
+    "State": "Vermont",
+    "Code": "VT",
+    "Regions_EPA": "North Atlantic",
+    "Regions_USDA_ERS": "Northeast",
+    "Climate": "cool moist"
+  },
+  {
+    "State": "Virginia",
+    "Code": "VA",
+    "Regions_EPA": "South Atlantic",
+    "Regions_USDA_ERS": "Appalachia",
+    "Climate": "warm moist"
+  },
+  {
+    "State": "Washington",
+    "Code": "WA",
+    "Regions_EPA": "West",
+    "Regions_USDA_ERS": "Pacific",
+    "Climate": "cool dry"
+  },
+  {
+    "State": "West Virginia",
+    "Code": "WV",
+    "Regions_EPA": "South Atlantic",
+    "Regions_USDA_ERS": "Appalachia",
+    "Climate": "warm moist"
+  },
+  {
+    "State": "Wisconsin",
+    "Code": "WI",
+    "Regions_EPA": "North Central",
+    "Regions_USDA_ERS": "Lake States",
+    "Climate": "cool moist"
+  },
+  {
+    "State": "Wyoming",
+    "Code": "WY",
+    "Regions_EPA": "West",
+    "Regions_USDA_ERS": "Mountain",
+    "Climate": "warm dry"
+  },
+  {
+    "State": "District of Columbia",
+    "Code": "DC",
+    "Regions_EPA": "South Atlantic",
+    "Regions_USDA_ERS": "Not included",
+    "Climate": "warm moist"
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "Animal": "Dairy Cattle",
+    "CH4_emission": 67.9
+  },
+  {
+    "Animal": "Beef Cattle",
+    "CH4_emission": 1.6
+  },
+  {
+    "Animal": "Swine",
+    "CH4_emission": 12
+  },
+  {
+    "Animal": "Sheep",
+    "CH4_emission": 0.5
+  },
+  {
+    "Animal": "Goats",
+    "CH4_emission": 0.3
+  },
+  {
+    "Animal": "Poultry",
+    "CH4_emission": 0.1
+  },
+  {
+    "Animal": "Horses",
+    "CH4_emission": 2.6
+  },
+  {
+    "Animal": "American Bison",
+    "CH4_emission": 2.1
+  },
+  {
+    "Animal": "Mules and Asses",
+    "CH4_emission": 1
+  }
+]
