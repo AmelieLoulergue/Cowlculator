@@ -1,0 +1,354 @@
+[
+  {
+    "climate": "cool dry",
+    "practice": "agronomy",
+    "CO2": 0.29,
+    "CH4": 0,
+    "N2O": 0.1,
+    "GHG": 0.39
+  },
+  {
+    "climate": "cool dry",
+    "practice": "nutrient",
+    "CO2": 0.26,
+    "CH4": 0,
+    "N2O": 0.07,
+    "GHG": 0.33
+  },
+  {
+    "climate": "cool dry",
+    "practice": "tillage and residue",
+    "CO2": 0.15,
+    "CH4": 0,
+    "N2O": 0.02,
+    "GHG": 0.17
+  },
+  {
+    "climate": "cool dry",
+    "practice": "water",
+    "CO2": 1.14,
+    "CH4": 0,
+    "N2O": 0,
+    "GHG": 1.14
+  },
+  {
+    "climate": "cool dry",
+    "practice": "set aside LUC",
+    "CO2": 1.6099999999999999,
+    "CH4": 0.02,
+    "N2O": 2.3,
+    "GHG": 3.93
+  },
+  {
+    "climate": "cool dry",
+    "practice": "agro-forestry",
+    "CO2": 0.15,
+    "CH4": 0,
+    "N2O": 0.02,
+    "GHG": 0.17
+  },
+  {
+    "climate": "cool dry",
+    "practice": "grazing,fert,fire",
+    "CO2": 0.11,
+    "CH4": 0.02,
+    "N2O": 0,
+    "GHG": 0.13
+  },
+  {
+    "climate": "cool dry",
+    "practice": "organic resto",
+    "CO2": 36.67,
+    "CH4": -3.32,
+    "N2O": 0.16,
+    "GHG": 33.51
+  },
+  {
+    "climate": "cool dry",
+    "practice": "degraded resto",
+    "CO2": 3.45,
+    "CH4": 0.08,
+    "N2O": 0,
+    "GHG": 3.5300000000000002
+  },
+  {
+    "climate": "cool dry",
+    "practice": "manure biosolids",
+    "CO2": 1.54,
+    "CH4": 0,
+    "N2O": 0,
+    "GHG": 1.54
+  },
+  {
+    "climate": "cool dry",
+    "practice": "bioenergy",
+    "CO2": 0.15,
+    "CH4": 0,
+    "N2O": 0.02,
+    "GHG": 0.16999999999999998
+  },
+  {
+    "climate": "cool moist",
+    "practice": "agronomy",
+    "CO2": 0.88,
+    "CH4": 0,
+    "N2O": 0.1,
+    "GHG": 0.98
+  },
+  {
+    "climate": "cool moist",
+    "practice": "nutrient",
+    "CO2": 0.55,
+    "CH4": 0,
+    "N2O": 0.07,
+    "GHG": 0.6200000000000001
+  },
+  {
+    "climate": "cool moist",
+    "practice": "tillage and residue",
+    "CO2": 0.51,
+    "CH4": 0,
+    "N2O": 0.02,
+    "GHG": 0.53
+  },
+  {
+    "climate": "cool moist",
+    "practice": "water",
+    "CO2": 1.14,
+    "CH4": 0,
+    "N2O": 0,
+    "GHG": 1.14
+  },
+  {
+    "climate": "cool moist",
+    "practice": "set aside LUC",
+    "CO2": 3.04,
+    "CH4": 0.02,
+    "N2O": 2.3,
+    "GHG": 5.359999999999999
+  },
+  {
+    "climate": "cool moist",
+    "practice": "agro-forestry",
+    "CO2": 0.51,
+    "CH4": 0,
+    "N2O": 0.02,
+    "GHG": 0.53
+  },
+  {
+    "climate": "cool moist",
+    "practice": "grazing,fert,fire",
+    "CO2": 0.81,
+    "CH4": 0,
+    "N2O": 0,
+    "GHG": 0.81
+  },
+  {
+    "climate": "cool moist",
+    "practice": "organic resto",
+    "CO2": 36.67,
+    "CH4": -3.32,
+    "N2O": 0.16,
+    "GHG": 33.51
+  },
+  {
+    "climate": "cool moist",
+    "practice": "degraded resto",
+    "CO2": 3.45,
+    "CH4": 1,
+    "N2O": 0,
+    "GHG": 4.45
+  },
+  {
+    "climate": "cool moist",
+    "practice": "manure biosolids",
+    "CO2": 2.79,
+    "CH4": 0,
+    "N2O": 0,
+    "GHG": 2.79
+  },
+  {
+    "climate": "cool moist",
+    "practice": "bioenergy",
+    "CO2": 0.51,
+    "CH4": 0,
+    "N2O": 0.02,
+    "GHG": 0.53
+  },
+  {
+    "climate": "warm dry",
+    "practice": "agronomy",
+    "CO2": 0.29,
+    "CH4": 0,
+    "N2O": 0.1,
+    "GHG": 0.39
+  },
+  {
+    "climate": "warm dry",
+    "practice": "nutrient",
+    "CO2": 0.26,
+    "CH4": 0,
+    "N2O": 0.07,
+    "GHG": 0.33
+  },
+  {
+    "climate": "warm dry",
+    "practice": "tillage and residue",
+    "CO2": 0.33,
+    "CH4": 0,
+    "N2O": 0.02,
+    "GHG": 0.35000000000000003
+  },
+  {
+    "climate": "warm dry",
+    "practice": "water",
+    "CO2": 1.14,
+    "CH4": 0,
+    "N2O": 0,
+    "GHG": 1.14
+  },
+  {
+    "climate": "warm dry",
+    "practice": "set aside LUC",
+    "CO2": 1.6099999999999999,
+    "CH4": 0.02,
+    "N2O": 2.3,
+    "GHG": 3.9299999999999997
+  },
+  {
+    "climate": "warm dry",
+    "practice": "agro-forestry",
+    "CO2": 0.33,
+    "CH4": 0,
+    "N2O": 0.02,
+    "GHG": 0.35000000000000003
+  },
+  {
+    "climate": "warm dry",
+    "practice": "grazing,fert,fire",
+    "CO2": 0.11,
+    "CH4": 0,
+    "N2O": 0,
+    "GHG": 0.11
+  },
+  {
+    "climate": "warm dry",
+    "practice": "organic resto",
+    "CO2": 73.33,
+    "CH4": -3.32,
+    "N2O": 0.16,
+    "GHG": 70.17
+  },
+  {
+    "climate": "warm dry",
+    "practice": "degraded resto",
+    "CO2": 3.45,
+    "CH4": 0,
+    "N2O": 0,
+    "GHG": 3.45
+  },
+  {
+    "climate": "warm dry",
+    "practice": "manure biosolids",
+    "CO2": 1.54,
+    "CH4": 0,
+    "N2O": 0,
+    "GHG": 1.54
+  },
+  {
+    "climate": "warm dry",
+    "practice": "bioenergy",
+    "CO2": 0.33,
+    "CH4": 0,
+    "N2O": 0.02,
+    "GHG": 0.35000000000000003
+  },
+  {
+    "climate": "warm moist",
+    "practice": "agronomy",
+    "CO2": 0.88,
+    "CH4": 0,
+    "N2O": 0.1,
+    "GHG": 0.98
+  },
+  {
+    "climate": "warm moist",
+    "practice": "nutrient",
+    "CO2": 0.55,
+    "CH4": 0,
+    "N2O": 0.07,
+    "GHG": 0.6200000000000001
+  },
+  {
+    "climate": "warm moist",
+    "practice": "tillage and residue",
+    "CO2": 0.7,
+    "CH4": 0,
+    "N2O": 0.02,
+    "GHG": 0.72
+  },
+  {
+    "climate": "warm moist",
+    "practice": "water",
+    "CO2": 1.14,
+    "CH4": 0,
+    "N2O": 0,
+    "GHG": 1.14
+  },
+  {
+    "climate": "warm moist",
+    "practice": "set aside LUC",
+    "CO2": 3.04,
+    "CH4": 0.02,
+    "N2O": 2.3,
+    "GHG": 5.359999999999999
+  },
+  {
+    "climate": "warm moist",
+    "practice": "agro-forestry",
+    "CO2": 0.7,
+    "CH4": 0,
+    "N2O": 0.02,
+    "GHG": 0.72
+  },
+  {
+    "climate": "warm moist",
+    "practice": "grazing,fert,fire",
+    "CO2": 0.81,
+    "CH4": 0,
+    "N2O": 0,
+    "GHG": 0.81
+  },
+  {
+    "climate": "warm moist",
+    "practice": "organic resto",
+    "CO2": 73.33,
+    "CH4": -3.32,
+    "N2O": 0.16,
+    "GHG": 70.17
+  },
+  {
+    "climate": "warm moist",
+    "practice": "degraded resto",
+    "CO2": 3.45,
+    "CH4": 0,
+    "N2O": 0,
+    "GHG": 3.45
+  },
+  {
+    "climate": "warm moist",
+    "practice": "manure biosolids",
+    "CO2": 2.79,
+    "CH4": 0,
+    "N2O": 0,
+    "GHG": 2.79
+  },
+  {
+    "climate": "warm moist",
+    "practice": "bioenergy",
+    "CO2": 0.7,
+    "CH4": 0,
+    "N2O": 0.02,
+    "GHG": 0.72
+  }
+]

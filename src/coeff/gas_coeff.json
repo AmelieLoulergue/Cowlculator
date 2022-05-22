@@ -1,0 +1,14 @@
+[
+  {
+    "Gas": "Propane",
+    "kg_CO2_gal": 5.76
+  },
+  {
+    "Gas": "Butane",
+    "kg_CO2_gal": 6.71
+  },
+  {
+    "Gas": "Butane/Propane Mix",
+    "kg_CO2_gal": 6.21
+  }
+]

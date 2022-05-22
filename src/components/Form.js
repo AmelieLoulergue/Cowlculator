@@ -11,6 +11,17 @@ import BlocAnimals from "./form_components/BlocAnimals";
 import BlocPlants from "./form_components/BlocPlants";
 import BlocPractices from "./form_components/BlocPractices";
 import BlocSoilTesting from "./form_components/BlocSoilTesting";
+import coeff_reduction_ghg from "../coeff/coeff_reduction_ghg.json";
+import elec_state_coeff from "../coeff/elec_state_coeff.json";
+import enteric_EF from "../coeff/enteric_EF.json";
+import fuel_coeff from "../coeff/fuel_coeff.json";
+import gas_coeff from "../coeff/gas_coeff.json";
+import manure from "../coeff/manure.json";
+import natgas_coeff from "../coeff/natgas_coeff.json";
+import other_coeff from "../coeff/other_coeff.json";
+import reductionEF_coeff from "../coeff/reductionEF_coeff.json";
+import regions from "../coeff/regions.json";
+import water_coeff from "../coeff/water_coeff.json";
 function Form(props) {
   let dateNow = new Date().toISOString().split("T")[0].split("-");
   const [formDatas, setFormDatas] = useState({
@@ -226,19 +237,19 @@ function Form(props) {
           selected: false,
           dairy_cow: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
           beef_cattle: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
           sheeps: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
@@ -249,19 +260,19 @@ function Form(props) {
           selected: false,
           dairy_cow: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
           beef_cattle: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
           sheeps: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
@@ -272,19 +283,19 @@ function Form(props) {
           selected: false,
           dairy_cow: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
           beef_cattle: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
           sheeps: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
@@ -298,19 +309,19 @@ function Form(props) {
           selected: false,
           croplands: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
           grasslands: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
           organic_soils: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
@@ -321,19 +332,19 @@ function Form(props) {
           selected: false,
           croplands: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
           grasslands: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
           organic_soils: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
@@ -344,19 +355,19 @@ function Form(props) {
           selected: false,
           croplands: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
           grasslands: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
           organic_soils: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
@@ -367,19 +378,19 @@ function Form(props) {
           selected: false,
           croplands: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
           grasslands: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
           organic_soils: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
@@ -390,19 +401,19 @@ function Form(props) {
           selected: false,
           croplands: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
           grasslands: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
           organic_soils: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
@@ -413,19 +424,19 @@ function Form(props) {
           selected: false,
           croplands: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
           grasslands: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
           organic_soils: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
@@ -436,19 +447,19 @@ function Form(props) {
           selected: false,
           croplands: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
           grasslands: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
           organic_soils: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
@@ -458,19 +469,19 @@ function Form(props) {
           selected: false,
           croplands: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
           grasslands: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
           organic_soils: {
             selected: false,
-            all_of_them:  true,
+            all_of_them: true,
             portion_of_them: false,
             portion_numb: 0,
           },
@@ -723,7 +734,20 @@ function Form(props) {
     // prevents the submit button from refreshing the page
     event.preventDefault();
     //console.log(formDatas);
-    calculs(formDatas);
+    calculs(
+      formDatas,
+      coeff_reduction_ghg,
+      elec_state_coeff,
+      enteric_EF,
+      fuel_coeff,
+      gas_coeff,
+      manure,
+      natgas_coeff,
+      other_coeff,
+      reductionEF_coeff,
+      regions,
+      water_coeff
+    );
   };
   return (
     <>

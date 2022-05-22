@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Dairy cows",
+    "Improved_feeding": 0.16,
+    "Spec_agents_and_diet_additives": 0.11,
+    "long-term change and breeding": 0.03
+  },
+  {
+    "name": "Beef cattle",
+    "Improved_feeding": 0.11,
+    "Spec_agents_and_diet_additives": 0.09,
+    "long-term change and breeding": 0.03
+  },
+  {
+    "name": "Sheep",
+    "Improved_feeding": 0.04,
+    "Spec_agents_and_diet_additives": 0.004,
+    "long-term change and breeding": 0.003
+  }
+]
