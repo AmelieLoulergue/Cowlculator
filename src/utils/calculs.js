@@ -1,5 +1,5 @@
-import React, { startTransition } from "react";
 
+import React from "react";
 function calculs(datasForm) {
   console.log("toutes les datas", datasForm);
   console.log("date de fin", datasForm.endDate);
@@ -23,6 +23,7 @@ function calculs(datasForm) {
   );
   console.log(unit_selected);
 
+
   let test= funcTime(datasForm)
   console.log(test)
 }
@@ -37,3 +38,4 @@ function funcTime(datasForm){
 
   return time
 }
+
