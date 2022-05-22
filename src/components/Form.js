@@ -429,7 +429,8 @@ function Form(props) {
         <div id="block_natural_gas">
           <div>
             <label htmlFor="natgas_unit">
-              What is the propane consumption ?
+              Pick the unit for your natural gas consumption
+
             </label>
             <select
               name="natgas_unit"
