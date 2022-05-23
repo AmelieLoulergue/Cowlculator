@@ -15,7 +15,7 @@ function calculs(
 )
 
 {
-  console.log(natgas_coeff); // tableau d'objets
+  console.log(elec_state_coeff); // tableau d'objets
   console.log(elec_state_coeff);
   // pour avoir la première ligne du tableau
   console.log(coeff_reduction_ghg[0]);
@@ -67,7 +67,7 @@ console.log(coeffState.CO2_kilo);
   let time= funcTime(datasForm)
   console.log(time)
 
-  let elecCO2=funcElec(datasForm)
+  let elecCO2=funcElec(datasForm,elec_state_coeff)
   console.log(elecCO2)
 
   let natGasCO2=funcNatgas(datasForm)
@@ -118,7 +118,7 @@ function funcTime(datasForm){
 }
 
 //function electricity
-function funcElec(datasForm){
+function funcElec(datasForm,elec_state_coeff){
 
   //electrictity consumption
   let elecCons = datasForm.elec_total.value
@@ -135,17 +135,18 @@ function funcElec(datasForm){
 
   //return elecTotal -> works
   
-  /*
+  
   //multiplied by CO2 kg/kWh coeff associated to state
+  
   let state= datasForm.demographics.state
   let coeffState=elec_state_coeff.find(
     (coeff)=> coeff.State===state
     );
-  let elecCO2 = round(coeffState.CO2_kilo*elecTotal,1)
+  //let elecCO2 = round(coeffState.CO2_kilo*elecTotal,1)
 
-  return elecCO2 
+  return coeffState
 
-*/
+
 
 }
 
