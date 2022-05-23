@@ -22,7 +22,7 @@ function BlocWater({ formDatas, handleChangeNumber }) {
               ? ""
               : formDatas.water_drink_cons.value
           }
-          onChange={(event) => handleChangeNumber(event)}
+          onChange={(event) => handleChangeNumber({ event: event })}
         />{" "}
         {formDatas.water_drink_cons.unit}
       </div>
@@ -38,7 +38,7 @@ function BlocWater({ formDatas, handleChangeNumber }) {
               ? ""
               : formDatas.water_waste_cons.value
           }
-          onChange={(event) => handleChangeNumber(event)}
+          onChange={(event) => handleChangeNumber({ event: event })}
         />{" "}
         {formDatas.water_waste_cons.unit}
       </div>

@@ -12,9 +12,7 @@ function calculs(
   reductionEF_coeff,
   regions,
   water_coeff
-)
-
-{
+) {
   console.log(natgas_coeff); // tableau d'objets
   console.log(elec_state_coeff);
   // pour avoir la première ligne du tableau
@@ -40,13 +38,9 @@ function calculs(
     (coeff) => coeff.practice === "agronomy"
   );
 
-  
-
-  let coeffState= elec_state_coeff.find(
-    (coeff)=> coeff.State==="FL"
-    );
-console.log(coeffState);
-console.log(coeffState.CO2_kilo);
+  let coeffState = elec_state_coeff.find((coeff) => coeff.State === "FL");
+  console.log(coeffState);
+  console.log(coeffState.CO2_kilo);
 
   console.log(practice);
   console.log(
@@ -64,14 +58,14 @@ console.log(coeffState.CO2_kilo);
     practice.GHG
   );
 
-  let time= funcTime(datasForm)
-  console.log(time)
+  let time = funcTime(datasForm);
+  console.log(time);
 
-  let elecCO2=funcElec(datasForm)
-  console.log(elecCO2)
+  let elecCO2 = funcElec(datasForm);
+  console.log(elecCO2);
 
-  let natGasCO2=funcNatgas(datasForm)
-  console.log(natGasCO2)
+  let natGasCO2 = funcNatgas(datasForm);
+  console.log(natGasCO2);
 
   console.log("toutes les datas", datasForm);
   // console.log("date de fin", datasForm.endDate);
@@ -82,7 +76,7 @@ console.log(coeffState.CO2_kilo);
   // );
   // console.log(
   //   "natgas unit Therm",
-  //   datasForm.natgas_unit[0].value,  
+  //   datasForm.natgas_unit[0].value,
   //   datasForm.natgas_unit[0].selected
   // );
   // // tu peux boucler sur des tableaux
@@ -107,34 +101,35 @@ function round(value, precision) {
   return Math.round(value * multiplier) / multiplier;
 }
 
-
 //function time
-function funcTime(datasForm){
-  let start= new Date(datasForm.startDate)
-  let end = new Date(datasForm.endDate)
-  let time = round(((end.getTime() - start.getTime())/ (1000*3600*24*7*52.25)),1);
-  
-  return time
+function funcTime(datasForm) {
+  let start = new Date(datasForm.startDate);
+  let end = new Date(datasForm.endDate);
+  let time = round(
+    (end.getTime() - start.getTime()) / (1000 * 3600 * 24 * 7 * 52.25),
+    1
+  );
+
+  return time;
 }
 
 //function electricity
-function funcElec(datasForm){
-
+function funcElec(datasForm, elec_state_coeff) {
   //electrictity consumption
-  let elecCons = datasForm.elec_total.value
-  let elecProd =0
+  let elecCons = datasForm.elec_total.value;
+  let elecProd = 0;
 
   // electricity production
-  if(datasForm.elec_generator){
-    elecProd= datasForm.elec_generator_prod.value
+  if (datasForm.elec_generator) {
+    elecProd = datasForm.elec_generator_prod.value;
   } else {
-    elecProd= 0
+    elecProd = 0;
   }
   //total
-  let elecTotal=elecCons-elecProd
+  let elecTotal = elecCons - elecProd;
 
   //return elecTotal -> works
-  
+
   /*
   //multiplied by CO2 kg/kWh coeff associated to state
   let state= datasForm.demographics.state
@@ -146,44 +141,38 @@ function funcElec(datasForm){
   return elecCO2 
 
 */
-
 }
-
 
 // Function natural gas
 
-function funcNatgas(datasForm){
-
-  let unit=datasForm.natgas_unit.value
-  let natGasCons=datasForm.natgas_cons
+function funcNatgas(datasForm) {
+  let unit = datasForm.natgas_unit.value;
+  let natGasCons = datasForm.natgas_cons;
 
   // convert unit to MMBtu
-  switch(unit){
-    case("Therm"):
-    natGasCons=natGasCons/10;
-    break;
-    case("Ccf"):
-    natGasCons=natGasCons/10.37;
-    break;
-    case("Gj"):
-    natGasCons=natGasCons/1.055056;
-    break;
-    case("m3"):
-    natGasCons=natGasCons/28.26369;
-    break;
-    case("MMBtu"):
-    natGasCons=natGasCons;
-    break;
+  switch (unit) {
+    case "Therm":
+      natGasCons = natGasCons / 10;
+      break;
+    case "Ccf":
+      natGasCons = natGasCons / 10.37;
+      break;
+    case "Gj":
+      natGasCons = natGasCons / 1.055056;
+      break;
+    case "m3":
+      natGasCons = natGasCons / 28.26369;
+      break;
+    case "MMBtu":
+      natGasCons = natGasCons;
+      break;
     default:
-      natGasCons=0
-
+      natGasCons = 0;
   }
-/*
+  /*
   let coeffNatGas= datasForm.natgas_coeff.kg_CO2_Mbtu
   let natGasCO2= round((natGasCons*coeffNatGas),1)
 
   return natGasCO2
 */
 }
-
-

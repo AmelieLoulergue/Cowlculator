@@ -18,7 +18,7 @@ function BlocElectricity({
           value={
             formDatas.elec_total.value === 0 ? "" : formDatas.elec_total.value
           }
-          onChange={(event) => handleChangeNumber(event)}
+          onChange={(event) => handleChangeNumber({ event: event })}
         />
         {formDatas.elec_total.unit}
       </div>
@@ -48,7 +48,7 @@ function BlocElectricity({
                 ? ""
                 : formDatas.elec_generator_prod.value
             }
-            onChange={(event) => handleChangeNumber(event)}
+            onChange={(event) => handleChangeNumber({ event: event })}
           />{" "}
           {formDatas.elec_generator_prod.unit}
         </div>
