@@ -129,7 +129,7 @@ function BlocFuel({ formDatas, handleChangeNumber, handleChangeRadio }) {
                 ? ""
                 : formDatas.fuel_car_gaso_cons.value
             }
-            onChange={(event) => handleChangeNumber(event)}
+            onChange={(event) => handleChangeNumber({ event: event })}
           />{" "}
           {formDatas.fuel_car_gaso_cons.unit}
         </div>
@@ -147,7 +147,7 @@ function BlocFuel({ formDatas, handleChangeNumber, handleChangeRadio }) {
                 ? ""
                 : formDatas.fuel_car_dies_cons.value
             }
-            onChange={(event) => handleChangeNumber(event)}
+            onChange={(event) => handleChangeNumber({ event: event })}
           />{" "}
           {formDatas.fuel_car_dies_cons.unit}
         </div>
@@ -215,7 +215,7 @@ function BlocFuel({ formDatas, handleChangeNumber, handleChangeRadio }) {
                 ? ""
                 : formDatas.fuel_truck_gaso_cons.value
             }
-            onChange={(event) => handleChangeNumber(event)}
+            onChange={(event) => handleChangeNumber({ event: event })}
           />{" "}
           {formDatas.fuel_truck_gaso_cons.unit}
         </div>
@@ -233,7 +233,7 @@ function BlocFuel({ formDatas, handleChangeNumber, handleChangeRadio }) {
                 ? ""
                 : formDatas.fuel_truck_dies_cons.value
             }
-            onChange={(event) => handleChangeNumber(event)}
+            onChange={(event) => handleChangeNumber({ event: event })}
           />{" "}
           {formDatas.fuel_truck_dies_cons.unit}
         </div>
@@ -301,7 +301,7 @@ function BlocFuel({ formDatas, handleChangeNumber, handleChangeRadio }) {
                 ? ""
                 : formDatas.fuel_tract_gaso_cons.value
             }
-            onChange={(event) => handleChangeNumber(event)}
+            onChange={(event) => handleChangeNumber({ event: event })}
           />{" "}
           {formDatas.fuel_tract_gaso_cons.unit}
         </div>
@@ -319,7 +319,7 @@ function BlocFuel({ formDatas, handleChangeNumber, handleChangeRadio }) {
                 ? ""
                 : formDatas.fuel_tract_dies_cons.value
             }
-            onChange={(event) => handleChangeNumber(event)}
+            onChange={(event) => handleChangeNumber({ event: event })}
           />{" "}
           {formDatas.fuel_tract_dies_cons.unit}
         </div>

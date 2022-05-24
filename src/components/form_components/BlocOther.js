@@ -46,7 +46,7 @@ function BlocOther({ formDatas, handleChangeNumber, handleChangeRadio }) {
                       ? ""
                       : formDatas[`other_${choice[0]}_cons`]["value"]
                   }
-                  onChange={(event) => handleChangeNumber(event)}
+                  onChange={(event) => handleChangeNumber({ event: event })}
                 />{" "}
                 {formDatas[`other_${choice[0]}_cons`]["unit"]}
               </div>

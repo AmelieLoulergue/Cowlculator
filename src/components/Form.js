@@ -22,6 +22,7 @@ import other_coeff from "../coeff/other_coeff.json";
 import reductionEF_coeff from "../coeff/reductionEF_coeff.json";
 import regions from "../coeff/regions.json";
 import water_coeff from "../coeff/water_coeff.json";
+import BlocDemographic from "./form_components/BlocDemographic";
 function Form(props) {
   let dateNow = new Date().toISOString().split("T")[0].split("-");
   const [formDatas, setFormDatas] = useState({
@@ -515,7 +516,7 @@ function Form(props) {
     demographics: {
       address: "",
       zip_code: "",
-      state: "",
+      state: "AK",
       contact_info: { website: "", email: "", phone: "" },
     },
   });
@@ -530,22 +531,32 @@ function Form(props) {
     let date = dateValue.split("/");
     return date[2] + "-" + date[0] + "-" + date[1];
   };
-  const handleChange = ({ event, other }) => {
-    !other
-      ? setFormDatas({
-          ...formDatas,
-          [event.target.name]: event.target.value,
-        })
-      : setFormDatas({
-          ...formDatas,
-          [event.target.name]: {
-            ...formDatas[event.target.name],
-            other: {
-              ...formDatas[event.target.name]["other"],
-              value: event.target.value,
-            },
+  const handleChange = ({ event, other, state }) => {
+    if (other) {
+      setFormDatas({
+        ...formDatas,
+        [event.target.name]: {
+          ...formDatas[event.target.name],
+          other: {
+            ...formDatas[event.target.name]["other"],
+            value: event.target.value,
           },
-        });
+        },
+      });
+    } else if (state) {
+      setFormDatas({
+        ...formDatas,
+        [event.target.name.split(".")[0]]: {
+          ...formDatas[event.target.name.split(".")[0]],
+          [event.target.name.split(".")[1]]: event.target.value,
+        },
+      });
+    } else {
+      setFormDatas({
+        ...formDatas,
+        [event.target.name]: event.target.value,
+      });
+    }
   };
 
   const setValuesToFalse = (datas) => {
@@ -711,7 +722,7 @@ function Form(props) {
       });
     }
   };
-  const handleChangeNumber = (event, size) => {
+  const handleChangeNumber = ({ event, size, natgas }) => {
     if (size) {
       setFormDatas({
         ...formDatas,
@@ -719,6 +730,11 @@ function Form(props) {
           ...formDatas[event.target.name],
           size: Number(event.target.value),
         },
+      });
+    } else if (natgas) {
+      setFormDatas({
+        ...formDatas,
+        [event.target.name]: Number(event.target.value),
       });
     } else {
       setFormDatas({
@@ -825,6 +841,15 @@ function Form(props) {
         />
         <BlocPractices
           formDatas={formDatas}
+          handleChangeRadio={handleChangeRadio}
+          handleChangeSelect={handleChangeSelect}
+          handleChangeNumber={handleChangeNumber}
+          handleChangeCheckbox={handleChangeCheckbox}
+          setFormDatas={setFormDatas}
+        />
+        <BlocDemographic
+          formDatas={formDatas}
+          handleChange={handleChange}
           handleChangeRadio={handleChangeRadio}
           handleChangeSelect={handleChangeSelect}
           handleChangeNumber={handleChangeNumber}

@@ -12,10 +12,8 @@ function calculs(
   reductionEF_coeff,
   regions,
   water_coeff
-)
-
-{
-  console.log(elec_state_coeff); // tableau d'objets
+) {
+  console.log(gas_coeff); // tableau d'objets
   console.log(elec_state_coeff);
   // pour avoir la première ligne du tableau
   console.log(coeff_reduction_ghg[0]);
@@ -40,13 +38,6 @@ function calculs(
     (coeff) => coeff.practice === "agronomy"
   );
 
-  
-
-  let coeffState= elec_state_coeff.find(
-    (coeff)=> coeff.State==="FL"
-    );
-console.log(coeffState);
-console.log(coeffState.CO2_kilo);
 
   console.log(practice);
   console.log(
@@ -64,14 +55,19 @@ console.log(coeffState.CO2_kilo);
     practice.GHG
   );
 
-  let time= funcTime(datasForm)
-  console.log(time)
+  let time = funcTime(datasForm);
+  console.log(time);
 
   let elecCO2=funcElec(datasForm,elec_state_coeff)
   console.log(elecCO2)
 
-  let natGasCO2=funcNatgas(datasForm)
-  console.log(natGasCO2)
+  let natGasCO2 = funcNatGas(datasForm,natgas_coeff);
+  console.log(natGasCO2);
+
+  let gasCO2=funcGas(datasForm,gas_coeff);
+  console.log(gasCO2)
+
+
 
   console.log("toutes les datas", datasForm);
   // console.log("date de fin", datasForm.endDate);
@@ -82,7 +78,7 @@ console.log(coeffState.CO2_kilo);
   // );
   // console.log(
   //   "natgas unit Therm",
-  //   datasForm.natgas_unit[0].value,  
+  //   datasForm.natgas_unit[0].value,
   //   datasForm.natgas_unit[0].selected
   // );
   // // tu peux boucler sur des tableaux
@@ -107,84 +103,135 @@ function round(value, precision) {
   return Math.round(value * multiplier) / multiplier;
 }
 
-
 //function time
-function funcTime(datasForm){
-  let start= new Date(datasForm.startDate)
-  let end = new Date(datasForm.endDate)
-  let time = round(((end.getTime() - start.getTime())/ (1000*3600*24*7*52.25)),1);
-  
-  return time
+function funcTime(datasForm) {
+  let start = new Date(datasForm.startDate);
+  let end = new Date(datasForm.endDate);
+  let time = round(
+    (end.getTime() - start.getTime()) / (1000 * 3600 * 24 * 7 * 52.25),
+    1
+  );
+
+  return time;
 }
 
 //function electricity
 function funcElec(datasForm,elec_state_coeff){
 
   //electrictity consumption
-  let elecCons = datasForm.elec_total.value
-  let elecProd =0
+  let elecCons = datasForm.elec_total.value;
+  let elecProd = 0;
 
   // electricity production
-  if(datasForm.elec_generator){
-    elecProd= datasForm.elec_generator_prod.value
+  if (datasForm.elec_generator) {
+    elecProd = datasForm.elec_generator_prod.value;
   } else {
-    elecProd= 0
+    elecProd = 0;
   }
   //total
-  let elecTotal=elecCons-elecProd
+  let elecTotal = elecCons - elecProd;
 
-  //return elecTotal -> works
-  
-  
+
   //multiplied by CO2 kg/kWh coeff associated to state
   
   let state= datasForm.demographics.state
   let coeffState=elec_state_coeff.find(
     (coeff)=> coeff.State===state
     );
-  //let elecCO2 = round(coeffState.CO2_kilo*elecTotal,1)
+  let elecCO2 = round(coeffState.CO2_kilo*elecTotal,1)
 
-  return coeffState
-
-
+  return elecCO2
 
 }
-
 
 // Function natural gas
 
-function funcNatgas(datasForm){
-
-  let unit=datasForm.natgas_unit.value
-  let natGasCons=datasForm.natgas_cons
+function funcNatGas(datasForm,natgas_coeff) {
+  let unit = datasForm.natgas_unit.value;
+  let natGasCons = datasForm.natgas_cons;
 
   // convert unit to MMBtu
-  switch(unit){
-    case("Therm"):
-    natGasCons=natGasCons/10;
-    break;
-    case("Ccf"):
-    natGasCons=natGasCons/10.37;
-    break;
-    case("Gj"):
-    natGasCons=natGasCons/1.055056;
-    break;
-    case("m3"):
-    natGasCons=natGasCons/28.26369;
-    break;
-    case("MMBtu"):
-    natGasCons=natGasCons;
-    break;
+  switch (unit) {
+    case "Therm":
+      natGasCons = natGasCons/10;
+      break;
+    case "Ccf":
+      natGasCons = natGasCons/10.37;
+      break;
+    case "Gj":
+      natGasCons = natGasCons/1.055056;
+      break;
+    case "m3":
+      natGasCons = natGasCons/28.26369;
+      break;
+    case "MMBtu":
+      natGasCons = natGasCons;
+      break;
     default:
-      natGasCons=0
-
+      natGasCons = 0;
   }
-/*
-  let coeffNatGas= datasForm.natgas_coeff.kg_CO2_Mbtu
+  
+  let coeffNatGas= natgas_coeff.kg_CO2_Mbtu
   let natGasCO2= round((natGasCons*coeffNatGas),1)
 
   return natGasCO2
-*/
 }
 
 
+
+// Fonction gas
+
+function funcGas(datasForm, gas_coeff){
+  let consButane=datasForm.gas_butane_cons.value
+  let consPropane=datasForm.gas_propane_cons.value
+  let consMix =datasForm.gas_mix_cons.value
+
+  let coeffButane=gas_coeff[1].kg_CO2_gal
+  let coeffPropane=gas_coeff[0].kg_CO2_gal
+  let coeffMix=gas_coeff[2].kg_CO2_gal
+
+  let gasCO2=round(((consButane*coeffButane)+(consPropane*coeffPropane)+(consMix*coeffMix)),1)
+
+  return gasCO2
+
+}
+
+/*
+//Function fuel
+
+function funcFuel(datasForm,fuel_coeff){
+  let consDiesel=
+  let consGasoline=
+  let consFuel
+
+  let coeffFuel=
+
+  let fuelCO2=
+}
+
+
+
+Funcfuel_CO2 <- function (data){
+  
+  data$fuel_car_gaso_cons_1 <-as.numeric(as.character(data$fuel_car_gaso_cons_1))
+  data$fuel_car_dies_cons_1<-as.numeric(as.character(data$fuel_car_dies_cons_1))
+  data$fuel_truck_gaso_cons_1<-as.numeric(as.character(data$fuel_truck_gaso_cons_1))
+  data$fuel_truck_dies_cons_1<-as.numeric(as.character(data$fuel_truck_dies_cons_1))
+  data$fuel_tract_gaso_cons_1<-as.numeric(as.character(data$fuel_tract_gaso_cons_1))
+  data$fuel_tract_dies_cons_1<-as.numeric(as.character(data$fuel_tract_dies_cons_1))
+  
+  diesel_cons <- sum(data$fuel_car_dies_cons_1,data$fuel_truck_dies_cons_1,data$fuel_tract_dies_cons_1)
+  gasoline_cons <- sum(data$fuel_car_gaso_cons_1,data$fuel_truck_gaso_cons_1, data$fuel_tract_gaso_cons_1)
+  cons <- c(diesel_cons,gasoline_cons)
+  
+  fuel_coeff<- fuel_coeff %>% mutate(consumption=cons) %>% mutate(CO2=`kg CO2`*consumption)
+  
+  fuel_CO2 <-round(sum(fuel_coeff$CO2)/1000 ,1)
+  
+  return(fuel_CO2)
+  
+}
+
+
+
+*/
