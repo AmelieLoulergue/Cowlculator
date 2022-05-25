@@ -13,7 +13,14 @@ function calculs(
   regions,
   water_coeff
 ) {
-  console.log(gas_coeff); // tableau d'objets
+
+
+  console.log("toutes les datas", datasForm);
+  console.log(other_coeff); // tableau d'objets
+  
+
+
+
   console.log(elec_state_coeff);
   // pour avoir la première ligne du tableau
   console.log(coeff_reduction_ghg[0]);
@@ -38,6 +45,10 @@ function calculs(
     (coeff) => coeff.practice === "agronomy"
   );
 
+  console.log(fuel_coeff);
+
+
+    
 
   console.log(practice);
   console.log(
@@ -61,11 +72,14 @@ function calculs(
   let elecCO2=funcElec(datasForm,elec_state_coeff)
   console.log(elecCO2)
 
-  let natGasCO2 = funcNatGas(datasForm,natgas_coeff);
-  console.log(natGasCO2);
+  //let natGasCO2 = funcNatGas(datasForm,natgas_coeff);
+  //console.log(natGasCO2);
 
   let gasCO2=funcGas(datasForm,gas_coeff);
   console.log(gasCO2)
+
+  let fuelCO2=funcFuel(datasForm,fuel_coeff);
+  console.log(fuelCO2)
 
 
 
@@ -144,10 +158,22 @@ function funcElec(datasForm,elec_state_coeff){
 
 }
 
-// Function natural gas
+/* Still has an issue
+
+// Function natural gas 
 
 function funcNatGas(datasForm,natgas_coeff) {
-  let unit = datasForm.natgas_unit.value;
+
+ 
+  //option1:let unit=0
+
+  //for (let i=0; i=datasForm.natgas_unit.length; i++){
+    //if (datasForm.natgas_unit[i].selected===true){
+      //let unit = datasForm.natgas_unit[i].value
+    //return unit
+    //}}
+
+  //option 2: let unit = datasForm.natgas_unit.value;
   let natGasCons = datasForm.natgas_cons;
 
   // convert unit to MMBtu
@@ -174,8 +200,10 @@ function funcNatGas(datasForm,natgas_coeff) {
   let coeffNatGas= natgas_coeff.kg_CO2_Mbtu
   let natGasCO2= round((natGasCons*coeffNatGas),1)
 
-  return natGasCO2
+  //return natGasCO2
+  return unit
 }
+*/
 
 
 
@@ -196,42 +224,83 @@ function funcGas(datasForm, gas_coeff){
 
 }
 
-/*
+
 //Function fuel
 
 function funcFuel(datasForm,fuel_coeff){
-  let consDiesel=
-  let consGasoline=
-  let consFuel
+  let consDiesel= (datasForm.fuel_car_dies_cons.value+datasForm.fuel_tract_dies_cons.value+datasForm.fuel_truck_dies_cons.value)
+  let consGasoline=(datasForm.fuel_car_gaso_cons.value+datasForm.fuel_tract_gaso_cons.value+datasForm.fuel_truck_gaso_cons.value)
+  
+  let coeffDiesel= fuel_coeff[0].kg_CO2
+  let coeffGasoline= fuel_coeff[1].kg_CO2
+  
+  let fuelCO2= (consDiesel*coeffDiesel)+(consGasoline*coeffGasoline)
+  return fuelCO2
 
-  let coeffFuel=
-
-  let fuelCO2=
 }
+/*
+//Function other
+
+let consAnthr=datasForm.other_anthracite_cons.value
+let consAsph=datasForm.other_asphalt_and_road_oil.value
+let consAvGas=datasForm.other_aviation_gas_cons.value
+let consBit=datasForm.other_bituminous_cons.value
+let consCoal=datasForm.other_coal_cons.value
+let consCoke=datasForm.other_coke_cons.value
+let consFlared=datasForm.other_flared_natural_gas_cons.value
+let consGeoth=datasForm.other_geothermal_cons.value
+let consJetFuel=datasForm.other_jet_fuel_cons.value
+let consKeros=datasForm.other_kerosene_cons.value
+let consLign=datasForm.other_lignite_cons.value
+let consLub=datasForm.other_lubricants_cons.value
+let consSolidWaste=datasForm.other_municiple_solid_waste_cons.value
+let consFeedstock=datasForm.other_petrochemical_feedstocks.value
+let consMisc=datasForm.other_petroleum_and_miscellaneous_cons.value
+let consPetroleum=datasForm.other_petroleum_coke_cons.value
+let consResFuel=datasForm.other_residual_heating_fuel_cons.value
+let consNapht=datasForm.other_special_naphthas_solvents.value
+let consSubb=datasForm.other_subbituminous_cons.value
+let consTireDer=datasForm.other_tire_derived_fuel_cons.value
+let consWasteOil=datasForm.other_waste_oil_cons.value
+let consWax=datasForm.other_waxes_cons.value
+
+let coeffAnthr=other_coeff[13]
+let coeffAsph=other_coeff[8]
+let coeffAvGas=other_coeff[4]
+let coeffBit=other_coeff[14]
+let coeffCoal=other_coeff[1]
+let coeffCoke=other_coeff[17]
+let coeffFlared=other_coeff[5]
+let coeffGeoth=other_coeff[18]
+let coeffJetFuel=other_coeff[3]
+let coeffKeros=other_coeff[0]
+let coeffLign=other_coeff[16]
+let coeffLub=other_coeff[9]
+let coeffSolidWaste=other_coeff[19]
+let coeffFeedstock=other_coeff[10]
+let coeffMisc=other_coeff[7]
+let coeffPetroleum=other_coeff[6]
+let coeffResFuel=other_coeff[2]
+let coeffNapht=other_coeff[11]
+let coeffSubb=other_coeff[15]
+let coeffTireDer=other_coeff[20]
+let coeffWasteOil=other_coeff[21]
+let coeffWax=other_coeff[12]
 
 
 
-Funcfuel_CO2 <- function (data){
+Funcother_CO2 <- function (data) {
   
-  data$fuel_car_gaso_cons_1 <-as.numeric(as.character(data$fuel_car_gaso_cons_1))
-  data$fuel_car_dies_cons_1<-as.numeric(as.character(data$fuel_car_dies_cons_1))
-  data$fuel_truck_gaso_cons_1<-as.numeric(as.character(data$fuel_truck_gaso_cons_1))
-  data$fuel_truck_dies_cons_1<-as.numeric(as.character(data$fuel_truck_dies_cons_1))
-  data$fuel_tract_gaso_cons_1<-as.numeric(as.character(data$fuel_tract_gaso_cons_1))
-  data$fuel_tract_dies_cons_1<-as.numeric(as.character(data$fuel_tract_dies_cons_1))
   
-  diesel_cons <- sum(data$fuel_car_dies_cons_1,data$fuel_truck_dies_cons_1,data$fuel_tract_dies_cons_1)
-  gasoline_cons <- sum(data$fuel_car_gaso_cons_1,data$fuel_truck_gaso_cons_1, data$fuel_tract_gaso_cons_1)
-  cons <- c(diesel_cons,gasoline_cons)
   
-  fuel_coeff<- fuel_coeff %>% mutate(consumption=cons) %>% mutate(CO2=`kg CO2`*consumption)
   
-  fuel_CO2 <-round(sum(fuel_coeff$CO2)/1000 ,1)
+  cons <- c(data$other_kero_cons_1,data$other_coal_cons_1,data$other_rhf_cons_1,data$other_jet_cons_1,data$other_aviation_cons_1,data$other_fng_cons_1,data$other_petroleum_cons_1,data$other_petmisc_cons_1,data$other_asphoil_cons_1,data$other_lub_cons_1,data$other_petrofeed_cons_1,data$other_specnapht_cons_1,data$other_waxes_cons_1,data$other_anthr_cons_1,data$other_bit_cons_1,data$other_subbit_cons_1,data$other_lignite_cons_1,data$other_coke_cons_1,data$other_geoth_cons_1,data$other_solidwaste_con_1,data$other_tireder_cons_1,data$other_wasteoil_cons_1) 
+  other_coeff <- other_coeff %>% mutate(consumption=cons) %>% mutate(CO2=`kg CO2`*consumption)
   
-  return(fuel_CO2)
+  other_CO2 <- round(sum(other_coeff$CO2)/1000,1) 
   
+  return(other_CO2)
 }
-
-
 
 */
+
