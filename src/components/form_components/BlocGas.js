@@ -20,7 +20,7 @@ function BlocGas({ formDatas, handleChangeNumber }) {
         {formDatas.gas_butane_cons.unit}
       </div>
       <div>
-        <label htmlFor="gas_propane_cons">What is the gas consumption ?</label>
+        <label htmlFor="gas_propane_cons">What is the propane consumption ?</label>
         <input
           type="number"
           name="gas_propane_cons"
