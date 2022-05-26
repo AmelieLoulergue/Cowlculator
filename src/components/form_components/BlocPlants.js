@@ -35,7 +35,6 @@ function BlocPlants({
           })}
           {Object.entries(formDatas.farm_type_plants).map((choice, index) => {
             if (formDatas[`farm_type_plants`][choice[0]]) {
-              
               return (
                 <>
                   <div key={index}>
@@ -69,6 +68,7 @@ function BlocPlants({
                     </label>
                     <input
                       type="number"
+                      min="0"
                       name={[choice[0]]}
                       value={
                         formDatas[[choice[0]]].size === 0

@@ -9,6 +9,7 @@ function BlocGas({ formDatas, handleChangeNumber }) {
         </label>
         <input
           type="number"
+          min="0"
           name="gas_butane_cons"
           value={
             formDatas.gas_butane_cons.value === 0
@@ -20,9 +21,12 @@ function BlocGas({ formDatas, handleChangeNumber }) {
         {formDatas.gas_butane_cons.unit}
       </div>
       <div>
-        <label htmlFor="gas_propane_cons">What is the propane consumption ?</label>
+        <label htmlFor="gas_propane_cons">
+          What is the propane consumption ?
+        </label>
         <input
           type="number"
+          min="0"
           name="gas_propane_cons"
           value={
             formDatas.gas_propane_cons.value === 0
@@ -39,6 +43,7 @@ function BlocGas({ formDatas, handleChangeNumber }) {
         </label>
         <input
           type="number"
+          min="0"
           name="gas_mix_cons"
           value={
             formDatas.gas_mix_cons.value === 0

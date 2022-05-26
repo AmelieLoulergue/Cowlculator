@@ -728,20 +728,20 @@ function Form(props) {
         ...formDatas,
         [event.target.name]: {
           ...formDatas[event.target.name],
-          size: Number(event.target.value),
+          size: Math.abs(Number(event.target.value)),
         },
       });
     } else if (natgas) {
       setFormDatas({
         ...formDatas,
-        [event.target.name]: Number(event.target.value),
+        [event.target.name]: Math.abs(Number(event.target.value)),
       });
     } else {
       setFormDatas({
         ...formDatas,
         [event.target.name]: {
           ...formDatas[event.target.name],
-          value: Number(event.target.value),
+          value: Math.abs(Number(event.target.value)),
         },
       });
     }
