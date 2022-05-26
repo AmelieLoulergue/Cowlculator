@@ -808,6 +808,7 @@ function Form(props) {
         <BlocFuel
           handleChangeNumber={handleChangeNumber}
           handleChangeSelect={handleChangeSelect}
+          handleChangeRadio={handleChangeRadio}
           formDatas={formDatas}
         />
         <BlocWater
