@@ -14,6 +14,7 @@ function BlocElectricity({
         </label>
         <input
           type="number"
+          min="0"
           name="elec_total"
           value={
             formDatas.elec_total.value === 0 ? "" : formDatas.elec_total.value
@@ -42,6 +43,7 @@ function BlocElectricity({
           </label>
           <input
             type="number"
+            min="0"
             name="elec_generator_prod"
             value={
               formDatas.elec_generator_prod.value === 0

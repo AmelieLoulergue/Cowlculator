@@ -32,6 +32,7 @@ function BlocNaturalGas({ handleChangeNumber, handleChangeSelect, formDatas }) {
           </label>
           <input
             type="number"
+            min="0"
             name="natgas_cons"
             value={formDatas.natgas_cons === 0 ? "" : formDatas.natgas_cons}
             onChange={(event) =>

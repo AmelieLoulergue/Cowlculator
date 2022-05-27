@@ -16,6 +16,7 @@ function BlocWater({ formDatas, handleChangeNumber }) {
         </label>
         <input
           type="number"
+          min="0"
           name="water_drink_cons"
           value={
             formDatas.water_drink_cons.value === 0
@@ -32,6 +33,7 @@ function BlocWater({ formDatas, handleChangeNumber }) {
         </label>
         <input
           type="number"
+          min="0"
           name="water_waste_cons"
           value={
             formDatas.water_waste_cons.value === 0
