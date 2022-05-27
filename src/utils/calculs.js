@@ -45,7 +45,7 @@ function calculs(
     (coeff) => coeff.practice === "agronomy"
   );
 
-  console.log(fuel_coeff);
+  console.log(natgas_coeff);
 
 
     
@@ -72,8 +72,8 @@ function calculs(
   let elecCO2=funcElec(datasForm,elec_state_coeff)
   console.log(elecCO2)
 
-  //let natGasCO2 = funcNatGas(datasForm,natgas_coeff);
-  //console.log(natGasCO2);
+   let natGasCO2 = funcNatGas(datasForm,natgas_coeff);
+   console.log(natGasCO2);
 
   let gasCO2=funcGas(datasForm,gas_coeff);
   console.log(gasCO2)
@@ -158,23 +158,13 @@ function funcElec(datasForm,elec_state_coeff){
 
 }
 
-/* Still has an issue
 
 // Function natural gas 
 
 function funcNatGas(datasForm,natgas_coeff) {
 
- 
-  //option1:let unit=0
-
-  //for (let i=0; i=datasForm.natgas_unit.length; i++){
-    //if (datasForm.natgas_unit[i].selected===true){
-      //let unit = datasForm.natgas_unit[i].value
-    //return unit
-    //}}
-
-  //option 2: let unit = datasForm.natgas_unit.value;
-  let natGasCons = datasForm.natgas_cons;
+let unit = datasForm.natgas_unit.find(unit => unit.selected === true).value
+let natGasCons = datasForm.natgas_cons;
 
   // convert unit to MMBtu
   switch (unit) {
@@ -197,13 +187,15 @@ function funcNatGas(datasForm,natgas_coeff) {
       natGasCons = 0;
   }
   
-  let coeffNatGas= natgas_coeff.kg_CO2_Mbtu
+  
+  let coeffNatGas= natgas_coeff[0].kg_CO2_Mbtu
   let natGasCO2= round((natGasCons*coeffNatGas),1)
 
-  //return natGasCO2
-  return unit
+  
+  return natGasCO2
+  
 }
-*/
+
 
 
 
