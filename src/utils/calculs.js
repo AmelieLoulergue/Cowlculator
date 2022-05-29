@@ -45,7 +45,7 @@ function calculs(
     (coeff) => coeff.practice === "agronomy"
   );
 
-  console.log(natgas_coeff);
+  console.log(consOther.length);
 
 
     
@@ -72,7 +72,7 @@ function calculs(
   let elecCO2=funcElec(datasForm,elec_state_coeff)
   console.log(elecCO2)
 
-   let natGasCO2 = funcNatGas(datasForm,natgas_coeff);
+  let natGasCO2 = funcNatGas(datasForm,natgas_coeff);
    console.log(natGasCO2);
 
   let gasCO2=funcGas(datasForm,gas_coeff);
@@ -230,9 +230,11 @@ function funcFuel(datasForm,fuel_coeff){
   return fuelCO2
 
 }
-/*
+
 //Function other
 
+function funcOther(datasForm, other_coeff)
+/*
 let consAnthr=datasForm.other_anthracite_cons.value
 let consAsph=datasForm.other_asphalt_and_road_oil.value
 let consAvGas=datasForm.other_aviation_gas_cons.value
@@ -279,20 +281,29 @@ let coeffTireDer=other_coeff[20]
 let coeffWasteOil=other_coeff[21]
 let coeffWax=other_coeff[12]
 
+*/
 
 
-Funcother_CO2 <- function (data) {
+  //option 2 attempt to make it short
+let consOther =[datasForm.other_anthracite_cons.value, datasForm.other_asphalt_and_road_oil.value,datasForm.other_aviation_gas_cons.value,
+  datasForm.other_bituminous_cons.value,datasForm.other_coal_cons.value, datasForm.other_coke_cons.value,datasForm.other_flared_natural_gas_cons.value,
+  datasForm.other_geothermal_cons.value, datasForm.other_jet_fuel_cons.value, datasForm.other_kerosene_cons.value,datasForm.other_lignite_cons.value,
+  datasForm.other_lubricants_cons.value, datasForm.other_municiple_solid_waste_cons.value, datasForm.other_petrochemical_feedstocks.value,
+  datasForm.other_petroleum_and_miscellaneous_cons.value, datasForm.other_petroleum_coke_cons.value, datasForm.other_residual_heating_fuel_cons.value,
+  datasForm.other_special_naphthas_solvents.value, datasForm.other_subbituminous_cons.value,datasForm.other_tire_derived_fuel_cons.value,
+  datasForm.other_waste_oil_cons.value,datasForm.other_waxes_cons.value]
+
   
-  
-  
-  
+
+   /*
+   
+   R
+   Funcother_CO2 <- function (data) {
+
   cons <- c(data$other_kero_cons_1,data$other_coal_cons_1,data$other_rhf_cons_1,data$other_jet_cons_1,data$other_aviation_cons_1,data$other_fng_cons_1,data$other_petroleum_cons_1,data$other_petmisc_cons_1,data$other_asphoil_cons_1,data$other_lub_cons_1,data$other_petrofeed_cons_1,data$other_specnapht_cons_1,data$other_waxes_cons_1,data$other_anthr_cons_1,data$other_bit_cons_1,data$other_subbit_cons_1,data$other_lignite_cons_1,data$other_coke_cons_1,data$other_geoth_cons_1,data$other_solidwaste_con_1,data$other_tireder_cons_1,data$other_wasteoil_cons_1) 
   other_coeff <- other_coeff %>% mutate(consumption=cons) %>% mutate(CO2=`kg CO2`*consumption)
   
   other_CO2 <- round(sum(other_coeff$CO2)/1000,1) 
   
   return(other_CO2)
-}
-
-*/
-
+} */
