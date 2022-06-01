@@ -19,14 +19,40 @@
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
     box-shadow: 0 0 20px black;
+    margin-bottom: 50px;
 }
 
 .hero .catchPhrase {
     text-shadow: 0 0 6px #0000008c;
+    cursor: pointer;
 }
 .hero .btn {
     position: absolute;
-    bottom: 30px;
+    bottom: 70px;
+}
+
+.arrow-animated {
+    position: absolute;
+    bottom: 0;
+    cursor: pointer;
+}
+.arrow-animated img {
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    transform: translateX(-50%);
+    animation: arrowanimation 3s ease infinite;
+}
+.arrow-animated .arrow1 {
+    bottom: 20px;
+    animation-delay: .1s;
+}
+
+@keyframes arrowanimation {
+    0%, 60% {transform: translate(-50%, 0);}
+    30% {transform: translate(-50%, 10px)}
 }
 
 #hero-bg {
