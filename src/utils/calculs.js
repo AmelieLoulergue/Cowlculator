@@ -379,7 +379,7 @@ function funcAnimalsEF(datasForm, enteric_EF, regions) {
   enteric_EF.map((selectRegion) =>
     Object.entries(selectRegion).map((key, value) => {
       if (key[0] !== "name" && key[0] === region) {
-        coeffEF.push({ name: selectRegion.name, [key[0]]: key[1] });
+        coeffEF.push({ name: selectRegion.name, coeff: key[1] });
       }
     })
   );
