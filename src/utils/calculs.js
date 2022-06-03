@@ -72,16 +72,16 @@ function calculs(
 
   let fuelCO2 = funcFuel(datasForm, fuel_coeff);
   console.log(fuelCO2);
-  
+
   let other = funcOther(datasForm, other_coeff);
   console.log(other);
 
   let water = funcWater(datasForm, water_coeff);
   console.log(water);
 
-  let entericFermentationCO2=funcAnimalsEF(datasForm,enteric_EF,regions);
-  console.log(entericFermentationCO2)
-  
+  let entericFermentationCO2 = funcAnimalsEF(datasForm, enteric_EF, regions);
+  console.log(entericFermentationCO2);
+
   console.log("toutes les datas", datasForm);
   // console.log("date de fin", datasForm.endDate);
   // console.log("date de début", datasForm.startDate);
@@ -224,11 +224,7 @@ function funcFuel(datasForm, fuel_coeff) {
 }
 //Function other
 function funcOther(datasForm, other_coeff) {
-
-
   let test = [
-  
- 
     {
       cons: datasForm.other_kerosene_cons.value,
       coeff: other_coeff[0].kg_CO2,
@@ -242,7 +238,9 @@ function funcOther(datasForm, other_coeff) {
     {
       cons: datasForm.other_residual_heating_fuel_cons.value,
       coeff: other_coeff[2].kg_CO2,
-      total: datasForm.other_residual_heating_fuel_cons.value * other_coeff[2].kg_CO2,
+      total:
+        datasForm.other_residual_heating_fuel_cons.value *
+        other_coeff[2].kg_CO2,
     },
     {
       cons: datasForm.other_jet_fuel_cons.value,
@@ -257,7 +255,8 @@ function funcOther(datasForm, other_coeff) {
     {
       cons: datasForm.other_flared_natural_gas_cons.value,
       coeff: other_coeff[5].kg_CO2,
-      total: datasForm.other_flared_natural_gas_cons.value * other_coeff[5].kg_CO2,
+      total:
+        datasForm.other_flared_natural_gas_cons.value * other_coeff[5].kg_CO2,
     },
     {
       cons: datasForm.other_petroleum_coke_cons.value,
@@ -267,7 +266,9 @@ function funcOther(datasForm, other_coeff) {
     {
       cons: datasForm.other_petroleum_and_miscellaneous_cons.value,
       coeff: other_coeff[7].kg_CO2,
-      total: datasForm.other_petroleum_and_miscellaneous_cons.value * other_coeff[7].kg_CO2,
+      total:
+        datasForm.other_petroleum_and_miscellaneous_cons.value *
+        other_coeff[7].kg_CO2,
     },
     {
       cons: datasForm.other_asphalt_and_road_oil.value,
@@ -282,12 +283,15 @@ function funcOther(datasForm, other_coeff) {
     {
       cons: datasForm.other_petrochemical_feedstocks.value,
       coeff: other_coeff[10].kg_CO2,
-      total: datasForm.other_petrochemical_feedstocks.value * other_coeff[10].kg_CO2,
-    }, 
+      total:
+        datasForm.other_petrochemical_feedstocks.value * other_coeff[10].kg_CO2,
+    },
     {
       cons: datasForm.other_special_naphthas_solvents.value,
       coeff: other_coeff[11].kg_CO2,
-      total: datasForm.other_special_naphthas_solvents.value * other_coeff[11].kg_CO2,
+      total:
+        datasForm.other_special_naphthas_solvents.value *
+        other_coeff[11].kg_CO2,
     },
     {
       cons: datasForm.other_waxes_cons.value,
@@ -322,12 +326,15 @@ function funcOther(datasForm, other_coeff) {
     {
       cons: datasForm.other_municiple_solid_waste_cons.value,
       coeff: other_coeff[19].kg_CO2,
-      total: datasForm.other_municiple_solid_waste_cons.value * other_coeff[19].kg_CO2,
+      total:
+        datasForm.other_municiple_solid_waste_cons.value *
+        other_coeff[19].kg_CO2,
     },
     {
       cons: datasForm.other_tire_derived_fuel_cons.value,
       coeff: other_coeff[20].kg_CO2,
-      total: datasForm.other_tire_derived_fuel_cons.value * other_coeff[20].kg_CO2,
+      total:
+        datasForm.other_tire_derived_fuel_cons.value * other_coeff[20].kg_CO2,
     },
     {
       cons: datasForm.other_waste_oil_cons.value,
@@ -340,66 +347,65 @@ function funcOther(datasForm, other_coeff) {
     sum += calcul.total;
     return sum;
   });
-  
+
   return sum;
 }
 
 //Function water
 function funcWater(datasForm, water_coeff) {
+  let consWaterDrink = datasForm.water_drink_cons.value;
+  let consWaterWaste = datasForm.water_waste_cons.value;
+  let coeffWaterDrink = water_coeff[0].kgCO2_gal;
+  let coeffWaterWaste = water_coeff[1].kgCO2_gal;
 
-  let consWaterDrink= datasForm.water_drink_cons.value;
-  let consWaterWaste=datasForm.water_waste_cons.value;
-  let coeffWaterDrink= water_coeff[0].kgCO2_gal
-  let coeffWaterWaste=water_coeff[1].kgCO2_gal
+  let consWater =
+    consWaterDrink * coeffWaterDrink + consWaterWaste * coeffWaterWaste;
 
-  let consWater=(consWaterDrink*coeffWaterDrink)+(consWaterWaste*coeffWaterWaste)
-
-  return consWater
-
-
+  return consWater;
 }
 
 // Function animals : emissions from enteric fermentation
-function funcAnimalsEF(datasForm,enteric_EF,regions){
+function funcAnimalsEF(datasForm, enteric_EF, regions) {
+  //Define the region
 
-//Define the region
+  let state = datasForm.demographics.state;
+  console.log(state);
+  let region = regions.find((region) => region.Code === state);
+  console.log(region);
+  region = region.Regions_EPA.replace(" ", "_");
+  console.log(region);
+  // keep only the coeff for the region
+  let coeffEF = [];
+  enteric_EF.map((selectRegion) =>
+    Object.entries(selectRegion).map((key, value) => {
+      if (key[0] !== "name" && key[0] === region) {
+        coeffEF.push({ name: selectRegion.name, [key[0]]: key[1] });
+      }
+    })
+  );
+  console.log(coeffEF);
 
-let state=datasForm.demographics.state;
-let region= regions.find((region) => region.Code === state);
-region=region.Regions_EPA
+  return coeffEF;
 
-// keep only the coeff for the region
+  //Extract animals' coeff based on the region
 
-let coeffEF= enteric_EF.filter(selectRegion=>selectRegion===region)
+  //CODE R
 
-return coeffEF
+  // coeff_dairyrep12<- as.numeric(EF_coeff[2,region])
+  //   coeff_dairyrep24<- as.numeric(EF_coeff[3,region])
+  //   coeff_dairymature<- as.numeric(EF_coeff[4,region])
 
-//Extract animals' coeff based on the region
+  //   coeff_beefrep12<- as.numeric(EF_coeff[6,region])
+  //   coeff_beefrep24<- as.numeric(EF_coeff[7,region])
+  //   coeff_beefmature<- as.numeric(EF_coeff[8,region])
+  //   ifelse((EF_coeff[9,region])==0,coeff_beefweanl<-as.numeric(EF_coeff$`National Average`[9]), coeff_beefweanl<-as.numeric(EF_coeff[9,region]))
+  //   ifelse((EF_coeff[10,region])==0,coeff_beefyearnl<-as.numeric(EF_coeff$`National Average`[10]), coeff_beefyearnl<-as.numeric(EF_coeff[10,region]))
+  //   coeff_beefbulls<- as.numeric(EF_coeff[11,region])
 
-
-
-//CODE R
-
-// coeff_dairyrep12<- as.numeric(EF_coeff[2,region])
-//   coeff_dairyrep24<- as.numeric(EF_coeff[3,region])
-//   coeff_dairymature<- as.numeric(EF_coeff[4,region])
-  
-//   coeff_beefrep12<- as.numeric(EF_coeff[6,region])
-//   coeff_beefrep24<- as.numeric(EF_coeff[7,region])
-//   coeff_beefmature<- as.numeric(EF_coeff[8,region])
-//   ifelse((EF_coeff[9,region])==0,coeff_beefweanl<-as.numeric(EF_coeff$`National Average`[9]), coeff_beefweanl<-as.numeric(EF_coeff[9,region]))
-//   ifelse((EF_coeff[10,region])==0,coeff_beefyearnl<-as.numeric(EF_coeff$`National Average`[10]), coeff_beefyearnl<-as.numeric(EF_coeff[10,region])) 
-//   coeff_beefbulls<- as.numeric(EF_coeff[11,region])
-  
-//   coeff_sheep <-as.numeric(EF_coeff$`National Average`[12])
-//   coeff_goats <-as.numeric(EF_coeff$`National Average`[13])
-//   coeff_swine <-as.numeric(EF_coeff$`National Average`[14])
-//   coeff_horses <-as.numeric(EF_coeff$`National Average`[15])
-//   coeff_mules <-as.numeric(EF_coeff$`National Average`[16])
-//   coeff_waterbuff <-as.numeric(EF_coeff$`National Average`[17])
-
+  //   coeff_sheep <-as.numeric(EF_coeff$`National Average`[12])
+  //   coeff_goats <-as.numeric(EF_coeff$`National Average`[13])
+  //   coeff_swine <-as.numeric(EF_coeff$`National Average`[14])
+  //   coeff_horses <-as.numeric(EF_coeff$`National Average`[15])
+  //   coeff_mules <-as.numeric(EF_coeff$`National Average`[16])
+  //   coeff_waterbuff <-as.numeric(EF_coeff$`National Average`[17])
 }
-
-
-
-
