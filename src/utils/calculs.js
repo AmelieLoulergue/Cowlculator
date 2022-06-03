@@ -14,9 +14,9 @@ function calculs(
   water_coeff
 ) {
   console.log("toutes les datas", datasForm);
-  console.log(water_coeff); // tableau d'objets
+  console.log(enteric_EF); // tableau d'objets
 
-  console.log(elec_state_coeff);
+  console.log(datasForm.natgas_unit);
   // pour avoir la première ligne du tableau
   console.log(coeff_reduction_ghg[0]);
   console.log(elec_state_coeff[0]);
@@ -78,6 +78,9 @@ function calculs(
 
   let water = funcWater(datasForm, water_coeff);
   console.log(water);
+
+  let entericFermentationCO2=funcAnimalsEF(datasForm,enteric_EF,regions);
+  console.log(entericFermentationCO2)
   
   console.log("toutes les datas", datasForm);
   // console.log("date de fin", datasForm.endDate);
@@ -356,22 +359,47 @@ function funcWater(datasForm, water_coeff) {
 
 }
 
-/*
-Funcwater_CO2 <- function (data){
+// Function animals : emissions from enteric fermentation
+function funcAnimalsEF(datasForm,enteric_EF,regions){
+
+//Define the region
+
+let state=datasForm.demographics.state;
+let region= regions.find((region) => region.Code === state);
+region=region.Regions_EPA
+
+// keep only the coeff for the region
+
+let coeffEF= enteric_EF.filter(selectRegion=>selectRegion===region)
+
+return coeffEF
+
+//Extract animals' coeff based on the region
+
+
+
+//CODE R
+
+// coeff_dairyrep12<- as.numeric(EF_coeff[2,region])
+//   coeff_dairyrep24<- as.numeric(EF_coeff[3,region])
+//   coeff_dairymature<- as.numeric(EF_coeff[4,region])
   
-  data$water_drink_cons_1<-as.numeric(as.character(data$water_drink_cons_1))
-  data$water_waste_cons_1<-as.numeric(as.character(data$water_waste_cons_1))
+//   coeff_beefrep12<- as.numeric(EF_coeff[6,region])
+//   coeff_beefrep24<- as.numeric(EF_coeff[7,region])
+//   coeff_beefmature<- as.numeric(EF_coeff[8,region])
+//   ifelse((EF_coeff[9,region])==0,coeff_beefweanl<-as.numeric(EF_coeff$`National Average`[9]), coeff_beefweanl<-as.numeric(EF_coeff[9,region]))
+//   ifelse((EF_coeff[10,region])==0,coeff_beefyearnl<-as.numeric(EF_coeff$`National Average`[10]), coeff_beefyearnl<-as.numeric(EF_coeff[10,region])) 
+//   coeff_beefbulls<- as.numeric(EF_coeff[11,region])
   
-  water_cons <- data$water_drink_cons_1
-  waste_water_cons <- data$water_waste_cons_1
-  cons <- c(water_cons,waste_water_cons)
-  
-  water_coeff<- water_coeff %>% mutate(consumption=cons) %>% mutate(CO2=`kgCO2/gal`*consumption)
-  
-  
-water_CO2 <-round(sum(water_coeff$CO2)/1000,1) 
-  
-  return(water_CO2)
-  
+//   coeff_sheep <-as.numeric(EF_coeff$`National Average`[12])
+//   coeff_goats <-as.numeric(EF_coeff$`National Average`[13])
+//   coeff_swine <-as.numeric(EF_coeff$`National Average`[14])
+//   coeff_horses <-as.numeric(EF_coeff$`National Average`[15])
+//   coeff_mules <-as.numeric(EF_coeff$`National Average`[16])
+//   coeff_waterbuff <-as.numeric(EF_coeff$`National Average`[17])
+
 }
-*/
+
+
+
+
