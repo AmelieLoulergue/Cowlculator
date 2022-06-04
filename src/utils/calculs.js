@@ -79,7 +79,7 @@ function calculs(
   let water = funcWater(datasForm, water_coeff);
   console.log(water);
 
-  let entericFermentationCO2 = funcAnimalsEF(datasForm, enteric_EF, regions);
+  let entericFermentationCO2 = funcAnimalsEF(datasForm, enteric_EF, regions,time);
   console.log(entericFermentationCO2);
 
   console.log("toutes les datas", datasForm);
@@ -365,7 +365,8 @@ function funcWater(datasForm, water_coeff) {
 }
 
 // Function animals : emissions from enteric fermentation
-function funcAnimalsEF(datasForm, enteric_EF, regions) {
+function funcAnimalsEF(datasForm, enteric_EF, regions,time) {
+
   //Define the region
 
   let state = datasForm.demographics.state;
@@ -385,27 +386,73 @@ function funcAnimalsEF(datasForm, enteric_EF, regions) {
   );
   console.log(coeffEF);
 
-  return coeffEF;
+ // National average coeff for beef yearnling and weanling
+  let coeffEFNatAv = [];
+    enteric_EF.map((changeRegion) =>
+    Object.entries(changeRegion).map((key, value) => {
+      if (key[0] !== "name" && key[0] === "National Average") {
+        coeffEFNatAv .push({ name: changeRegion.name, coeff: key[1] });
+      }
+    })
+    );
+    console.log(coeffEFNatAv);
+    
 
   //Extract animals' coeff based on the region
 
-  //CODE R
+  let coeffDairyRep12= coeffEF[1].coeff
+  let coeffDairyRep24=coeffEF[2].coeff
+  let coeffDairyMature=coeffEF[3].coeff
 
-  // coeff_dairyrep12<- as.numeric(EF_coeff[2,region])
-  //   coeff_dairyrep24<- as.numeric(EF_coeff[3,region])
-  //   coeff_dairymature<- as.numeric(EF_coeff[4,region])
+  let coeffBeefRep12=coeffEF[5].coeff
+  let coeffBeefRep24=coeffEF[6].coeff
+  let coeffBeefMature=coeffEF[7].coeff
 
-  //   coeff_beefrep12<- as.numeric(EF_coeff[6,region])
-  //   coeff_beefrep24<- as.numeric(EF_coeff[7,region])
-  //   coeff_beefmature<- as.numeric(EF_coeff[8,region])
-  //   ifelse((EF_coeff[9,region])==0,coeff_beefweanl<-as.numeric(EF_coeff$`National Average`[9]), coeff_beefweanl<-as.numeric(EF_coeff[9,region]))
-  //   ifelse((EF_coeff[10,region])==0,coeff_beefyearnl<-as.numeric(EF_coeff$`National Average`[10]), coeff_beefyearnl<-as.numeric(EF_coeff[10,region]))
-  //   coeff_beefbulls<- as.numeric(EF_coeff[11,region])
+  let coeffBeefWean=0
+  if(coeffEF[8].coeff===null){
+    coeffBeefWean=coeffEFNatAv[8].coeff
+  } else {
+    coeffBeefWean=coeffEF[8].coeff
+  }
+console.log(coeffBeefWean)
+   
+  let coeffBeefYearn=0
+  if(coeffEF[9].coeff===null){
+    coeffBeefYearn=coeffEFNatAv[9].coeff
+  } else {
+    coeffBeefYearn=coeffEF[9].coeff
+  }
+  console.log(coeffBeefYearn)
 
-  //   coeff_sheep <-as.numeric(EF_coeff$`National Average`[12])
-  //   coeff_goats <-as.numeric(EF_coeff$`National Average`[13])
-  //   coeff_swine <-as.numeric(EF_coeff$`National Average`[14])
-  //   coeff_horses <-as.numeric(EF_coeff$`National Average`[15])
-  //   coeff_mules <-as.numeric(EF_coeff$`National Average`[16])
-  //   coeff_waterbuff <-as.numeric(EF_coeff$`National Average`[17])
+ let coeffBeefBulls=coeffEF[10].coeff
+
+ let coeffSheep=coeffEFNatAv[11].coeff
+ let coeffGoat=coeffEFNatAv[12].coeff
+ let coeffSwine=coeffEFNatAv[13].coeff
+ let coeffHorse=coeffEFNatAv[14].coeff
+ let coeffMules=coeffEFNatAv[15].coeff
+ let coeffWaterBuff=coeffEFNatAv[16].coeff
+
+ //Calcul emissions from enteric fermentation for each animal
+ let EFDairy= (((datasForm.farm_dairy_cattle_rep12_numb.value*coeffDairyRep12*25)+
+ (datasForm.farm_dairy_cattle_rep24_numb.value*coeffDairyRep24*25)+ 
+ (datasForm.farm_dairy_cattle_matur_numb.value*coeffDairyMature*25))/1000)* time
+
+ let EFBeef=(((datasForm.farm_beef_cattle_rep12_numb.value*coeffBeefRep12*25)+
+ (datasForm.farm_beef_cattle_rep24_numb.value*coeffBeefRep24*25)+
+ (datasForm.farm_beef_cattle_matur_numb.value*coeffBeefMature*25)+
+ (datasForm.farm_beef_cattle_weanling_numb.value*coeffBeefWean*25)+
+ (datasForm.farm_beef_cattle_yearling_numb.value*coeffBeefYearn*25)+
+ (datasForm.farm_beef_cattle_bulls_numb.value*coeffBeefBulls*25))/1000)* time
+
+let EFSheep=((datasForm.farm_sheeps_matur_numb*coeffSheep*25)/1000)*time
+let EFGoat=((datasForm.farm_goats_matur_numb*coeffGoat*25)/1000)*time
+let EFSwine=((datasForm.farm_swine_matur_numb*coeffSwine*25)/1000)*time
+let EFHorse=((datasForm.farm_horses_matur_numb*coeffHorse*25)/1000)*time
+let EFMules=((datasForm.farm_mules_matur_numb*coeffMules*25)/1000)*time
+let EFWaterBuff=((datasForm.farm_water_buffalo_matur_numb*coeffWaterBuff*25)/1000)*time
+
+let EFtotal=EFDairy+EFBeef+EFSheep+EFGoat+EFSwine+EFHorse+EFMules+EFWaterBuff
+ return EFtotal;
+
 }
