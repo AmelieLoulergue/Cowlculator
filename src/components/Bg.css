@@ -1,0 +1,17 @@
+#Bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #110f16;
+    z-index: -99;
+}
+#Bg svg {
+    filter: blur(120px);
+    opacity: .7;
+    animation: animatedBg 10s ease infinite;
+}
+
+@keyframes animatedBg {
+    0%, 100% {filter: blur(120px);}
+    50% {filter: blur(200px);}
+}

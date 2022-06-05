@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  color: white;
 }
 
 .App-logo {
@@ -35,4 +36,27 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.btn {
+  border-radius: 30px;
+  border: none;
+  padding: 10px;
+  min-width: 150px;
+  min-height: 50px;
+  cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.473);
+  font-weight: 600;
+  color: white;
+  background-image: linear-gradient(315deg, #874FF5 0%, #2C60F5 100%);
+}
+
+.container {
+  max-width: 90vw;
+  margin: auto;
+}
+.sticky-bottom {
+  position: sticky;
+  top: calc(100vh - 50px - 30px);
 }
