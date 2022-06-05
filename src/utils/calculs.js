@@ -14,7 +14,7 @@ function calculs(
   water_coeff
 ) {
   console.log("toutes les datas", datasForm);
-  console.log(enteric_EF); // tableau d'objets
+  console.log(manure); // tableau d'objets
 
   console.log(datasForm.natgas_unit);
   // pour avoir la première ligne du tableau
@@ -81,6 +81,9 @@ function calculs(
 
   let entericFermentationCO2 = funcAnimalsEF(datasForm, enteric_EF, regions,time);
   console.log(entericFermentationCO2);
+
+  let manureCO2 = funcAnimalsManure(datasForm, manure, time);
+  console.log(manureCO2);
 
   console.log("toutes les datas", datasForm);
   // console.log("date de fin", datasForm.endDate);
@@ -367,6 +370,8 @@ function funcWater(datasForm, water_coeff) {
 // Function animals : emissions from enteric fermentation
 function funcAnimalsEF(datasForm, enteric_EF, regions,time) {
 
+ time= Number(time)
+
   //Define the region
 
   let state = datasForm.demographics.state;
@@ -400,59 +405,137 @@ function funcAnimalsEF(datasForm, enteric_EF, regions,time) {
 
   //Extract animals' coeff based on the region
 
-  let coeffDairyRep12= coeffEF[1].coeff
-  let coeffDairyRep24=coeffEF[2].coeff
-  let coeffDairyMature=coeffEF[3].coeff
+  let coeffDairyRep12EF=Number(coeffEF[1].coeff)
+  let coeffDairyRep24EF=Number(coeffEF[2].coeff)
+  let coeffDairyMatureEF=Number(coeffEF[3].coeff)
 
-  let coeffBeefRep12=coeffEF[5].coeff
-  let coeffBeefRep24=coeffEF[6].coeff
-  let coeffBeefMature=coeffEF[7].coeff
+  let coeffBeefRep12EF=Number(coeffEF[5].coeff)
+  let coeffBeefRep24EF=Number(coeffEF[6].coeff)
+  let coeffBeefMatureEF=Number(coeffEF[7].coeff)
 
-  let coeffBeefWean=0
+  let coeffBeefWeanEF=0
   if(coeffEF[8].coeff===null){
-    coeffBeefWean=coeffEFNatAv[8].coeff
+    coeffBeefWeanEF=Number(coeffEFNatAv[8].coeff)
   } else {
-    coeffBeefWean=coeffEF[8].coeff
+    coeffBeefWeanEF=Number(coeffEF[8].coeff)
   }
-console.log(coeffBeefWean)
    
-  let coeffBeefYearn=0
+  let coeffBeefYearnEF=0
   if(coeffEF[9].coeff===null){
-    coeffBeefYearn=coeffEFNatAv[9].coeff
+    coeffBeefYearnEF=Number(coeffEFNatAv[9].coeff)
   } else {
-    coeffBeefYearn=coeffEF[9].coeff
+    coeffBeefYearnEF=Number(coeffEF[9].coeff)
   }
-  console.log(coeffBeefYearn)
+ 
 
- let coeffBeefBulls=coeffEF[10].coeff
+ let coeffBeefBullsEF=Number(coeffEF[10].coeff)
 
- let coeffSheep=coeffEFNatAv[11].coeff
- let coeffGoat=coeffEFNatAv[12].coeff
- let coeffSwine=coeffEFNatAv[13].coeff
- let coeffHorse=coeffEFNatAv[14].coeff
- let coeffMules=coeffEFNatAv[15].coeff
- let coeffWaterBuff=coeffEFNatAv[16].coeff
+ let coeffSheepEF=Number(coeffEFNatAv[11].coeff)
+ let coeffGoatEF=Number(coeffEFNatAv[12].coeff)
+ let coeffSwineEF=Number(coeffEFNatAv[13].coeff)
+ let coeffHorseEF=Number(coeffEFNatAv[14].coeff)
+ let coeffMulesEF=Number(coeffEFNatAv[15].coeff)
+ let coeffWaterBuffEF=Number(coeffEFNatAv[16].coeff)
 
  //Calcul emissions from enteric fermentation for each animal
- let EFDairy= (((datasForm.farm_dairy_cattle_rep12_numb.value*coeffDairyRep12*25)+
- (datasForm.farm_dairy_cattle_rep24_numb.value*coeffDairyRep24*25)+ 
- (datasForm.farm_dairy_cattle_matur_numb.value*coeffDairyMature*25))/1000)* time
+ let EFDairy= (((datasForm.farm_dairy_cattle_rep12_numb.value*coeffDairyRep12EF*25)+
+ (datasForm.farm_dairy_cattle_rep24_numb.value*coeffDairyRep24EF*25)+ 
+ (datasForm.farm_dairy_cattle_matur_numb.value*coeffDairyMatureEF*25))/1000)* time
 
- let EFBeef=(((datasForm.farm_beef_cattle_rep12_numb.value*coeffBeefRep12*25)+
- (datasForm.farm_beef_cattle_rep24_numb.value*coeffBeefRep24*25)+
- (datasForm.farm_beef_cattle_matur_numb.value*coeffBeefMature*25)+
- (datasForm.farm_beef_cattle_weanling_numb.value*coeffBeefWean*25)+
- (datasForm.farm_beef_cattle_yearling_numb.value*coeffBeefYearn*25)+
- (datasForm.farm_beef_cattle_bulls_numb.value*coeffBeefBulls*25))/1000)* time
 
-let EFSheep=((datasForm.farm_sheeps_matur_numb*coeffSheep*25)/1000)*time
-let EFGoat=((datasForm.farm_goats_matur_numb*coeffGoat*25)/1000)*time
-let EFSwine=((datasForm.farm_swine_matur_numb*coeffSwine*25)/1000)*time
-let EFHorse=((datasForm.farm_horses_matur_numb*coeffHorse*25)/1000)*time
-let EFMules=((datasForm.farm_mules_matur_numb*coeffMules*25)/1000)*time
-let EFWaterBuff=((datasForm.farm_water_buffalo_matur_numb*coeffWaterBuff*25)/1000)*time
+ let EFBeef=(((datasForm.farm_beef_cattle_rep12_numb.value*coeffBeefRep12EF*25)+
+ (datasForm.farm_beef_cattle_rep24_numb.value*coeffBeefRep24EF*25)+
+ (datasForm.farm_beef_cattle_matur_numb.value*coeffBeefMatureEF*25)+
+ (datasForm.farm_beef_cattle_weanling_numb.value*coeffBeefWeanEF*25)+
+ (datasForm.farm_beef_cattle_yearling_numb.value*coeffBeefYearnEF*25)+
+ (datasForm.farm_beef_cattle_bulls_numb.value*coeffBeefBullsEF*25))/1000)* time
 
-let EFtotal=EFDairy+EFBeef+EFSheep+EFGoat+EFSwine+EFHorse+EFMules+EFWaterBuff
+let EFSheep=((datasForm.farm_sheeps_matur_numb.value*coeffSheepEF*25)/1000)*time
+let EFGoat=((datasForm.farm_goats_matur_numb.value*coeffGoatEF*25)/1000)*time
+let EFSwine=((datasForm.farm_swine_matur_numb.value*coeffSwineEF*25)/1000)*time
+let EFHorse=((datasForm.farm_horses_matur_numb.value*coeffHorseEF*25)/1000)*time
+let EFMules=((datasForm.farm_mules_matur_numb.value*coeffMulesEF*25)/1000)*time
+let EFWaterBuff=((datasForm.farm_water_buffalo_matur_numb.value*coeffWaterBuffEF*25)/1000)*time
+
+
+let EFtotal=round(EFDairy+EFBeef+EFSheep+EFGoat+EFSwine+EFHorse+EFMules+EFWaterBuff, 1);
  return EFtotal;
 
 }
+
+// Function animals : emissions from manure
+
+function funcAnimalsManure(datasForm, manure,time) {
+  time= Number(time)
+
+// Group dairies and beefs
+
+let cattleDairy= datasForm.farm_dairy_cattle_rep12_numb.value+
+datasForm.farm_dairy_cattle_rep24_numb.value+
+datasForm.farm_dairy_cattle_matur_numb.value
+
+let cattleBeef= datasForm.farm_beef_cattle_rep12_numb.value+
+datasForm.farm_beef_cattle_rep24_numb.value+
+datasForm.farm_beef_cattle_matur_numb.value+
+datasForm.farm_beef_cattle_weanling_numb.value+
+datasForm.farm_beef_cattle_yearling_numb.value+
+datasForm.farm_beef_cattle_bulls_numb.value
+
+//Manure coeffs
+
+let coeffDairyManure=manure[0].CH4_emission
+let coeffBeefManure=manure[1].CH4_emission
+let coeffSwineManure=manure[2].CH4_emission
+let coeffSheepManure=manure[3].CH4_emission
+let coeffGoatManure=manure[4].CH4_emission
+let coeffPoultryManure=manure[5].CH4_emission
+let coeffHorseManure=manure[6].CH4_emission
+let coeffMuleManure=manure[7].CH4_emission
+let coeffAmBisonManure=manure[8].CH4_emission
+
+// Calcul emissions from MANURE for each animal
+
+let manureDairy= (((cattleDairy*coeffDairyManure)*25)/1000)*time
+let manureBeef= (((cattleBeef*coeffBeefManure)*25)/1000)*time
+let manureSwine=((datasForm.farm_swine_matur_numb.value*coeffSwineManure*25)/1000)*time
+let manureSheep=((datasForm.farm_sheeps_matur_numb.value*coeffSheepManure*25)/1000)*time
+let manureGoat=((datasForm.farm_goats_matur_numb.value*coeffGoatManure*25)/1000)*time
+let manurePoultry=((datasForm.farm_poultry_matur_numb.value*coeffPoultryManure*25)/1000)*time
+let manureHorse=((datasForm.farm_horses_matur_numb.value*coeffHorseManure*25)/1000)*time
+let manureMule=((datasForm.farm_mules_matur_numb.value*coeffMuleManure*25)/1000)*time
+let manureAmBison=((datasForm.farm_american_bison_matur_numb.value*coeffAmBisonManure*25)/1000)*time
+
+
+let manureTotal=round(manureDairy+manureBeef+manureSwine+manureSheep+manureGoat+manurePoultry+manureHorse+manureMule+manureAmBison, 1);
+
+return(manureTotal);
+ }
+
+// R CODE
+
+  
+  
+//   #  calcul for each animal
+  
+//   MAN_dairy <- (dairy_cattle*coeff_dairy_man*25/1000 )*time
+  
+//   MAN_beef <- (beef_cattle*coeff_beef_man*25/1000 )*time
+  
+//   MAN_swine<- (data$farm_swine_numb_1* coeff_swine_man*25/1000 )*time
+  
+//   MAN_sheep <-(data$farm_sheeps_numb_1* coeff_sheep_man*25/1000 )*time  
+  
+//   MAN_goats<- (data$farm_goats_numb_1* coeff_goats_man*25/1000 )*time
+  
+//   MAN_poultry<- (data$farm_poultry_numb_1* coeff_poultry_man *25 /1000  )*time
+  
+//   MAN_horses<- (data$farm_horses_numb_1* coeff_horses_man*25/1000)*time
+  
+//   MAN_mules<- (data$farm_mules_numb_1* coeff_mules_man*25/1000 )*time
+  
+//   MAN_ambison<- (data$farm_ambison_numb_1* coeff_ambison_man*25/1000 )*time
+  
+//   #total
+  
+//   MAN_total= sum(MAN_dairy,MAN_beef,MAN_swine,MAN_sheep,MAN_horses,MAN_goats,MAN_poultry,MAN_mules,MAN_ambison,na.rm=TRUE)
+  
