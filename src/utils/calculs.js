@@ -14,7 +14,8 @@ function calculs(
   water_coeff
 ) {
   console.log("toutes les datas", datasForm);
-  console.log(manure); // tableau d'objets
+  console.log(reductionEF_coeff); // tableau d'objets
+ 
 
   console.log(datasForm.natgas_unit);
   // pour avoir la première ligne du tableau
@@ -84,6 +85,9 @@ function calculs(
 
   let manureCO2 = funcAnimalsManure(datasForm, manure, time);
   console.log(manureCO2);
+
+  let mitigationImpFeed= funcMitigationsImpFeed(datasForm, reductionEF_coeff,time);
+  console.log(mitigationImpFeed);
 
   console.log("toutes les datas", datasForm);
   // console.log("date de fin", datasForm.endDate);
@@ -511,31 +515,95 @@ let manureTotal=round(manureDairy+manureBeef+manureSwine+manureSheep+manureGoat+
 return(manureTotal);
  }
 
+ // Function animals: mitigations improved feeding
+
+function funcMitigationsImpFeed(datasForm, reductionEF_coeff,time) {
+
+  //Coeff
+  let coeffImpFeedDairy= reductionEF_coeff[0].Improved_feeding
+  let coeffImpFeedBeef= reductionEF_coeff[1].Improved_feeding
+  let coeffImpFeedSheep= reductionEF_coeff[2].Improved_feeding
+
+  //Number total dairies and beef
+  let cattleDairy= datasForm.farm_dairy_cattle_rep12_numb.value+
+  datasForm.farm_dairy_cattle_rep24_numb.value+
+datasForm.farm_dairy_cattle_matur_numb.value
+
+  let cattleBeef= datasForm.farm_beef_cattle_rep12_numb.value+
+ datasForm.farm_beef_cattle_rep24_numb.value+
+ datasForm.farm_beef_cattle_matur_numb.value+
+ datasForm.farm_beef_cattle_weanling_numb.value+
+ datasForm.farm_beef_cattle_yearling_numb.value+
+ datasForm.farm_beef_cattle_bulls_numb.value
+
+// Proportion of animals included in the practice
+
+
+let numbDairyPractices=0
+
+if (cattleDairy===0){
+  numbDairyPractices=0
+} else{
+  if (datasForm.practices.practice_anim[0].dairy_cow.all_of_them===true){
+    numbDairyPractices=cattleDairy
+  } else { 
+    if (datasForm.practices.practice_anim[0].dairy_cow.portion_of_them===true){
+      let portionDairy=datasForm.practices.practice_anim[0].dairy_cow.portion_numb/100
+      numbDairyPractices=cattleDairy*portionDairy
+    }
+
+  }
+
+}
+
+let numbBeefPractices=0
+if (cattleBeef===0){
+  numbBeefPractices=0
+} else{
+  if (datasForm.practices.practice_anim[0].beef_cattle.all_of_them===true){
+    numbBeefPractices=cattleBeef
+  } else { 
+    if (datasForm.practices.practice_anim[0].beef_cattle.portion_of_them===true){
+      let portionBeef=datasForm.practices.practice_anim[0].beef_cattle.portion_numb/100
+      numbBeefPractices=cattleBeef*portionBeef
+    }
+
+  }
+
+}
+
+let numbSheepPractices=0
+if (datasForm.farm_sheeps_matur_numb.value===0){
+  numbSheepPractices=0
+} else{
+  if (datasForm.practices.practice_anim[0].sheeps.all_of_them===true){
+    numbSheepPractices=datasForm.farm_sheeps_matur_numb.value
+  } else { 
+    if (datasForm.practices.practice_anim[0].sheeps.portion_of_them===true){
+      let portionSheep=datasForm.practices.practice_anim[0].sheeps.portion_numb/100
+      numbSheepPractices=datasForm.farm_sheeps_matur_numb.value*portionSheep
+    }
+
+  }
+
+}
+
+
+return(numbDairyPractices)}
+
+
+
 // R CODE
 
+
+//dairy_practice <- ifelse (dairy_cattle==0,0,ifelse(data$practice_anim_detail_1 != "All of them",data$practice_anim_numb_1 /dairy_cattle, 1))
+  
+ // beef_practice<-ifelse (beef_cattle==0,0,ifelse (data$practice_anim_detail_2 != "All of them", data$practice_anim_numb_2 /beef_cattle, 1))
+  
+ // sheep_practice<- ifelse (data$farm_sheeps_numb_1==0,0,ifelse (data$practice_anim_detail_3 != "All of them", data$practice_anim_numb_3 /data$farm_sheeps_numb_1, 1))
   
   
-//   #  calcul for each animal
+
+ 
   
-//   MAN_dairy <- (dairy_cattle*coeff_dairy_man*25/1000 )*time
-  
-//   MAN_beef <- (beef_cattle*coeff_beef_man*25/1000 )*time
-  
-//   MAN_swine<- (data$farm_swine_numb_1* coeff_swine_man*25/1000 )*time
-  
-//   MAN_sheep <-(data$farm_sheeps_numb_1* coeff_sheep_man*25/1000 )*time  
-  
-//   MAN_goats<- (data$farm_goats_numb_1* coeff_goats_man*25/1000 )*time
-  
-//   MAN_poultry<- (data$farm_poultry_numb_1* coeff_poultry_man *25 /1000  )*time
-  
-//   MAN_horses<- (data$farm_horses_numb_1* coeff_horses_man*25/1000)*time
-  
-//   MAN_mules<- (data$farm_mules_numb_1* coeff_mules_man*25/1000 )*time
-  
-//   MAN_ambison<- (data$farm_ambison_numb_1* coeff_ambison_man*25/1000 )*time
-  
-//   #total
-  
-//   MAN_total= sum(MAN_dairy,MAN_beef,MAN_swine,MAN_sheep,MAN_horses,MAN_goats,MAN_poultry,MAN_mules,MAN_ambison,na.rm=TRUE)
   
