@@ -536,62 +536,100 @@ datasForm.farm_dairy_cattle_matur_numb.value
  datasForm.farm_beef_cattle_yearling_numb.value+
  datasForm.farm_beef_cattle_bulls_numb.value
 
-// Proportion of animals included in the practice
+// Proportion of animals included in the practice imrpoved feeding
 
-
+    //Dairy
 let numbDairyPractices=0
 
 if (cattleDairy===0){
   numbDairyPractices=0
 } else{
   if (datasForm.practices.practice_anim[0].dairy_cow.all_of_them===true){
-    numbDairyPractices=cattleDairy
+    numbDairyPractices=1
   } else { 
     if (datasForm.practices.practice_anim[0].dairy_cow.portion_of_them===true){
       let portionDairy=datasForm.practices.practice_anim[0].dairy_cow.portion_numb/100
-      numbDairyPractices=cattleDairy*portionDairy
+      numbDairyPractices=portionDairy
     }
 
   }
 
 }
-
+    //Beef
 let numbBeefPractices=0
 if (cattleBeef===0){
   numbBeefPractices=0
 } else{
   if (datasForm.practices.practice_anim[0].beef_cattle.all_of_them===true){
-    numbBeefPractices=cattleBeef
+    numbBeefPractices=1
   } else { 
     if (datasForm.practices.practice_anim[0].beef_cattle.portion_of_them===true){
       let portionBeef=datasForm.practices.practice_anim[0].beef_cattle.portion_numb/100
-      numbBeefPractices=cattleBeef*portionBeef
+      numbBeefPractices=portionBeef
     }
 
-  }
+  }}
 
-}
-
+    // Sheep
 let numbSheepPractices=0
 if (datasForm.farm_sheeps_matur_numb.value===0){
   numbSheepPractices=0
 } else{
   if (datasForm.practices.practice_anim[0].sheeps.all_of_them===true){
-    numbSheepPractices=datasForm.farm_sheeps_matur_numb.value
+    numbSheepPractices=1
   } else { 
     if (datasForm.practices.practice_anim[0].sheeps.portion_of_them===true){
       let portionSheep=datasForm.practices.practice_anim[0].sheeps.portion_numb/100
-      numbSheepPractices=datasForm.farm_sheeps_matur_numb.value*portionSheep
+      numbSheepPractices=portionSheep
     }
 
   }
 
 }
 
+// EF emissions mitigated by the practice improved feeding
+
+  //Dairy
+      //EF emissions from cattle portion concerned by improved feeding
+      let EFDairyImpFeed=0
+       if (datasForm.practices.practice_anim[0].dairy_cow.selected===true){
+        EFDairyImpFeed=numbDairyPractices*EFDairy*coeffImpFeedDairy
+      } else{
+        EFDairyImpFeed=0
+      }
+      // Mitigation percentage
+      let mitigationPercentageDairyImpFeed= (EFDairyImpFeed*100)/EFDairy
+      // Total EF emissions after mitigation
+      mitigatedEFDairy= EFDairyImpFeed+((1-numbDairyPractices)*EFDairy)
+
+  //Beef
+      //EF emissions from cattle portion concerned by improved feeding
+      let EFBeefImpFeed=0
+       if (datasForm.practices.practice_anim[0].beef_cattle.selected===true){
+        EFBeefImpFeed=numbBeefPractices*EFBeef*coeffImpFeedBeef
+      } else{
+        EFBeefImpFeed=0
+      }
+      // Mitigation percentage
+      let mitigationPercentageBeefImpFeed= (EFBeefImpFeed*100)/EFBeef
+      // Total EF emissions after mitigation
+      mitigatedEFBeef= EFBeefImpFeed+((1-numbBeefPractices)*EFBeef)
+
+     //Sheep
+      //EF emissions from cattle portion concerned by improved feeding
+      let EFSheepImpFeed=0
+       if (datasForm.practices.practice_anim[0].sheeps.selected===true){
+        EFSheepImpFeed=numbSheepPractices*EFSheep*coeffImpFeedSheep
+      } else{
+        EFSheepImpFeed=0
+      }
+      // Mitigation percentage
+      let mitigationPercentageSheepImpFeed= (EFSheepImpFeed*100)/EFSheep
+      // Total EF emissions after mitigation
+      mitigatedEFSheep= EFSheepImpFeed+((1-numbSheepPractices)*EFSheep)
+
 
 return(numbDairyPractices)}
-
-
 
 // R CODE
 
