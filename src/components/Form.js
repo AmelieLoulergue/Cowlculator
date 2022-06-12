@@ -22,7 +22,24 @@ import other_coeff from "../coeff/other_coeff.json";
 import reductionEF_coeff from "../coeff/reductionEF_coeff.json";
 import regions from "../coeff/regions.json";
 import water_coeff from "../coeff/water_coeff.json";
+import Accordion from "./mui_components/Accordion";
+import Button from "@mui/material/Button";
+import Stepper from "./mui_components/Stepper";
+import BlocDemographic from "./form_components/BlocDemographic";
 function Form(props) {
+  const titlesAccordion = [
+    "Project presentation",
+    "Electricity",
+    "Gas",
+    "Natural gas",
+    "Fuel",
+    "Water",
+    "Other",
+    "Farm information",
+    "Soil testing",
+    "Practices",
+    "Démographics",
+  ];
   let dateNow = new Date().toISOString().split("T")[0].split("-");
   const [formDatas, setFormDatas] = useState({
     startDate: dateNow[1] + "/" + dateNow[2] + "/" + dateNow[0],
@@ -750,92 +767,99 @@ function Form(props) {
     );
   };
   return (
-    <>
+    <div id="form">
+      <Stepper />
       <form
         onSubmit={(event) => handleSubmit(event)}
         style={{ display: "flex", flexDirection: "column" }}
       >
-        <div id="block_project_presentation">
-          <div>
-            <label htmlFor="startDate">Start date:</label>
-            <input
-              type="date"
-              name="startDate"
-              value={transformDate(formDatas.startDate)}
-              onChange={(event) => handleChangeDate(event)}
-            />
+        <Accordion titlesAccordion={titlesAccordion}>
+          <div id="block_project_presentation" className="columns is-multiline">
+            <div className="column is-6">
+              <label htmlFor="startDate">Start date:</label>
+              <input
+                type="date"
+                name="startDate"
+                value={transformDate(formDatas.startDate)}
+                onChange={(event) => handleChangeDate(event)}
+              />
+            </div>
+            <div className="column is-6">
+              <label htmlFor="endDate">End date:</label>
+              <input
+                type="date"
+                name="endDate"
+                value={transformDate(formDatas.endDate)}
+                onChange={(event) => handleChangeDate(event)}
+              />
+            </div>
           </div>
-          <div>
-            <label htmlFor="endDate">End date:</label>
-            <input
-              type="date"
-              name="endDate"
-              value={transformDate(formDatas.endDate)}
-              onChange={(event) => handleChangeDate(event)}
-            />
-          </div>
-        </div>
-        <BlocElectricity
-          handleChangeNumber={handleChangeNumber}
-          formDatas={formDatas}
-          handleChangeCheckbox={handleChangeCheckbox}
-        />
-        <BlocGas
-          formDatas={formDatas}
-          handleChangeNumber={handleChangeNumber}
-        />
-        <BlocNaturalGas
-          handleChangeNumber={handleChangeNumber}
-          handleChangeSelect={handleChangeSelect}
-          formDatas={formDatas}
-        />
-        <BlocFuel
-          handleChangeNumber={handleChangeNumber}
-          handleChangeSelect={handleChangeSelect}
-          formDatas={formDatas}
-        />
-        <BlocWater
-          formDatas={formDatas}
-          handleChangeNumber={handleChangeNumber}
-        />
-        <BlocOther
-          formDatas={formDatas}
-          handleChangeNumber={handleChangeNumber}
-          handleChangeRadio={handleChangeRadio}
-        />
-        <div id="block_farm_information">
-          <BlocAnimals
+
+          <BlocElectricity
+            handleChangeNumber={handleChangeNumber}
             formDatas={formDatas}
-            handleChange={handleChange}
+            handleChangeCheckbox={handleChangeCheckbox}
+          />
+          <BlocGas
+            formDatas={formDatas}
+            handleChangeNumber={handleChangeNumber}
+          />
+          <BlocNaturalGas
+            handleChangeNumber={handleChangeNumber}
+            handleChangeSelect={handleChangeSelect}
+            formDatas={formDatas}
+          />
+          <BlocFuel
+            handleChangeNumber={handleChangeNumber}
+            handleChangeSelect={handleChangeSelect}
+            formDatas={formDatas}
+          />
+          <BlocWater
+            formDatas={formDatas}
+            handleChangeNumber={handleChangeNumber}
+          />
+          <BlocOther
+            formDatas={formDatas}
             handleChangeNumber={handleChangeNumber}
             handleChangeRadio={handleChangeRadio}
           />
-          <BlocPlants
+          <div id="block_farm_information">
+            <BlocAnimals
+              formDatas={formDatas}
+              handleChange={handleChange}
+              handleChangeNumber={handleChangeNumber}
+              handleChangeRadio={handleChangeRadio}
+            />
+            <BlocPlants
+              formDatas={formDatas}
+              handleChangeRadio={handleChangeRadio}
+              handleChangeSelect={handleChangeSelect}
+              handleChangeNumber={handleChangeNumber}
+              handleChangeCheckbox={handleChangeCheckbox}
+            />
+          </div>
+          <BlocSoilTesting
+            formDatas={formDatas}
+            handleChangeCheckbox={handleChangeCheckbox}
+            setFormDatas={setFormDatas}
+          />
+          <BlocPractices
             formDatas={formDatas}
             handleChangeRadio={handleChangeRadio}
             handleChangeSelect={handleChangeSelect}
             handleChangeNumber={handleChangeNumber}
             handleChangeCheckbox={handleChangeCheckbox}
+            setFormDatas={setFormDatas}
           />
-        </div>
-        <BlocSoilTesting
-          formDatas={formDatas}
-          handleChangeCheckbox={handleChangeCheckbox}
-          setFormDatas={setFormDatas}
-        />
-        <BlocPractices
-          formDatas={formDatas}
-          handleChangeRadio={handleChangeRadio}
-          handleChangeSelect={handleChangeSelect}
-          handleChangeNumber={handleChangeNumber}
-          handleChangeCheckbox={handleChangeCheckbox}
-          setFormDatas={setFormDatas}
-        />
+          <BlocDemographic />
+        </Accordion>
         <div>
-          <input type="submit" value="Envoyer" />
+          <Button variant="contained" type="submit">
+            Envoyer{" "}
+          </Button>
         </div>
       </form>
-    </>
+    </div>
   );
 }
 
