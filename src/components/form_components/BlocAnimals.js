@@ -157,13 +157,14 @@ function BlocAnimals({
                   </label>
                   <input
                     type="number"
+                    min="0"
                     name={`farm_${choice[0]}_rep12_numb`}
                     value={
                       formDatas[`farm_${choice[0]}_rep12_numb`]["value"] === 0
                         ? ""
                         : formDatas[`farm_${choice[0]}_rep12_numb`]["value"]
                     }
-                    onChange={(event) => handleChangeNumber(event)}
+                    onChange={(event) => handleChangeNumber({ event: event })}
                   />{" "}
                 </div>
               ) : (
@@ -177,13 +178,14 @@ function BlocAnimals({
                   </label>
                   <input
                     type="number"
+                    min="0"
                     name={`farm_${choice[0]}_rep24_numb`}
                     value={
                       formDatas[`farm_${choice[0]}_rep24_numb`]["value"] === 0
                         ? ""
                         : formDatas[`farm_${choice[0]}_rep24_numb`]["value"]
                     }
-                    onChange={(event) => handleChangeNumber(event)}
+                    onChange={(event) => handleChangeNumber({ event: event })}
                   />{" "}
                 </div>
               ) : (
@@ -197,13 +199,14 @@ function BlocAnimals({
                   </label>
                   <input
                     type="number"
+                    min="0"
                     name={`farm_${choice[0]}_matur_numb`}
                     value={
                       formDatas[`farm_${choice[0]}_matur_numb`]["value"] === 0
                         ? ""
                         : formDatas[`farm_${choice[0]}_matur_numb`]["value"]
                     }
-                    onChange={(event) => handleChangeNumber(event)}
+                    onChange={(event) => handleChangeNumber({ event: event })}
                   />{" "}
                 </div>
               ) : (
@@ -306,13 +309,14 @@ function BlocAnimals({
                   </label>
                   <input
                     type="number"
+                    min="0"
                     name={`farm_${choice[0]}_rep12_numb`}
                     value={
                       formDatas[`farm_${choice[0]}_rep12_numb`]["value"] === 0
                         ? ""
                         : formDatas[`farm_${choice[0]}_rep12_numb`]["value"]
                     }
-                    onChange={(event) => handleChangeNumber(event)}
+                    onChange={(event) => handleChangeNumber({ event: event })}
                   />{" "}
                 </div>
               ) : (
@@ -326,13 +330,14 @@ function BlocAnimals({
                   </label>
                   <input
                     type="number"
+                    min="0"
                     name={`farm_${choice[0]}_rep24_numb`}
                     value={
                       formDatas[`farm_${choice[0]}_rep24_numb`]["value"] === 0
                         ? ""
                         : formDatas[`farm_${choice[0]}_rep24_numb`]["value"]
                     }
-                    onChange={(event) => handleChangeNumber(event)}
+                    onChange={(event) => handleChangeNumber({ event: event })}
                   />{" "}
                 </div>
               ) : (
@@ -346,13 +351,14 @@ function BlocAnimals({
                   </label>
                   <input
                     type="number"
+                    min="0"
                     name={`farm_${choice[0]}_matur_numb`}
                     value={
                       formDatas[`farm_${choice[0]}_matur_numb`]["value"] === 0
                         ? ""
                         : formDatas[`farm_${choice[0]}_matur_numb`]["value"]
                     }
-                    onChange={(event) => handleChangeNumber(event)}
+                    onChange={(event) => handleChangeNumber({ event: event })}
                   />{" "}
                 </div>
               ) : (
@@ -366,6 +372,7 @@ function BlocAnimals({
                   </label>
                   <input
                     type="number"
+                    min="0"
                     name={`farm_${choice[0]}_weanling_numb`}
                     value={
                       formDatas[`farm_${choice[0]}_weanling_numb`]["value"] ===
@@ -373,7 +380,7 @@ function BlocAnimals({
                         ? ""
                         : formDatas[`farm_${choice[0]}_weanling_numb`]["value"]
                     }
-                    onChange={(event) => handleChangeNumber(event)}
+                    onChange={(event) => handleChangeNumber({ event: event })}
                   />{" "}
                 </div>
               ) : (
@@ -387,6 +394,7 @@ function BlocAnimals({
                   </label>
                   <input
                     type="number"
+                    min="0"
                     name={`farm_${choice[0]}_yearling_numb`}
                     value={
                       formDatas[`farm_${choice[0]}_yearling_numb`]["value"] ===
@@ -394,7 +402,7 @@ function BlocAnimals({
                         ? ""
                         : formDatas[`farm_${choice[0]}_yearling_numb`]["value"]
                     }
-                    onChange={(event) => handleChangeNumber(event)}
+                    onChange={(event) => handleChangeNumber({ event: event })}
                   />{" "}
                 </div>
               ) : (
@@ -408,13 +416,14 @@ function BlocAnimals({
                   </label>
                   <input
                     type="number"
+                    min="0"
                     name={`farm_${choice[0]}_bulls_numb`}
                     value={
                       formDatas[`farm_${choice[0]}_bulls_numb`]["value"] === 0
                         ? ""
                         : formDatas[`farm_${choice[0]}_bulls_numb`]["value"]
                     }
-                    onChange={(event) => handleChangeNumber(event)}
+                    onChange={(event) => handleChangeNumber({ event: event })}
                   />{" "}
                 </div>
               ) : (

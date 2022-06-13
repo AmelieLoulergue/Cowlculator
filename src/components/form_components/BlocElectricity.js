@@ -14,11 +14,12 @@ function BlocElectricity({
         </label>
         <input
           type="number"
+          min="0"
           name="elec_total"
           value={
             formDatas.elec_total.value === 0 ? "" : formDatas.elec_total.value
           }
-          onChange={(event) => handleChangeNumber(event)}
+          onChange={(event) => handleChangeNumber({ event: event })}
         />
         {formDatas.elec_total.unit}
       </div>
@@ -42,13 +43,14 @@ function BlocElectricity({
           </label>
           <input
             type="number"
+            min="0"
             name="elec_generator_prod"
             value={
               formDatas.elec_generator_prod.value === 0
                 ? ""
                 : formDatas.elec_generator_prod.value
             }
-            onChange={(event) => handleChangeNumber(event)}
+            onChange={(event) => handleChangeNumber({ event: event })}
           />{" "}
           {formDatas.elec_generator_prod.unit}
         </div>

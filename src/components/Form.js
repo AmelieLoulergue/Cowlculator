@@ -324,216 +324,103 @@ function Form(props) {
           value:
             "Agronomy i.e cover crops, crops rotations, perennial crops(applies for croplands)",
           selected: false,
-          croplands: {
-            selected: false,
-            all_of_them: true,
-            portion_of_them: false,
-            portion_numb: 0,
-          },
-          grasslands: {
-            selected: false,
-            all_of_them: true,
-            portion_of_them: false,
-            portion_numb: 0,
-          },
-          organic_soils: {
-            selected: false,
-            all_of_them: true,
-            portion_of_them: false,
-            portion_numb: 0,
-          },
         },
         {
           value:
             "Nutrient management i.e. adjusting application rates, slow- or controlled-release fertilizer forms or nitrification inhibitors (applies for croplands)",
           selected: false,
-          croplands: {
-            selected: false,
-            all_of_them: true,
-            portion_of_them: false,
-            portion_numb: 0,
-          },
-          grasslands: {
-            selected: false,
-            all_of_them: true,
-            portion_of_them: false,
-            portion_numb: 0,
-          },
-          organic_soils: {
-            selected: false,
-            all_of_them: true,
-            portion_of_them: false,
-            portion_numb: 0,
-          },
         },
         {
           value:
             "Tillage and residue management i.e. reduced or no tillage (apply for croplands)",
           selected: false,
-          croplands: {
-            selected: false,
-            all_of_them: true,
-            portion_of_them: false,
-            portion_numb: 0,
-          },
-          grasslands: {
-            selected: false,
-            all_of_them: true,
-            portion_of_them: false,
-            portion_numb: 0,
-          },
-          organic_soils: {
-            selected: false,
-            all_of_them: true,
-            portion_of_them: false,
-            portion_numb: 0,
-          },
         },
         {
           value:
             "Water management i.e. more effective irrigation measures  (applies for croplands)",
           selected: false,
-          croplands: {
-            selected: false,
-            all_of_them: true,
-            portion_of_them: false,
-            portion_numb: 0,
-          },
-          grasslands: {
-            selected: false,
-            all_of_them: true,
-            portion_of_them: false,
-            portion_numb: 0,
-          },
-          organic_soils: {
-            selected: false,
-            all_of_them: true,
-            portion_of_them: false,
-            portion_numb: 0,
-          },
         },
         {
           value:
             "Set aside and LUC (land-use change) i.e. allow or encourage the reversion of cropland to another land cover, typically one similar to the native vegetation. (apply for croplands)",
           selected: false,
-          croplands: {
-            selected: false,
-            all_of_them: true,
-            portion_of_them: false,
-            portion_numb: 0,
-          },
-          grasslands: {
-            selected: false,
-            all_of_them: true,
-            portion_of_them: false,
-            portion_numb: 0,
-          },
-          organic_soils: {
-            selected: false,
-            all_of_them: true,
-            portion_of_them: false,
-            portion_numb: 0,
-          },
         },
         {
           value:
             "Agro forestry i.e. production of livestock or food crops on land that also grows trees for timber, fire- wood, or other tree products (applies for croplands)",
           selected: false,
-          croplands: {
-            selected: false,
-            all_of_them: true,
-            portion_of_them: false,
-            portion_numb: 0,
-          },
-          grasslands: {
-            selected: false,
-            all_of_them: true,
-            portion_of_them: false,
-            portion_numb: 0,
-          },
-          organic_soils: {
-            selected: false,
-            all_of_them: true,
-            portion_of_them: false,
-            portion_numb: 0,
-          },
         },
         {
           value:
             "Grazing (adapted intensity and timing of grazing), fertilization (alleviating nutrient deficiencies by fertilizer or organic amendments), no fire (apply for grasslands)",
           selected: false,
-          croplands: {
-            selected: false,
-            all_of_them: true,
-            portion_of_them: false,
-            portion_numb: 0,
-          },
-          grasslands: {
-            selected: false,
-            all_of_them: true,
-            portion_of_them: false,
-            portion_numb: 0,
-          },
-          organic_soils: {
-            selected: false,
-            all_of_them: true,
-            portion_of_them: false,
-            portion_numb: 0,
-          },
         },
+        {
+          value: "Restoration ( applies for organic soils)",
+          selected: false,
+        },
+
         {
           value: "Restoration ( applies to degraded lands)",
           selected: false,
-          croplands: {
-            selected: false,
-            all_of_them: true,
-            portion_of_them: false,
-            portion_numb: 0,
-          },
-          grasslands: {
-            selected: false,
-            all_of_them: true,
-            portion_of_them: false,
-            portion_numb: 0,
-          },
-          organic_soils: {
-            selected: false,
-            all_of_them: true,
-            portion_of_them: false,
-            portion_numb: 0,
-          },
-          unit: [
-            { value: "acre", selected: true },
-            { value: "sq feet", selected: false },
-          ],
-          size: 0,
-        },
-        {
-          value: "Application of manure/biosolids",
-          selected: false,
-          unit: [
-            { value: "acre", selected: true },
-            { value: "sq feet", selected: false },
-          ],
-          size: 0,
         },
         {
           value: "Soils under bio-energy",
           selected: false,
-          unit: [
-            { value: "acre", selected: true },
-            { value: "sq feet", selected: false },
-          ],
-          size: 0,
+        },
+        {
+          value: "Application of manure/biosolids",
+          selected: false,
         },
         { value: "none", selected: false },
       ],
+      croplands: {
+        selected: false,
+        all_of_them: true,
+        portion_of_them: false,
+        portion_numb: 0,
+      },
+      grasslands: {
+        selected: false,
+        all_of_them: true,
+        portion_of_them: false,
+        portion_numb: 0,
+      },
+      organic_soils: {
+        selected: false,
+        all_of_them: true,
+        portion_of_them: false,
+        portion_numb: 0,
+      },
+      degraded_lands: {
+        unit: [
+          { value: "acre", selected: true },
+          { value: "sq feet", selected: false },
+        ],
+        size: 0,
+      },
+      manure: {
+        unit: [
+          { value: "acre", selected: true },
+          { value: "sq feet", selected: false },
+        ],
+        size: 0,
+      },
+      bionrj: {
+        unit: [
+          { value: "acre", selected: true },
+          { value: "sq feet", selected: false },
+        ],
+        size: 0,
+      },
     },
     demographics: {
       address: "",
       zip_code: "",
-      state: "",
-      contact_info: { website: "", email: "", phone: "" },
+      state: "AK",
+      contact_info_website: "",
+      contact_info_email: "",
+      contact_info_phone: "",
     },
   });
   const handleChangeDate = (event) => {
@@ -547,22 +434,32 @@ function Form(props) {
     let date = dateValue.split("/");
     return date[2] + "-" + date[0] + "-" + date[1];
   };
-  const handleChange = ({ event, other }) => {
-    !other
-      ? setFormDatas({
-          ...formDatas,
-          [event.target.name]: event.target.value,
-        })
-      : setFormDatas({
-          ...formDatas,
-          [event.target.name]: {
-            ...formDatas[event.target.name],
-            other: {
-              ...formDatas[event.target.name]["other"],
-              value: event.target.value,
-            },
+  const handleChange = ({ event, other, state }) => {
+    if (other) {
+      setFormDatas({
+        ...formDatas,
+        [event.target.name]: {
+          ...formDatas[event.target.name],
+          other: {
+            ...formDatas[event.target.name]["other"],
+            value: event.target.value,
           },
-        });
+        },
+      });
+    } else if (state) {
+      setFormDatas({
+        ...formDatas,
+        [event.target.name.split(".")[0]]: {
+          ...formDatas[event.target.name.split(".")[0]],
+          [event.target.name.split(".")[1]]: event.target.value,
+        },
+      });
+    } else {
+      setFormDatas({
+        ...formDatas,
+        [event.target.name]: event.target.value,
+      });
+    }
   };
 
   const setValuesToFalse = (datas) => {
@@ -728,21 +625,26 @@ function Form(props) {
       });
     }
   };
-  const handleChangeNumber = (event, size) => {
+  const handleChangeNumber = ({ event, size, natgas }) => {
     if (size) {
       setFormDatas({
         ...formDatas,
         [event.target.name]: {
           ...formDatas[event.target.name],
-          size: Number(event.target.value),
+          size: Math.abs(Number(event.target.value)),
         },
+      });
+    } else if (natgas) {
+      setFormDatas({
+        ...formDatas,
+        [event.target.name]: Math.abs(Number(event.target.value)),
       });
     } else {
       setFormDatas({
         ...formDatas,
         [event.target.name]: {
           ...formDatas[event.target.name],
-          value: Number(event.target.value),
+          value: Math.abs(Number(event.target.value)),
         },
       });
     }
@@ -812,6 +714,7 @@ function Form(props) {
           <BlocFuel
             handleChangeNumber={handleChangeNumber}
             handleChangeSelect={handleChangeSelect}
+            handleChangeRadio={handleChangeRadio}
             formDatas={formDatas}
           />
           <BlocWater
@@ -851,7 +754,7 @@ function Form(props) {
             handleChangeCheckbox={handleChangeCheckbox}
             setFormDatas={setFormDatas}
           />
-          <BlocDemographic />
+          <BlocDemographic formDatas={formDatas} />
         </Accordion>
         <div>
           <Button variant="contained" type="submit">

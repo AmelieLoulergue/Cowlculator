@@ -16,13 +16,14 @@ function BlocWater({ formDatas, handleChangeNumber }) {
         </label>
         <input
           type="number"
+          min="0"
           name="water_drink_cons"
           value={
             formDatas.water_drink_cons.value === 0
               ? ""
               : formDatas.water_drink_cons.value
           }
-          onChange={(event) => handleChangeNumber(event)}
+          onChange={(event) => handleChangeNumber({ event: event })}
         />{" "}
         {formDatas.water_drink_cons.unit}
       </div>
@@ -32,13 +33,14 @@ function BlocWater({ formDatas, handleChangeNumber }) {
         </label>
         <input
           type="number"
+          min="0"
           name="water_waste_cons"
           value={
             formDatas.water_waste_cons.value === 0
               ? ""
               : formDatas.water_waste_cons.value
           }
-          onChange={(event) => handleChangeNumber(event)}
+          onChange={(event) => handleChangeNumber({ event: event })}
         />{" "}
         {formDatas.water_waste_cons.unit}
       </div>

@@ -4,7 +4,9 @@ function BlocNaturalGas({ handleChangeNumber, handleChangeSelect, formDatas }) {
   return (
     <div id="block_natural_gas">
       <div>
-        <label htmlFor="natgas_unit">Pick the unit for your natural gas consumption</label>
+        <label htmlFor="natgas_unit">
+          Pick the unit for your natural gas consumption
+        </label>
         <select
           name="natgas_unit"
           id="natgaz_unit"
@@ -30,9 +32,12 @@ function BlocNaturalGas({ handleChangeNumber, handleChangeSelect, formDatas }) {
           </label>
           <input
             type="number"
+            min="0"
             name="natgas_cons"
             value={formDatas.natgas_cons === 0 ? "" : formDatas.natgas_cons}
-            onChange={(event) => handleChangeNumber(event)}
+            onChange={(event) =>
+              handleChangeNumber({ event: event, natgas: true })
+            }
           />{" "}
           {formDatas.natgas_unit.find((unit) => unit.selected).value}
         </div>
