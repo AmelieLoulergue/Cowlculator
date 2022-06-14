@@ -1,6 +1,7 @@
 import React from "react";
 import { Slider } from "@mui/material";
-function BlocPractices({ formDatas, setFormDatas }) {
+import { handleChange } from "../../utils/form_functions";
+function BlocPractices({ datasForm, setDatasForm }) {
   const handleChangeCheckbox = ({ event, practice, practiceNumber }) => {
     if (practice && !practiceNumber) {
       if (
@@ -10,43 +11,43 @@ function BlocPractices({ formDatas, setFormDatas }) {
         event.target.name.split(".")[0] === ""
       ) {
         console.log(
-          formDatas["practices"].practice_plant.find(
+          datasForm["practices"].practice_plant.find(
             (practice, index) => practice.selected && index < 5
           )
         );
         if (
           event.target.name.split(".")[0] === "croplands" &&
-          !formDatas["practices"].practice_plant.filter(
+          !datasForm["practices"].practice_plant.filter(
             (practice, index) => practice.selected && index < 5
           )
         ) {
-          setFormDatas({
-            ...formDatas,
+          setDatasForm({
+            ...datasForm,
             practices: {
-              ...formDatas["practices"],
-              practice_plant: formDatas.practices.practice_plant.map(
+              ...datasForm["practices"],
+              practice_plant: datasForm.practices.practice_plant.map(
                 (plant, index) =>
                   Number(index) === Number(event.target.value)
                     ? { ...plant, selected: event.target.checked }
                     : plant
               ),
               croplands: {
-                ...formDatas.practices.croplands,
+                ...datasForm.practices.croplands,
                 selected: event.target.checked,
               },
             },
           });
         } else if (
           event.target.name.split(".")[0] === "croplands" &&
-          formDatas["practices"].practice_plant.filter(
+          datasForm["practices"].practice_plant.filter(
             (practice, index) => practice.selected && index < 5
           ).length > 1
         ) {
-          setFormDatas({
-            ...formDatas,
+          setDatasForm({
+            ...datasForm,
             practices: {
-              ...formDatas["practices"],
-              practice_plant: formDatas.practices.practice_plant.map(
+              ...datasForm["practices"],
+              practice_plant: datasForm.practices.practice_plant.map(
                 (plant, index) =>
                   Number(index) === Number(event.target.value)
                     ? { ...plant, selected: event.target.checked }
@@ -57,14 +58,14 @@ function BlocPractices({ formDatas, setFormDatas }) {
         } else {
           if (11 === Number(event.target.value)) {
             console.log("je suis ici là");
-            formDatas.practices.practice_plant.map((element) =>
+            datasForm.practices.practice_plant.map((element) =>
               console.log(element)
             );
-            setFormDatas({
-              ...formDatas,
+            setDatasForm({
+              ...datasForm,
               practices: {
-                ...formDatas["practices"],
-                practice_plant: formDatas.practices.practice_plant.map(
+                ...datasForm["practices"],
+                practice_plant: datasForm.practices.practice_plant.map(
                   (practice, index) =>
                     practice.value === "none"
                       ? {
@@ -74,25 +75,25 @@ function BlocPractices({ formDatas, setFormDatas }) {
                       : { ...practice, selected: false }
                 ),
                 croplands: {
-                  ...formDatas.practices.croplands,
+                  ...datasForm.practices.croplands,
                   selected: false,
                 },
                 grasslands: {
-                  ...formDatas.practices.grasslands,
+                  ...datasForm.practices.grasslands,
                   selected: false,
                 },
                 organic_soils: {
-                  ...formDatas.practices.organic_soils,
+                  ...datasForm.practices.organic_soils,
                   selected: false,
                 },
               },
             });
           } else {
-            setFormDatas({
-              ...formDatas,
+            setDatasForm({
+              ...datasForm,
               practices: {
-                ...formDatas["practices"],
-                practice_plant: formDatas.practices.practice_plant.map(
+                ...datasForm["practices"],
+                practice_plant: datasForm.practices.practice_plant.map(
                   (plant, index) =>
                     Number(index) === Number(event.target.value)
                       ? { ...plant, selected: event.target.checked }
@@ -101,7 +102,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                       : plant
                 ),
                 [event.target.name.split(".")[0]]: {
-                  ...formDatas["practices"][event.target.name.split(".")[0]],
+                  ...datasForm["practices"][event.target.name.split(".")[0]],
                   selected: event.target.checked,
                 },
               },
@@ -111,12 +112,12 @@ function BlocPractices({ formDatas, setFormDatas }) {
       } else {
         if (11 === Number(event.target.value)) {
           console.log("je suis ici");
-          setFormDatas({
-            ...formDatas,
+          setDatasForm({
+            ...datasForm,
             practices: {
-              ...formDatas["practices"],
+              ...datasForm["practices"],
               [event.target.name.split(".")[0]]:
-                formDatas.practices.practice_plant.map((practice, index) =>
+                datasForm.practices.practice_plant.map((practice, index) =>
                   practice.value === "none"
                     ? {
                         ...practice,
@@ -136,44 +137,44 @@ function BlocPractices({ formDatas, setFormDatas }) {
               Number(practiceNumber) === 4 ||
               Number(practiceNumber) === 5
             ) {
-              setFormDatas({
-                ...formDatas,
+              setDatasForm({
+                ...datasForm,
                 practices: {
-                  ...formDatas.practices,
+                  ...datasForm.practices,
                   croplands: {
-                    ...formDatas["croplands"],
+                    ...datasForm["croplands"],
                     selected: event.target.checked,
                   },
                 },
               });
             } else if (practiceNumber === 6) {
-              setFormDatas({
-                ...formDatas,
+              setDatasForm({
+                ...datasForm,
                 practices: {
-                  ...formDatas.practices,
+                  ...datasForm.practices,
                   grasslands: {
-                    ...formDatas["grasslands"],
+                    ...datasForm["grasslands"],
                     selected: event.target.checked,
                   },
                 },
               });
             } else if (practiceNumber === 7) {
-              setFormDatas({
-                ...formDatas,
+              setDatasForm({
+                ...datasForm,
                 organic_soils: {
-                  ...formDatas["organic_soils"],
+                  ...datasForm["organic_soils"],
                   selected: event.target.checked,
                 },
               });
             }
           } else {
-            setFormDatas({
-              ...formDatas,
+            setDatasForm({
+              ...datasForm,
               practices: {
-                ...formDatas["practices"],
+                ...datasForm["practices"],
                 [event.target.name.split(".")[0]]:
                   event.target.name.split(".")[0] === "practice_anim"
-                    ? formDatas.practices.practice_anim.map((practice, index) =>
+                    ? datasForm.practices.practice_anim.map((practice, index) =>
                         index === Number(event.target.value)
                           ? {
                               ...practice,
@@ -185,7 +186,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                           : practice
                       )
                     : !event.target.name.split(".")[1]
-                    ? formDatas.practices.practice_plant.map(
+                    ? datasForm.practices.practice_plant.map(
                         (practice, index) =>
                           practice.value === "none"
                             ? {
@@ -199,7 +200,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                               }
                             : practice
                       )
-                    : formDatas.practices.practice_plant.map(
+                    : datasForm.practices.practice_plant.map(
                         (practice, index) =>
                           index === Number(event.target.value)
                             ? {
@@ -215,7 +216,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
             });
           }
         }
-        console.log(formDatas.practices);
+        console.log(datasForm.practices);
       }
     } else if (practiceNumber) {
       console.log(practiceNumber);
@@ -228,34 +229,34 @@ function BlocPractices({ formDatas, setFormDatas }) {
           practiceNumber === 4 ||
           practiceNumber === 5
         ) {
-          setFormDatas({
-            ...formDatas,
+          setDatasForm({
+            ...datasForm,
             practices: {
-              ...formDatas.practices,
+              ...datasForm.practices,
               croplands: {
-                ...formDatas["croplands"],
+                ...datasForm["croplands"],
                 selected: true,
               },
             },
           });
         } else if (practiceNumber === 6) {
-          setFormDatas({
-            ...formDatas,
+          setDatasForm({
+            ...datasForm,
             practices: {
-              ...formDatas.practices,
+              ...datasForm.practices,
               grasslands: {
-                ...formDatas["grasslands"],
+                ...datasForm["grasslands"],
                 selected: event.target.checked,
               },
             },
           });
         } else if (practiceNumber === 7) {
-          setFormDatas({
-            ...formDatas,
+          setDatasForm({
+            ...datasForm,
             practices: {
-              ...formDatas.practices,
+              ...datasForm.practices,
               organic_soils: {
-                ...formDatas["organic_soils"],
+                ...datasForm["organic_soils"],
                 selected: event.target.checked,
               },
             },
@@ -263,13 +264,13 @@ function BlocPractices({ formDatas, setFormDatas }) {
         }
       }
     } else {
-      //   console.log(formDatas.practices.practice_anim[event.target.value]);
+      //   console.log(datasForm.practices.practice_anim[event.target.value]);
       if (event.target.value === "3") {
-        setFormDatas({
-          ...formDatas,
+        setDatasForm({
+          ...datasForm,
           practices: {
-            ...formDatas["practices"],
-            [event.target.name]: formDatas.practices.practice_anim.map(
+            ...datasForm["practices"],
+            [event.target.name]: datasForm.practices.practice_anim.map(
               (practice, index) =>
                 index === Number(event.target.value)
                   ? { ...practice, selected: event.target.checked }
@@ -278,11 +279,11 @@ function BlocPractices({ formDatas, setFormDatas }) {
           },
         });
       } else {
-        setFormDatas({
-          ...formDatas,
+        setDatasForm({
+          ...datasForm,
           practices: {
-            ...formDatas["practices"],
-            [event.target.name]: formDatas.practices.practice_anim.map(
+            ...datasForm["practices"],
+            [event.target.name]: datasForm.practices.practice_anim.map(
               (practice, index) =>
                 index === Number(event.target.value)
                   ? { ...practice, selected: event.target.checked }
@@ -309,25 +310,25 @@ function BlocPractices({ formDatas, setFormDatas }) {
           event.target.name.split(".")[1],
           event.target.value
         );
-        console.log(formDatas.practices[event.target.name.split(".")[0]]);
+        console.log(datasForm.practices[event.target.name.split(".")[0]]);
         event.target.name.split(".")[1] === "portion_of_them"
-          ? setFormDatas({
-              ...formDatas,
+          ? setDatasForm({
+              ...datasForm,
               practices: {
-                ...formDatas.practices,
+                ...datasForm.practices,
                 [event.target.name.split(".")[0]]: {
-                  ...formDatas.practices[event.target.name.split(".")[0]],
+                  ...datasForm.practices[event.target.name.split(".")[0]],
                   [event.target.name.split(".")[1]]: event.target.checked,
                   all_of_them: false,
                 },
               },
             })
-          : setFormDatas({
-              ...formDatas,
+          : setDatasForm({
+              ...datasForm,
               practices: {
-                ...formDatas.practices,
+                ...datasForm.practices,
                 [event.target.name.split(".")[0]]: {
-                  ...formDatas.practices[event.target.name.split(".")[0]],
+                  ...datasForm.practices[event.target.name.split(".")[0]],
                   [event.target.name.split(".")[1]]: event.target.checked,
                   portion_of_them: false,
                 },
@@ -336,11 +337,11 @@ function BlocPractices({ formDatas, setFormDatas }) {
       } else {
         console.log("je suis ici", practice.selected);
         if (cropsIndex && cropsIndex.length > 0) {
-          setFormDatas({
-            ...formDatas,
+          setDatasForm({
+            ...datasForm,
             practices: {
-              ...formDatas.practices,
-              practice_plant: formDatas.practices.practice_plant.map(
+              ...datasForm.practices,
+              practice_plant: datasForm.practices.practice_plant.map(
                 (practice, index) =>
                   cropsIndex.find(
                     (element) => Number(element) === Number(index)
@@ -367,13 +368,13 @@ function BlocPractices({ formDatas, setFormDatas }) {
             },
           });
         } else {
-          formDatas.practices.practice_anim.map((practice, index) => {
+          datasForm.practices.practice_anim.map((practice, index) => {
             if (practice.selected) {
-              setFormDatas({
-                ...formDatas,
+              setDatasForm({
+                ...datasForm,
                 practices: {
-                  ...formDatas.practices,
-                  practice_anim: formDatas.practices.practice_anim.map(
+                  ...datasForm.practices,
+                  practice_anim: datasForm.practices.practice_anim.map(
                     (practice, index) =>
                       practice.selected
                         ? event.target.name.split(".")[1] === "portion_of_them"
@@ -406,13 +407,13 @@ function BlocPractices({ formDatas, setFormDatas }) {
   const handleChangeSelect = ({ event, other_plant }) => {
     if (other_plant) {
       console.log(event.target.name, event.target.value);
-      setFormDatas({
-        ...formDatas,
+      setDatasForm({
+        ...datasForm,
         practices: {
-          ...formDatas.practices,
+          ...datasForm.practices,
           [event.target.name]: {
-            ...formDatas.practices[event.target.name],
-            unit: formDatas.practices[event.target.name].unit.map((unit) =>
+            ...datasForm.practices[event.target.name],
+            unit: datasForm.practices[event.target.name].unit.map((unit) =>
               unit.value === event.target.value.toString()
                 ? { ...unit, selected: true }
                 : { ...unit, selected: false }
@@ -430,46 +431,46 @@ function BlocPractices({ formDatas, setFormDatas }) {
   }) => {
     if (other_plant) {
       console.log(event.target.name);
-      setFormDatas({
-        ...formDatas,
+      setDatasForm({
+        ...datasForm,
         practices: {
-          ...formDatas.practices,
+          ...datasForm.practices,
           [event.target.name]: {
-            ...formDatas.practices[event.target.name],
+            ...datasForm.practices[event.target.name],
             size: event.target.value,
           },
         },
       });
     } else if (practice) {
       if (practiceNumber) {
-        setFormDatas({
-          ...formDatas,
+        setDatasForm({
+          ...datasForm,
           practices: {
-            ...formDatas.practices,
+            ...datasForm.practices,
             [event.target.name.split(".")[0]]: {
-              ...formDatas.practices[event.target.name.split(".")[0]],
+              ...datasForm.practices[event.target.name.split(".")[0]],
               portion_numb: Number(event.target.value),
             },
           },
         });
         console.log(
-          formDatas.practices[event.target.name.split(".")[0]].portion_numb
+          datasForm.practices[event.target.name.split(".")[0]].portion_numb
         );
       } else {
-        formDatas.practices.practice_anim.map((practice, index) => {
+        datasForm.practices.practice_anim.map((practice, index) => {
           if (practice.selected) {
-            console.log(formDatas.practices.practice_anim);
+            console.log(datasForm.practices.practice_anim);
             console.log(practice, index);
-            console.log(formDatas.practices.practice_anim[index]);
+            console.log(datasForm.practices.practice_anim[index]);
             console.log(
               event.target.name.split(".")[0],
               event.target.name.split(".")[1]
             );
-            setFormDatas({
-              ...formDatas,
+            setDatasForm({
+              ...datasForm,
               practices: {
-                ...formDatas.practices,
-                practice_anim: formDatas.practices.practice_anim.map(
+                ...datasForm.practices,
+                practice_anim: datasForm.practices.practice_anim.map(
                   (practice, index) =>
                     practice.selected
                       ? {
@@ -486,7 +487,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
               },
             });
 
-            console.log(formDatas.practices);
+            console.log(datasForm.practices);
           }
         });
       }
@@ -495,16 +496,16 @@ function BlocPractices({ formDatas, setFormDatas }) {
   return (
     <div id="bloc_practices">
       <div id="bloc_practices_animals">
-        {(formDatas.farm_type.animals || formDatas.farm_type.both) &&
-          (formDatas.farm_type_animals.dairy_cattle ||
-            formDatas.farm_type_animals.beef_cattle ||
-            formDatas.farm_type_animals.sheeps) && (
+        {(datasForm.farm_type.animals || datasForm.farm_type.both) &&
+          (datasForm.farm_type_animals.dairy_cattle ||
+            datasForm.farm_type_animals.beef_cattle ||
+            datasForm.farm_type_animals.sheeps) && (
             <>
               <label>
                 For your animal(s), have you implemented practice(s) to reduce
                 enteric methane emissions?
               </label>
-              {formDatas.practices.practice_anim.map((practice, index) => (
+              {datasForm.practices.practice_anim.map((practice, index) => (
                 <div>
                   <input
                     type="checkbox"
@@ -516,9 +517,9 @@ function BlocPractices({ formDatas, setFormDatas }) {
                   {practice.value}
                 </div>
               ))}
-              {(formDatas.practices.practice_anim[0].selected ||
-                formDatas.practices.practice_anim[1].selected ||
-                formDatas.practices.practice_anim[2].selected) && (
+              {(datasForm.practices.practice_anim[0].selected ||
+                datasForm.practices.practice_anim[1].selected ||
+                datasForm.practices.practice_anim[2].selected) && (
                 <>
                   <label>
                     For each practice, select the animal(s) concerned :
@@ -527,31 +528,31 @@ function BlocPractices({ formDatas, setFormDatas }) {
                     <tbody>
                       <tr>
                         <td></td>
-                        {formDatas.practices.practice_anim[0].selected && (
-                          <td>{formDatas.practices.practice_anim[0].value}</td>
+                        {datasForm.practices.practice_anim[0].selected && (
+                          <td>{datasForm.practices.practice_anim[0].value}</td>
                         )}
-                        {formDatas.practices.practice_anim[1].selected && (
-                          <td>{formDatas.practices.practice_anim[1].value}</td>
+                        {datasForm.practices.practice_anim[1].selected && (
+                          <td>{datasForm.practices.practice_anim[1].value}</td>
                         )}
-                        {formDatas.practices.practice_anim[2].selected && (
-                          <td>{formDatas.practices.practice_anim[2].value}</td>
+                        {datasForm.practices.practice_anim[2].selected && (
+                          <td>{datasForm.practices.practice_anim[2].value}</td>
                         )}
                       </tr>
-                      {formDatas.farm_type_animals.dairy_cattle && (
+                      {datasForm.farm_type_animals.dairy_cattle && (
                         <tr>
-                          {(formDatas.practices.practice_anim[0].selected ||
-                            formDatas.practices.practice_anim[1].selected ||
-                            formDatas.practices.practice_anim[2].selected) && (
+                          {(datasForm.practices.practice_anim[0].selected ||
+                            datasForm.practices.practice_anim[1].selected ||
+                            datasForm.practices.practice_anim[2].selected) && (
                             <td>Dairy cow</td>
                           )}
-                          {formDatas.practices.practice_anim[0].selected && (
+                          {datasForm.practices.practice_anim[0].selected && (
                             <td>
                               <input
                                 type="checkbox"
                                 name={"practice_anim.dairy_cow"}
                                 value={0}
                                 checked={
-                                  formDatas.practices.practice_anim[0].dairy_cow
+                                  datasForm.practices.practice_anim[0].dairy_cow
                                     .selected
                                 }
                                 onChange={(event) =>
@@ -563,14 +564,14 @@ function BlocPractices({ formDatas, setFormDatas }) {
                               />
                             </td>
                           )}
-                          {formDatas.practices.practice_anim[1].selected && (
+                          {datasForm.practices.practice_anim[1].selected && (
                             <td>
                               <input
                                 type="checkbox"
                                 name={"practice_anim.dairy_cow"}
                                 value={1}
                                 checked={
-                                  formDatas.practices.practice_anim[1].dairy_cow
+                                  datasForm.practices.practice_anim[1].dairy_cow
                                     .selected
                                 }
                                 onChange={(event) =>
@@ -582,14 +583,14 @@ function BlocPractices({ formDatas, setFormDatas }) {
                               />
                             </td>
                           )}
-                          {formDatas.practices.practice_anim[2].selected && (
+                          {datasForm.practices.practice_anim[2].selected && (
                             <td>
                               <input
                                 type="checkbox"
                                 name={"practice_anim.dairy_cow"}
                                 value={2}
                                 checked={
-                                  formDatas.practices.practice_anim[2].dairy_cow
+                                  datasForm.practices.practice_anim[2].dairy_cow
                                     .selected
                                 }
                                 onChange={(event) =>
@@ -603,17 +604,17 @@ function BlocPractices({ formDatas, setFormDatas }) {
                           )}
                         </tr>
                       )}
-                      {formDatas.farm_type_animals.beef_cattle && (
+                      {datasForm.farm_type_animals.beef_cattle && (
                         <tr>
                           <td>Beef cattle</td>
-                          {formDatas.practices.practice_anim[0].selected && (
+                          {datasForm.practices.practice_anim[0].selected && (
                             <td>
                               <input
                                 type="checkbox"
                                 name={"practice_anim.beef_cattle"}
                                 value={0}
                                 checked={
-                                  formDatas.practices.practice_anim[0]
+                                  datasForm.practices.practice_anim[0]
                                     .beef_cattle.selected
                                 }
                                 onChange={(event) =>
@@ -625,14 +626,14 @@ function BlocPractices({ formDatas, setFormDatas }) {
                               />
                             </td>
                           )}
-                          {formDatas.practices.practice_anim[1].selected && (
+                          {datasForm.practices.practice_anim[1].selected && (
                             <td>
                               <input
                                 type="checkbox"
                                 name={"practice_anim.beef_cattle"}
                                 value={1}
                                 checked={
-                                  formDatas.practices.practice_anim[1]
+                                  datasForm.practices.practice_anim[1]
                                     .beef_cattle.selected
                                 }
                                 onChange={(event) =>
@@ -644,14 +645,14 @@ function BlocPractices({ formDatas, setFormDatas }) {
                               />
                             </td>
                           )}
-                          {formDatas.practices.practice_anim[2].selected && (
+                          {datasForm.practices.practice_anim[2].selected && (
                             <td>
                               <input
                                 type="checkbox"
                                 name={"practice_anim.beef_cattle"}
                                 value={2}
                                 checked={
-                                  formDatas.practices.practice_anim[2]
+                                  datasForm.practices.practice_anim[2]
                                     .beef_cattle.selected
                                 }
                                 onChange={(event) =>
@@ -665,17 +666,17 @@ function BlocPractices({ formDatas, setFormDatas }) {
                           )}
                         </tr>
                       )}
-                      {formDatas.farm_type_animals.sheeps && (
+                      {datasForm.farm_type_animals.sheeps && (
                         <tr>
                           <td>Sheeps</td>
-                          {formDatas.practices.practice_anim[0].selected && (
+                          {datasForm.practices.practice_anim[0].selected && (
                             <td>
                               <input
                                 type="checkbox"
                                 name={"practice_anim.sheeps"}
                                 value={0}
                                 checked={
-                                  formDatas.practices.practice_anim[0].sheeps
+                                  datasForm.practices.practice_anim[0].sheeps
                                     .selected
                                 }
                                 onChange={(event) =>
@@ -687,14 +688,14 @@ function BlocPractices({ formDatas, setFormDatas }) {
                               />
                             </td>
                           )}
-                          {formDatas.practices.practice_anim[1].selected && (
+                          {datasForm.practices.practice_anim[1].selected && (
                             <td>
                               <input
                                 type="checkbox"
                                 name={"practice_anim.sheeps"}
                                 value={1}
                                 checked={
-                                  formDatas.practices.practice_anim[1].sheeps
+                                  datasForm.practices.practice_anim[1].sheeps
                                     .selected
                                 }
                                 onChange={(event) =>
@@ -706,14 +707,14 @@ function BlocPractices({ formDatas, setFormDatas }) {
                               />
                             </td>
                           )}
-                          {formDatas.practices.practice_anim[2].selected && (
+                          {datasForm.practices.practice_anim[2].selected && (
                             <td>
                               <input
                                 type="checkbox"
                                 name={"practice_anim.sheeps"}
                                 value={2}
                                 checked={
-                                  formDatas.practices.practice_anim[2].sheeps
+                                  datasForm.practices.practice_anim[2].sheeps
                                     .selected
                                 }
                                 onChange={(event) =>
@@ -731,10 +732,10 @@ function BlocPractices({ formDatas, setFormDatas }) {
                   </table>
                 </>
               )}
-              {(formDatas.practices.practice_anim[0].selected ||
-                formDatas.practices.practice_anim[1].selected ||
-                formDatas.practices.practice_anim[2].selected) &&
-                formDatas.practices.practice_anim.find((animal) =>
+              {(datasForm.practices.practice_anim[0].selected ||
+                datasForm.practices.practice_anim[1].selected ||
+                datasForm.practices.practice_anim[2].selected) &&
+                datasForm.practices.practice_anim.find((animal) =>
                   animal["sheeps"]
                     ? animal["dairy_cow"].selected ||
                       animal["beef_cattle"].selected ||
@@ -752,8 +753,8 @@ function BlocPractices({ formDatas, setFormDatas }) {
                           <td>A portion of them</td>
                           <td>All of them</td>
                         </tr>
-                        {formDatas.farm_type_animals.dairy_cattle &&
-                          formDatas.practices.practice_anim.find((animal) =>
+                        {datasForm.farm_type_animals.dairy_cattle &&
+                          datasForm.practices.practice_anim.find((animal) =>
                             animal["dairy_cow"]
                               ? animal["dairy_cow"].selected
                               : false
@@ -766,7 +767,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                                     type="radio"
                                     name={"dairy_cow.portion_of_them"}
                                     checked={
-                                      formDatas.practices.practice_anim[0]
+                                      datasForm.practices.practice_anim[0]
                                         .dairy_cow.portion_of_them
                                     }
                                     onChange={(event) =>
@@ -782,7 +783,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                                     type="radio"
                                     name={"dairy_cow.all_of_them"}
                                     checked={
-                                      formDatas.practices.practice_anim[0]
+                                      datasForm.practices.practice_anim[0]
                                         .dairy_cow.all_of_them
                                     }
                                     onChange={(event) =>
@@ -794,7 +795,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                                   />
                                 </td>
                               </tr>
-                              {formDatas.practices.practice_anim.find(
+                              {datasForm.practices.practice_anim.find(
                                 (animal) =>
                                   animal["dairy_cow"]
                                     ? animal["dairy_cow"].portion_of_them
@@ -815,7 +816,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                                       aria-label="Temperature"
                                       name={"dairy_cow.portion_numb"}
                                       defaultValue={
-                                        formDatas.practices.practice_anim.find(
+                                        datasForm.practices.practice_anim.find(
                                           (animal) =>
                                             animal["dairy_cow"]
                                               ? animal["dairy_cow"]
@@ -824,7 +825,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                                         ).portion_numb
                                       }
                                       getAriaValueText={
-                                        formDatas.practices.practice_anim.find(
+                                        datasForm.practices.practice_anim.find(
                                           (animal) =>
                                             animal["dairy_cow"]
                                               ? animal["dairy_cow"]
@@ -843,8 +844,8 @@ function BlocPractices({ formDatas, setFormDatas }) {
                               )}
                             </>
                           )}
-                        {formDatas.farm_type_animals.beef_cattle &&
-                          formDatas.practices.practice_anim.find((animal) =>
+                        {datasForm.farm_type_animals.beef_cattle &&
+                          datasForm.practices.practice_anim.find((animal) =>
                             animal["beef_cattle"]
                               ? animal["beef_cattle"].selected
                               : false
@@ -857,7 +858,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                                     type="radio"
                                     name={"beef_cattle.portion_of_them"}
                                     checked={
-                                      formDatas.practices.practice_anim[0]
+                                      datasForm.practices.practice_anim[0]
                                         .beef_cattle.portion_of_them
                                     }
                                     onChange={(event) =>
@@ -873,7 +874,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                                     type="radio"
                                     name={"beef_cattle.all_of_them"}
                                     checked={
-                                      formDatas.practices.practice_anim[0]
+                                      datasForm.practices.practice_anim[0]
                                         .beef_cattle.all_of_them
                                     }
                                     onChange={(event) =>
@@ -885,7 +886,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                                   />
                                 </td>
                               </tr>
-                              {formDatas.practices.practice_anim.find(
+                              {datasForm.practices.practice_anim.find(
                                 (animal) =>
                                   animal["beef_cattle"]
                                     ? animal["beef_cattle"].portion_of_them
@@ -906,7 +907,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                                       aria-label="Temperature"
                                       name={"beef_cattle.portion_numb"}
                                       defaultValue={
-                                        formDatas.practices.practice_anim.find(
+                                        datasForm.practices.practice_anim.find(
                                           (animal) =>
                                             animal["beef_cattle"]
                                               ? animal["beef_cattle"]
@@ -915,7 +916,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                                         ).portion_numb
                                       }
                                       getAriaValueText={
-                                        formDatas.practices.practice_anim.find(
+                                        datasForm.practices.practice_anim.find(
                                           (animal) =>
                                             animal["beef_cattle"]
                                               ? animal["beef_cattle"]
@@ -934,8 +935,8 @@ function BlocPractices({ formDatas, setFormDatas }) {
                               )}
                             </>
                           )}
-                        {formDatas.farm_type_animals.sheeps &&
-                          formDatas.practices.practice_anim.find((animal) =>
+                        {datasForm.farm_type_animals.sheeps &&
+                          datasForm.practices.practice_anim.find((animal) =>
                             animal["sheeps"] ? animal["sheeps"].selected : false
                           ) && (
                             <>
@@ -946,7 +947,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                                     type="radio"
                                     name={"sheeps.portion_of_them"}
                                     checked={
-                                      formDatas.practices.practice_anim[0]
+                                      datasForm.practices.practice_anim[0]
                                         .sheeps.portion_of_them
                                     }
                                     onChange={(event) =>
@@ -962,7 +963,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                                     type="radio"
                                     name={"sheeps.all_of_them"}
                                     checked={
-                                      formDatas.practices.practice_anim[0]
+                                      datasForm.practices.practice_anim[0]
                                         .sheeps.all_of_them
                                     }
                                     onChange={(event) =>
@@ -974,7 +975,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                                   />
                                 </td>
                               </tr>
-                              {formDatas.practices.practice_anim.find(
+                              {datasForm.practices.practice_anim.find(
                                 (animal) =>
                                   animal["sheeps"]
                                     ? animal["sheeps"].portion_of_them
@@ -995,7 +996,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                                       aria-label="Temperature"
                                       name={"sheeps.portion_numb"}
                                       defaultValue={
-                                        formDatas.practices.practice_anim.find(
+                                        datasForm.practices.practice_anim.find(
                                           (animal) =>
                                             animal["sheeps"]
                                               ? animal["sheeps"].portion_of_them
@@ -1003,7 +1004,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                                         ).portion_numb
                                       }
                                       getAriaValueText={
-                                        formDatas.practices.practice_anim.find(
+                                        datasForm.practices.practice_anim.find(
                                           (animal) =>
                                             animal["sheeps"]
                                               ? animal["sheeps"].portion_of_them
@@ -1029,13 +1030,13 @@ function BlocPractices({ formDatas, setFormDatas }) {
           )}
       </div>
       <div id="bloc_practices_plant">
-        {(formDatas.farm_type.crops || formDatas.farm_type.both) && (
+        {(datasForm.farm_type.crops || datasForm.farm_type.both) && (
           <>
             <label>
               For your crop(s), have you implemented practice(s) to reduce
               emissions & increase sequestration?
             </label>
-            {formDatas.practices.practice_plant.map((practice, index) => (
+            {datasForm.practices.practice_plant.map((practice, index) => (
               <div>
                 <input
                   type="checkbox"
@@ -1064,9 +1065,9 @@ function BlocPractices({ formDatas, setFormDatas }) {
               </div>
             ))}
 
-            {(formDatas.practices["croplands"].selected ||
-              formDatas.practices["grasslands"].selected ||
-              formDatas.practices["organic_soils"].selected) && (
+            {(datasForm.practices["croplands"].selected ||
+              datasForm.practices["grasslands"].selected ||
+              datasForm.practices["organic_soils"].selected) && (
               <>
                 <label>Did you implement this/these practice(s) for: </label>
                 <table>
@@ -1076,7 +1077,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                       <td>A portion of them</td>
                       <td>All of them</td>
                     </tr>
-                    {formDatas.practices.croplands.selected && (
+                    {datasForm.practices.croplands.selected && (
                       <>
                         <tr>
                           <td>Croplands</td>
@@ -1085,7 +1086,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                               type="radio"
                               name={"croplands.portion_of_them"}
                               checked={
-                                formDatas.practices["croplands"].portion_of_them
+                                datasForm.practices["croplands"].portion_of_them
                               }
                               onChange={(event) =>
                                 handleChangeRadio({
@@ -1102,7 +1103,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                               type="radio"
                               name={"croplands.all_of_them"}
                               checked={
-                                formDatas.practices["croplands"].all_of_them
+                                datasForm.practices["croplands"].all_of_them
                               }
                               onChange={(event) =>
                                 handleChangeRadio({
@@ -1115,14 +1116,14 @@ function BlocPractices({ formDatas, setFormDatas }) {
                             />
                           </td>
                         </tr>
-                        {formDatas.practices["croplands"].portion_of_them && (
+                        {datasForm.practices["croplands"].portion_of_them && (
                           <tr>
                             <td>
                               <label>% of them :</label>
                             </td>
                             <td>
                               {console.log(
-                                formDatas.practices["croplands"].portion_numb
+                                datasForm.practices["croplands"].portion_numb
                               )}
                               <Slider
                                 onChange={(event) =>
@@ -1133,12 +1134,12 @@ function BlocPractices({ formDatas, setFormDatas }) {
                                   })
                                 }
                                 value={
-                                  formDatas.practices["croplands"].portion_numb
+                                  datasForm.practices["croplands"].portion_numb
                                 }
                                 aria-label="Temperature"
                                 name={"croplands.portion_numb"}
                                 defaultValue={
-                                  formDatas.practices.croplands.portion_numb
+                                  datasForm.practices.croplands.portion_numb
                                 }
                                 valueLabelDisplay="auto"
                                 step={10}
@@ -1151,7 +1152,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                         )}
                       </>
                     )}
-                    {formDatas.practices.grasslands.selected && (
+                    {datasForm.practices.grasslands.selected && (
                       <>
                         <tr>
                           <td>Grasslands</td>
@@ -1160,7 +1161,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                               type="radio"
                               name={"grasslands.portion_of_them"}
                               checked={
-                                formDatas.practices["grasslands"]
+                                datasForm.practices["grasslands"]
                                   .portion_of_them
                               }
                               onChange={(event) =>
@@ -1178,7 +1179,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                               type="radio"
                               name={"grasslands.all_of_them"}
                               checked={
-                                formDatas.practices["grasslands"].all_of_them
+                                datasForm.practices["grasslands"].all_of_them
                               }
                               onChange={(event) =>
                                 handleChangeRadio({
@@ -1191,7 +1192,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                             />
                           </td>
                         </tr>
-                        {formDatas.practices["grasslands"].portion_of_them && (
+                        {datasForm.practices["grasslands"].portion_of_them && (
                           <tr>
                             <td>
                               <label>% of them :</label>
@@ -1206,12 +1207,12 @@ function BlocPractices({ formDatas, setFormDatas }) {
                                   })
                                 }
                                 value={
-                                  formDatas.practices["grasslands"].portion_numb
+                                  datasForm.practices["grasslands"].portion_numb
                                 }
                                 aria-label="Temperature"
                                 name={"grasslands.portion_numb"}
                                 defaultValue={
-                                  formDatas.practices["grasslands"].portion_numb
+                                  datasForm.practices["grasslands"].portion_numb
                                 }
                                 valueLabelDisplay="auto"
                                 step={10}
@@ -1224,7 +1225,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                         )}
                       </>
                     )}
-                    {formDatas.practices.organic_soils.selected && (
+                    {datasForm.practices.organic_soils.selected && (
                       <>
                         <tr>
                           <td>Organic soils</td>
@@ -1233,7 +1234,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                               type="radio"
                               name={"organic_soils.portion_of_them"}
                               checked={
-                                formDatas.practices["organic_soils"]
+                                datasForm.practices["organic_soils"]
                                   .portion_of_them
                               }
                               onChange={(event) =>
@@ -1251,7 +1252,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                               type="radio"
                               name={"organic_soils.all_of_them"}
                               checked={
-                                formDatas.practices["organic_soils"].all_of_them
+                                datasForm.practices["organic_soils"].all_of_them
                               }
                               onChange={(event) =>
                                 handleChangeRadio({
@@ -1264,7 +1265,7 @@ function BlocPractices({ formDatas, setFormDatas }) {
                             />
                           </td>
                         </tr>
-                        {formDatas.practices["organic_soils"]
+                        {datasForm.practices["organic_soils"]
                           .portion_of_them && (
                           <tr>
                             <td>
@@ -1282,11 +1283,11 @@ function BlocPractices({ formDatas, setFormDatas }) {
                                 aria-label="Temperature"
                                 name={"organic_soils.portion_numb"}
                                 defaultValue={
-                                  formDatas.practices["organic_soils"]
+                                  datasForm.practices["organic_soils"]
                                     .portion_numb
                                 }
                                 value={
-                                  formDatas.practices["organic_soils"]
+                                  datasForm.practices["organic_soils"]
                                     .portion_numb
                                 }
                                 valueLabelDisplay="auto"
@@ -1304,26 +1305,27 @@ function BlocPractices({ formDatas, setFormDatas }) {
                 </table>
               </>
             )}
-            {formDatas.practices.practice_plant[8].selected && (
+            {datasForm.practices.practice_plant[8].selected && (
               <>
                 What is the size of the degraded lands on which you practice
                 restoration?
                 <input
                   type="number"
                   name="degraded_lands"
-                  value={formDatas.practices.degraded_lands.size}
+                  value={datasForm.practices.degraded_lands.size}
                   onChange={(event) =>
                     handleChangeNumber({ event: event, other_plant: true })
                   }
                 />
                 <select
+                  defaultValue=""
                   name={"degraded_lands"}
                   id={"degraded_lands_unit"}
                   onChange={(event) =>
                     handleChangeSelect({ event: event, other_plant: true })
                   }
                 >
-                  {formDatas.practices["degraded_lands"].unit.map((unit) => (
+                  {datasForm.practices["degraded_lands"].unit.map((unit) => (
                     <option
                       value={unit.value}
                       selected={unit.selected}
@@ -1335,26 +1337,27 @@ function BlocPractices({ formDatas, setFormDatas }) {
                 </select>
               </>
             )}
-            {formDatas.practices.practice_plant[9].selected && (
+            {datasForm.practices.practice_plant[9].selected && (
               <>
                 What is the size of the lands where the soils are under
                 bio-energy?
                 <input
                   type="number"
                   name="bionrj"
-                  value={formDatas.practices.bionrj.size}
+                  value={datasForm.practices.bionrj.size}
                   onChange={(event) =>
                     handleChangeNumber({ event: event, other_plant: true })
                   }
                 />
                 <select
+                  defaultValue=""
                   name={"bionrj"}
                   id={"bionrj_unit"}
                   onChange={(event) =>
                     handleChangeSelect({ event: event, other_plant: true })
                   }
                 >
-                  {formDatas.practices["bionrj"].unit.map((unit) => (
+                  {datasForm.practices["bionrj"].unit.map((unit) => (
                     <option
                       value={unit.value}
                       selected={unit.selected}
@@ -1366,26 +1369,27 @@ function BlocPractices({ formDatas, setFormDatas }) {
                 </select>
               </>
             )}
-            {formDatas.practices.practice_plant[10].selected && (
+            {datasForm.practices.practice_plant[10].selected && (
               <>
                 What is the size of the lands on which you apply
                 manure/biosolids?
                 <input
                   type="number"
                   name="manure"
-                  value={formDatas.practices.manure.size}
+                  value={datasForm.practices.manure.size}
                   onChange={(event) =>
                     handleChangeNumber({ event: event, other_plant: true })
                   }
                 />
                 <select
+                  defaultValue=""
                   name={"manure"}
                   id={"manure_unit"}
                   onChange={(event) =>
                     handleChangeSelect({ event: event, other_plant: true })
                   }
                 >
-                  {formDatas.practices["manure"].unit.map((unit) => (
+                  {datasForm.practices["manure"].unit.map((unit) => (
                     <option
                       value={unit.value}
                       selected={unit.selected}

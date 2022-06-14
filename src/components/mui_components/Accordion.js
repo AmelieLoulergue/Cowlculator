@@ -53,6 +53,7 @@ export default function CustomizedAccordions({ children, titlesAccordion }) {
         <Accordion
           expanded={expanded === "panel" + index + 1}
           onChange={handleChange("panel" + index + 1)}
+          key={"accordion_" + index}
         >
           <AccordionSummary
             aria-controls={"panel" + index + 1 + "d-content"}
@@ -60,9 +61,7 @@ export default function CustomizedAccordions({ children, titlesAccordion }) {
           >
             <Typography>{titlesAccordion[index]}</Typography>
           </AccordionSummary>
-          <AccordionDetails>
-            <Typography>{children[index]}</Typography>
-          </AccordionDetails>
+          <AccordionDetails>{children[index]}</AccordionDetails>
         </Accordion>
       ))}
     </div>
