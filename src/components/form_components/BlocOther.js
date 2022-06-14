@@ -32,7 +32,6 @@ function BlocOther({ datasForm, setDatasForm }) {
   let datas = Object.entries(datasForm.other_choice).map(
     (choice, index) => choice[0]
   );
-  console.log(datas);
   return (
     <div id="block_other">
       <div className="columns is-multiline">
