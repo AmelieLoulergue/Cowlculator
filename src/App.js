@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Form from "./components/Form";
 import Getstarted from "./components/Getstarted";
+import Login from "./components/Login";
 import { useState, useEffect } from "react";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<Home viewHeight={viewHeight} scroll={scroll} />}></Route>
           <Route path="/form" element={<Form />}></Route>
           <Route path="/getstarted" element={<Getstarted />}></Route>
+          <Route path="/login" element={<Login />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

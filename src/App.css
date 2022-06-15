@@ -60,3 +60,10 @@
   position: sticky;
   top: calc(100vh - 50px - 30px);
 }
+.center {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
