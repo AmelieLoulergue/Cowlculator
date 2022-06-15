@@ -67,7 +67,7 @@ function BlocWater({ datasForm, setDatasForm }) {
           What quantity of wastewater is treated? leave blank if non applicable.
         </label>
       </div>
-      <div className="column is-6">
+      <div className="column is-6 is-12-mobile">
         <FormControl sx={{ m: 1, width: "20ch" }} variant="filled">
           <Input
             id="standard-adornment-weight"
