@@ -1,14 +1,16 @@
 import * as React from "react";
 import './Login.css';
-import account from '../assets/svg/profile.svg';
-import lock from '../assets/svg/lock.svg';
+import account from '../../assets/svg/profile.svg';
+import lock from '../../assets/svg/lock.svg';
+import logo from '../../assets/img/logo.png';
 
-import Bg from './Bg';
+import Bg from '.././Bg';
 
 function Login() {
     return (
       <>
         <div className="container center" id="login">
+            <img src={logo}></img>
             <div className="login">
                 <h1>Welcome back ! &#128075;</h1>
                 <form id="login-form">
@@ -24,9 +26,12 @@ function Login() {
 
                     <button className="btn" type="submit">Login</button>
                 </form>
+                <h2>Already have an account ? <b>Sign up</b></h2>
             </div>
-            <div className="registrer"></div>
-            <h2>Need to <u>register</u> ?</h2>
+            <div className="registrer">
+                
+            </div>
+        
         </div>
         <Bg></Bg>
       </>

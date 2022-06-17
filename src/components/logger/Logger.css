@@ -1,0 +1,54 @@
+#logger {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    margin: auto;
+    overflow: hidden;
+}
+#logger .Titles {
+    margin-bottom: 10vh;
+    max-width: 60vw;
+}
+#logger img {
+    height: 50vh;
+    width: auto;
+    overflow: hidden;
+}
+#logger p {
+    opacity: 0.8;
+    text-align: center;
+}
+#logger .choice {
+    width: 80vw;
+    display: flex;
+    background: rgba(255,255,255,.1);
+    border-radius: 15px;
+    margin-bottom: 5vh;
+}
+#logger .choice a {
+    width: 50%;
+    min-height: 70px;
+    border: none;
+    border-radius: inherit;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#logger .choice .signin {
+    background: transparent;
+    color: white;
+}
+#logger .choice .register {
+    font-weight: bold;
+    color: black;
+    background: white;
+}
