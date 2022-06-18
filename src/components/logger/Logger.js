@@ -1,21 +1,16 @@
 import * as React from "react";
 import './Logger.css';
-import fandr from '../../assets/svg/farmer-and-researcher.svg';
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Lottie from "lottie-react";
+import fandr from '../../assets/anim/fandr.json';
 
 import Bg from '.././Bg';
 
-function Login() {
-  let navigate = useNavigate();
-    function onClickNavigate(location) {
-
-        navigate('/account/' + location)
-    }
+function Logger() {
     return (
       <>
         <div id="logger">
-            <img src={fandr}></img>
+            <Lottie animationData={fandr} loop="true"/>
             <div className="Titles">
                 <h1>Take part of the project.</h1>
                 <p>We really appreciate your comitment, and we are glade that you're interested in our project. <br></br>But before going further, do we already know each other?</p>
@@ -30,5 +25,5 @@ function Login() {
     );
   }
   
-  export default Login;
+  export default Logger;
   

@@ -13,9 +13,9 @@
     margin-bottom: 10vh;
     max-width: 60vw;
 }
-#logger img {
-    height: 50vh;
-    width: auto;
+#logger svg {
+    height: 50vh !important;
+    width: auto !important;
     overflow: hidden;
 }
 #logger p {
