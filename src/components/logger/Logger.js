@@ -3,12 +3,16 @@ import './Logger.css';
 import { Link } from "react-router-dom";
 import Lottie from "lottie-react";
 import fandr from '../../assets/anim/fandr.json';
+import home from '../../assets/svg/home.svg';
 
 import Bg from '.././Bg';
 
 function Logger() {
     return (
       <>
+        <div className="navbar">
+          <Link to={"../"}><img src={home}></img></Link>
+        </div>
         <div id="logger">
             <Lottie animationData={fandr} loop="true"/>
             <div className="Titles">
