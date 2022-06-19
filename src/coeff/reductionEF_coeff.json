@@ -15,6 +15,6 @@
     "name": "Sheep",
     "Improved_feeding": 0.04,
     "Spec_agents_and_diet_additives": 0.004,
-    "long-term change and breeding": 0.003
+    "longterm_change_and_breeding": 0.003
   }
 ]
