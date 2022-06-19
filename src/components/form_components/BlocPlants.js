@@ -1,31 +1,31 @@
 import React from "react";
-
-function BlocPlants({
-  formDatas,
-  handleChangeRadio,
-  handleChangeSelect,
-  handleChangeNumber,
-  handleChangeCheckbox,
-}) {
+import { handleChange } from "../../utils/form_functions";
+function BlocPlants({ datasForm, setDatasForm }) {
   return (
     <div id="block_plants_farming">
-      {(formDatas.farm_type.crops || formDatas.farm_type.both) && (
+      {(datasForm.farm_type.crops || datasForm.farm_type.both) && (
         <fieldset>
           <legend>
             What plant(s) do you farm ? NB: in the time frame reported.
           </legend>
 
-          {Object.entries(formDatas.farm_type_plants).map((choice) => {
+          {Object.entries(datasForm.farm_type_plants).map((choice) => {
             return (
               <div key={choice[0]}>
                 <input
                   type="checkbox"
                   id={choice[0]}
-                  name="farm_type_plants"
+                  name={"farm_type_plants." + choice[0]}
                   key={choice[0]}
                   value={choice[0]}
                   checked={choice[1]}
-                  onChange={(event) => handleChangeRadio({ event: event })}
+                  onChange={(event) =>
+                    handleChange({
+                      event: event,
+                      datasForm: datasForm,
+                      setDatasForm: setDatasForm,
+                    })
+                  }
                 />
                 <label htmlFor={choice[0]} style={{ paddingRight: "2rem" }}>
                   {choice[0].replaceAll("_", " ")}
@@ -33,9 +33,8 @@ function BlocPlants({
               </div>
             );
           })}
-          {Object.entries(formDatas.farm_type_plants).map((choice, index) => {
-            if (formDatas[`farm_type_plants`][choice[0]]) {
-              
+          {Object.entries(datasForm.farm_type_plants).map((choice, index) => {
+            if (datasForm[`farm_type_plants`][choice[0]]) {
               return (
                 <>
                   <div key={index}>
@@ -45,13 +44,17 @@ function BlocPlants({
                       report:
                     </label>
                     <select
-                      name={[choice[0]]}
-                      id={[choice[0]] + "_unit"}
+                      defaultValue=""
+                      name={[choice[0]] + ".unit"}
                       onChange={(event) =>
-                        handleChangeSelect({ event: event, plant: true })
+                        handleChange({
+                          event: event,
+                          datasForm: datasForm,
+                          setDatasForm: setDatasForm,
+                        })
                       }
                     >
-                      {formDatas[choice[0]].unit.map((unit) => (
+                      {datasForm[choice[0]].unit.map((unit) => (
                         <option
                           value={unit.value}
                           selected={unit.selected}
@@ -69,13 +72,20 @@ function BlocPlants({
                     </label>
                     <input
                       type="number"
-                      name={[choice[0]]}
+                      min="0"
+                      name={[choice[0]] + ".size"}
                       value={
-                        formDatas[[choice[0]]].size === 0
+                        datasForm[[choice[0]]].size === 0
                           ? ""
-                          : formDatas[[choice[0]]].size
+                          : datasForm[[choice[0]]].size
                       }
-                      onChange={(event) => handleChangeNumber(event, true)}
+                      onChange={(event) =>
+                        handleChange({
+                          event: event,
+                          datasForm: datasForm,
+                          setDatasForm: setDatasForm,
+                        })
+                      }
                     />{" "}
                   </div>
                   <label htmlFor="elec_generator">
@@ -83,10 +93,14 @@ function BlocPlants({
                   </label>
                   <input
                     type="checkbox"
-                    name={choice[0]}
-                    defaultChecked={formDatas[choice[0]].orga}
+                    name={[choice[0]] + ".orga"}
+                    defaultChecked={datasForm[choice[0]].orga}
                     onChange={(event) =>
-                      handleChangeCheckbox({ event: event, plant: true })
+                      handleChange({
+                        event: event,
+                        datasForm: datasForm,
+                        setDatasForm: setDatasForm,
+                      })
                     }
                   />{" "}
                   YES

@@ -7,17 +7,27 @@ import Account from "./components/logger/Logger";
 import Login from "./components/logger/Login";
 import Signup from "./components/logger/Signup";
 import { useState, useEffect } from "react";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
 function App() {
-  const [viewHeight, setViewHeight] = useState(window.innerHeight)
-  const [scroll, setScroll] = useState( window.scrollY)
-  const onScroll = () => {setViewHeight(window.innerHeight); setScroll(window.scrollY)}
-  useEffect(()=> window.addEventListener("scroll", onScroll ), [])
-  useEffect(() => setViewHeight(window.innerHeight), [window])
-  
+  const [viewHeight, setViewHeight] = useState(window.innerHeight);
+  const [scroll, setScroll] = useState(window.scrollY);
+  const onScroll = () => {
+    setViewHeight(window.innerHeight);
+    setScroll(window.scrollY);
+  };
+  useEffect(() => window.addEventListener("scroll", onScroll), []);
+  useEffect(() => setViewHeight(window.innerHeight), [window]);
+
   return (
-    <div className="App">
-      <BrowserRouter>
+    <ThemeProvider theme={darkTheme}>
+      <div className="App">
+        <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home viewHeight={viewHeight} scroll={scroll} />}></Route>
           <Route path="/form" element={<Form />}></Route>
@@ -26,8 +36,9 @@ function App() {
           <Route path="/account/login" element={<Login />}></Route>
           <Route path="/account/signup" element={<Signup />}></Route>
         </Routes>
-      </BrowserRouter>
-    </div>
+        </BrowserRouter>
+      </div>
+    </ThemeProvider>
   );
 }
 
