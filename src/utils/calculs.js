@@ -132,6 +132,19 @@ let mitigationEFImpFeedSheep=funcMitigationsImpFeedSheep(
   let mitigationEFAdditiveSheep= funcMitigationsAdditiveSheep(datasForm, reductionEF_coeff, EFSheep);
   console.log(mitigationEFAdditiveSheep);
 
+  
+   //Mitigation EF from LTBreedingDairy
+   let mitigationEFLTBreedingDairy= funcMitigationsLTBreedingDairy(datasForm, reductionEF_coeff, EFDairy, cattleDairy);
+   console.log(mitigationEFLTBreedingDairy);
+ 
+   //Mitigation EF from LTBreedingBeef
+   let mitigationEFLTBreedingBeef= funcMitigationsLTBreedingBeef(datasForm, reductionEF_coeff, EFBeef, cattleBeef);
+   console.log(mitigationEFLTBreedingBeef);
+ 
+   //Mitigation EF from LTBreeding Sheep
+   let mitigationEFLTBreedingSheep= funcMitigationsLTBreedingSheep(datasForm, reductionEF_coeff, EFSheep);
+   console.log(mitigationEFLTBreedingSheep);
+
 
   console.log("toutes les datas", datasForm);
   // console.log("date de fin", datasForm.endDate);
@@ -646,7 +659,7 @@ function funcMitigationsImpFeedDairy(
   //Dairy
   let numbDairyPractices = 0;
 
-  if (cattleDairy === 0) {
+  if (cattleDairy === 0 || datasForm.practices.practice_anim[3].selected===true) {
     numbDairyPractices = 0;
   } else {
     if (datasForm.practices.practice_anim[0].dairy_cow.all_of_them === true) {
@@ -694,7 +707,7 @@ function funcMitigationsImpFeedBeef(
 
 
   let numbBeefPractices = 0;
-  if (cattleBeef === 0) {
+  if (cattleBeef === 0 || datasForm.practices.practice_anim[3].selected===true) {
     numbBeefPractices = 0;
   } else {
     if (datasForm.practices.practice_anim[0].beef_cattle.all_of_them === true) {
@@ -740,7 +753,7 @@ function funcMitigationsImpFeedBeef(
   // Proportion of sheep included in the practice improved feeding
 
   let numbSheepPractices = 0;
-  if (datasForm.farm_sheeps_matur_numb.value === 0) {
+  if (datasForm.farm_sheeps_matur_numb.value === 0 || datasForm.practices.practice_anim[3].selected===true) {
     numbSheepPractices = 0;
   } else {
     if (datasForm.practices.practice_anim[0].sheeps.all_of_them === true) {
@@ -773,7 +786,7 @@ function funcMitigationsImpFeedBeef(
   }
 
 
-  // Function dairy: mitigations additive
+  // Function dairy: mitigations additives
 
 function funcMitigationsAdditiveDairy(datasForm, reductionEF_coeff, EFDairy, cattleDairy) {
   //Coeff
@@ -783,7 +796,7 @@ function funcMitigationsAdditiveDairy(datasForm, reductionEF_coeff, EFDairy, cat
 
   let numbDairyPracticesAdditive = 0;
 
-  if (cattleDairy === 0) {
+  if (cattleDairy === 0 || datasForm.practices.practice_anim[3].selected===true ) {
     numbDairyPracticesAdditive = 0;
   } else {
     if (datasForm.practices.practice_anim[1].dairy_cow.all_of_them === true) {
@@ -815,7 +828,7 @@ function funcMitigationsAdditiveDairy(datasForm, reductionEF_coeff, EFDairy, cat
   return [mitigatedEFDairyAdditive,mitigationPercentageDairyAdditive];
 }
 
-// Function beef: mitigations additive
+// Function beef: mitigations additives
 
 function funcMitigationsAdditiveBeef(datasForm, reductionEF_coeff, EFBeef, cattleBeef){
   
@@ -823,11 +836,11 @@ function funcMitigationsAdditiveBeef(datasForm, reductionEF_coeff, EFBeef, cattl
     let coeffAdditiveBeef = reductionEF_coeff[1].Spec_agents_and_diet_additives;
   
   
-    // Proportion of beef included in the practice additive
+    // Proportion of beef included in the practice additives
   
   
     let numbBeefPracticesAdditive = 0;
-    if (cattleBeef === 0) {
+    if (cattleBeef === 0 || datasForm.practices.practice_anim[3].selected===true ) {
       numbBeefPracticesAdditive = 0;
     } else {
       if (datasForm.practices.practice_anim[1].beef_cattle.all_of_them === true) {
@@ -844,7 +857,7 @@ function funcMitigationsAdditiveBeef(datasForm, reductionEF_coeff, EFBeef, cattl
       }
     }
   
-   // EF emissions mitigated by the practice improved feeding
+   // EF emissions mitigated by the practice additives
   
   
     let EFBeefAdditive= 0;
@@ -861,7 +874,7 @@ function funcMitigationsAdditiveBeef(datasForm, reductionEF_coeff, EFBeef, cattl
     return [mitigatedEFBeefAdditive,mitigationPercentageBeefAdditive]
 
 }
-// Function sheep: mitigations additive
+// Function sheep: mitigations additives
 
 
 function funcMitigationsAdditiveSheep(datasForm, reductionEF_coeff, EFSheep) {
@@ -869,10 +882,10 @@ function funcMitigationsAdditiveSheep(datasForm, reductionEF_coeff, EFSheep) {
       //Coeff
   let coeffAdditiveSheep = reductionEF_coeff[2].Spec_agents_and_diet_additives;
 
-  // Proportion of sheep included in the practice improved feeding
+  // Proportion of sheep included in the practice additives
 
   let numbSheepPracticesAdditive = 0;
-  if (datasForm.farm_sheeps_matur_numb.value === 0) {
+  if (datasForm.farm_sheeps_matur_numb.value === 0 || datasForm.practices.practice_anim[3].selected===true) {
     numbSheepPracticesAdditive = 0;
   } else {
     if (datasForm.practices.practice_anim[1].sheeps.all_of_them === true) {
@@ -888,7 +901,7 @@ function funcMitigationsAdditiveSheep(datasForm, reductionEF_coeff, EFSheep) {
     }
   }
 
-  //EF emissions from cattle portion concerned by improved feeding
+  //EF emissions from cattle portion concerned by additives
   let EFSheepAdditive = 0;
   if (datasForm.practices.practice_anim[1].sheeps.selected === true) {
     EFSheepAdditive = numbSheepPracticesAdditive * EFSheep * coeffAdditiveSheep;
@@ -902,3 +915,136 @@ function funcMitigationsAdditiveSheep(datasForm, reductionEF_coeff, EFSheep) {
 
   return [mitigatedEFSheepAdditive,mitigationPercentageSheepAdditive]
   }
+
+
+
+  // Function dairy: long term breeding
+
+function funcMitigationsLTBreedingDairy(datasForm, reductionEF_coeff, EFDairy, cattleDairy) {
+  //Coeff
+  let coeffLTBreedingDairy = reductionEF_coeff[0].longterm_change_and_breeding;
+;
+
+  // Proportion of animals included in the practice LTBreeding
+
+  let numbDairyPracticesLTBreeding= 0;
+
+  if (cattleDairy === 0 || datasForm.practices.practice_anim[3].selected===true ) {
+    numbDairyPracticesLTBreeding = 0;
+  } else {
+    if (datasForm.practices.practice_anim[2].dairy_cow.all_of_them === true) {
+      numbDairyPracticesLTBreeding = 1;
+    } else {
+      if (
+        datasForm.practices.practice_anim[2].dairy_cow.portion_of_them === true
+      ) {
+        let portionDairyLTBreeding =
+          datasForm.practices.practice_anim[2].dairy_cow.portion_numb / 100;
+        numbDairyPracticesLTBreeding = portionDairyLTBreeding;
+      }
+    }
+  }
+  
+  
+  //EF emissions from cattle portion concerned by LTBreeding
+  let EFDairyLTBreeding= 0;
+  if (datasForm.practices.practice_anim[2].dairy_cow.selected === true) {
+    EFDairyLTBreeding = numbDairyPracticesLTBreeding * EFDairy * coeffLTBreedingDairy;
+  } else {
+    EFDairyLTBreeding = 0;
+  }
+  // Mitigation percentage
+  let mitigationPercentageDairyLTBreeding = (EFDairyLTBreeding * 100) / EFDairy;
+  // Total EF emissions after mitigation
+  let mitigatedEFDairyLTBreeding = EFDairyLTBreeding+ (1 - numbDairyPracticesLTBreeding) * EFDairy;
+
+  return [mitigatedEFDairyLTBreeding,mitigationPercentageDairyLTBreeding];
+}
+
+// Function beef: mitigations Long Term Breeding
+
+function funcMitigationsLTBreedingBeef(datasForm, reductionEF_coeff, EFBeef, cattleBeef){
+  
+    //Coeff
+    let coeffLTBreedingBeef = reductionEF_coeff[1].longterm_change_and_breeding;
+  
+  
+    // Proportion of beef included in the practice LTBreeding
+  
+  
+    let numbBeefPracticesLTBreeding = 0;
+    if (cattleBeef === 0 || datasForm.practices.practice_anim[3].selected===true) {
+      numbBeefPracticesLTBreeding = 0;
+    } else {
+      if (datasForm.practices.practice_anim[2].beef_cattle.all_of_them === true) {
+        numbBeefPracticesLTBreeding = 1;
+      } else {
+        if (
+          datasForm.practices.practice_anim[2].beef_cattle.portion_of_them ===
+          true
+        ) {
+          let portionBeefLTBreeding = datasForm.practices.practice_anim[2].beef_cattle.portion_numb / 100;
+          numbBeefPracticesLTBreeding= portionBeefLTBreeding;
+        }
+      }
+    }
+  
+   // EF emissions mitigated by the practice LTBreeding
+  
+  
+    let EFBeefLTBreeding= 0;
+    if (datasForm.practices.practice_anim[2].beef_cattle.selected === true) {
+      EFBeefLTBreeding = numbBeefPracticesLTBreeding* EFBeef * coeffLTBreedingBeef;
+    } else {
+      EFBeefLTBreeding = 0;
+    }
+    // Mitigation percentage
+    let mitigationPercentageBeefLTBreeding = (EFBeefLTBreeding* 100) / EFBeef;
+    // Total EF emissions after mitigation
+    let mitigatedEFBeefLTBreeding = EFBeefLTBreeding + (1 - numbBeefPracticesLTBreeding) * EFBeef;
+  
+    return [mitigatedEFBeefLTBreeding,mitigationPercentageBeefLTBreeding]
+
+}
+// Function sheep: mitigations LTBreeding
+
+
+function funcMitigationsLTBreedingSheep(datasForm, reductionEF_coeff, EFSheep) {
+
+      //Coeff
+  let coeffLTBreedingSheep = reductionEF_coeff[2].longterm_change_and_breeding;
+
+  // Proportion of sheep included in the practice LTBreeding
+
+  let numbSheepPracticesLTBreeding = 0;
+  if (datasForm.farm_sheeps_matur_numb.value === 0 || datasForm.practices.practice_anim[3].selected===true ) {
+    numbSheepPracticesLTBreeding = 0;
+  } else {
+    if (datasForm.practices.practice_anim[2].sheeps.all_of_them === true) {
+      numbSheepPracticesLTBreeding = 1;
+    } else {
+      if (
+        datasForm.practices.practice_anim[2].sheeps.portion_of_them === true
+      ) {
+        let portionSheepLTBreeding =
+          datasForm.practices.practice_anim[2].sheeps.portion_numb / 100;
+        numbSheepPracticesLTBreeding = portionSheepLTBreeding;
+      }
+    }
+  }
+
+  //EF emissions from cattle portion concerned by LTBreeding
+  let EFSheepLTBreeding = 0;
+  if (datasForm.practices.practice_anim[2].sheeps.selected === true) {
+    EFSheepLTBreeding = numbSheepPracticesLTBreeding * EFSheep * coeffLTBreedingSheep;
+  } else {
+    EFSheepLTBreeding = 0;
+  }
+  // Mitigation percentage
+  let mitigationPercentageSheepLTBreeding = (EFSheepLTBreeding * 100) / EFSheep;
+  // Total EF emissions after mitigation
+  let mitigatedEFSheepLTBreeding = EFSheepLTBreeding + (1 - numbSheepPracticesLTBreeding) * EFSheep;
+
+  return [mitigatedEFSheepLTBreeding,mitigationPercentageSheepLTBreeding]
+  }
+
