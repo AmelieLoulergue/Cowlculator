@@ -17,7 +17,7 @@ function Logger() {
             <Lottie animationData={fandr} loop="true"/>
             <div className="Titles">
                 <h1>Take part of the project.</h1>
-                <p>We really appreciate your comitment, and we are glade that you're interested in our project. <br></br>But before going further, do we already know each other?</p>
+                <p>We really appreciate your commitment, and we are glade that you're interested in our project. <br></br>But before going further, do we already know each other?</p>
             </div>
             <div className="choice">
               <Link to={"signup"} className="register">Register</Link>

@@ -1,38 +1,37 @@
 import * as React from "react";
 import './Login.css';
-import account from '../../assets/svg/profile.svg';
-import lock from '../../assets/svg/lock.svg';
-import logo from '../../assets/img/logo.png';
+import './Logger.css';
+import back_arrow from '../../assets/svg/back-arrow.svg';
+import { Link } from "react-router-dom";
 
 import Bg from '.././Bg';
 
 function Login() {
     return (
       <>
-        <div className="container center" id="login">
-            <img src={logo}></img>
-            <div className="login">
-                <h1>Welcome back ! &#128075;</h1>
-                <form id="login-form">
-                    <div>
-                        <label htmlFor="mail"><img src={account}></img></label>
-                        <input id="mail" type='email'></input>
-                    </div>
-
-                    <div>
-                        <label htmlFor="password"><img src={lock}></img></label>
-                        <input id="password" type='password'></input>
-                    </div>
-
-                    <button className="btn" type="submit">Login</button>
-                </form>
-                <h2>Already have an account ? <b>Sign up</b></h2>
+      <div className="center-flex">
+        <div className="navbar"><Link to="../account"><img src={back_arrow}></img></Link></div>
+        <div className="content">
+            <div className="title">
+                <h1>Let's sign in.</h1>
+                <p>It's great to see you back !
+                    <br></br>
+                    Psst, it's a secret but we missed you 
+                </p>
             </div>
-            <div className="registrer">
-                
-            </div>
-        
+
+            <form>
+                <div className="input">
+                    <input type="email" placeholder="Email"></input>
+                    <input type="password" placeholder="Password"></input>
+                </div>
+                <div className="submit">
+                    <p>Don't have an account ? <Link to="register"><b>Register</b></Link></p>
+                    <button type="submit" className="btn">Sign in</button>
+                </div>
+            </form>
         </div>
+      </div>
         <Bg></Bg>
       </>
     );
