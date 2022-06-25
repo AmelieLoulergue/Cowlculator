@@ -20,9 +20,11 @@
     overflow: hidden;
 }
 #logger .Titles {
-    margin-bottom: 10vh;
-    max-width: 60vw;
+    margin-bottom: 5vh;
+    max-width: 65vw;
 }
+#logger .Titles h1 {font-size: 2.3rem;}
+#logger .Titles p {font-size: 1.05rem; text-align: justify;}
 #logger svg {
     height: 50vh !important;
     width: auto !important;
@@ -69,7 +71,7 @@ form {
     justify-content: space-between;
     flex-direction: column;
 }
-form input {
+form input:not([type='checkbox']):not([type='radio']) {
     width: calc(100% - 30px);
     border-radius: 15px;
     padding: 15px;
@@ -78,12 +80,14 @@ form input {
     border: solid 1px rgb(35 35 35);
     margin: 10px auto;
 }
-form input:focus-visible {
+form input:focus-visible, .borderGradient {
     background: 
         linear-gradient(rgb(21 20 26), rgb(21 20 26)) padding-box,
         linear-gradient(315deg, #874FF5 0%, #2C60F5 100%) border-box;
     border: 2px solid transparent;
     outline: none;
+    transform: translate(-1px, -1px);
+    margin: 9px 0;
 }
 .content {
     display: flex;
@@ -102,17 +106,19 @@ form input:focus-visible {
     font-size: 3rem;
 }
 .content .title p {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 200;
 }
 form .btn {
     width: 100%;
+    margin: 20px auto;
 }
 form .input {
     margin-top: 10vh;
 }
 form .submit {
     margin-top: auto;
+    text-align: center;
 }
 form .submit p {
     color: rgb(160 160 160);
@@ -120,4 +126,18 @@ form .submit p {
 form .submit a {
     color: rgb(220 220 220);
     text-decoration: none;
+}
+
+.eye-pass {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 45px;
+    margin: 10px;
+    cursor: pointer;
+    opacity: .5;
+    transition: .2s;
+}
+.eye-pass:hover {
+    opacity: 1;
 }

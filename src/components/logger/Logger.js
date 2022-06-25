@@ -20,7 +20,7 @@ function Logger() {
                 <p>We really appreciate your commitment, and we are glade that you're interested in our project. <br></br>But before going further, do we already know each other?</p>
             </div>
             <div className="choice">
-              <Link to={"signup"} className="register">Register</Link>
+              <Link to={"register"} className="register">Register</Link>
               <Link to={"login"} className="signin">Sign in</Link>
             </div>
         </div>

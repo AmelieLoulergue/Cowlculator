@@ -5,7 +5,7 @@ import Form from "./components/Form";
 import Getstarted from "./components/Getstarted";
 import Account from "./components/logger/Logger";
 import Login from "./components/logger/Login";
-import Signup from "./components/logger/Signup";
+import Register from "./components/logger/Signup";
 import { useState, useEffect } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
@@ -34,7 +34,7 @@ function App() {
           <Route path="/getstarted" element={<Getstarted />}></Route>
           <Route path="/account" element={<Account />}></Route>
           <Route path="/account/login" element={<Login />}></Route>
-          <Route path="/account/signup" element={<Signup />}></Route>
+          <Route path="/account/register" element={<Register />}></Route>
         </Routes>
         </BrowserRouter>
       </div>

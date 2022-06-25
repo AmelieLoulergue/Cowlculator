@@ -26,7 +26,7 @@ function Login() {
                     <input type="password" placeholder="Password"></input>
                 </div>
                 <div className="submit">
-                    <p>Don't have an account ? <Link to="register"><b>Register</b></Link></p>
+                    <p>Don't have an account ? <Link to="../account/register"><b>Register</b></Link></p>
                     <button type="submit" className="btn">Sign in</button>
                 </div>
             </form>

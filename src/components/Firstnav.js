@@ -9,7 +9,7 @@ function Firstnav({viewHeight, scroll}) {
     function onClickNavigate(e) {
         e.preventDefault();
 
-        navigate('/getstarted')
+        navigate('/account')
     }
         return (
             <>
