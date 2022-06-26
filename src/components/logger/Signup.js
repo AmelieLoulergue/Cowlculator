@@ -38,6 +38,13 @@ function Register() {
     const showPassConf = () => {document.getElementById('passwordConfirm').type = "text"; document.getElementById('passwordConfirm').classList.add('borderGradient'); passConf.current.goToAndPlay(0, true)}
     const hidePassConf = () => {document.getElementById('passwordConfirm').type = "password"; document.getElementById('passwordConfirm').classList.remove('borderGradient')}
     
+    var lastChecked;
+    const radioCheck = (e) => {
+
+            e.target.parentElement.classList.add('checkedRadio')
+            if(lastChecked) {lastChecked.parentElement.classList.remove('checkedRadio')}
+            lastChecked = e.target
+    }
     return (
       <>
       <div className="center-flex">
@@ -75,16 +82,16 @@ function Register() {
                     <div className="typeChoose">
                         <div className="typeChoose_type">
                             <label htmlFor="farmer">Farmer</label>
-                            <input name="type" type="radio" id="farmer"></input>
+                            <input name="type" type="radio" id="farmer" onChange={radioCheck}></input>
                         </div>
                         <div className="typeChoose_type">
                             <label htmlFor="researcher">Researcher</label>
-                            <input name="type" type="radio" id="researcher"></input>
+                            <input name="type" type="radio" id="researcher" onChange={radioCheck}></input>
                         </div>
                     </div>
                 </div>
                 <div className="submit">
-                    <p>Already have an account ? <Link to="../login"><b>Log in</b></Link></p>
+                    <p>Already have an account ? <Link to="../account/login"><b>Log in</b></Link></p>
                     <button type="submit" className="btn">Register</button>
                 </div>
             </form>

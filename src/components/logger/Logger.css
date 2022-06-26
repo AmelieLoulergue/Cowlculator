@@ -83,11 +83,11 @@ form input:not([type='checkbox']):not([type='radio']) {
 form input:focus-visible, .borderGradient {
     background: 
         linear-gradient(rgb(21 20 26), rgb(21 20 26)) padding-box,
-        linear-gradient(315deg, #874FF5 0%, #2C60F5 100%) border-box;
-    border: 2px solid transparent;
+        linear-gradient(315deg, #874FF5 0%, #2C60F5 100%) border-box !important;
+    border: 2px solid transparent !important;
     outline: none;
     transform: translate(-1px, -1px);
-    margin: 9px 0;
+    margin: 9px 0 !important;
 }
 .content {
     display: flex;
@@ -96,7 +96,7 @@ form input:focus-visible, .borderGradient {
     align-items: center;
     align-content: center;
     margin: auto;
-    height: 90vh;
+    min-height: 90vh;
     max-width: 80vw;
 }
 .content .title {
@@ -111,10 +111,10 @@ form input:focus-visible, .borderGradient {
 }
 form .btn {
     width: 100%;
-    margin: 20px auto;
+    margin: 20px auto calc(5vh + 0.67em) auto;
 }
 form .input {
-    margin-top: 10vh;
+    margin-top: 8vh;
 }
 form .submit {
     margin-top: auto;

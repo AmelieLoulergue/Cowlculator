@@ -3,10 +3,17 @@ import './Login.css';
 import './Logger.css';
 import back_arrow from '../../assets/svg/back-arrow.svg';
 import { Link } from "react-router-dom";
+import { useRef } from "react";
+import Lottie from "lottie-react";
+import eyeBlink from "../../assets/anim/eye-blink.json";
 
 import Bg from '.././Bg';
 
 function Login() {
+  const pass = useRef();
+
+    const showPass = () => {document.getElementById('password').type = "text"; document.getElementById('password').classList.add('borderGradient'); pass.current.goToAndPlay(0, true)}
+    const hidePass = () => {document.getElementById('password').type = "password"; document.getElementById('password').classList.remove('borderGradient')}
     return (
       <>
       <div className="center-flex">
@@ -23,7 +30,10 @@ function Login() {
             <form>
                 <div className="input">
                     <input type="email" placeholder="Email"></input>
-                    <input type="password" placeholder="Password"></input>
+                    <div style={{position: 'relative'}}>
+                        <input type="password" placeholder="Password" id="password"></input>
+                        <Lottie lottieRef={pass} autoplay={false} animationData={eyeBlink} loop={false} onMouseDown={showPass} onMouseUp={hidePass} className="eye-pass" />
+                    </div>
                 </div>
                 <div className="submit">
                     <p>Don't have an account ? <Link to="../account/register"><b>Register</b></Link></p>

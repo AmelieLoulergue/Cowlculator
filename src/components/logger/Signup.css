@@ -36,7 +36,7 @@
     padding: 15px 20px;
     cursor: pointer;
 }
-.typeChoose_type:hover {
+.typeChoose_type:hover, .checkedRadio {
     transform: scale(1.05);
     background-color: rgba(21, 20, 26, 0);
     transition: .2s;
