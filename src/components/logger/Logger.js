@@ -14,7 +14,7 @@ function Logger() {
           <Link to={"../"}><img src={home}></img></Link>
         </div>
         <div id="logger">
-            <Lottie animationData={fandr} loop="true"/>
+            <Lottie animationData={fandr} loop={true}/>
             <div className="Titles">
                 <h1>Take part of the project.</h1>
                 <p>We really appreciate your commitment, and we are glade that you're interested in our project. <br></br>But before going further, do we already know each other?</p>

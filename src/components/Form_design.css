@@ -1,0 +1,31 @@
+.formChat .beginin svg {
+    height: 50vh !important;
+    /* width: fit-content !important; */
+}
+.formChat .beginin img {
+    max-height: 50px;
+}
+.formChat .beginin {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    min-height: 100vh;
+    justify-content: space-between;
+}
+.formChat .beginin h3 {
+    color: rgb(180,180,180);
+    font-size: 1.2rem;
+    margin-bottom: 0;
+}
+.formChat .beginin h1 {
+    font-size: 3.5rem;
+    font-weight: 400;
+    margin-top: 0;
+}
+.formChat .beginin .btns {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5vh auto;
+    width: 80vw;
+}

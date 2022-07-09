@@ -60,6 +60,16 @@ function Register() {
 
             <form>
                 <div className="input">
+                    <div className="typeChoose">    
+                        <div className="typeChoose_type">
+                            <label htmlFor="farmer">Farmer</label>
+                            <input name="type" type="radio" id="farmer" onChange={radioCheck}></input>
+                        </div>
+                        <div className="typeChoose_type">
+                            <label htmlFor="researcher">Researcher</label>
+                            <input name="type" type="radio" id="researcher" onChange={radioCheck}></input>
+                        </div>
+                    </div>
                     <input type="email" placeholder="Email"></input>
                     <div style={{position: 'relative'}}>
                         <input type="password" placeholder="Password" onKeyUp={passChange} id="password"></input>
@@ -79,16 +89,6 @@ function Register() {
                         <Lottie lottieRef={passConf} autoplay={false} animationData={eyeBlink} loop={false} onMouseDown={showPassConf} onMouseUp={hidePassConf} className="eye-pass" />
                     </div>
                     <h2>I am a</h2>
-                    <div className="typeChoose">
-                        <div className="typeChoose_type">
-                            <label htmlFor="farmer">Farmer</label>
-                            <input name="type" type="radio" id="farmer" onChange={radioCheck}></input>
-                        </div>
-                        <div className="typeChoose_type">
-                            <label htmlFor="researcher">Researcher</label>
-                            <input name="type" type="radio" id="researcher" onChange={radioCheck}></input>
-                        </div>
-                    </div>
                 </div>
                 <div className="submit">
                     <p>Already have an account ? <Link to="../account/login"><b>Log in</b></Link></p>
