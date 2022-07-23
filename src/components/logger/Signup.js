@@ -60,6 +60,7 @@ function Register() {
 
             <form>
                 <div className="input">
+                <h2>I am a</h2>
                     <div className="typeChoose">    
                         <div className="typeChoose_type">
                             <label htmlFor="farmer">Farmer</label>
@@ -88,7 +89,6 @@ function Register() {
                         <input type="password" placeholder="Confirm password" id="passwordConfirm"></input>
                         <Lottie lottieRef={passConf} autoplay={false} animationData={eyeBlink} loop={false} onMouseDown={showPassConf} onMouseUp={hidePassConf} className="eye-pass" />
                     </div>
-                    <h2>I am a</h2>
                 </div>
                 <div className="submit">
                     <p>Already have an account ? <Link to="../account/login"><b>Log in</b></Link></p>
