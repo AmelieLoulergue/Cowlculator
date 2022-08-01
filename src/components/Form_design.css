@@ -1,178 +1,187 @@
 /* First page for beginin form completion */
 .formChat .beginin svg {
-    height: 50vh !important;
-    /* width: fit-content !important; */
+  height: 50vh !important;
+  /* width: fit-content !important; */
 }
 .formChat .beginin img {
-    max-height: 50px;
+  max-height: 50px;
 }
 .formChat .beginin {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    min-height: 100vh;
-    justify-content: space-between;
-    display: none;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  min-height: 100vh;
+  justify-content: space-between;
+  display: none;
 }
 .formChat .beginin h3 {
-    color: rgb(180,180,180);
-    font-size: 1.2rem;
-    margin-bottom: 0;
+  color: rgb(180, 180, 180);
+  font-size: 1.2rem;
+  margin-bottom: 0;
 }
 .formChat .beginin h1 {
-    font-size: 3.5rem;
-    font-weight: 400;
-    margin-top: 0;
+  font-size: 3.5rem;
+  font-weight: 400;
+  margin-top: 0;
 }
 .formChat .beginin .btns {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 5vh auto;
-    width: 80vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5vh auto;
+  width: 80vw;
 }
-
-
 
 /* Form questions section */
 .fadeInBottom {
-    animation: fadeInBottom 1s ease forwards;
-    opacity: 0;
+  animation: fadeInBottom 1s ease forwards;
+  opacity: 0;
 }
 @keyframes fadeInBottom {
-    from {opacity: 0; transform: translateY(20px);}
-    to {opacity: 1; transform: translateY(0px);}
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
 }
-.delay-05 {animation-delay: 0.5s;}
-.delay-1 {animation-delay: 1s;}
-.delay-15 {animation-delay: 1.5s;}
+.delay-05 {
+  animation-delay: 0.5s;
+}
+.delay-1 {
+  animation-delay: 1s;
+}
+.delay-15 {
+  animation-delay: 1.5s;
+}
 
 .formChat {
-    min-height: 100vh;
+  min-height: 100vh;
 }
 .formChat .questions {
-    display: flex;
-    flex-direction: column;
-    max-width: 80%;
-    margin: auto;
-    min-height: 90vh;
-    margin-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+  margin: auto;
+  min-height: 90vh;
+  margin-bottom: 100px;
 }
 
-.formChat .ask, .formChat .response, .formChat .inputField {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-content: center;
-    align-items: center;
-    column-gap: 20px;
+.formChat .ask,
+.formChat .response,
+.formChat .inputField {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  align-items: center;
+  column-gap: 20px;
 }
 .formChat .ask {
-    justify-content: flex-start;
+  justify-content: flex-start;
 }
 .formChat .response {
-    justify-content: flex-end;
+  justify-content: flex-end;
 }
 
 /* Navbar section */
 .formChat .questions .nav {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .formChat .questions .nav h1 {
-    text-transform: uppercase;
-    font-size: 1.8rem;
-    text-align: center;
+  text-transform: uppercase;
+  font-size: 1.8rem;
+  text-align: center;
 }
 .formChat .questions .nav img {
-    height: 40px;
+  height: 40px;
 }
 
 /* Question section */
 .formChat .ask {
-    background-color: rgb(21 20 26);
-    border-radius: 0 15px 15px 15px;
-    box-shadow: 0 10px 20px rgb(0 0 0 / 47%);
-    width: fit-content;
-    background: 
-        linear-gradient(rgb(21 20 26), rgb(21 20 26)) padding-box,
-        linear-gradient(315deg, #874FF5 0%, #2C60F5 100%) border-box !important;
-    border: 1px solid transparent !important;
-    margin: 15px 0;
+  background-color: rgb(21 20 26);
+  border-radius: 0 15px 15px 15px;
+  box-shadow: 0 10px 20px rgb(0 0 0 / 47%);
+  width: fit-content;
+  background: linear-gradient(rgb(21 20 26), rgb(21 20 26)) padding-box,
+    linear-gradient(315deg, #874ff5 0%, #2c60f5 100%) border-box !important;
+  border: 1px solid transparent !important;
+  margin: 15px 0;
 }
 .formChat .ask p {
-    padding: 15px;
-    font-size: 1.1rem;
+  padding: 15px;
+  font-size: 1.1rem;
 }
-
 
 /* Response section */
 .formChat .response {
-    background: linear-gradient(315deg, #874FF5 0%, #2C60F5 100%);
-    width: fit-content;
-    float: right;
-    margin: 15px 0 15px auto;
-    border-radius: 15px 0 15px 15px;
-    
-    box-shadow: 0 10px 20px rgb(0 0 0 / 20%);
+  background: linear-gradient(315deg, #874ff5 0%, #2c60f5 100%);
+  width: fit-content;
+  float: right;
+  margin: 15px 0 15px auto;
+  border-radius: 15px 0 15px 15px;
+
+  box-shadow: 0 10px 20px rgb(0 0 0 / 20%);
 }
-.formChat .response p {
-    padding: 15px;
-    font-size: 1.1rem;
+.formChat .response div {
+  padding: 15px;
+  font-size: 1.1rem;
 }
 .formChat .response p:focus-visible {
-    outline: none;
+  outline: none;
 }
 .following-response {
-    margin-top: -10px !important;
+  margin-top: -10px !important;
 }
 
 /* Send respopnse section */
 .formChat .inputField {
-    position: fixed;
-    bottom: 0;
-    padding: 20px 0;
-    border-radius: 15px 15px 0 0;
-    background-color: rgba(15, 15, 15, 0.432);
-    width: 100%;
-    left: 0;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    
-    box-shadow: 0 -10px 10px rgb(0 0 0 / 20%);
+  position: fixed;
+  bottom: 0;
+  padding: 20px 0;
+  border-radius: 15px 15px 0 0;
+  background-color: rgba(15, 15, 15, 0.432);
+  width: 100%;
+  left: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  box-shadow: 0 -10px 10px rgb(0 0 0 / 20%);
 }
 .formChat .inputField .btn img {
-    height: 50px;
-    width: auto;
+  height: 50px;
+  width: auto;
 }
 .formChat .inputField .btn {
-    padding: 0;
-    margin: auto;
+  padding: 0;
+  margin: auto;
 }
 .formChat .inputField .response-input input {
-    border-radius: 15px;
-    padding: 15px;
-    background: rgb(21 20 26);
-    color: white;
-    border: solid 1px rgb(35 35 35);
-    height: 21px;
-    box-shadow: 0 10px 20px rgb(0 0 0 / 47%);
-    width: 45vw;
-    transition: .5s ease;
+  border-radius: 15px;
+  padding: 15px;
+  background: rgb(21 20 26);
+  color: white;
+  border: solid 1px rgb(35 35 35);
+  height: 21px;
+  box-shadow: 0 10px 20px rgb(0 0 0 / 47%);
+  width: 45vw;
+  transition: 0.5s ease;
 }
 .formChat .inputField .response-input input:focus-visible {
-    background: 
-        linear-gradient(rgb(21 20 26), rgb(21 20 26)) padding-box,
-        linear-gradient(315deg, #874FF5 0%, #2C60F5 100%) border-box !important;
-    border: 2px solid transparent !important;
-    outline: none;
-    transform: translate(-1px, -1px);
-    margin: -1px -1px -1px 0;
-    width: 75vw;
-    transition: all .5s ease;
+  background: linear-gradient(rgb(21 20 26), rgb(21 20 26)) padding-box,
+    linear-gradient(315deg, #874ff5 0%, #2c60f5 100%) border-box !important;
+  border: 2px solid transparent !important;
+  outline: none;
+  transform: translate(-1px, -1px);
+  margin: -1px -1px -1px 0;
+  width: 75vw;
+  transition: all 0.5s ease;
 }
 .formChat .inputField .response-input {
-    margin: auto;
+  margin: auto;
 }

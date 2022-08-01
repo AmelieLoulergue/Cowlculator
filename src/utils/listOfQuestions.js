@@ -5,13 +5,13 @@ const listOfQuestions = {
       questions: [
         {
           id: "start_date",
-          question: "Start date",
-          formInput: { type: "date" },
+          question: "Choose a start date for the period study :",
+          formInput: { type: "date", label: "You choosed :" },
           userValue: Date.now(),
         },
         {
           id: "end_date",
-          question: "End date",
+          question: "Choose a end date for the period study :",
           formInput: { type: "date" },
           userValue: Date.now(),
         },
@@ -87,7 +87,7 @@ const listOfQuestions = {
       bloc_id: "fuel",
       questions: [
         {
-          id: "vehicles",
+          id: "vehicles_type",
           question:
             "Select all the vehicles used on your production, transformation, distribution business area:",
           formInput: {
@@ -148,14 +148,14 @@ const listOfQuestions = {
               },
               sub_questions: [
                 {
-                  id: "gaso_cons",
-                  question: "Gasoline car consumption",
+                  id: "gasoline_cons",
+                  question: "Gasoline truck consumption",
                   formInput: { type: "number" },
                   userValue: { value: 0, unit: "Gal" },
                 },
                 {
-                  id: "dies_cons",
-                  question: "Diesel car consumption",
+                  id: "diesel_cons",
+                  question: "Diesel truck consumption",
                   formInput: { type: "number" },
                   userValue: { value: 0, unit: "Gal" },
                 },
@@ -177,14 +177,14 @@ const listOfQuestions = {
               },
               sub_questions: [
                 {
-                  id: "gaso_cons",
-                  question: "Gasoline car consumption",
+                  id: "gasoline_cons",
+                  question: "Gasoline tractor consumption",
                   formInput: { type: "number" },
                   userValue: { value: 0, unit: "Gal" },
                 },
                 {
-                  id: "dies_cons",
-                  question: "Diesel car consumption",
+                  id: "diesel_cons",
+                  question: "Diesel tractor consumption",
                   formInput: { type: "number" },
                   userValue: { value: 0, unit: "Gal" },
                 },
@@ -446,10 +446,11 @@ const listOfQuestions = {
                       { value: "sq feet", selected: false },
                     ],
                     value: 0,
+                    organic: true,
                   },
                   sub_questions: [
                     {
-                      id: "organic",
+                      id: "organic_grown",
                       question: "Is it organically grown ?",
                       formInput: { type: "checkbox" },
                       userValue: false,
@@ -466,10 +467,11 @@ const listOfQuestions = {
                       { value: "sq feet", selected: false },
                     ],
                     value: 0,
+                    organic: false,
                   },
                   sub_questions: [
                     {
-                      id: "organic",
+                      id: "organic_grown",
                       question: "Is it organically grown ?",
                       formInput: { type: "checkbox" },
                       userValue: false,
@@ -486,10 +488,11 @@ const listOfQuestions = {
                       { value: "sq feet", selected: false },
                     ],
                     value: 0,
+                    organic: false,
                   },
                   sub_questions: [
                     {
-                      id: "organic",
+                      id: "organic_grown",
                       question: "Is it organically grown ?",
                       formInput: { type: "checkbox" },
                       userValue: false,
@@ -506,10 +509,11 @@ const listOfQuestions = {
                       { value: "sq feet", selected: false },
                     ],
                     value: 0,
+                    organic: false,
                   },
                   sub_questions: [
                     {
-                      id: "organic",
+                      id: "organic_grown",
                       question: "Is it organically grown ?",
                       formInput: { type: "checkbox" },
                       userValue: false,
@@ -526,10 +530,11 @@ const listOfQuestions = {
                       { value: "sq feet", selected: false },
                     ],
                     value: 0,
+                    organic: false,
                   },
                   sub_questions: [
                     {
-                      id: "organic",
+                      id: "organic_grown",
                       question: "Is it organically grown ?",
                       formInput: { type: "checkbox" },
                       userValue: false,
@@ -546,10 +551,11 @@ const listOfQuestions = {
                       { value: "sq feet", selected: false },
                     ],
                     value: 0,
+                    organic: false,
                   },
                   sub_questions: [
                     {
-                      id: "organic",
+                      id: "organic_grown",
                       question: "Is it organically grown ?",
                       formInput: { type: "checkbox" },
                       userValue: false,
@@ -580,65 +586,6 @@ const listOfQuestions = {
                 poultry: false,
                 american_bison: false,
               },
-            },
-            {
-              id: "trucks_type",
-              question: "For the truck(s), do you use :",
-              formInput: {
-                type: "select",
-                options: "multiple",
-                none: false,
-                both: true,
-              },
-              userValue: {
-                gasoline: false,
-                diesel: false,
-                both: false,
-              },
-              sub_questions: [
-                {
-                  id: "plants_farming",
-                  question:
-                    "What plant(s) do you farm ? NB: in the time frame reported.",
-                  formInput: { type: "number" },
-                  userValue: { value: 0, unit: "Gal" },
-                },
-                {
-                  id: "dies_cons",
-                  question: "Diesel car consumption",
-                  formInput: { type: "number" },
-                  userValue: { value: 0, unit: "Gal" },
-                },
-              ],
-            },
-            {
-              id: "tractors_type",
-              question: "For the tractor(s), do you use :",
-              formInput: {
-                type: "select",
-                options: "multiple",
-                none: false,
-                both: true,
-              },
-              userValue: {
-                gasoline: false,
-                diesel: false,
-                both: false,
-              },
-              sub_questions: [
-                {
-                  id: "gaso_cons",
-                  question: "Gasoline car consumption",
-                  formInput: { type: "number" },
-                  userValue: { value: 0, unit: "Gal" },
-                },
-                {
-                  id: "dies_cons",
-                  question: "Diesel car consumption",
-                  formInput: { type: "number" },
-                  userValue: { value: 0, unit: "Gal" },
-                },
-              ],
             },
           ],
         },

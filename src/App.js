@@ -17,15 +17,17 @@ const darkTheme = createTheme({
   },
 });
 function App() {
+  const [numberOfResponse, setNumberOfResponse] = useState(0);
   const [viewHeight, setViewHeight] = useState(window.innerHeight);
   const [scroll, setScroll] = useState(window.scrollY);
   const onScroll = () => {
     setViewHeight(window.innerHeight);
     setScroll(window.scrollY);
   };
-  useEffect(() => window.addEventListener("scroll", onScroll), []);
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+  }, []);
   useEffect(() => setViewHeight(window.innerHeight), [window]);
-
   return (
     <ThemeProvider theme={darkTheme}>
       <div className="App">
@@ -36,7 +38,13 @@ function App() {
               element={<Home viewHeight={viewHeight} scroll={scroll} />}
             ></Route>
             <Route path="/form" element={<Form />}></Route>
-            <Route path="/newform" element={<NewForm />}></Route>
+            <Route
+              path="/newform"
+              element={
+                <NewForm
+                />
+              }
+            ></Route>
             <Route path="/form_design" element={<Form_design />}></Route>
             <Route path="/getstarted" element={<Getstarted />}></Route>
             <Route path="/account" element={<Account />}></Route>
