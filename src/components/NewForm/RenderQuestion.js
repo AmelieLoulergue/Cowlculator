@@ -17,6 +17,7 @@ const RenderQuestion = ({
   totalCounterBloc,
   numberOfResponseBloc,
   setNumberOfResponseBloc,
+  sup_question,
 }) => {
   const [blocs, allBlocs] = useState([]);
   const [questions, allQuestions] = useState([]);
@@ -24,6 +25,11 @@ const RenderQuestion = ({
   const [sendInputs, allSendInputs] = useState([]);
   const [responses, allResponses] = useState([]);
   const [displayButtonNextBloc, setDisplayButtonNextBloc] = useState(false);
+  const [displayQuestion, setDisplayQuestion] = useState("is-hidden");
+  // useEffect(() => {
+  //   if()
+  // }, []);
+  console.log(displayQuestion);
   const [numberOfResponseBlocMax, setNumberOfResponseBlocMax] = useState(
     counterBlocLimits.find(
       (element) => Number(element.id.split("bloc_")[1]) === bloc_id
@@ -74,7 +80,7 @@ const RenderQuestion = ({
     );
   }, [questions, numberOfResponse]);
   return (
-    <>
+    <div className={displayQuestion ? "" :"is-hidden"}>
       <div
         className={numberOfResponse <= totalCounterBloc ? "ask" : "is-hidden"}
         id={`ask_${counter}`}

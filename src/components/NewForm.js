@@ -24,8 +24,6 @@ const NewForm = () => {
       counterQuestions({ bloc, bloc_index })
     )
   );
-
-  // console.log({ numberOfResponse },{ totalCounterBloc });
   const startForm = () => {};
   useEffect(() => {
     const sum = counterBlocLimits
@@ -34,65 +32,15 @@ const NewForm = () => {
         return accumulator + object.counter;
       }, 0);
     setTotalCounterBloc(sum);
-    console.log(
-      counterBlocLimits.find(
-        (element) => Number(element.id.split("bloc_")[1]) === blocIndex
-      ),
-      { blocIndex },
-      { numberOfResponse },
-      { totalCounterBloc }
-    );
   }, [numberOfResponse, blocIndex]);
   useEffect(() => {
     if (blocIndex !== 0) {
-      console.log(
-        "change number of Response",
-        counterBlocLimits.find(
-          (element) => Number(element.id.split("bloc_")[1]) === blocIndex - 1
-        ).counter
-      );
-      // setNumberOfResponse(
-      //   counterBlocLimits.find(
-      //     (element) => Number(element.id.split("bloc_")[1]) === blocIndex - 1
-      //   ).counter
-      // );
       setNumberOfResponseBloc(0);
     }
   }, [totalCounterBloc]);
 
   return (
     <div className="">
-      {/* TO DELETE */}
-      <button
-        onClick={() => {
-          setNumberOfResponse(numberOfResponse + 1);
-        }}
-      >
-        numberOfResponse +
-      </button>
-      <button
-        onClick={() => {
-          setNumberOfResponse(numberOfResponse - 1);
-        }}
-      >
-        numberOfResponse -
-      </button>
-      <button
-        onClick={() => {
-          setBlocIndex(blocIndex + 1);
-          console.log(blocIndex);
-        }}
-      >
-        bloc +
-      </button>
-      <button
-        onClick={() => {
-          setBlocIndex(blocIndex - 1);
-        }}
-      >
-        bloc -
-      </button>
-      {/* TO DELETE FIN */}
       <div className="formChat">
         <div className="beginin">
           <div className="LottieContainer">
@@ -159,6 +107,7 @@ const NewForm = () => {
                                   counterBlocLimits={counterBlocLimits}
                                   numberOfResponse={numberOfResponse}
                                   setNumberOfResponse={setNumberOfResponse}
+                                  sup_question={question}
                                   question={sub_question_1}
                                   range={1}
                                   totalCounterBloc={totalCounterBloc}
@@ -195,6 +144,7 @@ const NewForm = () => {
                                             setNumberOfResponse={
                                               setNumberOfResponse
                                             }
+                                            sup_question={sub_question_1}
                                             question={sub_question_2}
                                             range={2}
                                             bloc_id={key_bloc}
@@ -243,6 +193,9 @@ const NewForm = () => {
                                                       }
                                                       setNumberOfResponse={
                                                         setNumberOfResponse
+                                                      }
+                                                      sup_question={
+                                                        sub_question_2
                                                       }
                                                       question={sub_question_3}
                                                       range={3}
