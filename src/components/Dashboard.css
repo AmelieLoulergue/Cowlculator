@@ -1,0 +1,46 @@
+#dash {
+    /* background-color: #0a0a0f; */
+}
+
+
+/* Dashboard side nav bar */
+.dash-nav {
+    background-color: #0c0b10;
+    min-height: 100vh;
+    width: fit-content;
+    text-align: center;
+}
+.dash-li li img {
+    height: 40px;
+}
+.dash-li li {
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+    position: relative;
+    padding-left: 70px;
+    cursor: pointer;
+    margin: 40px 70px 40px 0;
+}
+.dash-li li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 5px;
+    transform: translateX(-5px);
+    border-radius: 0 5px 5px 0;
+    background-color: red;
+    transition: .5s;
+}
+.dash-li ul {
+    padding-inline-start: 0;
+}
+.dash-li li:hover::before {
+    background-color: blueviolet;
+    transform: translateX(0px);
+}
