@@ -2,12 +2,12 @@
     position: fixed;
     top: 0;
     left: 0;
-    background: #110f16;
+    background: #0c0b10;
     z-index: -99;
 }
 #Bg svg {
     filter: blur(120px);
-    opacity: .7;
+    opacity: .6;
     animation: animatedBg 10s ease infinite;
 }
 

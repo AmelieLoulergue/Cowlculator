@@ -4,11 +4,49 @@
 
 
 /* Dashboard side nav bar */
-.dash-nav {
-    background-color: #0c0b10;
-    min-height: 100vh;
-    width: fit-content;
+.dash-side {
     text-align: center;
+    position: fixed;
+    z-index: 9999;
+    background: linear-gradient(315deg, #874FF5 10%, #2C60F5 50%, #874FF5 90%);
+    background-size: 200%;
+    background-position: left;
+    animation: rotatingBg 4s infinite alternate;
+    right: 100%;
+    animation-timing-function: ease;
+}
+@keyframes rotatingBg {
+    0% {background-position: left;}
+    100% {background-position: right;}
+}
+.dash-side-container {
+    background: #0c0b10;
+    height: calc(100vh - 10px);
+    width: calc(100vw - 10px);
+    border-radius: 10px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    right: 100%;
+    animation-delay: .2s;
+    animation-timing-function: cubic-bezier(.77, 0, .175, 1);
+}
+.slideLeft {
+    animation-name: slideLeft;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+}
+.slideRight {
+    animation: slideLeft 1s 0s cubic-bezier(.77,.46,.47,.87) reverse;
+}
+@keyframes slideLeft {
+    0% {right: 100%;}
+    100% {right: 0%;}
+}
+.dash-li {
+    margin: auto;
 }
 .dash-li li img {
     height: 40px;
@@ -18,24 +56,10 @@
     display: flex;
     align-items: center;
     column-gap: 20px;
+    justify-content: center;
     position: relative;
-    padding-left: 70px;
     cursor: pointer;
-    margin: 40px 70px 40px 0;
-}
-.dash-li li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    height: 100%;
-    width: 5px;
-    transform: translateX(-5px);
-    border-radius: 0 5px 5px 0;
-    background-color: red;
-    transition: .5s;
+    margin: 60px auto;
 }
 .dash-li ul {
     padding-inline-start: 0;
@@ -43,4 +67,61 @@
 .dash-li li:hover::before {
     background-color: blueviolet;
     transform: translateX(0px);
+}
+
+.dash-profile {
+    margin: 50px auto;
+}
+
+/* Top nav bar */
+.dash-nav {
+    display: flex;
+    align-items: center;
+    margin: 30px;
+    justify-content: space-between;
+    position: fixed;
+    z-index: 99999;
+    width: 100vw;
+}
+
+.dash-nav-icon {
+    height: 16px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    margin: 20px;
+}
+.dash-nav-icon:hover span,.dash-nav-icon:hover span::before, .dash-nav-icon:hover span::after {
+    width: 100%;
+}
+.dash-nav-icon span {
+    width: 100%;
+    height: 2px;
+    background-color: white;
+}
+.dash-nav-icon span::before, .dash-nav-icon span::after {
+    width: 50%;
+    height: 2px;
+    position: absolute;
+    background-color: white;
+    content: '';
+    transition: 1s ease;
+}
+.dash-nav-icon span::before {
+    top: 0;
+    right: 0;
+}
+.dash-nav-icon span::after {
+    bottom: 0;
+    left: 0;
+}
+
+.dash-nav .logo img {
+    height: 80px;
+}
+.dash-nav .logo {
+    display: flex;
+    align-items: center;
 }
