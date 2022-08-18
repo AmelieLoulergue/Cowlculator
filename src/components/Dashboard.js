@@ -7,11 +7,15 @@ import logow from '../assets/img/logo-w.png';
 import Bg from './Bg';
 
 function Dashboard() {
+    const toggleSideNav = () => {
+        document.getElementById('dash-side').classList.toggle('active')
+        document.getElementById('dash-nav-icon-burger').classList.toggle('active')
+    }
     return (
       <>
       <div id="dash">
-        <div className="dash-side slideLeft">
-            <div className="dash-side-container slideLeft">
+        <div className="dash-side" id="dash-side">
+            <div className="dash-side-container">
                 <div className="dash-profile">
                     <h1>
                         Dashboard
@@ -34,13 +38,13 @@ function Dashboard() {
         </div>
 
         <div className="dash-nav">
-            <div className="dash-nav-icon">
-                <span></span>
+            <div className="dash-nav-icon" onClick={toggleSideNav}>
+                <span id="dash-nav-icon-burger"></span>
             </div>
             <div className="logo">
                 CarbonBalance <img src={logow}></img>
             </div>
-            <div></div>
+            <div style={{'width': '20px'}}></div>
         </div>
       </div>
       <Bg></Bg>
