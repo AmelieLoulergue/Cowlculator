@@ -4,6 +4,10 @@ import './Dashboard.css';
 import charts from '../assets/svg/charts.svg';
 import logow from '../assets/img/logo-w.png';
 
+import plant from '../assets/svg/plant.svg';
+import footprint from '../assets/svg/footprint.svg';
+import dollar from '../assets/svg/dollar.svg';
+
 import Bg from './Bg';
 
 function Dashboard() {
@@ -24,6 +28,7 @@ function Dashboard() {
                         <img></img>
                         <h2>Username</h2>
                         <p>Project name</p>
+                        <button className="btn">Disconect</button>
                     </div>
                 </div>
                 <div className="dash-li">
@@ -34,6 +39,15 @@ function Dashboard() {
                         <li><img src={charts}></img> Menu 4 </li>
                     </ul>
                 </div>
+                <div className="copyright">
+                    <p>© CarbonBalance 2022</p>
+                    <p>Made with 💙🤍❤️ by
+                        <br></br><span><small>Bertille Dormoy Smith</small></span>
+                        <br></br><span><small>Amélie Loulergue</small></span>
+                        <br></br><span><small>Clément Loulergue</small></span>
+                    </p>
+                    
+                </div>
             </div>
         </div>
 
@@ -42,9 +56,41 @@ function Dashboard() {
                 <span id="dash-nav-icon-burger"></span>
             </div>
             <div className="logo">
-                CarbonBalance <img src={logow}></img>
+                CarbonBalance <img src={logow} alt="brand icon"></img>
             </div>
             <div style={{'width': '20px'}}></div>
+        </div>
+
+        <div id="summary" className="panel">
+            <div className="card-section">
+                <div className="card">
+                    <div className="card-icon">
+                        <div className="card-top">
+                            <img src={plant} alt="plant icon"></img>
+                            <h1>CO<sub>2</sub> saved</h1>
+                        </div>
+                        <h2>2000 T of CO2</h2>
+                    </div>
+                </div>
+                <div className="card">
+                    <div className="card-icon">
+                        <div className="card-top">
+                            <img src={footprint} alt="carbon footprint icon"></img>
+                            <h1>CO<sub>2</sub> consuption</h1>
+                        </div>
+                        <h2>25 T of CO2</h2>
+                    </div>
+                </div>
+                <div className="card">
+                    <div className="card-icon">
+                        <div className="card-top">
+                            <img src={dollar} alt="dollar sign icon"></img>
+                            <h1>New income</h1>
+                        </div>
+                        <h2>$3.8 M per month</h2>
+                    </div>
+                </div>
+            </div>
         </div>
       </div>
       <Bg></Bg>
