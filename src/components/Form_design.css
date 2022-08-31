@@ -12,7 +12,7 @@
   text-align: center;
   min-height: 100vh;
   justify-content: space-between;
-  display: none;
+  /* display: none; */
 }
 .formChat .beginin h3 {
   color: rgb(180, 180, 180);
