@@ -2,7 +2,7 @@ import * as React from "react";
 import './Dashboard.css';
 
 import charts from '../assets/svg/charts.svg';
-import logow from '../assets/img/logo-w.png';
+import cowlculator from '../assets/img/cowlculator.png';
 
 import plant from '../assets/svg/plant.svg';
 import footprint from '../assets/svg/footprint.svg';
@@ -56,9 +56,9 @@ function Dashboard() {
                 <span id="dash-nav-icon-burger"></span>
             </div>
             <div className="logo">
-                CarbonBalance <img src={logow} alt="brand icon"></img>
+                <img src={cowlculator} alt="brand icon"></img>
             </div>
-            <div style={{'width': '20px'}}></div>
+            <div style={{'width': '60px'}}></div>
         </div>
 
         <div id="summary" className="panel">

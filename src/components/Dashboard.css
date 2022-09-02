@@ -101,12 +101,13 @@
 .dash-nav {
     display: flex;
     align-items: center;
-    margin: 30px auto;
+    padding: 20px 0;
     justify-content: space-around;
     position: fixed;
     top: 0;
     z-index: 99999;
     width: 100vw;
+    background: rgba(20,20,20,.9);
 }
 
 .dash-nav-icon {
@@ -153,12 +154,12 @@
 .dash-nav-icon span.active::before {
     top: 50%;
     right: 0;
-    transform: rotate(45deg) translateY(-50%);
+    transform: rotate(45deg);
 }
 .dash-nav-icon span.active::after {
-    bottom: 50%;
+    top: 50%;
     left: 0;
-    transform: rotate(-45deg) translateY(50%);
+    transform: rotate(-45deg);
 }
 
 .dash-nav .logo img {
