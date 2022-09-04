@@ -490,3 +490,11 @@ body {
   justify-content: center;
   height: 100vh;
 }
+
+.alert-message {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 1000;
+}

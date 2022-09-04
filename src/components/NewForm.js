@@ -2,92 +2,82 @@ import React, { useEffect, useState } from "react";
 import listOfQuestions from "../utils/listOfQuestions";
 // import "./NewForm.css";
 import RenderQuestion from "./NewForm/RenderQuestion";
-import SubQuestions from "./NewForm/SubQuestions";
 import "./Form_design.css";
 import back_arrow from "../assets/svg/back-arrow.svg";
 import Lottie from "lottie-react";
 import form_begin from "../assets/anim/form-begin.json";
 import home from "../assets/svg/home.svg";
-import send from "../assets/svg/send.svg";
-import menu from "../assets/svg/burger.svg";
 import Bg from "./Bg";
-import counterQuestions from "../utils/counterQuestions";
+import { Alert } from "@mui/material";
+import AlertComponent from "./alerts/Alert";
 
 const NewForm = () => {
+  const [initForm, setInitForm] = useState(false);
   const [numberOfResponse, setNumberOfResponse] = useState(0);
-  const [blocIndex, setBlocIndex] = useState(0);
   const [questionToDisplay, setQuestionToDisplay] = useState(null);
-  const [displayedQuestions, setDisplayedQuestions] = useState([]);
+  const [questions, setQuestions] = useState([]);
+  const [indexQuestions, setIndexQuestions] = useState(0);
+  const [answer, setAnswer] = useState(null);
+  const [severity, setSeverity] = useState("");
+  const [messageAlert, setMessageAlert] = useState("");
+  const [displayAlert, setDisplayAlert] = useState(false);
+  const sendAnswer = () => {
+    // add check answer
+    if (answer === null && questionToDisplay.formInput.type !== "checkbox") {
+      setSeverity("error");
+      setMessageAlert("Invalid Response");
+      setDisplayAlert(true);
+      setTimeout(() => setDisplayAlert(false), 3000);
+    } else {
+      setSeverity("success");
+      setMessageAlert("Response saved !");
+      setDisplayAlert(true);
+      setTimeout(() => setDisplayAlert(false), 3000);
+      const newQuestionsList = questions;
 
-  // console.log({ questionToDisplay, displayedQuestions });
-  const renderQuestion = () => {
-    let question = null;
-    // if (
-    //   displayedQuestions[displayedQuestions.length - 1] &&
-    //   displayedQuestions[displayedQuestions.length - 1]
-    //     .dependant_question_number !== 0 &&
-    //   !displayedQuestions[displayedQuestions.length - 1].userValue.value
-    // ) {
-    //   console.log("je suis la 1");
-    //   question = listOfQuestions.formQuestions
-    //     .find((bloc) => bloc.bloc_id === `bloc_${blocIndex}`)
-    //     .questions.find(
-    //       (question) =>
-    //         displayedQuestions.length +
-    //           displayedQuestions[displayedQuestions.length - 1]
-    //             .dependant_question_number ===
-    //         question.index_id
-    //     );
-    //   if (
-    //     !question &&
-    //     listOfQuestions.formQuestions.find(
-    //       (bloc) => bloc.bloc_id === `bloc_${blocIndex}`
-    //     ).bloc_questions_number >= numberOfResponse
-    //   ) {
-    //     question = listOfQuestions.formQuestions
-    //       .find((bloc) => bloc.bloc_id === `bloc_${blocIndex + 1}`)
-    //       .questions.find(
-    //         (question) =>
-    //           displayedQuestions.length +
-    //             displayedQuestions[displayedQuestions.length - 1]
-    //               .dependant_question_number ===
-    //           question.index_id
-    //       );
-    //     setBlocIndex(blocIndex + 1);
-    //   }
-    // } else {
-    console.log("je suis la");
-    question = listOfQuestions.formQuestions
-      .find((bloc) => bloc.bloc_id === `bloc_${blocIndex}`)
-      .questions.find(
-        (question) => displayedQuestions.length === question.index_id
-      );
-
-    if (
-      !question &&
-      listOfQuestions.formQuestions.find(
-        (bloc) => bloc.bloc_id === `bloc_${blocIndex}`
-      ).bloc_questions_number === numberOfResponse
-    ) {
-      setBlocIndex(blocIndex + 1);
-      question = listOfQuestions.formQuestions
-        .find((bloc) => bloc.bloc_id === `bloc_${blocIndex + 1}`)
-        .questions.find(
-          (question) => displayedQuestions.length === question.index_id
+      if (questionToDisplay?.linked_questions?.length) {
+        questionToDisplay.linked_questions.map((question) =>
+          console.log(
+            question.answerParentQuestion === answer,
+            question.answerParentQuestion,
+            answer
+          )
         );
+        const questionsLinked = questionToDisplay.linked_questions.filter(
+          (question) => question.answerParentQuestion === answer
+        );
+
+        newQuestionsList.splice(indexQuestions + 1, 0, ...questionsLinked);
+      }
+
+      newQuestionsList.splice(indexQuestions, 1, {
+        ...questionToDisplay,
+        response:
+          questionToDisplay.formInput.type === "checkbox" && answer === null
+            ? "false"
+            : answer,
+      });
+
+      setQuestions(newQuestionsList);
+      setIndexQuestions(indexQuestions + 1);
+      setQuestionToDisplay(newQuestionsList[indexQuestions + 1]);
+      setAnswer(null);
     }
-    // }
-    setQuestionToDisplay(question);
   };
+
   useEffect(() => {
-    questionToDisplay &&
-      setDisplayedQuestions([...displayedQuestions, questionToDisplay]);
-  }, [numberOfResponse]);
+    setQuestions(listOfQuestions.formQuestions);
+    setQuestionToDisplay(listOfQuestions.formQuestions[0]);
+  }, []);
   useEffect(() => {
-    questionToDisplay && renderQuestion();
-  }, [displayedQuestions]);
+    console.log("je modifie questions");
+  }, [questions]);
+
   return (
     <div className="">
+      {displayAlert && (
+        <AlertComponent severity={severity} messageAlert={messageAlert} />
+      )}
       <div className="formChat">
         <div className="beginin">
           <div className="LottieContainer">
@@ -99,79 +89,58 @@ const NewForm = () => {
           </div>
           <div className="btns">
             <img src={back_arrow} alt=""></img>
-            <button className="btn" onClick={() => renderQuestion()}>
+            <button className="btn" onClick={() => setInitForm(true)}>
               Let's get started
             </button>
             <img src={home} alt=""></img>
           </div>
         </div>
-        <div id="questions-form" className="questions">
-          {displayedQuestions.length > 0 &&
-            displayedQuestions.map((question, index) => (
-              <div key={`question_form_${index}`}>
-                {question.bloc_name && (
-                  <div className="nav">
-                    <h1>{question.bloc_name.replace("_", " ")}</h1>
-                  </div>
-                )}
-                {question.question && (
-                  <div
-                    key={question.question_id}
-                    id={question.question_id}
-                    className={
-                      question.question_class ? question.question_class : ""
-                    }
-                  >
-                    <RenderQuestion
-                      numberOfResponse={numberOfResponse}
-                      setNumberOfResponse={setNumberOfResponse}
-                      question={question}
-                      blocIndex={blocIndex}
-                      setBlocIndex={setBlocIndex}
-                      hasResponse={true}
-                    />
-                  </div>
-                )}
-              </div>
-            ))}
-          {questionToDisplay && (
-            <>
-              <div className="nav">
-                <h1>
-                  {questionToDisplay.bloc_name &&
-                    questionToDisplay.bloc_name.replace("_", " ")}
-                </h1>
-              </div>
-              <div
-                key={questionToDisplay.question_id}
-                id={questionToDisplay.question_id}
-              >
-                <RenderQuestion
-                  numberOfResponse={numberOfResponse}
-                  setNumberOfResponse={setNumberOfResponse}
-                  question={questionToDisplay}
-                  blocIndex={blocIndex}
-                  setBlocIndex={setBlocIndex}
-                />
-              </div>
-            </>
-          )}
-          {/*  On parcours tous les blocs existants dans listOfQuestions un à un, et on cache avec is-hidden selon l'étape de l'utilisateur */}
-          {/* {listOfQuestions.formQuestions.map((bloc, key_bloc) => (
-            <div
-              key={`${key_bloc}`}
-              id={bloc.bloc_id}
-              className={key_bloc <= blocIndex ? "" : "is-hidden"}
-            >
-              <div className="nav">
-                <img src={menu} alt=""></img>
-                <h1>{bloc.bloc_name.replace("_", " ")}</h1>
-                <img src={home} alt=""></img>
-              </div>
-              
-            </div>
-          ))} */}
-        </div>
+        {initForm && (
+          <div id="questions-form" className="questions">
+            {questions.length > 0 &&
+              questions.slice(0, indexQuestions).map((question, index) => (
+                <div key={`question_form_${index}`}>
+                  {question.bloc_name && (
+                    <div className="nav">
+                      <h1>{question.bloc_name.replace("_", " ")}</h1>
+                    </div>
+                  )}
+                  {question.question && (
+                    <div key={question.id} id={question.id}>
+                      <RenderQuestion
+                        numberOfResponse={numberOfResponse}
+                        setNumberOfResponse={setNumberOfResponse}
+                        question={question}
+                        response={question.response}
+                        questions={questions}
+                        setQuestions={setQuestions}
+                      />
+                    </div>
+                  )}
+                </div>
+              ))}
+            {questionToDisplay && (
+              <>
+                <div className="nav">
+                  <h1>
+                    {questionToDisplay.bloc_name &&
+                      questionToDisplay.bloc_name.replace("_", " ")}
+                  </h1>
+                </div>
+                <div key={questionToDisplay.id} id={questionToDisplay.id}>
+                  <RenderQuestion
+                    numberOfResponse={numberOfResponse}
+                    setNumberOfResponse={setNumberOfResponse}
+                    question={questionToDisplay}
+                    setAnswer={setAnswer}
+                    sendAnswer={sendAnswer}
+                    answer={answer}
+                  />
+                </div>
+              </>
+            )}
+          </div>
+        )}
       </div>
       <Bg />
     </div>

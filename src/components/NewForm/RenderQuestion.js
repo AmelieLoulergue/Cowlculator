@@ -1,24 +1,27 @@
 import RenderInput from "./RenderInput";
-import sendIcon from "../../assets/svg/send.svg";
+
+import React, { useEffect, useState } from "react";
 
 const RenderQuestion = ({
   question,
-  numberOfResponse,
-  setNumberOfResponse,
   userValues,
-  hasResponse,
+  sendAnswer,
+  setAnswer,
+  response,
+  answer,
+  questions,
+  setQuestions,
 }) => {
-  let question_id = Number(question.question_id.split("-")[1].split("_")[1]);
   return (
     <>
-      <div id={`ask_${question_id}`} className="ask">
+      <div id={`ask_${question.id}`} className="ask">
         <p>{question.question}</p>
       </div>
 
       <div
         style={{ display: "flex", flexDirection: "column" }}
-        id={`response_${question_id}`}
-        className={numberOfResponse >= question.index_id + 1 ? "" : "is-hidden"}
+        id={`response_${question.id}`}
+        className={response || response === false ? "" : "is-hidden"}
       >
         {question.formInput.label && (
           <div className="response ">
@@ -26,41 +29,33 @@ const RenderQuestion = ({
           </div>
         )}
         <div className="response">
-          <div>
+          <RenderInput
+            formInput={question.formInput}
+            userValues={userValues}
+            question={question}
+            answer={response}
+            indexQuestion={question.id}
+            questions={questions}
+            setQuestions={setQuestions}
+          />
+        </div>
+      </div>
+      {!response && (
+        <div
+          className={response ? "is-hidden" : "inputField"}
+          id={`send_input_${question.id}`}
+        >
             <RenderInput
               formInput={question.formInput}
               userValues={userValues}
-              question={question}
+              setAnswer={setAnswer}
+              answer={answer}
+              sendAnswer={sendAnswer}
+              isButtonDisplay={true}
+              indexQuestion={question.id}
             />
-          </div>
         </div>
-      </div>
-      <div
-        className={hasResponse ? "is-hidden" : "inputField"}
-        id={`send_input_${question_id}`}
-      >
-        <div className="response-input">
-          <RenderInput formInput={question.formInput} userValues={userValues} />
-        </div>
-        <button
-          className="btn"
-          onClick={() => {
-            console.log(question.dependant_question_number);
-            if (
-              question.dependant_question_number !== 0 &&
-              !question.userValue.value
-            ) {
-              setNumberOfResponse(
-                numberOfResponse + question.dependant_question_number
-              );
-            } else {
-              setNumberOfResponse(numberOfResponse + 1);
-            }
-          }}
-        >
-          <img src={sendIcon} alt=""></img>
-        </button>
-      </div>
+      )}
     </>
   );
 };

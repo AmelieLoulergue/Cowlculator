@@ -159,7 +159,7 @@
 }
 .formChat .inputField .btn {
   padding: 0;
-  margin: auto;
+  margin-left: 1rem;
 }
 .formChat .inputField .response-input input {
   border-radius: 15px;
@@ -184,4 +184,13 @@
 }
 .formChat .inputField .response-input {
   margin: auto;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.checkbox-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 1rem;
 }
