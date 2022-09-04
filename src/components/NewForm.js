@@ -19,9 +19,45 @@ const NewForm = () => {
   const [questionToDisplay, setQuestionToDisplay] = useState(null);
   const [displayedQuestions, setDisplayedQuestions] = useState([]);
 
-  console.log({ questionToDisplay, displayedQuestions });
+  // console.log({ questionToDisplay, displayedQuestions });
   const renderQuestion = () => {
-    let question = listOfQuestions.formQuestions
+    let question = null;
+    // if (
+    //   displayedQuestions[displayedQuestions.length - 1] &&
+    //   displayedQuestions[displayedQuestions.length - 1]
+    //     .dependant_question_number !== 0 &&
+    //   !displayedQuestions[displayedQuestions.length - 1].userValue.value
+    // ) {
+    //   console.log("je suis la 1");
+    //   question = listOfQuestions.formQuestions
+    //     .find((bloc) => bloc.bloc_id === `bloc_${blocIndex}`)
+    //     .questions.find(
+    //       (question) =>
+    //         displayedQuestions.length +
+    //           displayedQuestions[displayedQuestions.length - 1]
+    //             .dependant_question_number ===
+    //         question.index_id
+    //     );
+    //   if (
+    //     !question &&
+    //     listOfQuestions.formQuestions.find(
+    //       (bloc) => bloc.bloc_id === `bloc_${blocIndex}`
+    //     ).bloc_questions_number >= numberOfResponse
+    //   ) {
+    //     question = listOfQuestions.formQuestions
+    //       .find((bloc) => bloc.bloc_id === `bloc_${blocIndex + 1}`)
+    //       .questions.find(
+    //         (question) =>
+    //           displayedQuestions.length +
+    //             displayedQuestions[displayedQuestions.length - 1]
+    //               .dependant_question_number ===
+    //           question.index_id
+    //       );
+    //     setBlocIndex(blocIndex + 1);
+    //   }
+    // } else {
+    console.log("je suis la");
+    question = listOfQuestions.formQuestions
       .find((bloc) => bloc.bloc_id === `bloc_${blocIndex}`)
       .questions.find(
         (question) => displayedQuestions.length === question.index_id
@@ -40,7 +76,7 @@ const NewForm = () => {
           (question) => displayedQuestions.length === question.index_id
         );
     }
-    console.log(question);
+    // }
     setQuestionToDisplay(question);
   };
   useEffect(() => {
@@ -71,31 +107,41 @@ const NewForm = () => {
         </div>
         <div id="questions-form" className="questions">
           {displayedQuestions.length > 0 &&
-            displayedQuestions.map((question) => (
-              <>
-                {question.bloc_name && question.bloc_name.replace("_", " ")}
-                <div
-                  key={question.question_id}
-                  id={question.question_id}
-                  className={
-                    question.question_class ? question.question_class : ""
-                  }
-                >
-                  <RenderQuestion
-                    numberOfResponse={numberOfResponse}
-                    setNumberOfResponse={setNumberOfResponse}
-                    question={question}
-                    blocIndex={blocIndex}
-                    setBlocIndex={setBlocIndex}
-                    hasResponse={true}
-                  />
-                </div>
-              </>
+            displayedQuestions.map((question, index) => (
+              <div key={`question_form_${index}`}>
+                {question.bloc_name && (
+                  <div className="nav">
+                    <h1>{question.bloc_name.replace("_", " ")}</h1>
+                  </div>
+                )}
+                {question.question && (
+                  <div
+                    key={question.question_id}
+                    id={question.question_id}
+                    className={
+                      question.question_class ? question.question_class : ""
+                    }
+                  >
+                    <RenderQuestion
+                      numberOfResponse={numberOfResponse}
+                      setNumberOfResponse={setNumberOfResponse}
+                      question={question}
+                      blocIndex={blocIndex}
+                      setBlocIndex={setBlocIndex}
+                      hasResponse={true}
+                    />
+                  </div>
+                )}
+              </div>
             ))}
           {questionToDisplay && (
             <>
-              {questionToDisplay.bloc_name &&
-                questionToDisplay.bloc_name.replace("_", " ")}
+              <div className="nav">
+                <h1>
+                  {questionToDisplay.bloc_name &&
+                    questionToDisplay.bloc_name.replace("_", " ")}
+                </h1>
+              </div>
               <div
                 key={questionToDisplay.question_id}
                 id={questionToDisplay.question_id}

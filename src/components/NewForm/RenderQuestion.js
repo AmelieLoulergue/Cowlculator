@@ -8,7 +8,6 @@ const RenderQuestion = ({
   userValues,
   hasResponse,
 }) => {
-  console.log(question.index_id);
   let question_id = Number(question.question_id.split("-")[1].split("_")[1]);
   return (
     <>
@@ -46,7 +45,17 @@ const RenderQuestion = ({
         <button
           className="btn"
           onClick={() => {
-            setNumberOfResponse(numberOfResponse + 1);
+            console.log(question.dependant_question_number);
+            if (
+              question.dependant_question_number !== 0 &&
+              !question.userValue.value
+            ) {
+              setNumberOfResponse(
+                numberOfResponse + question.dependant_question_number
+              );
+            } else {
+              setNumberOfResponse(numberOfResponse + 1);
+            }
           }}
         >
           <img src={sendIcon} alt=""></img>
