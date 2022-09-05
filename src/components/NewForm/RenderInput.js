@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import sendIcon from "../../assets/svg/send.svg";
 
 function RenderInput({
@@ -11,15 +11,19 @@ function RenderInput({
   questions,
   setQuestions,
 }) {
+  const [yesChecked, setYesChecked] = useState(true);
   const inputRef = useRef(null);
 
   console.log(answer);
   return (
     <div id={"input_" + indexQuestion} className={"response-input"}>
+      {formInput.type === "checkbox" && <h3>YES</h3>}
       <input
         ref={inputRef}
+        style={formInput.type === "checkbox" ? { width: "3rem" } : {}}
         type={formInput.type}
         onChange={(event) => {
+          console.log(event.target.value, "zizi");
           isButtonDisplay
             ? setAnswer(
                 formInput.type === "checkbox"
@@ -29,6 +33,7 @@ function RenderInput({
             : setQuestions(
                 questions.map((question) => {
                   if (question.id === indexQuestion) {
+                    formInput.type === "checkbox" && setYesChecked(!yesChecked);
                     return {
                       ...question,
                       response:
@@ -50,8 +55,35 @@ function RenderInput({
               );
         }}
         value={answer || ""}
-        checked={answer === "false" ? false : answer}
+        checked={formInput.type === "checkbox" ? yesChecked : answer}
       />
+      {formInput.type === "checkbox" && (
+        <>
+          <h3>NO</h3>
+          <input
+            style={{ width: "3rem" }}
+            ref={inputRef}
+            type={formInput.type}
+            onChange={(event) => {
+              setYesChecked(!yesChecked);
+              setQuestions(
+                questions.map((question) => {
+                  if (question.id === indexQuestion) {
+                    formInput.type === "checkbox" && setYesChecked(!yesChecked);
+                    return {
+                      ...question,
+                      response: event.target.checked ? "false" : true,
+                    };
+                  } else {
+                    return question;
+                  }
+                })
+              );
+            }}
+            checked={!yesChecked}
+          />
+        </>
+      )}
 
       {isButtonDisplay && (
         <button

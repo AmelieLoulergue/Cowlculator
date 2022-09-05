@@ -5,7 +5,7 @@ import Bg from './Bg';
 
 import farmer from '../assets/svg/farmer.svg';
 import researcher from '../assets/svg/researcher.svg';
-import logo from '../assets/img/logo.png';
+// import logo from '../assets/img/logo.png';
 
 function Getstarted() {
     return (
@@ -26,7 +26,7 @@ function Getstarted() {
             <div className="Choice-path"></div>
             <div className="Choice-bot">
                 <div>
-                    <img src={logo} alt="logo"></img>
+                    {/* <img src={logo} alt="logo"></img> */}
                 </div>
             </div>
         </div>
