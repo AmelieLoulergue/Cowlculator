@@ -178,9 +178,9 @@
     linear-gradient(315deg, #874ff5 0%, #2c60f5 100%) border-box !important;
   border: 2px solid transparent !important;
   outline: none;
-  transform: translate(-1px, -1px);
+  /* transform: translate(-1px, -1px); */
   margin: -1px -1px -1px 0;
-  width: 75vw;
+  /* width: 75vw; */
   transition: all 0.5s ease;
 }
 .formChat .inputField .response-input {

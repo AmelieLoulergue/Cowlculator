@@ -31,7 +31,6 @@ const listOfQuestions = {
         {
           answerParentQuestion: true,
           parentId: "elec_generator",
-          is_hidden: false,
           id: "elec_generator_prod",
           question: "How much renewable energy do you produce ?",
           formInput: { type: "number" },
@@ -59,13 +58,14 @@ const listOfQuestions = {
       userValue: { value: 0, unit: "kWh" },
     },
     {
-      id: "natgas_unit",
+      id: "natgas",
       question: "Natural gas consumption ?",
       formInput: { type: "checkbox" },
       userValue: true,
       linked_questions: [
         {
           answerParentQuestion: true,
+          parentId: "natgas",
           id: "natgas_cons",
           question: "What is the natural gas consumption ?",
           formInput: { type: "number" },
@@ -78,6 +78,7 @@ const listOfQuestions = {
     },
     {
       id: "vehicles_type_cars",
+      bloc_name: "fuel",
       question:
         "Do you use cars on your production, transformation, distribution business area?",
       formInput: { type: "checkbox" },
@@ -132,13 +133,15 @@ const listOfQuestions = {
         {
           answerParentQuestion: true,
           id: "vehicles_type_trucks_gasoline",
+          parentId: "vehicles_type_trucks",
           question: "For the truck(s), do you use gasoline ?",
           formInput: { type: "checkbox" },
           userValue: true,
           linked_questions: [
             {
               answerParentQuestion: true,
-              id: "trucks_type_gasoline_cons",
+              parentId: "vehicles_type_trucks_gasoline",
+              id: "vehicles_type_trucks_gasoline_cons",
               question: "Gasoline truck consumption",
               question_class: "",
               formInput: { type: "number" },
@@ -149,13 +152,15 @@ const listOfQuestions = {
         {
           answerParentQuestion: true,
           id: "vehicles_type_trucks_diesel",
+          parentId: "vehicles_type_trucks",
           question: "For the truck(s), do you use diesel ?",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
             {
               answerParentQuestion: true,
-              id: "trucks_type_diesel_cons",
+              id: "vehicles_type_trucks_diesel_cons",
+              parentId: "vehicles_type_trucks_diesel",
               question: "Diesel truck consumption",
               formInput: { type: "number" },
               userValue: { value: 0, unit: "Gal" },
@@ -174,13 +179,15 @@ const listOfQuestions = {
         {
           answerParentQuestion: true,
           id: "vehicles_type_tractors_gasoline",
+          parentId: "vehicles_type_tractors",
           question: "For the tractor(s), do you use gasoline ?",
           formInput: { type: "checkbox" },
           userValue: true,
           linked_questions: [
             {
               answerParentQuestion: true,
-              id: "tractors_type_gasoline_cons",
+              id: "vehicles_type_tractors_gasoline_cons",
+              parentId: "vehicles_type_tractors",
               question: "Gasoline tractor consumption",
               question_class: "",
               formInput: { type: "number" },
@@ -197,7 +204,7 @@ const listOfQuestions = {
           linked_questions: [
             {
               answerParentQuestion: true,
-              id: "tractors_type_diesel_cons",
+              id: "vehicles_type_tractors_diesel_cons",
               question: "Diesel tractor consumption",
               formInput: { type: "number" },
               userValue: { value: 0, unit: "Gal" },
@@ -222,7 +229,7 @@ const listOfQuestions = {
       userValue: { value: 0, unit: "Gal" },
     },
     {
-      id: "other_kerosene",
+      id: "kerosene",
       bloc_name: "other",
       question: "Do you use kerosene?",
       formInput: { type: "checkbox" },
@@ -238,7 +245,7 @@ const listOfQuestions = {
       ],
     },
     {
-      id: "other_coal",
+      id: "coal",
       question: "Do you use coal?",
       formInput: { type: "checkbox" },
       userValue: false,
@@ -253,7 +260,7 @@ const listOfQuestions = {
       ],
     },
     {
-      id: "other_residual_heating_fuel",
+      id: "residual_heating_fuel",
       question: "Do you use residual heating fuel?",
       formInput: { type: "checkbox" },
       userValue: false,
@@ -268,7 +275,7 @@ const listOfQuestions = {
       ],
     },
     {
-      id: "other_jet_fuel",
+      id: "jet_fuel",
       question: "Do you use jet fuel?",
       formInput: { type: "checkbox" },
       userValue: false,
@@ -283,7 +290,7 @@ const listOfQuestions = {
       ],
     },
     {
-      id: "other_aviation_gas",
+      id: "aviation_gas",
       question: "Do you use aviation gas?",
       formInput: { type: "checkbox" },
       userValue: false,
@@ -298,7 +305,7 @@ const listOfQuestions = {
       ],
     },
     {
-      id: "other_flared_natural_gas",
+      id: "flared_natural_gas",
       question: "Do you use flared natural gas?",
       formInput: { type: "checkbox" },
       userValue: false,
@@ -314,7 +321,7 @@ const listOfQuestions = {
       ],
     },
     {
-      id: "other_petroleum_coke",
+      id: "petroleum_coke",
       question: "Do you use petroleum coke?",
       formInput: { type: "checkbox" },
       userValue: false,
@@ -329,7 +336,7 @@ const listOfQuestions = {
       ],
     },
     {
-      id: "other_petroleum_and_miscellaneous",
+      id: "petroleum_and_miscellaneous",
       question: "Do you use petroleum and miscellaneous?",
       formInput: { type: "checkbox" },
       userValue: false,
@@ -344,7 +351,7 @@ const listOfQuestions = {
       ],
     },
     {
-      id: "other_petroleum_and_miscellaneous",
+      id: "petroleum_and_miscellaneous",
       question: "Do you use petroleum and miscellaneous?",
       formInput: { type: "checkbox" },
       userValue: false,
@@ -359,7 +366,7 @@ const listOfQuestions = {
       ],
     },
     {
-      id: "other_asphalt_and_road_oil",
+      id: "asphalt_and_road_oil",
       question: "Do you use asphalt and road oil?",
       formInput: { type: "checkbox" },
       userValue: false,
@@ -374,7 +381,7 @@ const listOfQuestions = {
       ],
     },
     {
-      id: "other_lubricants",
+      id: "lubricants",
       question: "Do you use lubricants?",
       formInput: { type: "checkbox" },
       userValue: false,
@@ -389,7 +396,7 @@ const listOfQuestions = {
       ],
     },
     {
-      id: "other_petrochemical_feedstocks",
+      id: "petrochemical_feedstocks",
       question: "Do you use petrochemical feedstocks?",
       formInput: { type: "checkbox" },
       userValue: false,
@@ -404,7 +411,7 @@ const listOfQuestions = {
       ],
     },
     {
-      id: "other_special_naphthas_solvents",
+      id: "special_naphthas_solvents",
       question: "Do you use special naphthas solvents?",
       formInput: { type: "checkbox" },
       userValue: false,
@@ -419,7 +426,7 @@ const listOfQuestions = {
       ],
     },
     {
-      id: "other_waxes",
+      id: "waxes",
       question: "Do you use waxes?",
       formInput: { type: "checkbox" },
       userValue: false,
@@ -434,7 +441,7 @@ const listOfQuestions = {
       ],
     },
     {
-      id: "other_anthracite",
+      id: "anthracite",
       question: "Do you use anthracite?",
       formInput: { type: "checkbox" },
       userValue: false,
@@ -449,7 +456,7 @@ const listOfQuestions = {
       ],
     },
     {
-      id: "other_bituminous",
+      id: "bituminous",
       question: "Do you use bituminous?",
       formInput: { type: "checkbox" },
       userValue: false,
@@ -464,7 +471,7 @@ const listOfQuestions = {
       ],
     },
     {
-      id: "other_subbituminous",
+      id: "subbituminous",
       question: "Do you use subbituminous?",
       formInput: { type: "checkbox" },
       userValue: false,
@@ -479,7 +486,7 @@ const listOfQuestions = {
       ],
     },
     {
-      id: "other_lignite",
+      id: "lignite",
       question: "Do you use lignite?",
       formInput: { type: "checkbox" },
       userValue: false,
@@ -494,7 +501,7 @@ const listOfQuestions = {
       ],
     },
     {
-      id: "other_coke",
+      id: "coke",
       question: "Do you use coke?",
       formInput: { type: "checkbox" },
       userValue: false,
@@ -509,7 +516,7 @@ const listOfQuestions = {
       ],
     },
     {
-      id: "other_geothermal",
+      id: "geothermal",
       question: "Do you use geothermal?",
       formInput: { type: "checkbox" },
       userValue: false,
@@ -524,7 +531,7 @@ const listOfQuestions = {
       ],
     },
     {
-      id: "other_municiple_solid_waste",
+      id: "municiple_solid_waste",
       question: "Do you use municiple solid waste?",
       formInput: { type: "checkbox" },
       userValue: false,
@@ -539,7 +546,7 @@ const listOfQuestions = {
       ],
     },
     {
-      id: "other_tire_derived_fuel",
+      id: "tire_derived_fuel",
       question: "Do you use tire derived fuel?",
       formInput: { type: "checkbox" },
       userValue: false,
@@ -554,7 +561,7 @@ const listOfQuestions = {
       ],
     },
     {
-      id: "other_waste_oil",
+      id: "waste_oil",
       question: "Do you use waste oil?",
       formInput: { type: "checkbox" },
       userValue: false,
@@ -585,6 +592,7 @@ const listOfQuestions = {
       linked_questions: [
         {
           answerParentQuestion: true,
+          parentId: "farm_crops",
           id: "farm_crops_grassland",
           question: "Do you produce grassland?",
           formInput: { type: "checkbox" },
@@ -593,6 +601,7 @@ const listOfQuestions = {
             {
               answerParentQuestion: true,
               id: "farm_crops_grassland_size",
+              parentId: "farm_crops_grassland",
               question: "What is the size of the farm grassland ?",
               formInput: { type: "number" },
               userValue: {
@@ -602,6 +611,7 @@ const listOfQuestions = {
             {
               answerParentQuestion: true,
               id: "farm_crops_grassland_organic",
+              parentId: "farm_crops_grassland",
               question: "Is it organically grown ?",
               formInput: { type: "checkbox" },
               userValue: false,
@@ -611,6 +621,7 @@ const listOfQuestions = {
         {
           answerParentQuestion: true,
           id: "farm_crops_grain",
+          parentId: "farm_crops",
           question: "Do you produce grain?",
           formInput: { type: "checkbox" },
           userValue: false,
@@ -618,6 +629,7 @@ const listOfQuestions = {
             {
               answerParentQuestion: true,
               id: "farm_crops_grain_size",
+              parentId: "farm_crops_grain",
               question: "What is the size of the farm grain ?",
               formInput: { type: "number" },
               userValue: {
@@ -627,6 +639,7 @@ const listOfQuestions = {
             {
               answerParentQuestion: true,
               id: "farm_crops_grain_organic",
+              parentId: "farm_crops_grain",
               question: "Is it organically grown ?",
               formInput: { type: "checkbox" },
               userValue: false,
@@ -636,6 +649,7 @@ const listOfQuestions = {
         {
           answerParentQuestion: true,
           id: "farm_crops_forage",
+          parentId: "farm_crops",
           question: "Do you produce forage?",
           formInput: { type: "checkbox" },
           userValue: false,
@@ -643,6 +657,7 @@ const listOfQuestions = {
             {
               answerParentQuestion: true,
               id: "farm_crops_forage_size",
+              parentId: "farm_crops_forage",
               question: "What is the size of the farm forage ?",
               formInput: { type: "number" },
               userValue: {
@@ -652,6 +667,7 @@ const listOfQuestions = {
             {
               answerParentQuestion: true,
               id: "farm_crops_forage_organic",
+              parentId: "farm_crops_forage",
               question: "Is it organically grown ?",
               formInput: { type: "checkbox" },
               userValue: false,
@@ -661,6 +677,7 @@ const listOfQuestions = {
         {
           answerParentQuestion: true,
           id: "farm_crops_fv",
+          parentId: "farm_crops",
           question: "Do you produce fv?",
           formInput: { type: "checkbox" },
           userValue: false,
@@ -668,6 +685,7 @@ const listOfQuestions = {
             {
               answerParentQuestion: true,
               id: "farm_crops_fv_size",
+              parentId: "farm_crops_fv",
               question: "What is the size of the farm fv ?",
               formInput: { type: "number" },
               userValue: {
@@ -677,6 +695,7 @@ const listOfQuestions = {
             {
               answerParentQuestion: true,
               id: "farm_crops_fv_organic",
+              parentId: "farm_crops_fv",
               question: "Is it organically grown ?",
               formInput: { type: "checkbox" },
               userValue: false,
@@ -686,6 +705,7 @@ const listOfQuestions = {
         {
           answerParentQuestion: true,
           id: "farm_crops_flowers",
+          parentId: "farm_crops",
           question: "Do you produce flowers?",
           formInput: { type: "checkbox" },
           userValue: false,
@@ -693,6 +713,7 @@ const listOfQuestions = {
             {
               answerParentQuestion: true,
               id: "farm_crops_flowers_size",
+              parentId: "farm_crops_flowers",
               question: "What is the size of the farm flowers ?",
               formInput: { type: "number" },
               userValue: {
@@ -702,6 +723,7 @@ const listOfQuestions = {
             {
               answerParentQuestion: true,
               id: "farm_crops_flowers_organic",
+              parentId: "farm_crops_flowers",
               question: "Is it organically grown ?",
               formInput: { type: "checkbox" },
               userValue: false,
@@ -711,6 +733,7 @@ const listOfQuestions = {
         {
           answerParentQuestion: true,
           id: "farm_crops_herbs",
+          parentId: "farm_crops",
           question: "Do you produce herbs?",
           formInput: { type: "checkbox" },
           userValue: false,
@@ -718,6 +741,7 @@ const listOfQuestions = {
             {
               answerParentQuestion: true,
               id: "farm_crops_herbs_size",
+              parentId: "farm_crops_herbs",
               question: "What is the size of the farm herbs ?",
               formInput: { type: "number" },
               userValue: {
@@ -727,6 +751,7 @@ const listOfQuestions = {
             {
               answerParentQuestion: true,
               id: "farm_crops_herbs_organic",
+              parentId: "farm_crops_herbs",
               question: "Is it organically grown ?",
               formInput: { type: "checkbox" },
               userValue: false,
@@ -735,15 +760,17 @@ const listOfQuestions = {
         },
         {
           answerParentQuestion: true,
-          id: "farm_croplands_agronomy_practice",
+          id: "farm_crops_agronomy_practice",
+          parentId: "farm_crops",
           question:
-            "For your crop(s), have you implemented agronomy i.e cover crops, crops rotations, perennial crops(applies for croplands) to reduce emissions & increase sequestration?",
+            "For your crop(s), have you implemented agronomy i.e cover crops, crops rotations, perennial crops(applies for crops) to reduce emissions & increase sequestration?",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
             {
               answerParentQuestion: true,
-              id: "farm_croplands_agronomy_practice_portion",
+              id: "farm_crops_agronomy_practice_portion",
+              parentId: "farm_crops_agronomy_practice",
               question: "Did you implement this/these practice(s) for:",
 
               formInput: { type: "select" },
@@ -751,7 +778,8 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: "A portion of them",
-                  id: "farm_croplands_agronomy_practice_number",
+                  parentId: "farm_crops_agronomy_practice_portion",
+                  id: "farm_crops_agronomy_practice_portion_number",
                   question: "% of them",
 
                   formInput: { type: "number" },
@@ -763,15 +791,17 @@ const listOfQuestions = {
         },
         {
           answerParentQuestion: true,
-          id: "farm_croplands_nutrient_management_practice",
+          id: "farm_crops_nutrient_management_practice",
+          parentId: "farm_crops",
           question:
-            "For your crop(s), have you implemented Nutrient management i.e. adjusting application rates, slow- or controlled-release fertilizer forms or nitrification inhibitors (applies for croplands) to reduce emissions & increase sequestration?",
+            "For your crop(s), have you implemented Nutrient management i.e. adjusting application rates, slow- or controlled-release fertilizer forms or nitrification inhibitors (applies for crops) to reduce emissions & increase sequestration?",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
             {
               answerParentQuestion: true,
-              id: "farm_croplands_nutrient_management_practice_portion",
+              id: "farm_crops_nutrient_management_practice_portion",
+              parentId: "farm_crops_nutrient_management_practice",
               question: "Did you implement this/these practice(s) for:",
 
               formInput: { type: "select" },
@@ -779,7 +809,8 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: "A portion of them",
-                  id: "farm_croplands_nutrient_management_practice_number",
+                  id: "farm_crops_nutrient_management_practice_portion_number",
+                  parentId: "farm_crops_nutrient_management_practice_portion",
                   question: "% of them",
 
                   formInput: { type: "number" },
@@ -791,15 +822,17 @@ const listOfQuestions = {
         },
         {
           answerParentQuestion: true,
-          id: "farm_croplands_residue_management_practice",
+          id: "farm_crops_residue_management_practice",
+          parentId: "farm_crops",
           question:
-            "For your crop(s), have you implemented Tillage and residue management i.e. reduced or no tillage (apply for croplands) to reduce emissions & increase sequestration?",
+            "For your crop(s), have you implemented Tillage and residue management i.e. reduced or no tillage (apply for crops) to reduce emissions & increase sequestration?",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
             {
               answerParentQuestion: true,
-              id: "farm_croplands_residue_management_practice_portion",
+              id: "farm_crops_residue_management_practice_portion",
+              parentId: "farm_crops_residue_management_practice",
               question: "Did you implement this/these practice(s) for:",
 
               formInput: { type: "select" },
@@ -807,7 +840,8 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: "A portion of them",
-                  id: "farm_croplands_residue_management_practice_number",
+                  id: "farm_crops_residue_management_practice_portion_number",
+                  parentId: "farm_crops_residue_management_practice_portion",
                   question: "% of them",
 
                   formInput: { type: "number" },
@@ -819,15 +853,17 @@ const listOfQuestions = {
         },
         {
           answerParentQuestion: true,
-          id: "farm_croplands_water_management_practice",
+          id: "farm_crops_water_management_practice",
+          parentId: "farm_crops",
           question:
-            "For your crop(s), have you implemented Water management i.e. more effective irrigation measures (applies for croplands) to reduce emissions & increase sequestration?",
+            "For your crop(s), have you implemented Water management i.e. more effective irrigation measures (applies for crops) to reduce emissions & increase sequestration?",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
             {
               answerParentQuestion: true,
-              id: "farm_croplands_water_management_practice_portion",
+              id: "farm_crops_water_management_practice_portion",
+              parentId: "farm_crops_water_management_practice",
               question: "Did you implement this/these practice(s) for:",
 
               formInput: { type: "select" },
@@ -835,7 +871,8 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: "A portion of them",
-                  id: "farm_croplands_water_management_practice_number",
+                  id: "farm_crops_water_management_practice_portion_number",
+                  parentId: "farm_crops_water_management_practice_portion",
                   question: "% of them",
 
                   formInput: { type: "number" },
@@ -847,15 +884,17 @@ const listOfQuestions = {
         },
         {
           answerParentQuestion: true,
-          id: "farm_croplands_land_use_change_practice",
+          id: "farm_crops_land_use_change_practice",
+          parentId: "farm_crops",
           question:
-            "For your crop(s), have you implemented Set aside and LUC (land-use change) i.e. allow or encourage the reversion of cropland to another land cover, typically one similar to the native vegetation. (apply for croplands) to reduce emissions & increase sequestration?",
+            "For your crop(s), have you implemented Set aside and LUC (land-use change) i.e. allow or encourage the reversion of cropland to another land cover, typically one similar to the native vegetation. (apply for crops) to reduce emissions & increase sequestration?",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
             {
               answerParentQuestion: true,
-              id: "farm_croplands_land_use_change_practice_portion",
+              id: "farm_crops_land_use_change_practice_portion",
+              parentId: "farm_crops_land_use_change_practice",
               question: "Did you implement this/these practice(s) for:",
 
               formInput: { type: "select" },
@@ -863,7 +902,8 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: "A portion of them",
-                  id: "farm_croplands_land_use_change_practice_number",
+                  id: "farm_crops_land_use_change_practice_portion_number",
+                  parentId: "farm_crops_land_use_change_practice_portion",
                   question: "% of them",
 
                   formInput: { type: "number" },
@@ -875,15 +915,17 @@ const listOfQuestions = {
         },
         {
           answerParentQuestion: true,
-          id: "farm_croplands_agroforestry_practice",
+          id: "farm_crops_agroforestry_practice",
+          parentId: "farm_crops",
           question:
-            "For your crop(s), have you implemented Agro forestry i.e. production of livestock or food crops on land that also grows trees for timber, fire- wood, or other tree products (applies for croplands) to reduce emissions & increase sequestration?",
+            "For your crop(s), have you implemented Agro forestry i.e. production of livestock or food crops on land that also grows trees for timber, fire- wood, or other tree products (applies for crops) to reduce emissions & increase sequestration?",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
             {
               answerParentQuestion: true,
-              id: "farm_croplands_agroforestry_practice_portion",
+              parentId: "farm_crops_agroforestry_practice",
+              id: "farm_crops_agroforestry_practice_portion",
               question: "Did you implement this/these practice(s) for:",
 
               formInput: { type: "select" },
@@ -891,7 +933,8 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: "A portion of them",
-                  id: "farm_croplands_agroforestry_practice_number",
+                  parentId: "farm_crops_agroforestry_practice_portion",
+                  id: "farm_crops_agroforestry_practice_portion_number",
                   question: "% of them",
 
                   formInput: { type: "number" },
@@ -903,7 +946,8 @@ const listOfQuestions = {
         },
         {
           answerParentQuestion: true,
-          id: "farm_grassland_grazing_practice",
+          id: "farm_crops_grassland_grazing_practice",
+          parentId: "farm_crops",
           question:
             "For your crop(s), have you implemented Grazing (adapted intensity and timing of grazing), fertilization (alleviating nutrient deficiencies by fertilizer or organic amendments), no fire (apply for grasslands) to reduce emissions & increase sequestration?",
           formInput: { type: "checkbox" },
@@ -911,7 +955,8 @@ const listOfQuestions = {
           linked_questions: [
             {
               answerParentQuestion: true,
-              id: "farm_grassland_grazing_practice_portion",
+              parentId: "farm_crops_grassland_grazing_practice",
+              id: "farm_crops_grassland_grazing_practice_portion",
               question: "Did you implement this/these practice(s) for:",
 
               formInput: { type: "select" },
@@ -919,7 +964,8 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: "A portion of them",
-                  id: "farm_grassland_grazing_practice_number",
+                  parentId: "farm_crops_grassland_grazing_practice_portion",
+                  id: "farm_crops_grassland_grazing_practice_portion_number",
                   question: "% of them",
 
                   formInput: { type: "number" },
@@ -931,7 +977,8 @@ const listOfQuestions = {
         },
         {
           answerParentQuestion: true,
-          id: "farm_organic_soils_restoration_practice",
+          id: "farm_crops_organic_soils_restoration_practice",
+          parentId: "farm_crops",
           question:
             "For your crop(s), have you implemented Restoration ( applies for organic soils) to reduce emissions & increase sequestration?",
           formInput: { type: "checkbox" },
@@ -939,7 +986,8 @@ const listOfQuestions = {
           linked_questions: [
             {
               answerParentQuestion: true,
-              id: "farm_organic_soils_restoration_practice_portion",
+              parentId: "farm_crops_organic_soils_restoration_practice",
+              id: "farm_crops_organic_soils_restoration_practice_portion",
               question: "Did you implement this/these practice(s) for:",
 
               formInput: { type: "select" },
@@ -947,7 +995,9 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: "A portion of them",
-                  id: "farm_organic_soils_restoration_practice_number",
+                  parentId:
+                    "farm_crops_organic_soils_restoration_practice_portion",
+                  id: "farm_crops_organic_soils_restoration_practice_portion_number",
                   question: "% of them",
 
                   formInput: { type: "number" },
@@ -959,7 +1009,8 @@ const listOfQuestions = {
         },
         {
           answerParentQuestion: true,
-          id: "farm_degraded_lands_restoration_practice",
+          id: "farm_crops_degraded_lands_restoration_practice",
+          parentId: "farm_crops",
           question:
             "For your crop(s), have you implemented Restoration ( applies to degraded lands) to reduce emissions & increase sequestration?",
           formInput: { type: "checkbox" },
@@ -967,7 +1018,8 @@ const listOfQuestions = {
           linked_questions: [
             {
               answerParentQuestion: true,
-              id: "farm_degraded_lands_restoration_practice_portion",
+              parentId: "farm_crops_degraded_lands_restoration_practice",
+              id: "farm_crops_degraded_lands_restoration_practice_portion",
               question: "Did you implement this/these practice(s) for:",
 
               formInput: { type: "select" },
@@ -975,7 +1027,9 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: "A portion of them",
-                  id: "farm_degraded_lands_restoration_practice_number",
+                  parentId:
+                    "farm_crops_degraded_lands_restoration_practice_portion",
+                  id: "farm_crops_degraded_lands_restoration_practice_portion_number",
                   question: "% of them",
 
                   formInput: { type: "number" },
@@ -987,7 +1041,8 @@ const listOfQuestions = {
         },
         {
           answerParentQuestion: true,
-          id: "farm_soils_bioenergy_practice",
+          id: "farm_crops_soils_bioenergy_practice",
+          parentId: "farm_crops",
           question:
             "For your crop(s), have you implemented Soils under bio-energy to reduce emissions & increase sequestration?",
           formInput: { type: "checkbox" },
@@ -995,7 +1050,8 @@ const listOfQuestions = {
           linked_questions: [
             {
               answerParentQuestion: true,
-              id: "farm_soils_bioenergy_practice_portion",
+              parentId: "farm_crops_soils_bioenergy_practice",
+              id: "farm_crops_soils_bioenergy_practice_portion",
               question: "Did you implement this/these practice(s) for:",
 
               formInput: { type: "select" },
@@ -1003,7 +1059,8 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: "A portion of them",
-                  id: "farm_soils_bioenergy_practice_number",
+                  parentId: "farm_crops_soils_bioenergy_practice_portion",
+                  id: "farm_crops_soils_bioenergy_practice_portion_number",
                   question: "% of them",
 
                   formInput: { type: "number" },
@@ -1015,7 +1072,8 @@ const listOfQuestions = {
         },
         {
           answerParentQuestion: true,
-          id: "farm_manure_practice",
+          id: "farm_crops_manure_practice",
+          parentId: "farm_crops",
           question:
             "For your crop(s), have you implemented Application of manure/biosolids to reduce emissions & increase sequestration?",
           formInput: { type: "checkbox" },
@@ -1023,7 +1081,8 @@ const listOfQuestions = {
           linked_questions: [
             {
               answerParentQuestion: true,
-              id: "farm_manure_practice_portion",
+              parentId: "farm_crops_manure_practice",
+              id: "farm_crops_manure_practice_portion",
               question: "Did you implement this/these practice(s) for:",
 
               formInput: { type: "select" },
@@ -1031,7 +1090,8 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: "A portion of them",
-                  id: "farm_manure_practice_number",
+                  parentId: "farm_crops_manure_practice_portion",
+                  id: "farm_crops_manure_practice_portion_number",
                   question: "% of them",
 
                   formInput: { type: "number" },
@@ -1043,15 +1103,17 @@ const listOfQuestions = {
         },
         {
           answerParentQuestion: true,
+          parentId: "farm_crops",
           bloc_name: "fertilizer",
-          id: "fertilizer",
+          id: "farm_crops_fertilizer",
           question: "Do you apply synthetic fertilizer",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
             {
               answerParentQuestion: true,
-              id: "fertilizer_ammonia_anhydrous",
+              id: "farm_crops_fertilizer_ammonia_anhydrous",
+              parentId: "farm_crops_fertilizer",
               question: "Do you use Ammonia anhydrous ?",
 
               formInput: { type: "checkbox" },
@@ -1059,7 +1121,8 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: true,
-                  id: "fertilizer_ammonia_anhydrous_cons",
+                  parentId: "farm_crops_fertilizer_ammonia_anhydrous",
+                  id: "farm_crops_fertilizer_ammonia_anhydrous_cons",
                   question:
                     "During the period of time indicated at the beginning of this questionnaire, how many ton of Ammonia anhydrous did you apply?",
 
@@ -1070,7 +1133,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_ammonia_aqua",
+              id: "farm_crops_fertilizer_ammonia_aqua",
+              parentId: "farm_crops_fertilizer",
               question: "Do you use Ammonia aqua ?",
 
               formInput: { type: "checkbox" },
@@ -1078,7 +1142,7 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: true,
-                  id: "fertilizer_ammonia_aqua_cons",
+                  id: "farm_crops_fertilizer_ammonia_aqua_cons",
                   question:
                     "During the period of time indicated at the beginning of this questionnaire, how many ton of Ammonia aqua did you apply?",
 
@@ -1089,7 +1153,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_ammonia_nitrate",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_ammonia_nitrate",
               question: "Do you use Ammonia nitrate ?",
 
               formInput: { type: "checkbox" },
@@ -1097,7 +1162,7 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: true,
-                  id: "fertilizer_ammonia_nitrate_cons",
+                  id: "farm_crops_fertilizer_ammonia_nitrate_cons",
                   question:
                     "During the period of time indicated at the beginning of this questionnaire, how many ton of Ammonia nitrate did you apply?",
 
@@ -1108,7 +1173,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_ammonium_nitrate_limestone_mixtures",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_ammonium_nitrate_limestone_mixtures",
               question: "Do you use Ammonium nitrate limestone mixtures ?",
 
               formInput: { type: "checkbox" },
@@ -1127,7 +1193,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_ammonium_sulfate",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_ammonium_sulfate",
               question: "Do you use ammonium sulfate ?",
 
               formInput: { type: "checkbox" },
@@ -1146,7 +1213,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_ammonium_sulfate_nitrate",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_ammonium_sulfate_nitrate",
               question: "Do you use ammonium sulfate nitrate?",
 
               formInput: { type: "checkbox" },
@@ -1165,7 +1233,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_calcium_cyanamide",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_calcium_cyanamide",
               question: "Do you use calcium cyanamide?",
 
               formInput: { type: "checkbox" },
@@ -1184,7 +1253,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_calcium_nitrate",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_calcium_nitrate",
               question: "Do you use calcium nitrate?",
 
               formInput: { type: "checkbox" },
@@ -1203,7 +1273,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_nitrogen_solutions",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_nitrogen_solutions",
               question: "Do you use nitrogen solutions?",
 
               formInput: { type: "checkbox" },
@@ -1222,7 +1293,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_sodium_nitrate",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_sodium_nitrate",
               question: "Do you use sodium nitrate?",
 
               formInput: { type: "checkbox" },
@@ -1241,7 +1313,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_urea",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_urea",
               question: "Do you use urea?",
 
               formInput: { type: "checkbox" },
@@ -1260,7 +1333,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_urea_form",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_urea_form",
               question: "Do you use urea form?",
 
               formInput: { type: "checkbox" },
@@ -1279,7 +1353,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_basic_slag",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_basic_slag",
               question: "Do you use basic slag, open hearth?",
 
               formInput: { type: "checkbox" },
@@ -1298,7 +1373,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_bone_meal",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_bone_meal",
               question: "Do you use bone meal?",
 
               formInput: { type: "checkbox" },
@@ -1317,7 +1393,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_phosphoric_acid",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_phosphoric_acid",
               question: "Do you use phosphoric acid?",
 
               formInput: { type: "checkbox" },
@@ -1336,7 +1413,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_rock_phosphate",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_rock_phosphate",
               question: "Do you use rock phosphate?",
 
               formInput: { type: "checkbox" },
@@ -1355,7 +1433,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_superphosphate_normal",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_superphosphate_normal",
               question: "Do you use superphosphate normal?",
 
               formInput: { type: "checkbox" },
@@ -1374,7 +1453,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_superphosphate_concentrated",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_superphosphate_concentrated",
               question: "Do you use superphosphate concentrated?",
 
               formInput: { type: "checkbox" },
@@ -1393,7 +1473,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_superphosphoric_acid",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_superphosphoric_acid",
               question: "Do you use superphosphoric acid?",
 
               formInput: { type: "checkbox" },
@@ -1412,7 +1493,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_potash",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_potash",
               question: "Do you use potash?",
 
               formInput: { type: "checkbox" },
@@ -1431,7 +1513,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_potassium_chloride",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_potassium_chloride",
               question: "Do you use potassium chloride (muriate)?",
 
               formInput: { type: "checkbox" },
@@ -1450,7 +1533,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_potassium_magnesium_sulfate",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_potassium_magnesium_sulfate",
               question: "Do you use potassium magnesium sulfate?",
 
               formInput: { type: "checkbox" },
@@ -1469,7 +1553,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_potassium_sulfate",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_potassium_sulfate",
               question: "Do you use potassium sulfate?",
 
               formInput: { type: "checkbox" },
@@ -1488,7 +1573,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_ammoniated_superphosphate",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_ammoniated_superphosphate",
               question: "Do you use ammoniated superphosphate?",
 
               formInput: { type: "checkbox" },
@@ -1507,7 +1593,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_ammonium_phosphate_nitrate",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_ammonium_phosphate_nitrate",
               question: "Do you use ammonium phosphate nitrate?",
 
               formInput: { type: "checkbox" },
@@ -1526,7 +1613,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_ammonium_phosphate_sulfate",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_ammonium_phosphate_sulfate",
               question: "Do you use ammonium phosphate sulfate?",
 
               formInput: { type: "checkbox" },
@@ -1545,7 +1633,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_diammonium_phosphate",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_diammonium_phosphate",
               question: "Do you use diammonium phosphate?",
 
               formInput: { type: "checkbox" },
@@ -1564,7 +1653,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_monoammonium_phosphate",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_monoammonium_phosphate",
               question: "Do you use monoammonium phosphate?",
 
               formInput: { type: "checkbox" },
@@ -1583,7 +1673,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_nitric_phosphate",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_nitric_phosphate",
               question: "Do you use nitric phosphate?",
 
               formInput: { type: "checkbox" },
@@ -1602,7 +1693,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_nitrate_of_soda_potash",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_nitrate_of_soda_potash",
               question: "Do you use Nitrate of soda potash?",
 
               formInput: { type: "checkbox" },
@@ -1621,7 +1713,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_potassium_nitrate",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_potassium_nitrate",
               question: "Do you use Potassium nitrate?",
 
               formInput: { type: "checkbox" },
@@ -1640,7 +1733,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_wood_ashes",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_wood_ashes",
               question: "Do you use wood ashes?",
 
               formInput: { type: "checkbox" },
@@ -1659,7 +1753,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_blast_furnace_slag",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_blast_furnace_slag",
               question: "Do you use Blast furnace slag?",
 
               formInput: { type: "checkbox" },
@@ -1678,7 +1773,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_dolomite",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_dolomite",
               question: "Do you use dolomite?",
 
               formInput: { type: "checkbox" },
@@ -1697,7 +1793,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_gypsum",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_gypsum",
               question: "Do you use gypsum?",
 
               formInput: { type: "checkbox" },
@@ -1716,7 +1813,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_kiesserite",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_kiesserite",
               question: "Do you use kiesserite(emjeo)?",
 
               formInput: { type: "checkbox" },
@@ -1735,7 +1833,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_limestone",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_limestone",
               question: "Do you use limestone?",
 
               formInput: { type: "checkbox" },
@@ -1754,7 +1853,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_lime_sulfur_solution",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_lime_sulfur_solution",
               question: "Do you use lime-sulfur solution?",
 
               formInput: { type: "checkbox" },
@@ -1773,7 +1873,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_magnesium_sulfate",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_magnesium_sulfate",
               question: "Do you use magnesium sulfate (Epsom salt)?",
 
               formInput: { type: "checkbox" },
@@ -1792,7 +1893,8 @@ const listOfQuestions = {
             },
             {
               answerParentQuestion: true,
-              id: "fertilizer_sulfur",
+              parentId: "farm_crops_fertilizer",
+              id: "farm_crops_fertilizer_sulfur",
               question: "Do you use sulfur?",
 
               formInput: { type: "checkbox" },
