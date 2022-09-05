@@ -4,8 +4,9 @@ import videoSrc from "../assets/video/720pmini.webm";
 import Firstnav from "./Firstnav";
 import Bg from "./Bg";
 import arrow from "../assets/svg/arrow.svg";
-
+import { useNavigate } from "react-router-dom";
 function Home({ viewHeight, scroll }) {
+  let navigate = useNavigate();
   function scrollHero() {
     window.scrollTo({
       left: 0,
@@ -74,7 +75,12 @@ function Home({ viewHeight, scroll }) {
           <circle r="50" fill="white" cx="50" cy="50"></circle>
         </svg>
       </div>
-      <button className="btn sticky-bottom">get strated</button>
+      <button
+        className="btn sticky-bottom"
+        onClick={() => navigate("/getstarted")}
+      >
+        get strated
+      </button>
       <p>
         Fugiat ea Lorem quis culpa esse commodo fugiat dolore anim aliqua fugiat
         ad. Ex ea velit sit consectetur aute aliqua cillum minim quis proident
