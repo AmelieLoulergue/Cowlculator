@@ -1,6 +1,62 @@
 import React, { useRef, useState } from "react";
 import sendIcon from "../../assets/svg/send.svg";
+import back_arrow from "../../assets/svg/back-arrow.svg";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import { styled } from "@mui/material/styles";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
+const label = { inputProps: { "aria-label": "Switch demo" } };
+const AntSwitch = styled(Switch)(({ theme }) => ({
+  width: 28,
+  height: 16,
+  padding: 0,
+  display: "flex",
+  "&:active": {
+    "& .MuiSwitch-thumb": {
+      width: 15,
+    },
+    "& .MuiSwitch-switchBase.Mui-checked": {
+      transform: "translateX(9px)",
+    },
+  },
+  "& .MuiSwitch-switchBase": {
+    padding: 2,
+    "&.Mui-checked": {
+      transform: "translateX(12px)",
+      color: "#fff",
+      "& + .MuiSwitch-track": {
+        opacity: 1,
+        backgroundColor: theme.palette.mode === "dark" ? "#177ddc" : "#1890ff",
+      },
+    },
+  },
+  "& .MuiSwitch-thumb": {
+    boxShadow: "0 2px 4px 0 rgb(0 35 11 / 20%)",
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+    transition: theme.transitions.create(["width"], {
+      duration: 200,
+    }),
+  },
+  "& .MuiSwitch-track": {
+    borderRadius: 16 / 2,
+    opacity: 1,
+    backgroundColor:
+      theme.palette.mode === "dark"
+        ? "rgba(255,255,255,.35)"
+        : "rgba(0,0,0,.25)",
+    boxSizing: "border-box",
+  },
+}));
 function RenderInput({
   formInput,
   indexQuestion,
@@ -8,83 +64,78 @@ function RenderInput({
   answer,
   sendAnswer,
   isButtonDisplay = false,
-  questions,
-  setQuestions,
+  goPrecedentQuestion,
+  question,
+  unit,
+  setUnit,
 }) {
-  const [yesChecked, setYesChecked] = useState(true);
   const inputRef = useRef(null);
-
-  console.log(answer);
   return (
     <div id={"input_" + indexQuestion} className={"response-input"}>
-      {formInput.type === "checkbox" && <h3>YES</h3>}
-      <input
-        ref={inputRef}
-        style={formInput.type === "checkbox" ? { width: "3rem" } : {}}
-        type={formInput.type}
-        onChange={(event) => {
-          console.log(event.target.value, "zizi");
-          isButtonDisplay
-            ? setAnswer(
-                formInput.type === "checkbox"
-                  ? event.target.checked
-                  : event.target.value
-              )
-            : setQuestions(
-                questions.map((question) => {
-                  if (question.id === indexQuestion) {
-                    formInput.type === "checkbox" && setYesChecked(!yesChecked);
-                    return {
-                      ...question,
-                      response:
-                        formInput.type === "number" &&
-                        (event.target.value === 0 ||
-                          event.target.value === "0" ||
-                          event.target.value === null ||
-                          event.target.value === undefined ||
-                          event.target.value === "")
-                          ? " "
-                          : formInput.type === "checkbox"
-                          ? event.target.checked
-                          : event.target.value,
-                    };
-                  } else {
-                    return question;
-                  }
-                })
-              );
-        }}
-        value={answer || ""}
-        checked={formInput.type === "checkbox" ? yesChecked : answer}
-      />
-      {formInput.type === "checkbox" && (
-        <>
-          <h3>NO</h3>
-          <input
-            style={{ width: "3rem" }}
-            ref={inputRef}
-            type={formInput.type}
-            onChange={(event) => {
-              setYesChecked(!yesChecked);
-              setQuestions(
-                questions.map((question) => {
-                  if (question.id === indexQuestion) {
-                    formInput.type === "checkbox" && setYesChecked(!yesChecked);
-                    return {
-                      ...question,
-                      response: event.target.checked ? "false" : true,
-                    };
-                  } else {
-                    return question;
-                  }
-                })
-              );
-            }}
-            checked={!yesChecked}
-          />
-        </>
+      {isButtonDisplay && (
+        <button className="btn-back" onClick={goPrecedentQuestion}>
+          <img src={back_arrow} alt="" width="40px"></img>
+        </button>
       )}
-
+      {question.formInput.type === "checkbox" ? (
+        <div className="switch-yes-no">
+          <Stack direction="row" spacing={1} alignItems="center">
+            <Typography>NO</Typography>
+            <AntSwitch
+              checked={answer || false}
+              inputProps={{ "aria-label": "ant design" }}
+              onChange={(event) => {
+                setAnswer(
+                  formInput.type === "checkbox"
+                    ? event.target.checked
+                    : event.target.value
+                );
+              }}
+            />
+            <Typography>YES</Typography>
+          </Stack>
+        </div>
+      ) : (
+        <input
+          ref={inputRef}
+          style={formInput.type === "checkbox" ? { width: "3rem" } : {}}
+          type={formInput.type}
+          onChange={(event) => {
+            setAnswer(
+              formInput.type === "checkbox"
+                ? event.target.checked
+                : event.target.value
+            );
+          }}
+          value={answer || ""}
+          checked={answer || false}
+        />
+      )}
+      {question.userValue.unit &&
+        typeof question.userValue.unit === "string" && (
+          <p>{question.userValue.unit}</p>
+        )}
+      {question.userValue.unit && typeof question.userValue.unit === "object" && (
+        <Box sx={{ minWidth: 120 }}>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Unit</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={unit}
+              label="Age"
+              onChange={(event) => {
+                console.log(unit, event.target.value);
+                setUnit(event.target.value);
+              }}
+            >
+              {question.userValue.unit.map((unit) => (
+                <MenuItem value={unit}>{unit}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Box>
+      )}
       {isButtonDisplay && (
         <button
           className="btn"

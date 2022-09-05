@@ -1,17 +1,17 @@
 import RenderInput from "./RenderInput";
-
+import RenderResponse from "./RenderResponse";
 import React, { useEffect, useState } from "react";
 
 const RenderQuestion = ({
   question,
-  userValues,
   sendAnswer,
   setAnswer,
   response,
   answer,
-  questions,
-  setQuestions,
+  goPrecedentQuestion,
 }) => {
+  console.log(question);
+  const [unit, setUnit] = useState(null);
   return (
     <>
       <div id={`ask_${question.id}`} className="ask">
@@ -29,31 +29,31 @@ const RenderQuestion = ({
           </div>
         )}
         <div className="response">
-          <RenderInput
-            formInput={question.formInput}
-            userValues={userValues}
+          <RenderResponse
             question={question}
             answer={response}
             indexQuestion={question.id}
-            questions={questions}
-            setQuestions={setQuestions}
+            unit={unit}
           />
         </div>
       </div>
-      {!response && (
+      {typeof response !== "boolean" && response !== null && !response && (
         <div
           className={response ? "is-hidden" : "inputField"}
           id={`send_input_${question.id}`}
         >
-            <RenderInput
-              formInput={question.formInput}
-              userValues={userValues}
-              setAnswer={setAnswer}
-              answer={answer}
-              sendAnswer={sendAnswer}
-              isButtonDisplay={true}
-              indexQuestion={question.id}
-            />
+          <RenderInput
+            formInput={question.formInput}
+            setAnswer={setAnswer}
+            answer={answer}
+            sendAnswer={sendAnswer}
+            isButtonDisplay={true}
+            indexQuestion={question.id}
+            goPrecedentQuestion={goPrecedentQuestion}
+            question={question}
+            unit={unit}
+            setUnit={setUnit}
+          />
         </div>
       )}
     </>

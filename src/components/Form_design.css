@@ -130,6 +130,7 @@
 .formChat .response div {
   padding: 15px;
   font-size: 1.1rem;
+  display: flex;
 }
 .formChat .response p:focus-visible {
   outline: none;
@@ -186,11 +187,42 @@
   margin: auto;
   justify-content: center;
   align-items: center;
-  display: flex;
+  display: flex !important;
 }
 .checkbox-input {
   display: flex;
   justify-content: center;
   align-items: center;
   padding-right: 1rem;
+}
+.buttons-skip-form {
+  position: fixed;
+  z-index: 999;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  background-color: #110f16;
+  padding: 1rem;
+}
+.buttons-skip-form > button {
+  /* padding: 1rem; */
+  color: rgb(180, 180, 180);
+  background-color: #110f16;
+  border: none;
+  font-size: 1rem;
+}
+.btn-back {
+  background-color: transparent;
+  border: none;
+}
+.switch-yes-no {
+  border-radius: 15px;
+  padding: 15px;
+  background: rgb(21 20 26);
+  color: white;
+  border: solid 1px rgb(35 35 35);
+  height: 21px;
+  box-shadow: 0 10px 20px rgb(0 0 0 / 47%);
+  width: 45vw;
+  transition: 0.5s ease;
 }
