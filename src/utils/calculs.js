@@ -14,70 +14,70 @@ function calculs(
   water_coeff
 ) {
   console.log("toutes les datas", datasForm);
-  console.log(reductionEF_coeff); // tableau d'objets
+  // console.log(reductionEF_coeff); // tableau d'objets
 
-  console.log(datasForm.natgas_unit);
-  // pour avoir la première ligne du tableau
-  console.log(coeff_reduction_ghg[0]);
-  console.log(elec_state_coeff[0]);
-  // au valeur de cette ligne
-  console.log(
-    "climate : ",
-    coeff_reduction_ghg[0].climate,
-    "practice : ",
-    coeff_reduction_ghg[0].practice,
-    "CO2 :",
-    coeff_reduction_ghg[0].CO2,
-    "CH4 :",
-    coeff_reduction_ghg[0].CH4,
-    "N2O : ",
-    coeff_reduction_ghg[0].N2O,
-    "GHG :",
-    coeff_reduction_ghg[0].GHG
-  );
-  // trouver un élément par rapport à la pratique
-  let practice = coeff_reduction_ghg.find(
-    (coeff) => coeff.practice === "agronomy"
-  );
+  // console.log(datasForm.natgas_unit);
+  // // pour avoir la première ligne du tableau
+  // console.log(coeff_reduction_ghg[0]);
+  // console.log(elec_state_coeff[0]);
+  // // au valeur de cette ligne
+  // console.log(
+  //   "climate : ",
+  //   coeff_reduction_ghg[0].climate,
+  //   "practice : ",
+  //   coeff_reduction_ghg[0].practice,
+  //   "CO2 :",
+  //   coeff_reduction_ghg[0].CO2,
+  //   "CH4 :",
+  //   coeff_reduction_ghg[0].CH4,
+  //   "N2O : ",
+  //   coeff_reduction_ghg[0].N2O,
+  //   "GHG :",
+  //   coeff_reduction_ghg[0].GHG
+  // );
+  // // trouver un élément par rapport à la pratique
+  // let practice = coeff_reduction_ghg.find(
+  //   (coeff) => coeff.practice === "agronomy"
+  // );
 
-  //console.log(consOther.length);
+  // //console.log(consOther.length);
 
-  console.log(practice);
-  console.log(
-    "climate : ",
-    practice.climate,
-    "practice : ",
-    practice.practice,
-    "CO2 :",
-    practice.CO2,
-    "CH4 :",
-    practice.CH4,
-    "N2O : ",
-    practice.N2O,
-    "GHG :",
-    practice.GHG
-  );
+  // console.log(practice);
+  // console.log(
+  //   "climate : ",
+  //   practice.climate,
+  //   "practice : ",
+  //   practice.practice,
+  //   "CO2 :",
+  //   practice.CO2,
+  //   "CH4 :",
+  //   practice.CH4,
+  //   "N2O : ",
+  //   practice.N2O,
+  //   "GHG :",
+  //   practice.GHG
+  // );
 
   let time = funcTime(datasForm);
-  console.log(time);
+  // console.log(time);
 
   let elecCO2 = funcElec(datasForm, elec_state_coeff);
-  console.log(elecCO2);
+  // console.log(elecCO2);
 
   let natGasCO2 = funcNatGas(datasForm, natgas_coeff);
-  console.log(natGasCO2);
+  // console.log(natGasCO2);
 
   let gasCO2 = funcGas(datasForm, gas_coeff);
-  console.log(gasCO2);
+  // console.log(gasCO2);
 
   let fuelCO2 = funcFuel(datasForm, fuel_coeff);
-  console.log(fuelCO2);
+  // console.log(fuelCO2);
 
   let other = funcOther(datasForm, other_coeff);
-  console.log(other);
+  // console.log(other);
 
   let water = funcWater(datasForm, water_coeff);
-  console.log(water);
+  // console.log(water);
 
   // Emissions from enteric fermentation of dairies, beed and sheep
   let entericFermentationCO2 = funcAnimalsEF(
@@ -93,58 +93,112 @@ function calculs(
   let manureCO2 = funcAnimalsManure(datasForm, manure, time);
   console.log(manureCO2);
 
+  let numbDairyPractices = 0;
+
+  // if (cattleDairy === 0 || datasForm.practices.practice_anim[3].selected===true) {
+  //   numbDairyPractices = 0;
+  // } else {
+  //   if (datasForm.practices.practice_anim[0].dairy_cow.all_of_them === true) {
+  //     numbDairyPractices = 1;
+  //   } else {
+  //     if (
+  //       datasForm.practices.practice_anim[0].dairy_cow.portion_of_them === true
+  //     ) {
+  //       let portionDairy =
+  //         datasForm.practices.practice_anim[0].dairy_cow.portion_numb / 100;
+  //       numbDairyPractices = portionDairy;
+  //     }
+  //   }
+  // }
+  console.log(numbDairyPractices);
+
   // Extract EFDairy, EFBeef, EFSheep
-  let EFDairy= entericFermentationCO2[0]
-  let EFBeef= entericFermentationCO2[1]
-  let EFSheep= entericFermentationCO2[2]
+  let EFDairy = entericFermentationCO2[0];
+  let EFBeef = entericFermentationCO2[1];
+  let EFSheep = entericFermentationCO2[2];
 
   //numb total beef and dairies
-  let numbTotal= funcNumbTotalBeefDairy(datasForm);
-  let cattleDairy= numbTotal[0];
-  let cattleBeef= numbTotal[1];
-   console.log(cattleDairy);
-   console.log(cattleBeef);
+  let numbTotal = funcNumbTotalBeefDairy(datasForm);
+  let cattleDairy = numbTotal[0];
+  let cattleBeef = numbTotal[1];
+  console.log(cattleDairy);
+  console.log(cattleBeef);
 
   // Mitigation EF from Imp Feed Dairy
   let mitigationEFImpFeedDairy = funcMitigationsImpFeedDairy(
-    datasForm, reductionEF_coeff, EFDairy);
+    datasForm,
+    reductionEF_coeff,
+    EFDairy
+  );
   console.log(mitigationEFImpFeedDairy);
 
   // Mitigation EF from Imp Feed Beef
-  let mitigationEFImpFeedBeef=funcMitigationsImpFeedBeef(
-    datasForm,reductionEF_coeff,EFBeef);
+  let mitigationEFImpFeedBeef = funcMitigationsImpFeedBeef(
+    datasForm,
+    reductionEF_coeff,
+    EFBeef
+  );
   console.log(mitigationEFImpFeedBeef);
 
   // Mitigation EF from Imp Feed Sheep
-let mitigationEFImpFeedSheep=funcMitigationsImpFeedSheep(
-    datasForm,reductionEF_coeff,EFSheep);
+  let mitigationEFImpFeedSheep = funcMitigationsImpFeedSheep(
+    datasForm,
+    reductionEF_coeff,
+    EFSheep
+  );
   console.log(mitigationEFImpFeedSheep);
 
   //Mitigation EF from Additive Dairy
-  let mitigationEFAdditiveDairy= funcMitigationsAdditiveDairy(datasForm, reductionEF_coeff, EFDairy, cattleDairy);
+  let mitigationEFAdditiveDairy = funcMitigationsAdditiveDairy(
+    datasForm,
+    reductionEF_coeff,
+    EFDairy,
+    cattleDairy
+  );
   console.log(mitigationEFAdditiveDairy);
 
   //Mitigation EF from Additive Beef
-  let mitigationEFAdditiveBeef= funcMitigationsAdditiveBeef(datasForm, reductionEF_coeff, EFBeef, cattleBeef);
+  let mitigationEFAdditiveBeef = funcMitigationsAdditiveBeef(
+    datasForm,
+    reductionEF_coeff,
+    EFBeef,
+    cattleBeef
+  );
   console.log(mitigationEFAdditiveBeef);
 
   //Mitigation EF from Additive Sheep
-  let mitigationEFAdditiveSheep= funcMitigationsAdditiveSheep(datasForm, reductionEF_coeff, EFSheep);
+  let mitigationEFAdditiveSheep = funcMitigationsAdditiveSheep(
+    datasForm,
+    reductionEF_coeff,
+    EFSheep
+  );
   console.log(mitigationEFAdditiveSheep);
 
-  
-   //Mitigation EF from LTBreedingDairy
-   let mitigationEFLTBreedingDairy= funcMitigationsLTBreedingDairy(datasForm, reductionEF_coeff, EFDairy, cattleDairy);
-   console.log(mitigationEFLTBreedingDairy);
- 
-   //Mitigation EF from LTBreedingBeef
-   let mitigationEFLTBreedingBeef= funcMitigationsLTBreedingBeef(datasForm, reductionEF_coeff, EFBeef, cattleBeef);
-   console.log(mitigationEFLTBreedingBeef);
- 
-   //Mitigation EF from LTBreeding Sheep
-   let mitigationEFLTBreedingSheep= funcMitigationsLTBreedingSheep(datasForm, reductionEF_coeff, EFSheep);
-   console.log(mitigationEFLTBreedingSheep);
+  //Mitigation EF from LTBreedingDairy
+  let mitigationEFLTBreedingDairy = funcMitigationsLTBreedingDairy(
+    datasForm,
+    reductionEF_coeff,
+    EFDairy,
+    cattleDairy
+  );
+  console.log(mitigationEFLTBreedingDairy);
 
+  //Mitigation EF from LTBreedingBeef
+  let mitigationEFLTBreedingBeef = funcMitigationsLTBreedingBeef(
+    datasForm,
+    reductionEF_coeff,
+    EFBeef,
+    cattleBeef
+  );
+  console.log(mitigationEFLTBreedingBeef);
+
+  //Mitigation EF from LTBreeding Sheep
+  let mitigationEFLTBreedingSheep = funcMitigationsLTBreedingSheep(
+    datasForm,
+    reductionEF_coeff,
+    EFSheep
+  );
+  console.log(mitigationEFLTBreedingSheep);
 
   console.log("toutes les datas", datasForm);
   // console.log("date de fin", datasForm.endDate);
@@ -195,7 +249,7 @@ function funcTime(datasForm) {
 //function electricity
 function funcElec(datasForm, elec_state_coeff) {
   //electrictity consumption
-  let elecCons = datasForm.elec_total.value;
+  let elecCons = datasForm.elec_total?.value;
   let elecProd = 0;
 
   // electricity production
@@ -209,9 +263,9 @@ function funcElec(datasForm, elec_state_coeff) {
 
   //multiplied by CO2 kg/kWh coeff associated to state
 
-  let state = datasForm.demographics.state;
+  let state = datasForm.demographics?.state;
   let coeffState = elec_state_coeff.find((coeff) => coeff.State === state);
-  let elecCO2 = round(coeffState.CO2_kilo * elecTotal, 1);
+  let elecCO2 = round(coeffState?.CO2_kilo * elecTotal, 1);
 
   return elecCO2;
 }
@@ -219,7 +273,9 @@ function funcElec(datasForm, elec_state_coeff) {
 // Function natural gas
 
 function funcNatGas(datasForm, natgas_coeff) {
-  let unit = datasForm.natgas_unit.find((unit) => unit.selected === true).value;
+  let unit = datasForm.natgas_unit?.find(
+    (unit) => unit.selected === true
+  ).value;
   let natGasCons = datasForm.natgas_cons;
 
   // convert unit to MMBtu
@@ -541,7 +597,17 @@ function funcAnimalsEF(datasForm, enteric_EF, regions, time) {
       EFWaterBuff,
     1
   );
-  return [EFDairy, EFBeef, EFSheep, EFGoat, EFSwine, EFHorse, EFMules, EFWaterBuff,EFtotal];
+  return [
+    EFDairy,
+    EFBeef,
+    EFSheep,
+    EFGoat,
+    EFSwine,
+    EFHorse,
+    EFMules,
+    EFWaterBuff,
+    EFtotal,
+  ];
 }
 
 // Function animals : emissions from manure
@@ -623,8 +689,7 @@ function funcAnimalsManure(datasForm, manure, time) {
 }
 
 // Function number total beef and dairies
-function funcNumbTotalBeefDairy(datasForm){
-
+function funcNumbTotalBeefDairy(datasForm) {
   //Number total dairies
   let cattleDairy =
     datasForm.farm_dairy_cattle_rep12_numb.value +
@@ -639,27 +704,29 @@ function funcNumbTotalBeefDairy(datasForm){
     datasForm.farm_beef_cattle_yearling_numb.value +
     datasForm.farm_beef_cattle_bulls_numb.value;
 
-  return [cattleDairy,cattleBeef]
-
+  return [cattleDairy, cattleBeef];
 }
-
 
 // Function dairy: mitigations improved feeding
 
 function funcMitigationsImpFeedDairy(
   datasForm,
   reductionEF_coeff,
-  EFDairy, cattleDairy) {
+  EFDairy,
+  cattleDairy
+) {
   //Coeff
   let coeffImpFeedDairy = reductionEF_coeff[0].Improved_feeding;
-  
-  
+
   // Proportion of animals included in the practice improved feeding
 
   //Dairy
   let numbDairyPractices = 0;
 
-  if (cattleDairy === 0 || datasForm.practices.practice_anim[3].selected===true) {
+  if (
+    cattleDairy === 0 ||
+    datasForm.practices.practice_anim[3].selected === true
+  ) {
     numbDairyPractices = 0;
   } else {
     if (datasForm.practices.practice_anim[0].dairy_cow.all_of_them === true) {
@@ -674,7 +741,6 @@ function funcMitigationsImpFeedDairy(
       }
     }
   }
-  
 
   //EF emissions from cattle portion concerned by improved feeding
   let EFDairyImpFeed = 0;
@@ -686,28 +752,28 @@ function funcMitigationsImpFeedDairy(
   // Mitigation percentage
   let mitigationPercentageDairyImpFeed = (EFDairyImpFeed * 100) / EFDairy;
   // Total EF emissions after mitigation
-  let mitigatedEFDairyImpFeed = EFDairyImpFeed + (1 - numbDairyPractices) * EFDairy;
+  let mitigatedEFDairyImpFeed =
+    EFDairyImpFeed + (1 - numbDairyPractices) * EFDairy;
 
-  
-
-  return [mitigatedEFDairyImpFeed,mitigationPercentageDairyImpFeed];
+  return [mitigatedEFDairyImpFeed, mitigationPercentageDairyImpFeed];
 }
-
 
 function funcMitigationsImpFeedBeef(
   datasForm,
   reductionEF_coeff,
-  EFBeef, cattleBeef) {
-
+  EFBeef,
+  cattleBeef
+) {
   //Coeff
   let coeffImpFeedBeef = reductionEF_coeff[1].Improved_feeding;
 
-
   // Proportion of beef included in the practice improved feeding
 
-
   let numbBeefPractices = 0;
-  if (cattleBeef === 0 || datasForm.practices.practice_anim[3].selected===true) {
+  if (
+    cattleBeef === 0 ||
+    datasForm.practices.practice_anim[3].selected === true
+  ) {
     numbBeefPractices = 0;
   } else {
     if (datasForm.practices.practice_anim[0].beef_cattle.all_of_them === true) {
@@ -724,8 +790,7 @@ function funcMitigationsImpFeedBeef(
     }
   }
 
- // EF emissions mitigated by the practice improved feeding
-
+  // EF emissions mitigated by the practice improved feeding
 
   let EFBeefImpFeed = 0;
   if (datasForm.practices.practice_anim[0].beef_cattle.selected === true) {
@@ -738,22 +803,20 @@ function funcMitigationsImpFeedBeef(
   // Total EF emissions after mitigation
   let mitigatedEFBeefImpFeed = EFBeefImpFeed + (1 - numbBeefPractices) * EFBeef;
 
-  return [mitigatedEFBeefImpFeed,mitigationPercentageBeefImpFeed]
+  return [mitigatedEFBeefImpFeed, mitigationPercentageBeefImpFeed];
 }
 
-  
-  function funcMitigationsImpFeedSheep(
-  datasForm,
-  reductionEF_coeff,
-  EFSheep) {
-
-      //Coeff
+function funcMitigationsImpFeedSheep(datasForm, reductionEF_coeff, EFSheep) {
+  //Coeff
   let coeffImpFeedSheep = reductionEF_coeff[2].Improved_feeding;
 
   // Proportion of sheep included in the practice improved feeding
 
   let numbSheepPractices = 0;
-  if (datasForm.farm_sheeps_matur_numb.value === 0 || datasForm.practices.practice_anim[3].selected===true) {
+  if (
+    datasForm.farm_sheeps_matur_numb.value === 0 ||
+    datasForm.practices.practice_anim[3].selected === true
+  ) {
     numbSheepPractices = 0;
   } else {
     if (datasForm.practices.practice_anim[0].sheeps.all_of_them === true) {
@@ -769,7 +832,6 @@ function funcMitigationsImpFeedBeef(
     }
   }
 
-
   //EF emissions from cattle portion concerned by improved feeding
   let EFSheepImpFeed = 0;
   if (datasForm.practices.practice_anim[0].sheeps.selected === true) {
@@ -780,15 +842,20 @@ function funcMitigationsImpFeedBeef(
   // Mitigation percentage
   let mitigationPercentageSheepImpFeed = (EFSheepImpFeed * 100) / EFSheep;
   // Total EF emissions after mitigation
-  let mitigatedEFSheepImpFeed = EFSheepImpFeed + (1 - numbSheepPractices) * EFSheep;
+  let mitigatedEFSheepImpFeed =
+    EFSheepImpFeed + (1 - numbSheepPractices) * EFSheep;
 
-  return [mitigatedEFSheepImpFeed,mitigationPercentageSheepImpFeed ]
-  }
+  return [mitigatedEFSheepImpFeed, mitigationPercentageSheepImpFeed];
+}
 
+// Function dairy: mitigations additives
 
-  // Function dairy: mitigations additives
-
-function funcMitigationsAdditiveDairy(datasForm, reductionEF_coeff, EFDairy, cattleDairy) {
+function funcMitigationsAdditiveDairy(
+  datasForm,
+  reductionEF_coeff,
+  EFDairy,
+  cattleDairy
+) {
   //Coeff
   let coeffAdditiveDairy = reductionEF_coeff[0].Spec_agents_and_diet_additives;
 
@@ -796,7 +863,10 @@ function funcMitigationsAdditiveDairy(datasForm, reductionEF_coeff, EFDairy, cat
 
   let numbDairyPracticesAdditive = 0;
 
-  if (cattleDairy === 0 || datasForm.practices.practice_anim[3].selected===true ) {
+  if (
+    cattleDairy === 0 ||
+    datasForm.practices.practice_anim[3].selected === true
+  ) {
     numbDairyPracticesAdditive = 0;
   } else {
     if (datasForm.practices.practice_anim[1].dairy_cow.all_of_them === true) {
@@ -811,10 +881,9 @@ function funcMitigationsAdditiveDairy(datasForm, reductionEF_coeff, EFDairy, cat
       }
     }
   }
-  
-  
+
   //EF emissions from cattle portion concerned by additives
-  let EFDairyAdditive= 0;
+  let EFDairyAdditive = 0;
   if (datasForm.practices.practice_anim[1].dairy_cow.selected === true) {
     EFDairyAdditive = numbDairyPracticesAdditive * EFDairy * coeffAdditiveDairy;
   } else {
@@ -823,69 +892,75 @@ function funcMitigationsAdditiveDairy(datasForm, reductionEF_coeff, EFDairy, cat
   // Mitigation percentage
   let mitigationPercentageDairyAdditive = (EFDairyAdditive * 100) / EFDairy;
   // Total EF emissions after mitigation
-  let mitigatedEFDairyAdditive = EFDairyAdditive+ (1 - numbDairyPracticesAdditive) * EFDairy;
+  let mitigatedEFDairyAdditive =
+    EFDairyAdditive + (1 - numbDairyPracticesAdditive) * EFDairy;
 
-  return [mitigatedEFDairyAdditive,mitigationPercentageDairyAdditive];
+  return [mitigatedEFDairyAdditive, mitigationPercentageDairyAdditive];
 }
 
 // Function beef: mitigations additives
 
-function funcMitigationsAdditiveBeef(datasForm, reductionEF_coeff, EFBeef, cattleBeef){
-  
-    //Coeff
-    let coeffAdditiveBeef = reductionEF_coeff[1].Spec_agents_and_diet_additives;
-  
-  
-    // Proportion of beef included in the practice additives
-  
-  
-    let numbBeefPracticesAdditive = 0;
-    if (cattleBeef === 0 || datasForm.practices.practice_anim[3].selected===true ) {
-      numbBeefPracticesAdditive = 0;
+function funcMitigationsAdditiveBeef(
+  datasForm,
+  reductionEF_coeff,
+  EFBeef,
+  cattleBeef
+) {
+  //Coeff
+  let coeffAdditiveBeef = reductionEF_coeff[1].Spec_agents_and_diet_additives;
+
+  // Proportion of beef included in the practice additives
+
+  let numbBeefPracticesAdditive = 0;
+  if (
+    cattleBeef === 0 ||
+    datasForm.practices.practice_anim[3].selected === true
+  ) {
+    numbBeefPracticesAdditive = 0;
+  } else {
+    if (datasForm.practices.practice_anim[1].beef_cattle.all_of_them === true) {
+      numbBeefPracticesAdditive = 1;
     } else {
-      if (datasForm.practices.practice_anim[1].beef_cattle.all_of_them === true) {
-        numbBeefPracticesAdditive = 1;
-      } else {
-        if (
-          datasForm.practices.practice_anim[1].beef_cattle.portion_of_them ===
-          true
-        ) {
-          let portionBeefAdditive =
-            datasForm.practices.practice_anim[1].beef_cattle.portion_numb / 100;
-          numbBeefPracticesAdditive = portionBeefAdditive;
-        }
+      if (
+        datasForm.practices.practice_anim[1].beef_cattle.portion_of_them ===
+        true
+      ) {
+        let portionBeefAdditive =
+          datasForm.practices.practice_anim[1].beef_cattle.portion_numb / 100;
+        numbBeefPracticesAdditive = portionBeefAdditive;
       }
     }
-  
-   // EF emissions mitigated by the practice additives
-  
-  
-    let EFBeefAdditive= 0;
-    if (datasForm.practices.practice_anim[1].beef_cattle.selected === true) {
-      EFBeefAdditive = numbBeefPracticesAdditive * EFBeef * coeffAdditiveBeef;
-    } else {
-      EFBeefAdditive = 0;
-    }
-    // Mitigation percentage
-    let mitigationPercentageBeefAdditive = (EFBeefAdditive* 100) / EFBeef;
-    // Total EF emissions after mitigation
-    let mitigatedEFBeefAdditive = EFBeefAdditive + (1 - numbBeefPracticesAdditive) * EFBeef;
-  
-    return [mitigatedEFBeefAdditive,mitigationPercentageBeefAdditive]
+  }
 
+  // EF emissions mitigated by the practice additives
+
+  let EFBeefAdditive = 0;
+  if (datasForm.practices.practice_anim[1].beef_cattle.selected === true) {
+    EFBeefAdditive = numbBeefPracticesAdditive * EFBeef * coeffAdditiveBeef;
+  } else {
+    EFBeefAdditive = 0;
+  }
+  // Mitigation percentage
+  let mitigationPercentageBeefAdditive = (EFBeefAdditive * 100) / EFBeef;
+  // Total EF emissions after mitigation
+  let mitigatedEFBeefAdditive =
+    EFBeefAdditive + (1 - numbBeefPracticesAdditive) * EFBeef;
+
+  return [mitigatedEFBeefAdditive, mitigationPercentageBeefAdditive];
 }
 // Function sheep: mitigations additives
 
-
 function funcMitigationsAdditiveSheep(datasForm, reductionEF_coeff, EFSheep) {
-
-      //Coeff
+  //Coeff
   let coeffAdditiveSheep = reductionEF_coeff[2].Spec_agents_and_diet_additives;
 
   // Proportion of sheep included in the practice additives
 
   let numbSheepPracticesAdditive = 0;
-  if (datasForm.farm_sheeps_matur_numb.value === 0 || datasForm.practices.practice_anim[3].selected===true) {
+  if (
+    datasForm.farm_sheeps_matur_numb.value === 0 ||
+    datasForm.practices.practice_anim[3].selected === true
+  ) {
     numbSheepPracticesAdditive = 0;
   } else {
     if (datasForm.practices.practice_anim[1].sheeps.all_of_them === true) {
@@ -911,25 +986,30 @@ function funcMitigationsAdditiveSheep(datasForm, reductionEF_coeff, EFSheep) {
   // Mitigation percentage
   let mitigationPercentageSheepAdditive = (EFSheepAdditive * 100) / EFSheep;
   // Total EF emissions after mitigation
-  let mitigatedEFSheepAdditive = EFSheepAdditive + (1 - numbSheepPracticesAdditive) * EFSheep;
+  let mitigatedEFSheepAdditive =
+    EFSheepAdditive + (1 - numbSheepPracticesAdditive) * EFSheep;
 
-  return [mitigatedEFSheepAdditive,mitigationPercentageSheepAdditive]
-  }
+  return [mitigatedEFSheepAdditive, mitigationPercentageSheepAdditive];
+}
 
+// Function dairy: long term breeding
 
-
-  // Function dairy: long term breeding
-
-function funcMitigationsLTBreedingDairy(datasForm, reductionEF_coeff, EFDairy, cattleDairy) {
+function funcMitigationsLTBreedingDairy(
+  datasForm,
+  reductionEF_coeff,
+  EFDairy,
+  cattleDairy
+) {
   //Coeff
   let coeffLTBreedingDairy = reductionEF_coeff[0].longterm_change_and_breeding;
-;
-
   // Proportion of animals included in the practice LTBreeding
 
-  let numbDairyPracticesLTBreeding= 0;
+  let numbDairyPracticesLTBreeding = 0;
 
-  if (cattleDairy === 0 || datasForm.practices.practice_anim[3].selected===true ) {
+  if (
+    cattleDairy === 0 ||
+    datasForm.practices.practice_anim[3].selected === true
+  ) {
     numbDairyPracticesLTBreeding = 0;
   } else {
     if (datasForm.practices.practice_anim[2].dairy_cow.all_of_them === true) {
@@ -944,80 +1024,88 @@ function funcMitigationsLTBreedingDairy(datasForm, reductionEF_coeff, EFDairy, c
       }
     }
   }
-  
-  
+
   //EF emissions from cattle portion concerned by LTBreeding
-  let EFDairyLTBreeding= 0;
+  let EFDairyLTBreeding = 0;
   if (datasForm.practices.practice_anim[2].dairy_cow.selected === true) {
-    EFDairyLTBreeding = numbDairyPracticesLTBreeding * EFDairy * coeffLTBreedingDairy;
+    EFDairyLTBreeding =
+      numbDairyPracticesLTBreeding * EFDairy * coeffLTBreedingDairy;
   } else {
     EFDairyLTBreeding = 0;
   }
   // Mitigation percentage
   let mitigationPercentageDairyLTBreeding = (EFDairyLTBreeding * 100) / EFDairy;
   // Total EF emissions after mitigation
-  let mitigatedEFDairyLTBreeding = EFDairyLTBreeding+ (1 - numbDairyPracticesLTBreeding) * EFDairy;
+  let mitigatedEFDairyLTBreeding =
+    EFDairyLTBreeding + (1 - numbDairyPracticesLTBreeding) * EFDairy;
 
-  return [mitigatedEFDairyLTBreeding,mitigationPercentageDairyLTBreeding];
+  return [mitigatedEFDairyLTBreeding, mitigationPercentageDairyLTBreeding];
 }
 
 // Function beef: mitigations Long Term Breeding
 
-function funcMitigationsLTBreedingBeef(datasForm, reductionEF_coeff, EFBeef, cattleBeef){
-  
-    //Coeff
-    let coeffLTBreedingBeef = reductionEF_coeff[1].longterm_change_and_breeding;
-  
-  
-    // Proportion of beef included in the practice LTBreeding
-  
-  
-    let numbBeefPracticesLTBreeding = 0;
-    if (cattleBeef === 0 || datasForm.practices.practice_anim[3].selected===true) {
-      numbBeefPracticesLTBreeding = 0;
+function funcMitigationsLTBreedingBeef(
+  datasForm,
+  reductionEF_coeff,
+  EFBeef,
+  cattleBeef
+) {
+  //Coeff
+  let coeffLTBreedingBeef = reductionEF_coeff[1].longterm_change_and_breeding;
+
+  // Proportion of beef included in the practice LTBreeding
+
+  let numbBeefPracticesLTBreeding = 0;
+  if (
+    cattleBeef === 0 ||
+    datasForm.practices.practice_anim[3].selected === true
+  ) {
+    numbBeefPracticesLTBreeding = 0;
+  } else {
+    if (datasForm.practices.practice_anim[2].beef_cattle.all_of_them === true) {
+      numbBeefPracticesLTBreeding = 1;
     } else {
-      if (datasForm.practices.practice_anim[2].beef_cattle.all_of_them === true) {
-        numbBeefPracticesLTBreeding = 1;
-      } else {
-        if (
-          datasForm.practices.practice_anim[2].beef_cattle.portion_of_them ===
-          true
-        ) {
-          let portionBeefLTBreeding = datasForm.practices.practice_anim[2].beef_cattle.portion_numb / 100;
-          numbBeefPracticesLTBreeding= portionBeefLTBreeding;
-        }
+      if (
+        datasForm.practices.practice_anim[2].beef_cattle.portion_of_them ===
+        true
+      ) {
+        let portionBeefLTBreeding =
+          datasForm.practices.practice_anim[2].beef_cattle.portion_numb / 100;
+        numbBeefPracticesLTBreeding = portionBeefLTBreeding;
       }
     }
-  
-   // EF emissions mitigated by the practice LTBreeding
-  
-  
-    let EFBeefLTBreeding= 0;
-    if (datasForm.practices.practice_anim[2].beef_cattle.selected === true) {
-      EFBeefLTBreeding = numbBeefPracticesLTBreeding* EFBeef * coeffLTBreedingBeef;
-    } else {
-      EFBeefLTBreeding = 0;
-    }
-    // Mitigation percentage
-    let mitigationPercentageBeefLTBreeding = (EFBeefLTBreeding* 100) / EFBeef;
-    // Total EF emissions after mitigation
-    let mitigatedEFBeefLTBreeding = EFBeefLTBreeding + (1 - numbBeefPracticesLTBreeding) * EFBeef;
-  
-    return [mitigatedEFBeefLTBreeding,mitigationPercentageBeefLTBreeding]
+  }
 
+  // EF emissions mitigated by the practice LTBreeding
+
+  let EFBeefLTBreeding = 0;
+  if (datasForm.practices.practice_anim[2].beef_cattle.selected === true) {
+    EFBeefLTBreeding =
+      numbBeefPracticesLTBreeding * EFBeef * coeffLTBreedingBeef;
+  } else {
+    EFBeefLTBreeding = 0;
+  }
+  // Mitigation percentage
+  let mitigationPercentageBeefLTBreeding = (EFBeefLTBreeding * 100) / EFBeef;
+  // Total EF emissions after mitigation
+  let mitigatedEFBeefLTBreeding =
+    EFBeefLTBreeding + (1 - numbBeefPracticesLTBreeding) * EFBeef;
+
+  return [mitigatedEFBeefLTBreeding, mitigationPercentageBeefLTBreeding];
 }
 // Function sheep: mitigations LTBreeding
 
-
 function funcMitigationsLTBreedingSheep(datasForm, reductionEF_coeff, EFSheep) {
-
-      //Coeff
+  //Coeff
   let coeffLTBreedingSheep = reductionEF_coeff[2].longterm_change_and_breeding;
 
   // Proportion of sheep included in the practice LTBreeding
 
   let numbSheepPracticesLTBreeding = 0;
-  if (datasForm.farm_sheeps_matur_numb.value === 0 || datasForm.practices.practice_anim[3].selected===true ) {
+  if (
+    datasForm.farm_sheeps_matur_numb.value === 0 ||
+    datasForm.practices.practice_anim[3].selected === true
+  ) {
     numbSheepPracticesLTBreeding = 0;
   } else {
     if (datasForm.practices.practice_anim[2].sheeps.all_of_them === true) {
@@ -1036,15 +1124,16 @@ function funcMitigationsLTBreedingSheep(datasForm, reductionEF_coeff, EFSheep) {
   //EF emissions from cattle portion concerned by LTBreeding
   let EFSheepLTBreeding = 0;
   if (datasForm.practices.practice_anim[2].sheeps.selected === true) {
-    EFSheepLTBreeding = numbSheepPracticesLTBreeding * EFSheep * coeffLTBreedingSheep;
+    EFSheepLTBreeding =
+      numbSheepPracticesLTBreeding * EFSheep * coeffLTBreedingSheep;
   } else {
     EFSheepLTBreeding = 0;
   }
   // Mitigation percentage
   let mitigationPercentageSheepLTBreeding = (EFSheepLTBreeding * 100) / EFSheep;
   // Total EF emissions after mitigation
-  let mitigatedEFSheepLTBreeding = EFSheepLTBreeding + (1 - numbSheepPracticesLTBreeding) * EFSheep;
+  let mitigatedEFSheepLTBreeding =
+    EFSheepLTBreeding + (1 - numbSheepPracticesLTBreeding) * EFSheep;
 
-  return [mitigatedEFSheepLTBreeding,mitigationPercentageSheepLTBreeding]
-  }
-
+  return [mitigatedEFSheepLTBreeding, mitigationPercentageSheepLTBreeding];
+}
