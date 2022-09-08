@@ -1,90 +1,90 @@
 [
   {
-    "Other": "Kerosene",
+    "Other": "kerosene",
     "kg_CO2": 9.752247552866255
   },
   {
-    "Other": "Coal (All types)",
+    "Other": "coal",
     "kg_CO2": 2100.8155600511654
   },
   {
-    "Other": "Residual Heating Fuel (Businesses only)",
+    "Other": "residual_heating_fuel",
     "kg_CO2": 11.793415645326633
   },
   {
-    "Other": "Jet Fuel",
+    "Other": "jet_fuel",
     "kg_CO2": 9.570810389092
   },
   {
-    "Other": "Aviation Gas",
+    "Other": "aviation_gas",
     "kg_CO2": 8.34610953361577
   },
   {
-    "Other": "Flared natural gas",
+    "Other": "flared_natural_gas",
     "kg_CO2": 54.74866416888172
   },
   {
-    "Other": "Petroleum coke",
+    "Other": "petroleum_coke",
     "kg_CO2": 14.696410265714727
   },
   {
-    "Other": "Otherpetroleum & miscellaneous",
+    "Other": "petroleum_and_miscellaneous",
     "kg_CO2": 10.021591022489138
   },
   {
-    "Other": "Asphalt and Road Oil",
+    "Other": "asphalt_and_road_oil",
     "kg_CO2": 11.94700220446154
   },
   {
-    "Other": "Lubricants",
+    "Other": "lubricants",
     "kg_CO2": 10.715959688118158
   },
   {
-    "Other": "Petrochemical Feedstocks",
+    "Other": "petrochemical_feedstocks",
     "kg_CO2": 11.223158639584147
   },
   {
-    "Other": "Special Naphthas (solvents)",
+    "Other": "special_naphthas_solvents",
     "kg_CO2": 9.096740999744695
   },
   {
-    "Other": "Waxes ",
+    "Other": "waxes",
     "kg_CO2": 9.573766302885154
   },
   {
-    "Other": "Anthracite",
+    "Other": "anthracite",
     "kg_CO2": 2578.675690141612
   },
   {
-    "Other": "Bituminous",
+    "Other": "bituminous",
     "kg_CO2": 2236.8027142999704
   },
   {
-    "Other": "Subbituminous",
+    "Other": "subbituminous",
     "kg_CO2": 1685.5058921718937
   },
   {
-    "Other": "Lignite",
+    "Other": "lignite",
     "kg_CO2": 1266.249965980532
   },
   {
-    "Other": "Coke",
+    "Other": "coke",
     "kg_CO2": 2830.2746051473728
   },
   {
-    "Other": "Geothermal (average all generation)",
+    "Other": "geothermal",
     "kg_CO2": 0
   },
   {
-    "Other": "Municiple Solid Waste",
+    "Other": "municiple_solid_waste",
     "kg_CO2": 2617.684680353077
   },
   {
-    "Other": "Tire-derived fuel",
+    "Other": "tire_derived_fuel",
     "kg_CO2": 2794.1323221235407
   },
   {
-    "Other": "Waste oil",
+    "Other": "waste_oil",
     "kg_CO2": 419.1198483185312
   }
 ]
