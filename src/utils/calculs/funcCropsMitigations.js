@@ -232,16 +232,28 @@ function funcCropsMitigations({ datasForm, state, time }) {
   let cropland_practice = 0;
   if (
     datasForm.find((element) => element.id === "farm_crops")?.response &&
-    (datasForm.find((element) => element.id === "farm_crops_grain")?.response ||
-      datasForm.find((element) => element.id === "farm_crops_forage")
-        ?.response ||
-      datasForm.find((element) => element.id === "farm_crops_fv")?.response ||
-      datasForm.find((element) => element.id === "farm_crops_flowers")
-        ?.response ||
-      datasForm.find((element) => element.id === "farm_crops_herbs")?.response)
+    (datasForm.find((element) => element.id === "farm_crops_grain_size")
+      ?.response?.value ||
+      datasForm.find((element) => element.id === "farm_crops_forage_size")
+        ?.response?.value ||
+      datasForm.find((element) => element.id === "farm_crops_fv_size")?.response
+        ?.value ||
+      datasForm.find((element) => element.id === "farm_crops_flowers_size")
+        ?.response?.value ||
+      datasForm.find((element) => element.id === "farm_crops_herbs_size")
+        ?.response?.value)
   ) {
     cropland_practice =
-      grain_size + forage_size + fv_size + flowers_size + herbs_size;
+      datasForm.find((element) => element.id === "farm_crops_grain_size")
+        ?.response?.value +
+      datasForm.find((element) => element.id === "farm_crops_forage_size")
+        ?.response?.value +
+      datasForm.find((element) => element.id === "farm_crops_fv_size")?.response
+        ?.value +
+      datasForm.find((element) => element.id === "farm_crops_flowers_size")
+        ?.response?.value +
+      datasForm.find((element) => element.id === "farm_crops_herbs_size")
+        ?.response?.value;
   } else {
     if (datasForm.practices.croplands.portion_of_them === true) {
       cropland_practice =
