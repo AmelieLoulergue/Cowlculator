@@ -40,7 +40,7 @@ function funcCropsMitigations({ datasForm, state, time }) {
   ) {
     grassland_size = datasForm.find(
       (element) => element.id === "farm_crops_grassland_size"
-    ).response.value
+    )?.response?.value
       ? Number(
           datasForm.find(
             (element) => element.id === "farm_crops_grassland_size"
@@ -56,7 +56,7 @@ function funcCropsMitigations({ datasForm, state, time }) {
     ) {
       grassland_size = grassland_size = datasForm.find(
         (element) => element.id === "farm_crops_grassland_size"
-      ).response.value
+      )?.response?.value
         ? Number(
             (grassland_size = datasForm.find(
               (element) => element.id === "farm_crops_grassland_size"
@@ -74,7 +74,7 @@ function funcCropsMitigations({ datasForm, state, time }) {
   ) {
     grain_size = datasForm.find(
       (element) => element.id === "farm_crops_grain_size"
-    ).response.value
+    )?.response?.value
       ? Number(
           datasForm.find((element) => element.id === "farm_crops_grain_size")
             .response.value
@@ -89,7 +89,7 @@ function funcCropsMitigations({ datasForm, state, time }) {
     ) {
       grain_size = datasForm.find(
         (element) => element.id === "farm_crops_grain_size"
-      ).response.value
+      )?.response?.value
         ? Number(
             datasForm.find((element) => element.id === "farm_crops_grain_size")
               .response.value
@@ -106,7 +106,7 @@ function funcCropsMitigations({ datasForm, state, time }) {
   ) {
     forage_size = datasForm.find(
       (element) => element.id === "farm_crops_forage_size"
-    ).response.value
+    )?.response?.value
       ? Number(
           datasForm.find((element) => element.id === "farm_crops_forage_size")
             .response.value
@@ -121,7 +121,7 @@ function funcCropsMitigations({ datasForm, state, time }) {
     ) {
       forage_size = datasForm.find(
         (element) => element.id === "farm_crops_forage_size"
-      ).response.value
+      )?.response?.value
         ? Number(
             datasForm.find((element) => element.id === "farm_crops_forage_size")
               .response.value
@@ -137,7 +137,7 @@ function funcCropsMitigations({ datasForm, state, time }) {
       ?.unit === "acre"
   ) {
     fv_size = datasForm.find((element) => element.id === "farm_crops_fv_size")
-      .response.value
+      ?.response?.value
       ? Number(
           datasForm.find((element) => element.id === "farm_crops_fv_size")
             .response.value
@@ -150,7 +150,7 @@ function funcCropsMitigations({ datasForm, state, time }) {
         ?.unit === "sq feet"
     ) {
       fv_size = datasForm.find((element) => element.id === "farm_crops_fv_size")
-        .response.value
+        ?.response?.value
         ? Number(
             datasForm.find((element) => element.id === "farm_crops_fv_size")
               .response.value
@@ -168,7 +168,7 @@ function funcCropsMitigations({ datasForm, state, time }) {
   ) {
     flowers_size = datasForm.find(
       (element) => element.id === "farm_crops_flowers_size"
-    ).response.value
+    )?.response?.value
       ? Number(
           datasForm.find((element) => element.id === "farm_crops_flowers_size")
             .response.value
@@ -183,7 +183,7 @@ function funcCropsMitigations({ datasForm, state, time }) {
     ) {
       flowers_size = datasForm.find(
         (element) => element.id === "farm_crops_flowers_size"
-      ).response.value
+      )?.response?.value
         ? Number(
             datasForm.find(
               (element) => element.id === "farm_crops_flowers_size"
@@ -201,7 +201,7 @@ function funcCropsMitigations({ datasForm, state, time }) {
   ) {
     herbs_size = datasForm.find(
       (element) => element.id === "farm_crops_herbs_size"
-    ).response.value
+    )?.response?.value
       ? Number(
           datasForm.find((element) => element.id === "farm_crops_herbs_size")
             .response.value
@@ -216,7 +216,7 @@ function funcCropsMitigations({ datasForm, state, time }) {
     ) {
       herbs_size = datasForm.find(
         (element) => element.id === "farm_crops_herbs_size"
-      ).response.value
+      )?.response?.value
         ? Number(
             datasForm.find((element) => element.id === "farm_crops_herbs_size")
               .response.value
