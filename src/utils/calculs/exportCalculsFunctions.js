@@ -17,6 +17,9 @@ import funcMitigationsAdditiveSheep from "./funcMitigationsAdditiveSheeps";
 import funcMitigationsLTBreedingDairy from "./funcMitigationsLTBreedingDairy";
 import funcMitigationsLTBreedingBeef from "./funcMitigationsLTBreedingBeef";
 import funcMitigationsLTBreedingSheep from "./funcMitigationsLTBreedingSheep";
+import funcCropsMitigations from "./funcCropsMitigations";
+import funcCarbonCreditsAnimals from "./funcCarbonCreditsAnimals";
+import funcCarbonCreditsCrops from "./funcCarbonCreditsCrops";
 
 export {
   funcTime,
@@ -38,4 +41,7 @@ export {
   funcMitigationsLTBreedingBeef,
   funcMitigationsLTBreedingDairy,
   funcMitigationsLTBreedingSheep,
+  funcCarbonCreditsAnimals,
+  funcCarbonCreditsCrops,
+  funcCropsMitigations,
 };

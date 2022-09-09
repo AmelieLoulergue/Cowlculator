@@ -1,6 +1,6 @@
 // Function sheep: mitigations LTBreeding
-
-function funcMitigationsLTBreedingSheep(datasForm, reductionEF_coeff, EFSheep) {
+import reductionEF_coeff from "../../coeff/reductionEF_coeff.json";
+function funcMitigationsLTBreedingSheep({ datasForm, EFSheep }) {
   //Coeff
   let coeffLTBreedingSheep = reductionEF_coeff[2].longterm_change_and_breeding;
 
@@ -8,19 +8,43 @@ function funcMitigationsLTBreedingSheep(datasForm, reductionEF_coeff, EFSheep) {
 
   let numbSheepPracticesLTBreeding = 0;
   if (
-    datasForm.farm_sheeps_matur_numb.value === 0 ||
-    datasForm.practices.practice_anim[3].selected === true
+    datasForm.find((element) => element.id === "farm_animals_sheeps")
+      .response &&
+    datasForm.find((element) => element.id === "farm_animals_sheeps_numb")
+      ?.response?.value === 0
   ) {
     numbSheepPracticesLTBreeding = 0;
   } else {
-    if (datasForm.practices.practice_anim[2].sheeps.all_of_them === true) {
+    if (
+      datasForm.find(
+        (data) => data.id === "farm_animals_sheeps_breeding_practice"
+      )?.response &&
+      datasForm.find(
+        (data) => data.id === "farm_animals_sheeps_breeding_practice_portion"
+      )?.response === "All of them"
+    ) {
       numbSheepPracticesLTBreeding = 1;
     } else {
       if (
-        datasForm.practices.practice_anim[2].sheeps.portion_of_them === true
+        datasForm.find(
+          (data) => data.id === "farm_animals_sheeps_breeding_practice"
+        )?.response &&
+        datasForm.find(
+          (data) => data.id === "farm_animals_sheeps_breeding_practice_portion"
+        )?.response === "A portion of them"
       ) {
-        let portionSheepLTBreeding =
-          datasForm.practices.practice_anim[2].sheeps.portion_numb / 100;
+        let portionSheepLTBreeding = datasForm.find(
+          (data) =>
+            data.id === "farm_animals_sheeps_breeding_practice_portion_numb"
+        )?.response?.value
+          ? Number(
+              datasForm.find(
+                (data) =>
+                  data.id ===
+                  "farm_animals_sheeps_breeding_practice_portion_numb"
+              ).response.value
+            ) / 100
+          : 0;
         numbSheepPracticesLTBreeding = portionSheepLTBreeding;
       }
     }
@@ -28,7 +52,11 @@ function funcMitigationsLTBreedingSheep(datasForm, reductionEF_coeff, EFSheep) {
 
   //EF emissions from cattle portion concerned by LTBreeding
   let EFSheepLTBreeding = 0;
-  if (datasForm.practices.practice_anim[2].sheeps.selected === true) {
+  if (
+    datasForm.find(
+      (data) => data.id === "farm_animals_sheeps_breeding_practice"
+    )?.response
+  ) {
     EFSheepLTBreeding =
       numbSheepPracticesLTBreeding * EFSheep * coeffLTBreedingSheep;
   } else {
@@ -40,6 +68,9 @@ function funcMitigationsLTBreedingSheep(datasForm, reductionEF_coeff, EFSheep) {
   let mitigatedEFSheepLTBreeding =
     EFSheepLTBreeding + (1 - numbSheepPracticesLTBreeding) * EFSheep;
 
-  return [mitigatedEFSheepLTBreeding, mitigationPercentageSheepLTBreeding];
+  return {
+    mitigatedEFSheepLTBreeding: mitigatedEFSheepLTBreeding,
+    mitigationPercentageSheepLTBreeding: mitigationPercentageSheepLTBreeding,
+  };
 }
 export default funcMitigationsLTBreedingSheep;

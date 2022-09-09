@@ -1,51 +1,76 @@
 // Function beef: mitigations additives
+import reductionEF_coeff from "../../coeff/reductionEF_coeff.json";
+function funcMitigationsAdditiveBeef({ datasForm, EFBeef, cattleBeef }) {
+  //Coeff
+  let coeffAdditiveBeef = reductionEF_coeff[1].Spec_agents_and_diet_additives;
 
-function funcMitigationsAdditiveBeef(
-    datasForm,
-    reductionEF_coeff,
-    EFBeef,
-    cattleBeef
-  ) {
-    //Coeff
-    let coeffAdditiveBeef = reductionEF_coeff[1].Spec_agents_and_diet_additives;
-  
-    // Proportion of beef included in the practice additives
-  
-    let numbBeefPracticesAdditive = 0;
+  // Proportion of beef included in the practice additives
+
+  let numbBeefPracticesAdditive = 0;
+  if (!cattleBeef || cattleBeef === 0) {
+    numbBeefPracticesAdditive = 0;
+  } else {
     if (
-      cattleBeef === 0 ||
-      datasForm.practices.practice_anim[3].selected === true
+      datasForm.find(
+        (data) => data.id === "farm_animals_beef_cattle_specific_agent_practice"
+      )?.response &&
+      datasForm.find(
+        (data) =>
+          data.id === "farm_animals_beef_cattle_specific_agent_practice_portion"
+      )?.response === "All of them"
     ) {
-      numbBeefPracticesAdditive = 0;
+      numbBeefPracticesAdditive = 1;
     } else {
-      if (datasForm.practices.practice_anim[1].beef_cattle.all_of_them === true) {
-        numbBeefPracticesAdditive = 1;
-      } else {
-        if (
-          datasForm.practices.practice_anim[1].beef_cattle.portion_of_them ===
-          true
-        ) {
-          let portionBeefAdditive =
-            datasForm.practices.practice_anim[1].beef_cattle.portion_numb / 100;
-          numbBeefPracticesAdditive = portionBeefAdditive;
-        }
+      if (
+        datasForm.find(
+          (data) =>
+            data.id === "farm_animals_beef_cattle_specific_agent_practice"
+        )?.response &&
+        datasForm.find(
+          (data) =>
+            data.id ===
+            "farm_animals_beef_cattle_specific_agent_practice_portion"
+        )?.response === "A portion of them"
+      ) {
+        let portionBeefAdditive = datasForm.find(
+          (data) =>
+            data.id ===
+            "farm_animals_beef_cattle_specific_agent_practice_portion_numb"
+        )?.response?.value
+          ? Number(
+              datasForm.find(
+                (data) =>
+                  data.id ===
+                  "farm_animals_beef_cattle_specific_agent_practice_portion_numb"
+              ).response.value
+            ) / 100
+          : 0;
+        numbBeefPracticesAdditive = portionBeefAdditive;
       }
     }
-  
-    // EF emissions mitigated by the practice additives
-  
-    let EFBeefAdditive = 0;
-    if (datasForm.practices.practice_anim[1].beef_cattle.selected === true) {
-      EFBeefAdditive = numbBeefPracticesAdditive * EFBeef * coeffAdditiveBeef;
-    } else {
-      EFBeefAdditive = 0;
-    }
-    // Mitigation percentage
-    let mitigationPercentageBeefAdditive = (EFBeefAdditive * 100) / EFBeef;
-    // Total EF emissions after mitigation
-    let mitigatedEFBeefAdditive =
-      EFBeefAdditive + (1 - numbBeefPracticesAdditive) * EFBeef;
-  
-    return [mitigatedEFBeefAdditive, mitigationPercentageBeefAdditive];
   }
-  export default funcMitigationsAdditiveBeef
+
+  // EF emissions mitigated by the practice additives
+
+  let EFBeefAdditive = 0;
+  if (
+    datasForm.find(
+      (data) => data.id === "farm_animals_beef_cattle_specific_agent_practice"
+    )?.response
+  ) {
+    EFBeefAdditive = numbBeefPracticesAdditive * EFBeef * coeffAdditiveBeef;
+  } else {
+    EFBeefAdditive = 0;
+  }
+  // Mitigation percentage
+  let mitigationPercentageBeefAdditive = (EFBeefAdditive * 100) / EFBeef;
+  // Total EF emissions after mitigation
+  let mitigatedEFBeefAdditive =
+    EFBeefAdditive + (1 - numbBeefPracticesAdditive) * EFBeef;
+
+  return {
+    mitigatedEFBeefAdditive: mitigatedEFBeefAdditive,
+    mitigationPercentageBeefAdditive: mitigationPercentageBeefAdditive,
+  };
+}
+export default funcMitigationsAdditiveBeef;

@@ -1,6 +1,6 @@
 // Function sheep: mitigations additives
-
-function funcMitigationsAdditiveSheep(datasForm, reductionEF_coeff, EFSheep) {
+import reductionEF_coeff from "../../coeff/reductionEF_coeff.json";
+function funcMitigationsAdditiveSheep({ datasForm, EFSheep }) {
   //Coeff
   let coeffAdditiveSheep = reductionEF_coeff[2].Spec_agents_and_diet_additives;
 
@@ -8,19 +8,46 @@ function funcMitigationsAdditiveSheep(datasForm, reductionEF_coeff, EFSheep) {
 
   let numbSheepPracticesAdditive = 0;
   if (
-    datasForm.farm_sheeps_matur_numb.value === 0 ||
-    datasForm.practices.practice_anim[3].selected === true
+    datasForm.find((element) => element.id === "farm_animals_sheeps")
+      .response &&
+    datasForm.find((element) => element.id === "farm_animals_sheeps_numb")
+      ?.response?.value === 0
   ) {
     numbSheepPracticesAdditive = 0;
   } else {
-    if (datasForm.practices.practice_anim[1].sheeps.all_of_them === true) {
+    if (
+      datasForm.find(
+        (data) => data.id === "farm_animals_sheeps_specific_agent_practice"
+      )?.response &&
+      datasForm.find(
+        (data) =>
+          data.id === "farm_animals_sheeps_specific_agent_practice_portion"
+      )?.response === "All of them"
+    ) {
       numbSheepPracticesAdditive = 1;
     } else {
       if (
-        datasForm.practices.practice_anim[1].sheeps.portion_of_them === true
+        datasForm.find(
+          (data) => data.id === "farm_animals_sheeps_specific_agent_practice"
+        )?.response &&
+        datasForm.find(
+          (data) =>
+            data.id === "farm_animals_sheeps_specific_agent_practice_portion"
+        )?.response === "A portion of them"
       ) {
-        let portionSheepAdditive =
-          datasForm.practices.practice_anim[1].sheeps.portion_numb / 100;
+        let portionSheepAdditive = datasForm.find(
+          (data) =>
+            data.id ===
+            "farm_animals_sheeps_specific_agent_practice_portion_numb"
+        )?.response?.value
+          ? Number(
+              datasForm.find(
+                (data) =>
+                  data.id ===
+                  "farm_animals_sheeps_specific_agent_practice_portion_numb"
+              ).response.value
+            ) / 100
+          : 0;
         numbSheepPracticesAdditive = portionSheepAdditive;
       }
     }
@@ -28,7 +55,11 @@ function funcMitigationsAdditiveSheep(datasForm, reductionEF_coeff, EFSheep) {
 
   //EF emissions from cattle portion concerned by additives
   let EFSheepAdditive = 0;
-  if (datasForm.practices.practice_anim[1].sheeps.selected === true) {
+  if (
+    datasForm.find(
+      (data) => data.id === "farm_animals_sheeps_specific_agent_practice"
+    )?.response
+  ) {
     EFSheepAdditive = numbSheepPracticesAdditive * EFSheep * coeffAdditiveSheep;
   } else {
     EFSheepAdditive = 0;

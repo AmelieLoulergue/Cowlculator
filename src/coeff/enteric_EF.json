@@ -1,15 +1,6 @@
 [
   {
-    "name": "Dairy cattle",
-    "North_Atlantic": null,
-    "South_Atlantic": null,
-    "North_Central": null,
-    "South_Central": null,
-    "West": null,
-    "National Average": null
-  },
-  {
-    "name": "Replacements\n0-12 months",
+    "name": "farm_animals_dairy_cattle_rep12",
     "North_Atlantic": 19.5,
     "South_Atlantic": 20.5,
     "North_Central": 18.9,
@@ -18,7 +9,7 @@
     "National Average": 19.5
   },
   {
-    "name": "Replacements\n12-24 months",
+    "name": "farm_animals_dairy_cattle_rep24",
     "North_Atlantic": 58.3,
     "South_Atlantic": 58.6,
     "North_Central": 57.3,
@@ -27,7 +18,7 @@
     "National Average": 58.7
   },
   {
-    "name": "Mature cows",
+    "name": "farm_animals_dairy_cattle_matur",
     "North_Atlantic": 117.2,
     "South_Atlantic": 126.2,
     "North_Central": 19.2,
@@ -36,16 +27,7 @@
     "National Average": 114.3
   },
   {
-    "name": "Beef cattle",
-    "North_Atlantic": null,
-    "South_Atlantic": null,
-    "North_Central": null,
-    "South_Central": null,
-    "West": null,
-    "National Average": null
-  },
-  {
-    "name": "Replacements\n0-12 months",
+    "name": "farm_animals_beef_cattle_rep12",
     "North_Atlantic": 19.1,
     "South_Atlantic": 22.6,
     "North_Central": 20.3,
@@ -54,7 +36,7 @@
     "National Average": 22.3
   },
   {
-    "name": "Replacements\n12-24 months",
+    "name": "farm_animals_beef_cattle_rep24",
     "North_Atlantic": 63.7,
     "South_Atlantic": 67.4,
     "North_Central": 60.7,
@@ -63,7 +45,7 @@
     "National Average": 64.9
   },
   {
-    "name": "Mature cows",
+    "name": "farm_animals_beef_cattle_matur",
     "North_Atlantic": 61.4,
     "South_Atlantic": 69.8,
     "North_Central": 59.4,
@@ -72,7 +54,7 @@
     "National Average": 66.5
   },
   {
-    "name": "Weanling system steers/ heifers",
+    "name": "farm_animals_beef_cattle_wealing",
     "North_Atlantic": null,
     "South_Atlantic": null,
     "North_Central": 22.5,
@@ -81,7 +63,7 @@
     "National Average": 23
   },
   {
-    "name": "Yearling system steers/ heifers",
+    "name": "farm_animals_beef_cattle_yearling",
     "North_Atlantic": null,
     "South_Atlantic": null,
     "North_Central": 46.9,
@@ -90,7 +72,7 @@
     "National Average": 47.2
   },
   {
-    "name": "Bulls",
+    "name": "farm_animals_beef_cattle_bulls",
     "North_Atlantic": 99.8,
     "South_Atlantic": 99.8,
     "North_Central": 99.8,
@@ -99,7 +81,7 @@
     "National Average": 99.8
   },
   {
-    "name": "Sheeps",
+    "name": "farm_animals_sheeps",
     "North_Atlantic": null,
     "South_Atlantic": null,
     "North_Central": null,
@@ -108,7 +90,7 @@
     "National Average": 8
   },
   {
-    "name": "Goats",
+    "name": "farm_animals_goats",
     "North_Atlantic": null,
     "South_Atlantic": null,
     "North_Central": null,
@@ -117,7 +99,7 @@
     "National Average": 5
   },
   {
-    "name": "Swine",
+    "name": "farm_animals_swine",
     "North_Atlantic": null,
     "South_Atlantic": null,
     "North_Central": null,
@@ -126,7 +108,7 @@
     "National Average": 1.5
   },
   {
-    "name": "Horses",
+    "name": "farm_animals_horses",
     "North_Atlantic": null,
     "South_Atlantic": null,
     "North_Central": null,
@@ -135,7 +117,7 @@
     "National Average": 18
   },
   {
-    "name": "Mules/Asses",
+    "name": "farm_animals_mules",
     "North_Atlantic": null,
     "South_Atlantic": null,
     "North_Central": null,
@@ -144,7 +126,7 @@
     "National Average": 10
   },
   {
-    "name": "Water Buffalo",
+    "name": "farm_animals_water_buffalo",
     "North_Atlantic": null,
     "South_Atlantic": null,
     "North_Central": null,

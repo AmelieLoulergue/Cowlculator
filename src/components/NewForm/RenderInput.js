@@ -89,6 +89,28 @@ function RenderInput({
             <Typography>YES</Typography>
           </Stack>
         </div>
+      ) : question.formInput.type === "select" &&
+        typeof question.userValue === "object" ? (
+        <Box sx={{ minWidth: 120 }}>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Portion</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={answer || ""}
+              label="Portion"
+              onChange={(event) => {
+                setAnswer(event.target.value);
+              }}
+            >
+              {question.userValue.map((value, index) => (
+                <MenuItem value={value} key={value + index}>
+                  {value}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Box>
       ) : (
         <input
           ref={inputRef}
@@ -145,7 +167,7 @@ function RenderInput({
           className="btn"
           onClick={() => {
             sendAnswer();
-            if (formInput.type !== "checkbox") {
+            if (formInput.type !== "checkbox" || formInput.type !== "select" ) {
               inputRef.current.value = null;
             }
             window.scrollTo(0, document.body.scrollHeight);

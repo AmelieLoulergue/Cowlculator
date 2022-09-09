@@ -839,11 +839,11 @@ const listOfQuestions = {
                 {
                   answerParentQuestion: "A portion of them",
                   parentId: "farm_crops_agronomy_practice_portion",
-                  id: "farm_crops_agronomy_practice_portion_number",
+                  id: "farm_crops_agronomy_practice_portion_numb",
                   question: "% of them",
 
                   formInput: { type: "number" },
-                  userValue: { value: "100%" },
+                  userValue: { value: "100", unit: "%" },
                 },
               ],
             },
@@ -869,12 +869,12 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: "A portion of them",
-                  id: "farm_crops_nutrient_management_practice_portion_number",
+                  id: "farm_crops_nutrient_management_practice_portion_numb",
                   parentId: "farm_crops_nutrient_management_practice_portion",
                   question: "% of them",
 
                   formInput: { type: "number" },
-                  userValue: { value: "100%" },
+                  userValue: { value: "100", unit: "%" },
                 },
               ],
             },
@@ -900,12 +900,12 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: "A portion of them",
-                  id: "farm_crops_residue_management_practice_portion_number",
+                  id: "farm_crops_residue_management_practice_portion_numb",
                   parentId: "farm_crops_residue_management_practice_portion",
                   question: "% of them",
 
                   formInput: { type: "number" },
-                  userValue: { value: "100%" },
+                  userValue: { value: "100", unit: "%" },
                 },
               ],
             },
@@ -931,12 +931,12 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: "A portion of them",
-                  id: "farm_crops_water_management_practice_portion_number",
+                  id: "farm_crops_water_management_practice_portion_numb",
                   parentId: "farm_crops_water_management_practice_portion",
                   question: "% of them",
 
                   formInput: { type: "number" },
-                  userValue: { value: "100%" },
+                  userValue: { value: "100", unit: "%" },
                 },
               ],
             },
@@ -962,12 +962,12 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: "A portion of them",
-                  id: "farm_crops_land_use_change_practice_portion_number",
+                  id: "farm_crops_land_use_change_practice_portion_numb",
                   parentId: "farm_crops_land_use_change_practice_portion",
                   question: "% of them",
 
                   formInput: { type: "number" },
-                  userValue: { value: "100%" },
+                  userValue: { value: "100", unit: "%" },
                 },
               ],
             },
@@ -994,11 +994,11 @@ const listOfQuestions = {
                 {
                   answerParentQuestion: "A portion of them",
                   parentId: "farm_crops_agroforestry_practice_portion",
-                  id: "farm_crops_agroforestry_practice_portion_number",
+                  id: "farm_crops_agroforestry_practice_portion_numb",
                   question: "% of them",
 
                   formInput: { type: "number" },
-                  userValue: { value: "100%" },
+                  userValue: { value: "100", unit: "%" },
                 },
               ],
             },
@@ -1025,11 +1025,11 @@ const listOfQuestions = {
                 {
                   answerParentQuestion: "A portion of them",
                   parentId: "farm_crops_grassland_grazing_practice_portion",
-                  id: "farm_crops_grassland_grazing_practice_portion_number",
+                  id: "farm_crops_grassland_grazing_practice_portion_numb",
                   question: "% of them",
 
                   formInput: { type: "number" },
-                  userValue: { value: "100%" },
+                  userValue: { value: "100", unit: "%" },
                 },
               ],
             },
@@ -1057,11 +1057,11 @@ const listOfQuestions = {
                   answerParentQuestion: "A portion of them",
                   parentId:
                     "farm_crops_organic_soils_restoration_practice_portion",
-                  id: "farm_crops_organic_soils_restoration_practice_portion_number",
+                  id: "farm_crops_organic_soils_restoration_practice_portion_numb",
                   question: "% of them",
 
                   formInput: { type: "number" },
-                  userValue: { value: "100%" },
+                  userValue: { value: "100", unit: "%" },
                 },
               ],
             },
@@ -1089,11 +1089,11 @@ const listOfQuestions = {
                   answerParentQuestion: "A portion of them",
                   parentId:
                     "farm_crops_degraded_lands_restoration_practice_portion",
-                  id: "farm_crops_degraded_lands_restoration_practice_portion_number",
+                  id: "farm_crops_degraded_lands_restoration_practice_portion_numb",
                   question: "% of them",
 
                   formInput: { type: "number" },
-                  userValue: { value: "100%" },
+                  userValue: { value: "100", unit: "%" },
                 },
               ],
             },
@@ -1120,11 +1120,11 @@ const listOfQuestions = {
                 {
                   answerParentQuestion: "A portion of them",
                   parentId: "farm_crops_soils_bioenergy_practice_portion",
-                  id: "farm_crops_soils_bioenergy_practice_portion_number",
+                  id: "farm_crops_soils_bioenergy_practice_portion_numb",
                   question: "% of them",
 
                   formInput: { type: "number" },
-                  userValue: { value: "100%" },
+                  userValue: { value: "100", unit: "%" },
                 },
               ],
             },
@@ -1151,11 +1151,11 @@ const listOfQuestions = {
                 {
                   answerParentQuestion: "A portion of them",
                   parentId: "farm_crops_manure_practice_portion",
-                  id: "farm_crops_manure_practice_portion_number",
+                  id: "farm_crops_manure_practice_portion_numb",
                   question: "% of them",
 
                   formInput: { type: "number" },
-                  userValue: { value: "100%" },
+                  userValue: { value: "100", unit: "%" },
                 },
               ],
             },
@@ -1984,6 +1984,7 @@ const listOfQuestions = {
       linked_questions: [
         {
           answerParentQuestion: true,
+          parentId: "farm_animals",
           id: "farm_animals_dairy_cattle",
           question: "Do you produce dairy cattle ?",
           formInput: { type: "checkbox" },
@@ -1991,7 +1992,8 @@ const listOfQuestions = {
           linked_questions: [
             {
               answerParentQuestion: true,
-              id: "farm_dairy_cattle_rep12",
+              parentId: "farm_animals_dairy_cattle",
+              id: "farm_animals_dairy_cattle_rep12",
               question:
                 "Do you have replacements 0-12months composing your dairy cattle in the time frame reported? NB: A portion of the offspring are retained to replace mature cows that die or are removed from the herd (culled) each year. Those represents a very fast movement of cattle called 'replacements'.",
 
@@ -2000,19 +2002,22 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: true,
-                  id: "farm_dairy_cattle_rep12_numb",
+                  parentId: "farm_animals_dairy_cattle_rep12",
+                  id: "farm_animals_dairy_cattle_rep12_numb",
                   question:
                     "How many heads of replacements 0-12mois do you farm? NB: in the time frame reported",
                   formInput: { type: "number" },
                   userValue: {
                     value: 0,
+                    unit: " ",
                   },
                 },
               ],
             },
             {
               answerParentQuestion: true,
-              id: "farm_dairy_cattle_rep24",
+              parentId: "farm_animals_dairy_cattle",
+              id: "farm_animals_dairy_cattle_rep24",
               question:
                 "Do you have replacements 0-24months composing your dairy cattle in the time frame reported? NB: A portion of the offspring are retained to replace mature cows that die or are removed from the herd (culled) each year. Those represents a very fast movement of cattle called 'replacements'.",
 
@@ -2021,19 +2026,22 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: true,
-                  id: "farm_dairy_cattle_rep24_numb",
+                  parentId: "farm_animals_dairy_cattle_rep24",
+                  id: "farm_animals_dairy_cattle_rep24_numb",
                   question:
                     "How many heads of replacements 0-24mois do you farm? NB: in the time frame reported",
                   formInput: { type: "number" },
                   userValue: {
                     value: 0,
+                    unit: " ",
                   },
                 },
               ],
             },
             {
               answerParentQuestion: true,
-              id: "farm_dairy_cattle_matur",
+              parentId: "farm_animals_dairy_cattle",
+              id: "farm_animals_dairy_cattle_matur",
               question:
                 "Do you have mature cows composing your dairy cattle in the time frame reported? NB: A portion of the offspring are retained to replace mature cows that die or are removed from the herd (culled) each year. Those represents a very fast movement of cattle called 'replacements'.",
 
@@ -2042,18 +2050,22 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: true,
-                  id: "farm_dairy_cattle_matur_numb",
+                  parentId: "farm_animals_dairy_cattle_matur",
+                  id: "farm_animals_dairy_cattle_matur_numb",
                   question:
                     "How many heads of mature cows do you farm? NB: in the time frame reported",
                   formInput: { type: "number" },
                   userValue: {
                     value: 0,
+                    unit: " ",
                   },
                 },
               ],
             },
             {
-              id: "dairy_cow_feeding_practice",
+              answerParentQuestion: true,
+              parentId: "farm_animals_dairy_cattle",
+              id: "farm_animals_dairy_cattle_feeding_practice",
               question:
                 "For your dairy cattle, have you improved feeding practice e.g. replacing roughage with concentrate, feeding, extra dietary oil",
               formInput: { type: "checkbox" },
@@ -2061,7 +2073,8 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: true,
-                  id: "dairy_cow_feeding_practice_portion",
+                  parentId: "farm_animals_dairy_cattle_feeding_practice",
+                  id: "farm_animals_dairy_cattle_feeding_practice_portion",
                   question: "Did you implement this/these practice(s) for:",
 
                   formInput: { type: "select" },
@@ -2069,18 +2082,22 @@ const listOfQuestions = {
                   linked_questions: [
                     {
                       answerParentQuestion: "A portion of them",
-                      id: "dairy_cow_feeding_practice_number",
+                      parentId:
+                        "farm_animals_dairy_cattle_feeding_practice_portion",
+                      id: "farm_animals_dairy_cattle_feeding_practice_portion_numb",
                       question: "% of them",
 
                       formInput: { type: "number" },
-                      userValue: { value: "100%" },
+                      userValue: { value: "100", unit: "%" },
                     },
                   ],
                 },
               ],
             },
             {
-              id: "dairy_cow_specific_agent_practice",
+              answerParentQuestion: true,
+              parentId: "farm_animals_dairy_cattle",
+              id: "farm_animals_dairy_cattle_specific_agent_practice",
               question:
                 "For your dairy cattle, do you use specific agents and dietary additives e.g. bST, growth hormones, ionophores, propionate precursors",
               formInput: { type: "checkbox" },
@@ -2088,7 +2105,8 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: true,
-                  id: "dairy_cow_specific_agent_practice_portion",
+                  parentId: "farm_animals_dairy_cattle_specific_agent_practice",
+                  id: "farm_animals_dairy_cattle_specific_agent_practice_portion",
                   question: "Did you implement this/these practice(s) for:",
 
                   formInput: { type: "select" },
@@ -2096,18 +2114,22 @@ const listOfQuestions = {
                   linked_questions: [
                     {
                       answerParentQuestion: "A portion of them",
-                      id: "dairy_cow_specific_agent_practice_number",
+                      parentId:
+                        "farm_animals_dairy_cattle_specific_agent_practice_portion",
+                      id: "farm_animals_dairy_cattle_specific_agent_practice_portion_numb",
                       question: "% of them",
 
                       formInput: { type: "number" },
-                      userValue: { value: "100%" },
+                      userValue: { value: "100", unit: "%" },
                     },
                   ],
                 },
               ],
             },
             {
-              id: "dairy_cow_animal_breeding_practice",
+              answerParentQuestion: true,
+              parentId: "farm_animals_dairy_cattle",
+              id: "farm_animals_dairy_cattle_animal_breeding_practice",
               question:
                 "For your dairy cattle, do you improved Long term structural/management and animal breeding e.g. lifetime management of beef cattle, improved productivity through animal breeding",
               formInput: { type: "checkbox" },
@@ -2115,7 +2137,9 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: true,
-                  id: "dairy_cow_animal_breeding_practice_portion",
+                  parentId:
+                    "farm_animals_dairy_cattle_animal_breeding_practice",
+                  id: "farm_animals_dairy_cattle_animal_breeding_practice_portion",
                   question: "Did you implement this/these practice(s) for:",
 
                   formInput: { type: "select" },
@@ -2123,11 +2147,13 @@ const listOfQuestions = {
                   linked_questions: [
                     {
                       answerParentQuestion: "A portion of them",
-                      id: "dairy_cow_animal_breeding_practice_number",
+                      parentId:
+                        "farm_animals_dairy_cattle_animal_breeding_practice_portion",
+                      id: "farm_animals_dairy_cattle_animal_breeding_practice_portion_numb",
                       question: "% of them",
 
                       formInput: { type: "number" },
-                      userValue: { value: "100%" },
+                      userValue: { value: "100", unit: "%" },
                     },
                   ],
                 },
@@ -2137,6 +2163,7 @@ const listOfQuestions = {
         },
         {
           answerParentQuestion: true,
+          parentId: "farm_animals",
           id: "farm_animals_beef_cattle",
           question: "Do you produce beef cattle ?",
           formInput: { type: "checkbox" },
@@ -2144,7 +2171,8 @@ const listOfQuestions = {
           linked_questions: [
             {
               answerParentQuestion: true,
-              id: "farm_beef_cattle_rep12",
+              parentId: "farm_animals_beef_cattle",
+              id: "farm_animals_beef_cattle_rep12",
               question:
                 "Do you have replacements 0-12months composing your beef cattle in the time frame reported? NB: A portion of the offspring are retained to replace mature cows that die or are removed from the herd (culled) each year. Those represents a very fast movement of cattle called 'replacements'.",
 
@@ -2153,19 +2181,22 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: true,
-                  id: "farm_beef_cattle_rep12_numb",
+                  parentId: "farm_animals_beef_cattle_rep12",
+                  id: "farm_animals_beef_cattle_rep12_numb",
                   question:
                     "How many heads of replacements 0-12mois do you farm? NB: in the time frame reported",
                   formInput: { type: "number" },
                   userValue: {
                     value: 0,
+                    unit: " ",
                   },
                 },
               ],
             },
             {
               answerParentQuestion: true,
-              id: "farm_beef_cattle_rep24",
+              parentId: "farm_animals_beef_cattle",
+              id: "farm_animals_beef_cattle_rep24",
               question:
                 "Do you have replacements 0-24months composing your beef cattle in the time frame reported? NB: A portion of the offspring are retained to replace mature cows that die or are removed from the herd (culled) each year. Those represents a very fast movement of cattle called 'replacements'.",
 
@@ -2174,19 +2205,22 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: true,
-                  id: "farm_beef_cattle_rep24_numb",
+                  parentId: "farm_animals_beef_cattle_rep24",
+                  id: "farm_animals_beef_cattle_rep24_numb",
                   question:
                     "How many heads of replacements 0-24mois do you farm? NB: in the time frame reported",
                   formInput: { type: "number" },
                   userValue: {
                     value: 0,
+                    unit: " ",
                   },
                 },
               ],
             },
             {
               answerParentQuestion: true,
-              id: "farm_beef_cattle_matur",
+              parentId: "farm_animals_beef_cattle",
+              id: "farm_animals_beef_cattle_matur",
               question:
                 "Do you have mature cows composing your beef cattle in the time frame reported? NB: A portion of the offspring are retained to replace mature cows that die or are removed from the herd (culled) each year. Those represents a very fast movement of cattle called 'replacements'.",
 
@@ -2195,19 +2229,22 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: true,
-                  id: "farm_beef_cattle_matur_numb",
+                  parentId: "farm_animals_beef_cattle_matur",
+                  id: "farm_animals_beef_cattle_matur_numb",
                   question:
                     "How many heads of mature cows do you farm? NB: in the time frame reported",
                   formInput: { type: "number" },
                   userValue: {
                     value: 0,
+                    unit: " ",
                   },
                 },
               ],
             },
             {
               answerParentQuestion: true,
-              id: "farm_beef_cattle_weanling",
+              parentId: "farm_animals_beef_cattle",
+              id: "farm_animals_beef_cattle_weanling",
               question:
                 "Do you have weanling system steers/heifers composing your beef cattle in the time frame reported? NB: A portion of the offspring are retained to replace mature cows that die or are removed from the herd (culled) each year. Those represents a very fast movement of cattle called 'replacements'.",
 
@@ -2216,19 +2253,22 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: true,
-                  id: "farm_beef_cattle_weanling_numb",
+                  parentId: "farm_animals_beef_cattle_weanling",
+                  id: "farm_animals_beef_cattle_weanling_numb",
                   question:
                     "How many heads of weanling system steers/heifers do you farm? NB: in the time frame reported",
                   formInput: { type: "number" },
                   userValue: {
                     value: 0,
+                    unit: " ",
                   },
                 },
               ],
             },
             {
               answerParentQuestion: true,
-              id: "farm_beef_cattle_yearling",
+              parentId: "farm_animals_beef_cattle",
+              id: "farm_animals_beef_cattle_yearling",
               question:
                 "Do you have yearling system steers/heifers composing your beef cattle in the time frame reported? NB: A portion of the offspring are retained to replace mature cows that die or are removed from the herd (culled) each year. Those represents a very fast movement of cattle called 'replacements'.",
 
@@ -2237,19 +2277,22 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: true,
-                  id: "farm_beef_cattle_yearling_numb",
+                  parentId: "farm_animals_beef_cattle_yearling",
+                  id: "farm_animals_beef_cattle_yearling_numb",
                   question:
                     "How many heads of yearling system steers/heifers do you farm? NB: in the time frame reported",
                   formInput: { type: "number" },
                   userValue: {
                     value: 0,
+                    unit: " ",
                   },
                 },
               ],
             },
             {
               answerParentQuestion: true,
-              id: "farm_beef_cattle_bulls_numb",
+              parentId: "farm_animals_beef_cattle",
+              id: "farm_animals_beef_cattle_bulls",
               question:
                 "Do you have bulls composing your beef cattle in the time frame reported? NB: A portion of the offspring are retained to replace mature cows that die or are removed from the herd (culled) each year. Those represents a very fast movement of cattle called 'replacements'.",
 
@@ -2258,18 +2301,22 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: true,
-                  id: "farm_beef_cattle_bulls_numb",
+                  parentId: "farm_animals_beef_cattle_bulls",
+                  id: "farm_animals_beef_cattle_bulls_numb",
                   question:
                     "How many heads of bulls do you farm? NB: in the time frame reported",
                   formInput: { type: "number" },
                   userValue: {
                     value: 0,
+                    unit: " ",
                   },
                 },
               ],
             },
             {
-              id: "beef_cattle_feeding_practice",
+              answerParentQuestion: true,
+              parentId: "farm_animals_beef_cattle",
+              id: "farm_animals_beef_cattle_feeding_practice",
               question:
                 "For your beef cattle, have you improved feeding practice e.g. replacing roughage with concentrate, feeding, extra dietary oil",
               formInput: { type: "checkbox" },
@@ -2277,7 +2324,8 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: true,
-                  id: "beef_cattle_feeding_practice_portion",
+                  parentId: "farm_animals_beef_cattle_feeding_practice",
+                  id: "farm_animals_beef_cattle_feeding_practice_portion",
                   question: "Did you implement this/these practice(s) for:",
 
                   formInput: { type: "select" },
@@ -2285,18 +2333,22 @@ const listOfQuestions = {
                   linked_questions: [
                     {
                       answerParentQuestion: "A portion of them",
-                      id: "beef_cattle_feeding_practice_number",
+                      parentId:
+                        "farm_animals_beef_cattle_feeding_practice_portion",
+                      id: "farm_animals_beef_cattle_feeding_practice_portion_numb",
                       question: "% of them",
 
                       formInput: { type: "number" },
-                      userValue: { value: "100%" },
+                      userValue: { value: "100", unit: "%" },
                     },
                   ],
                 },
               ],
             },
             {
-              id: "beef_cattle_specific_agent_practice",
+              answerParentQuestion: true,
+              parentId: "farm_animals_beef_cattle",
+              id: "farm_animals_beef_cattle_specific_agent_practice",
               question:
                 "For your beef cattle, do you use specific agents and dietary additives e.g. bST, growth hormones, ionophores, propionate precursors",
               formInput: { type: "checkbox" },
@@ -2304,7 +2356,8 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: true,
-                  id: "beef_cattle_specific_agent_practice_portion",
+                  parentId: "farm_animals_beef_cattle_specific_agent_practice",
+                  id: "farm_animals_beef_cattle_specific_agent_practice_portion",
                   question: "Did you implement this/these practice(s) for:",
 
                   formInput: { type: "select" },
@@ -2312,18 +2365,22 @@ const listOfQuestions = {
                   linked_questions: [
                     {
                       answerParentQuestion: "A portion of them",
-                      id: "beef_cattle_specific_agent_practice_number",
+                      parentId:
+                        "farm_animals_beef_cattle_specific_agent_practice_portion",
+                      id: "farm_animals_beef_cattle_specific_agent_practice_portion_numb",
                       question: "% of them",
 
                       formInput: { type: "number" },
-                      userValue: { value: "100%" },
+                      userValue: { value: "100", unit: "%" },
                     },
                   ],
                 },
               ],
             },
             {
-              id: "beef_cattle_animal_breeding_practice",
+              answerParentQuestion: true,
+              parentId: "farm_animals_beef_cattle",
+              id: "farm_animals_beef_cattle_breeding_practice",
               index_id: 126,
               question:
                 "For your beef cattle, do you improved Long term structural/management and animal breeding e.g. lifetime management of beef cattle, improved productivity through animal breeding",
@@ -2332,7 +2389,8 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: true,
-                  id: "beef_cattle_animal_breeding_practice_portion",
+                  parentId: "farm_animals_beef_cattle_breeding_practice",
+                  id: "farm_animals_beef_cattle_breeding_practice_portion",
                   index_id: 127,
                   question: "Did you implement this/these practice(s) for:",
 
@@ -2341,12 +2399,14 @@ const listOfQuestions = {
                   linked_questions: [
                     {
                       answerParentQuestion: "A portion of them",
-                      id: "beef_cattle_animal_breeding_practice_number",
+                      parentId:
+                        "farm_animals_beef_cattle_breeding_practice_portion",
+                      id: "farm_animals_beef_cattle_breeding_practice_portion_numb",
                       index_id: 127,
                       question: "% of them",
 
                       formInput: { type: "number" },
-                      userValue: { value: "100%" },
+                      userValue: { value: "100", unit: "%" },
                     },
                   ],
                 },
@@ -2356,24 +2416,29 @@ const listOfQuestions = {
         },
         {
           answerParentQuestion: true,
-          id: "farm_animals_sheeps_matur",
+          parentId: "farm_animals",
+          id: "farm_animals_sheeps",
           question: "Do you produce sheeps ?",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
             {
               answerParentQuestion: true,
-              id: "farm_sheeps_matur_numb",
+              parentId: "farm_animals_sheeps",
+              id: "farm_animals_sheeps_numb",
               question:
                 "How many heads of sheeps do you farm? NB: in the time frame reported",
 
               formInput: { type: "number" },
               userValue: {
                 value: 0,
+                unit: " ",
               },
             },
             {
-              id: "sheeps_feeding_practice",
+              answerParentQuestion: true,
+              parentId: "farm_animals_sheeps",
+              id: "farm_animals_sheeps_feeding_practice",
               question:
                 "For your sheeps, have you improved feeding practice e.g. replacing roughage with concentrate, feeding, extra dietary oil",
               formInput: { type: "checkbox" },
@@ -2381,7 +2446,8 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: true,
-                  id: "sheeps_feeding_practice_portion",
+                  parentId: "farm_animals_sheeps_feeding_practice",
+                  id: "farm_animals_sheeps_feeding_practice_portion",
                   question: "Did you implement this/these practice(s) for:",
 
                   formInput: { type: "select" },
@@ -2389,18 +2455,20 @@ const listOfQuestions = {
                   linked_questions: [
                     {
                       answerParentQuestion: "A portion of them",
-                      id: "sheeps_feeding_practice_number",
+                      parentId: "farm_animals_sheeps_feeding_practice_portion",
+                      id: "farm_animals_sheeps_feeding_practice_portion_numb",
                       question: "% of them",
 
                       formInput: { type: "number" },
-                      userValue: { value: "100%" },
+                      userValue: { value: "100", unit: "%" },
                     },
                   ],
                 },
               ],
             },
             {
-              id: "sheeps_specific_agent_practice",
+              parentId: "farm_animals_sheeps",
+              id: "farm_animals_sheeps_specific_agent_practice",
               question:
                 "For your sheeps, do you use specific agents and dietary additives e.g. bST, growth hormones, ionophores, propionate precursors",
               formInput: { type: "checkbox" },
@@ -2408,7 +2476,8 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: true,
-                  id: "sheeps_specific_agent_practice_portion",
+                  parentId: "farm_animals_sheeps_specific_agent_practice",
+                  id: "farm_animals_sheeps_specific_agent_practice_portion",
                   question: "Did you implement this/these practice(s) for:",
 
                   formInput: { type: "select" },
@@ -2416,18 +2485,21 @@ const listOfQuestions = {
                   linked_questions: [
                     {
                       answerParentQuestion: "A portion of them",
-                      id: "sheeps_specific_agent_practice_number",
+                      parentId:
+                        "farm_animals_sheeps_specific_agent_practice_portion",
+                      id: "farm_animals_sheeps_specific_agent_practice_portion_numb",
                       question: "% of them",
 
                       formInput: { type: "number" },
-                      userValue: { value: "100%" },
+                      userValue: { value: "100", unit: "%" },
                     },
                   ],
                 },
               ],
             },
             {
-              id: "sheeps_animal_breeding_practice",
+              parentId: "farm_animals_sheeps",
+              id: "farm_animals_sheeps_breeding_practice",
               question:
                 "For your sheeps, do you improved Long term structural/management and animal breeding e.g. lifetime management of beef cattle, improved productivity through animal breeding",
               formInput: { type: "checkbox" },
@@ -2435,7 +2507,8 @@ const listOfQuestions = {
               linked_questions: [
                 {
                   answerParentQuestion: true,
-                  id: "sheeps_animal_breeding_practice_portion",
+                  parentId: "farm_animals_sheeps_breeding_practice",
+                  id: "farm_animals_sheeps_breeding_practice_portion",
                   question: "Did you implement this/these practice(s) for:",
 
                   formInput: { type: "select" },
@@ -2443,11 +2516,13 @@ const listOfQuestions = {
                   linked_questions: [
                     {
                       answerParentQuestion: "A portion of them",
-                      id: "sheeps_animal_breeding_practice_number",
+                      parentId:
+                        "farm_animals_sheeps_breeding_practice_portion",
+                      id: "farm_animals_sheeps_breeding_practice_portion_numb",
                       question: "% of them",
 
                       formInput: { type: "number" },
-                      userValue: { value: "100%" },
+                      userValue: { value: "100", unit: "%" },
                     },
                   ],
                 },
@@ -2457,140 +2532,161 @@ const listOfQuestions = {
         },
         {
           answerParentQuestion: true,
-          id: "farm_animals_goats_matur",
+          parentId: "farm_animals",
+          id: "farm_animals_goats",
           question: "Do you produce goats ?",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
             {
               answerParentQuestion: true,
-              id: "farm_goats_matur_numb",
+              parentId: "farm_animals_goats",
+              id: "farm_animals_goats_numb",
               question:
                 "How many heads of goats do you farm? NB: in the time frame reported",
 
               formInput: { type: "number" },
               userValue: {
                 value: 0,
+                unit: " ",
               },
             },
           ],
         },
         {
           answerParentQuestion: true,
-          id: "farm_animals_swine_matur",
+          parentId: "farm_animals",
+          id: "farm_animals_swine",
           question: "Do you produce swine ?",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
             {
               answerParentQuestion: true,
-              id: "farm_swine_matur_numb",
+              parentId: "farm_animals_swine",
+              id: "farm_animals_swine_numb",
               question:
                 "How many heads of swine do you farm? NB: in the time frame reported",
 
               formInput: { type: "number" },
               userValue: {
                 value: 0,
+                unit: " ",
               },
             },
           ],
         },
         {
           answerParentQuestion: true,
-          id: "farm_animals_horses_matur",
+          parentId: "farm_animals",
+          id: "farm_animals_horses",
           question: "Do you produce horses ?",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
             {
               answerParentQuestion: true,
-              id: "farm_horses_matur_numb",
+              parentId: "farm_animals_horses",
+              id: "farm_animals_horses_numb",
               question:
                 "How many heads of horses do you farm? NB: in the time frame reported",
 
               formInput: { type: "number" },
               userValue: {
                 value: 0,
+                unit: " ",
               },
             },
           ],
         },
         {
           answerParentQuestion: true,
-          id: "farm_animals_mules_matur",
+          parentId: "farm_animals",
+          id: "farm_animals_mules",
           question: "Do you produce mules ?",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
             {
               answerParentQuestion: true,
-              id: "farm_mules_matur_numb",
+              parentId: "farm_animals_mules",
+              id: "farm_animals_mules_numb",
               question:
                 "How many heads of mules do you farm? NB: in the time frame reported",
 
               formInput: { type: "number" },
               userValue: {
                 value: 0,
+                unit: " ",
               },
             },
           ],
         },
         {
           answerParentQuestion: true,
-          id: "farm_animals_water_buffalo_matur",
+          parentId: "farm_animals",
+          id: "farm_animals_water_buffalo",
           question: "Do you produce water buffalo ?",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
             {
               answerParentQuestion: true,
-              id: "farm_water_buffalo_matur_numb",
+              parentId: "farm_animals_water_buffalo",
+              id: "farm_animals_water_buffalo_numb",
               question:
                 "How many heads of water buffalo do you farm? NB: in the time frame reported",
 
               formInput: { type: "number" },
               userValue: {
                 value: 0,
+                unit: " ",
               },
             },
           ],
         },
         {
           answerParentQuestion: true,
-          id: "farm_animals_poultry_matur",
+          parentId: "farm_animals",
+          id: "farm_animals_poultry",
           question: "Do you produce poultry ?",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
             {
               answerParentQuestion: true,
-              id: "farm_poultry_matur_numb",
+              parentId: "farm_animals_poultry",
+              id: "farm_animals_poultry_numb",
               question:
                 "How many heads of poultry do you farm? NB: in the time frame reported",
 
               formInput: { type: "number" },
               userValue: {
                 value: 0,
+                unit: " ",
               },
             },
           ],
         },
         {
           answerParentQuestion: true,
-          id: "farm_animals_american_bison_matur",
+          parentId: "farm_animals",
+          id: "farm_animals_american_bison",
           question: "Do you produce american bison ?",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
             {
               answerParentQuestion: true,
-              id: "farm_american_bison_numb",
+              parentId: "farm_animals_american_bison",
+              id: "farm_animals_american_bison_numb",
               question:
                 "How many heads of american bison do you farm? NB: in the time frame reported",
 
               formInput: { type: "number" },
               userValue: {
                 value: 0,
+                unit: " ",
               },
             },
           ],

@@ -1,32 +1,45 @@
 // Function beef: mitigations Long Term Breeding
-
-function funcMitigationsLTBreedingBeef(
-  datasForm,
-  reductionEF_coeff,
-  EFBeef,
-  cattleBeef
-) {
+import reductionEF_coeff from "../../coeff/reductionEF_coeff.json";
+function funcMitigationsLTBreedingBeef({ datasForm, EFBeef, cattleBeef }) {
   //Coeff
   let coeffLTBreedingBeef = reductionEF_coeff[1].longterm_change_and_breeding;
 
   // Proportion of beef included in the practice LTBreeding
 
   let numbBeefPracticesLTBreeding = 0;
-  if (
-    cattleBeef === 0 ||
-    datasForm.practices.practice_anim[3].selected === true
-  ) {
+  if (!cattleBeef || cattleBeef === 0) {
     numbBeefPracticesLTBreeding = 0;
   } else {
-    if (datasForm.practices.practice_anim[2].beef_cattle.all_of_them === true) {
+    if (
+      datasForm.find(
+        (data) => data.id === "farm_animals_beef_cattle_breeding_practice"
+      )?.response &&
+      datasForm.find(
+        (data) =>
+          data.id === "farm_animals_beef_cattle_breeding_practice_portion"
+      )?.response === "All of them"
+    ) {
       numbBeefPracticesLTBreeding = 1;
     } else {
       if (
-        datasForm.practices.practice_anim[2].beef_cattle.portion_of_them ===
-        true
+        datasForm.find(
+          (data) => data.id === "farm_animals_beef_cattle_breeding_practice"
+        )?.response &&
+        datasForm.find(
+          (data) =>
+            data.id === "farm_animals_beef_cattle_breeding_practice_portion"
+        )?.response === "A portion of them"
       ) {
-        let portionBeefLTBreeding =
-          datasForm.practices.practice_anim[2].beef_cattle.portion_numb / 100;
+        let portionBeefLTBreeding = datasForm.find(
+          (data) =>
+            data.id ===
+            "farm_animals_beef_cattle_breeding_practice_portion_numb"
+        )?.response?.value
+          ? Number(
+              datasForm.find((data) => data.id === "c_portion_numb").response
+                .value
+            ) / 100
+          : 0;
         numbBeefPracticesLTBreeding = portionBeefLTBreeding;
       }
     }
@@ -35,7 +48,11 @@ function funcMitigationsLTBreedingBeef(
   // EF emissions mitigated by the practice LTBreeding
 
   let EFBeefLTBreeding = 0;
-  if (datasForm.practices.practice_anim[2].beef_cattle.selected === true) {
+  if (
+    datasForm.find(
+      (data) => data.id === "farm_animals_beef_cattle_breeding_practice"
+    )?.response
+  ) {
     EFBeefLTBreeding =
       numbBeefPracticesLTBreeding * EFBeef * coeffLTBreedingBeef;
   } else {
@@ -47,6 +64,9 @@ function funcMitigationsLTBreedingBeef(
   let mitigatedEFBeefLTBreeding =
     EFBeefLTBreeding + (1 - numbBeefPracticesLTBreeding) * EFBeef;
 
-  return [mitigatedEFBeefLTBreeding, mitigationPercentageBeefLTBreeding];
+  return {
+    mitigatedEFBeefLTBreeding: mitigatedEFBeefLTBreeding,
+    mitigationPercentageBeefLTBreeding: mitigationPercentageBeefLTBreeding,
+  };
 }
 export default funcMitigationsLTBreedingBeef;

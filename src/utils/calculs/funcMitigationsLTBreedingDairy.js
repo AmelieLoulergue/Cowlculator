@@ -1,31 +1,52 @@
 // Function dairy: long term breeding
-
-function funcMitigationsLTBreedingDairy(
-  datasForm,
-  reductionEF_coeff,
-  EFDairy,
-  cattleDairy
-) {
+import reductionEF_coeff from "../../coeff/reductionEF_coeff.json";
+function funcMitigationsLTBreedingDairy({ datasForm, EFDairy, cattleDairy }) {
   //Coeff
   let coeffLTBreedingDairy = reductionEF_coeff[0].longterm_change_and_breeding;
   // Proportion of animals included in the practice LTBreeding
 
   let numbDairyPracticesLTBreeding = 0;
 
-  if (
-    cattleDairy === 0 ||
-    datasForm.practices.practice_anim[3].selected === true
-  ) {
+  if (!cattleDairy || cattleDairy === 0) {
     numbDairyPracticesLTBreeding = 0;
   } else {
-    if (datasForm.practices.practice_anim[2].dairy_cow.all_of_them === true) {
+    if (
+      datasForm.find(
+        (data) =>
+          data.id === "farm_animals_dairy_cattle_animal_breeding_practice"
+      )?.response &&
+      datasForm.find(
+        (data) =>
+          data.id ===
+          "farm_animals_dairy_cattle_animal_breeding_practice_portion"
+      )?.response === "All of them"
+    ) {
       numbDairyPracticesLTBreeding = 1;
     } else {
       if (
-        datasForm.practices.practice_anim[2].dairy_cow.portion_of_them === true
+        datasForm.find(
+          (data) =>
+            data.id === "farm_animals_dairy_cattle_animal_breeding_practice"
+        )?.response &&
+        datasForm.find(
+          (data) =>
+            data.id ===
+            "farm_animals_dairy_cattle_animal_breeding_practice_portion"
+        )?.response === "A portion of them"
       ) {
-        let portionDairyLTBreeding =
-          datasForm.practices.practice_anim[2].dairy_cow.portion_numb / 100;
+        let portionDairyLTBreeding = datasForm.find(
+          (data) =>
+            data.id ===
+            "farm_animals_dairy_cattle_animal_breeding_practice_portion_numb"
+        )?.response?.value
+          ? Number(
+              datasForm.find(
+                (data) =>
+                  data.id ===
+                  "farm_animals_dairy_cattle_animal_breeding_practice_portion_numb"
+              ).response.value
+            ) / 100
+          : 0;
         numbDairyPracticesLTBreeding = portionDairyLTBreeding;
       }
     }
@@ -33,7 +54,11 @@ function funcMitigationsLTBreedingDairy(
 
   //EF emissions from cattle portion concerned by LTBreeding
   let EFDairyLTBreeding = 0;
-  if (datasForm.practices.practice_anim[2].dairy_cow.selected === true) {
+  if (
+    datasForm.find(
+      (data) => data.id === "farm_animals_dairy_cattle_animal_breeding_practice"
+    )?.response
+  ) {
     EFDairyLTBreeding =
       numbDairyPracticesLTBreeding * EFDairy * coeffLTBreedingDairy;
   } else {
@@ -45,6 +70,9 @@ function funcMitigationsLTBreedingDairy(
   let mitigatedEFDairyLTBreeding =
     EFDairyLTBreeding + (1 - numbDairyPracticesLTBreeding) * EFDairy;
 
-  return [mitigatedEFDairyLTBreeding, mitigationPercentageDairyLTBreeding];
+  return {
+    mitigatedEFDairyLTBreeding: mitigatedEFDairyLTBreeding,
+    mitigationPercentageDairyLTBreeding: mitigationPercentageDairyLTBreeding,
+  };
 }
 export default funcMitigationsLTBreedingDairy;
