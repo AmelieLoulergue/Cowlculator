@@ -177,6 +177,7 @@
     margin: 20px;
     margin-top: 135px;
     padding: 20px;
+    box-shadow: 0 0 40px 0px #0000007c;
 }
 .card-section {
     display: flex;
