@@ -14,7 +14,6 @@ function funcGas({ gas_butane_cons, gas_propane_cons, gas_mix_cons }) {
   let propane = consPropane ? consPropane * coeffPropane : 0;
   let mix = consMix ? consMix * coeffMix : 0;
   let gasCO2 = round(butane + propane + mix, 1);
-  console.log(consMix, coeffMix, consMix * coeffMix);
 
   return gasCO2;
 }

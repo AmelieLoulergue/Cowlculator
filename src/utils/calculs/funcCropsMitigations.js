@@ -224,197 +224,253 @@ function funcCropsMitigations({ datasForm, state, time }) {
         : 0;
     }
   }
-
   // Practices
 
   // Proportions of cropland on which practices applied
 
-  let cropland_practice = 0;
-  if (
-    datasForm.find((element) => element.id === "farm_crops")?.response &&
-    (datasForm.find((element) => element.id === "farm_crops_grain_size")
-      ?.response?.value ||
-      datasForm.find((element) => element.id === "farm_crops_forage_size")
-        ?.response?.value ||
-      datasForm.find((element) => element.id === "farm_crops_fv_size")?.response
-        ?.value ||
-      datasForm.find((element) => element.id === "farm_crops_flowers_size")
-        ?.response?.value ||
-      datasForm.find((element) => element.id === "farm_crops_herbs_size")
-        ?.response?.value)
-  ) {
-    cropland_practice =
-      datasForm.find((element) => element.id === "farm_crops_grain_size")
-        ?.response?.value +
-      datasForm.find((element) => element.id === "farm_crops_forage_size")
-        ?.response?.value +
-      datasForm.find((element) => element.id === "farm_crops_fv_size")?.response
-        ?.value +
-      datasForm.find((element) => element.id === "farm_crops_flowers_size")
-        ?.response?.value +
-      datasForm.find((element) => element.id === "farm_crops_herbs_size")
-        ?.response?.value;
-  } else {
-    if (datasForm.practices.croplands.portion_of_them === true) {
-      cropland_practice =
-        (grain_size + forage_size + fv_size + flowers_size + herbs_size) *
-        (datasForm.practices.croplands.portion_numb / 100);
+  const calculProportion = (practice) => {
+    console.log(
+      practice,
+      datasForm.find((element) => element.id === `${practice}_portion`)
+        ?.response,
+      datasForm.find((element) => element.id === `${practice}_portion_numb`)
+        ?.response?.value
+    );
+    if (
+      grain_size !== 0 ||
+      fv_size !== 0 ||
+      flowers_size !== 0 ||
+      herbs_size !== 0 ||
+      forage_size !== 0
+    ) {
+      if (
+        datasForm.find((element) => element.id === `${practice}_portion`)
+          ?.response === "All of them"
+      ) {
+        return grain_size + fv_size + flowers_size + herbs_size + forage_size;
+      } else if (
+        datasForm.find((element) => element.id === `${practice}_portion`)
+          ?.response === "A portion of them" &&
+        datasForm.find((element) => element.id === `${practice}_portion_numb`)
+          ?.response?.value
+      ) {
+        return (
+          (grain_size + fv_size + flowers_size + herbs_size + forage_size) *
+          (datasForm.find(
+            (element) => element.id === `${practice}_portion_numb`
+          )?.response?.value /
+            100)
+        );
+      }
     }
-  }
+  };
 
   // Proportions of grassland on which practices applied
 
   let grassland_practice = 0;
-  if (datasForm.practices.grasslands.all_of_them === true) {
-    grassland_practice = grassland_size;
+  if (
+    datasForm.find(
+      (element) => element.id === "farm_crops_grassland_grazing_practice"
+    )?.response
+  ) {
+    if (
+      datasForm.find(
+        (element) =>
+          element.id === "farm_crops_grassland_grazing_practice_portion"
+      )?.response?.value === "All of them"
+    )
+      grassland_practice = grassland_size;
   } else {
-    if (datasForm.practices.grasslands.portion_of_them === true) {
+    if (
+      datasForm.find(
+        (element) =>
+          element.id === "farm_crops_grassland_grazing_practice_portion"
+      )?.response?.value === "A portion of them" &&
+      datasForm.find(
+        (element) =>
+          element.id === "farm_crops_grassland_grazing_practice_portion_numb"
+      )?.response?.value
+    ) {
       grassland_practice =
-        grassland_size * (datasForm.practices.grasslands.portion_numb / 100);
+        grassland_size *
+        (datasForm.find(
+          (element) =>
+            element.id === "farm_crops_grassland_grazing_practice_portion_numb"
+        )?.response?.value /
+          100);
     }
   }
 
   // size of land on which degraded land restoration is practiced
   let degradedRestoration_size = 0;
-  if (datasForm.practices.degraded_lands.unit[0].selected === true) {
-    degradedRestoration_size =
-      datasForm.practices.degraded_lands.size * acre_to_ha;
-  } else {
-    if (datasForm.practices.degraded_lands.unit[1].selected === true) {
-      degradedRestoration_size =
-        datasForm.practices.degraded_lands.size * sqfeet_to_ha;
-    }
-  }
+  // if (datasForm.practices.degraded_lands.unit[0].selected === true) {
+  //   degradedRestoration_size =
+  //     datasForm.practices.degraded_lands.size * acre_to_ha;
+  // } else {
+  //   if (datasForm.practices.degraded_lands.unit[1].selected === true) {
+  //     degradedRestoration_size =
+  //       datasForm.practices.degraded_lands.size * sqfeet_to_ha;
+  //   }
+  // }
 
   // size of land on which manure is applied
   let manure_size = 0;
-  if (datasForm.practices.manure.unit[0].selected === true) {
-    manure_size = datasForm.practices.manure.size * acre_to_ha;
-  } else {
-    if (datasForm.practices.manure.unit[1].selected === true) {
-      manure_size = datasForm.practices.manure.size * sqfeet_to_ha;
-    }
-  }
+  // if (datasForm.practices.manure.unit[0].selected === true) {
+  //   manure_size = datasForm.practices.manure.size * acre_to_ha;
+  // } else {
+  //   if (datasForm.practices.manure.unit[1].selected === true) {
+  //     manure_size = datasForm.practices.manure.size * sqfeet_to_ha;
+  //   }
+  // }
 
-  // Calculate mitigation from each practice on each type of land
-  //Agronomy
+  // // Calculate mitigation from each practice on each type of land
+  let cropland_practice = 0;
+  // //Agronomy
   let mitigationCropAgro = 0;
-  if (datasForm.practices.practice_plant[0].selected === false) {
-    mitigationCropAgro = 0;
-  } else {
-    if (datasForm.practices.practice_plant[0].selected === true) {
-      mitigationCropAgro = (crop_agro_coeff * cropland_practice * time) / 1000;
-    }
+  if (
+    datasForm.find((element) => element.id === "farm_crops_agronomy_practice")
+      ?.response
+  ) {
+    cropland_practice = calculProportion("farm_crops_agronomy_practice");
+    mitigationCropAgro = cropland_practice
+      ? (crop_agro_coeff * cropland_practice * time) / 1000
+      : 0;
   }
 
   //Nutrient management
   let mitigationCropNut = 0;
-  if (datasForm.practices.practice_plant[1].selected === false) {
-    mitigationCropNut = 0;
-  } else {
-    if (datasForm.practices.practice_plant[1].selected === true) {
-      mitigationCropNut = (crop_nut_coeff * cropland_practice * time) / 1000;
-    }
+  if (
+    datasForm.find(
+      (element) => element.id === "farm_crops_nutrient_management_practice"
+    )?.response
+  ) {
+    cropland_practice = calculProportion(
+      "farm_crops_nutrient_management_practice"
+    );
+    mitigationCropNut = cropland_practice
+      ? (crop_nut_coeff * cropland_practice * time) / 1000
+      : 0;
   }
 
   //Tillage
   let mitigationCropTillage = 0;
-  if (datasForm.practices.practice_plant[2].selected === false) {
-    mitigationCropTillage = 0;
-  } else {
-    if (datasForm.practices.practice_plant[2].selected === true) {
-      mitigationCropTillage =
-        (crop_tillage_coeff * cropland_practice * time) / 1000;
-    }
+  if (
+    datasForm.find(
+      (element) => element.id === "farm_crops_residue_management_practice"
+    )?.response
+  ) {
+    cropland_practice = calculProportion(
+      "farm_crops_residue_management_practice"
+    );
+    mitigationCropTillage = cropland_practice
+      ? (crop_tillage_coeff * cropland_practice * time) / 1000
+      : 0;
   }
 
   //Water Management
   let mitigationCropWater = 0;
-  if (datasForm.practices.practice_plant[3].selected === false) {
-    mitigationCropWater = 0;
-  } else {
-    if (datasForm.practices.practice_plant[3].selected === true) {
-      mitigationCropWater =
-        (crop_water_coeff * cropland_practice * time) / 1000;
-    }
+  if (
+    datasForm.find(
+      (element) => element.id === "farm_crops_water_management_practice"
+    )?.response
+  ) {
+    cropland_practice = calculProportion(
+      "farm_crops_water_management_practice"
+    );
+    mitigationCropWater = cropland_practice
+      ? (crop_water_coeff * cropland_practice * time) / 1000
+      : 0;
   }
 
   //LUC
   let mitigationCropLUC = 0;
-  if (datasForm.practices.practice_plant[4].selected === false) {
-    mitigationCropLUC = 0;
-  } else {
-    if (datasForm.practices.practice_plant[4].selected === true) {
-      mitigationCropLUC = (crop_LUC_coeff * cropland_practice * time) / 1000;
-    }
+  if (
+    datasForm.find(
+      (element) => element.id === "farm_crops_land_use_change_practice"
+    )?.response
+  ) {
+    cropland_practice = calculProportion("farm_crops_land_use_change_practice");
+    mitigationCropLUC = cropland_practice
+      ? (crop_LUC_coeff * cropland_practice * time) / 1000
+      : 0;
   }
 
   //Agro Forestry
   let mitigationCropAgrofo = 0;
-  if (datasForm.practices.practice_plant[5].selected === false) {
-    mitigationCropAgrofo = 0;
-  } else {
-    if (datasForm.practices.practice_plant[5].selected === true) {
-      mitigationCropAgrofo =
-        (crop_agrofo_coeff * cropland_practice * time) / 1000;
-    }
+  if (
+    datasForm.find(
+      (element) => element.id === "farm_crops_agroforestry_practice"
+    )?.response
+  ) {
+    cropland_practice = calculProportion("farm_crops_agroforestry_practice");
+    mitigationCropAgrofo = cropland_practice
+      ? (crop_agrofo_coeff * cropland_practice * time) / 1000
+      : 0;
   }
 
   //Grazing
   let mitigationGrassGraz = 0;
-  if (datasForm.practices.practice_plant[6].selected === false) {
-    mitigationGrassGraz = 0;
-  } else {
-    if (datasForm.practices.practice_plant[6].selected === true) {
-      mitigationGrassGraz =
-        (grass_graz_coeff * grassland_practice * time) / 1000;
-    }
+  if (
+    datasForm.find(
+      (element) => element.id === "farm_crops_grassland_grazing_practice"
+    )?.response
+  ) {
+    mitigationGrassGraz = (grass_graz_coeff * grassland_practice * time) / 1000;
   }
 
   //Restoration Degraded Lands
-  let mitigationDegResto = 0;
-  if (datasForm.practices.practice_plant[8].selected === false) {
-    mitigationDegResto = 0;
-  } else {
-    if (datasForm.practices.practice_plant[8].selected === true) {
-      mitigationDegResto =
-        (deg_resto_coeff * degradedRestoration_size * time) / 1000;
-    }
-  }
+  // let mitigationDegResto = 0;
+  // if (datasForm.practices.practice_plant[8].selected === false) {
+  //   mitigationDegResto = 0;
+  // } else {
+  //   if (datasForm.practices.practice_plant[8].selected === true) {
+  //     mitigationDegResto =
+  //       (deg_resto_coeff * degradedRestoration_size * time) / 1000;
+  //   }
+  // }
 
   //Manure application
-  let mitigationManureApp = 0;
-  if (datasForm.practices.practice_plant[10].selected === false) {
-    mitigationManureApp = 0;
-  } else {
-    if (datasForm.practices.practice_plant[10].selected === true) {
-      mitigationManureApp = (manure_bios_coeff * manure_size * time) / 1000;
-    }
-  }
+  // let mitigationManureApp = 0;
+  // if (datasForm.practices.practice_plant[10].selected === false) {
+  //   mitigationManureApp = 0;
+  // } else {
+  //   if (datasForm.practices.practice_plant[10].selected === true) {
+  //     mitigationManureApp = (manure_bios_coeff * manure_size * time) / 1000;
+  //   }
+  // }
 
-  //Total crops practices mitigations
-  let mitigationCropsTotal =
-    mitigationManureApp +
-    mitigationDegResto +
-    mitigationGrassGraz +
-    mitigationCropAgrofo +
-    mitigationCropLUC +
-    mitigationCropWater +
-    mitigationCropTillage +
-    mitigationCropNut +
-    mitigationCropAgro;
+  // //Total crops practices mitigations
+  // let mitigationCropsTotal =
+  //   mitigationManureApp +
+  //   mitigationDegResto +
+  //   mitigationGrassGraz +
+  //   mitigationCropAgrofo +
+  //   mitigationCropLUC +
+  //   mitigationCropWater +
+  //   mitigationCropTillage +
+  //   mitigationCropNut +
+  //   mitigationCropAgro;
 
+  // return {
+  //   mitigation_total_crops: mitigationCropsTotal,
+  //   mitigation_manure_application: mitigationManureApp,
+  //   mitigation_resto_degraded: mitigationDegResto,
+  //   mitigation_grazing_grasslands: mitigationGrassGraz,
+  //   mitigation_agrofo: mitigationCropAgrofo,
+  //   mitigation_LUC: mitigationCropLUC,
+  //   mitiation_water_croplands: mitigationCropWater,
+  //   mitigation_tillage_croplands: mitigationCropTillage,
+  //   mitigation_nut_croplands: mitigationCropNut,
+  //   mitigation_agro_croplands: mitigationCropAgro,
+  // };
   return {
-    mitigation_total_crops: mitigationCropsTotal,
-    mitigation_manure_application: mitigationManureApp,
-    mitigation_resto_degraded: mitigationDegResto,
-    mitigation_grazing_grasslands: mitigationGrassGraz,
-    mitigation_agrofo: mitigationCropAgrofo,
-    mitigation_LUC: mitigationCropLUC,
-    mitiation_water_croplands: mitigationCropWater,
-    mitigation_tillage_croplands: mitigationCropTillage,
-    mitigation_nut_croplands: mitigationCropNut,
-    mitigation_agro_croplands: mitigationCropAgro,
+    mitigationCropAgro: mitigationCropAgro,
+    mitigationCropNut: mitigationCropNut,
+    mitigationCropTillage: mitigationCropTillage,
+    mitigationCropWater: mitigationCropWater,
+    mitigationCropLUC: mitigationCropLUC,
+    mitigationCropAgrofo: mitigationCropAgrofo,
+    mitigationGrassGraz: mitigationGrassGraz,
   };
 }
 

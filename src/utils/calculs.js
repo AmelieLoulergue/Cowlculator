@@ -274,17 +274,17 @@ function calculs({ datasForm, results, setResults }) {
 
     // Mitigations from practices implemented in crops (t CO2e/time frame)
     // detailed, last values. First value=total
-    if (datasForm.find((element) => element.id === "farm_crops")?.response) {
-      // setResults({
-      //   ...results,
-      //   cropsMitigations: allFunctions.funcCropsMitigations({
-      //     datasForm,
-      //     regions,
-      //     state,
-      //     time: results.time,
-      //   }),
-      // });
-    }
+  }
+  if (datasForm.find((element) => element.id === "farm_crops")?.response) {
+    console.log("je rentre ici");
+    setResults({
+      ...results,
+      cropsMitigations: allFunctions.funcCropsMitigations({
+        datasForm,
+        state,
+        time: results.time,
+      }),
+    });
   }
   // TO UPDATE WITH NEW OBJECT AMELIE
   // if (datasForm.find((element) => element.id === "farm_crops")?.response) {
