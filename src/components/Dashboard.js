@@ -52,7 +52,6 @@ function Dashboard() {
 
         </div>
       </div>
-      <Bg></Bg>
       </>
     );
   }

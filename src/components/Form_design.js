@@ -61,7 +61,6 @@ function Form_design() {
                 </div>
             </div>
         </div>
-        <Bg></Bg>
       </>
     );
   }

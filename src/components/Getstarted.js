@@ -41,7 +41,6 @@ function Getstarted() {
           <div>{/* <img src={logo} alt="logo"></img> */}</div>
         </div>
       </div>
-      <Bg></Bg>
     </>
   );
 }
