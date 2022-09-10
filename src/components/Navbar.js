@@ -2,7 +2,7 @@ import * as React from "react";
 import './Navbar.css';
 
 
-import carbdown from '../assets/img/carbdown.png';
+import cowlculator from '../assets/img/cowlculator.png';
 
 function Navbar() {
     const toggleSideNav = () => {
@@ -50,7 +50,7 @@ function Navbar() {
                 <span id="dash-nav-icon-burger"></span>
             </div>
             <div className="logo">
-                <img src={carbdown} alt='brand icon'></img>
+                <img src={cowlculator} alt='brand icon'></img>
             </div>
             <div style={{'width': '60px'}}></div>
         </div>

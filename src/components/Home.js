@@ -4,8 +4,9 @@ import videoSrc from "../assets/video/720pmini.webm";
 import Firstnav from "./Firstnav";
 import Bg from "./Bg";
 import arrow from "../assets/svg/arrow.svg";
-
+import { useNavigate } from "react-router-dom";
 function Home({ viewHeight, scroll }) {
+  let navigate = useNavigate();
   function scrollHero() {
     window.scrollTo({
       left: 0,
@@ -20,8 +21,9 @@ function Home({ viewHeight, scroll }) {
       <div id="hero-container">
         <div className="hero">
           <h2 className="catchPhrase" onClick={scrollHero}>
-            Our planet is beautiful.<br></br> It's time to work for, not against
-            her.
+            “ We know solutions to help mitigate greenhouse gas emissions in
+            agriculture. <br></br>The question is: how to get people to
+            implement them?” <br></br> Steven Mufson, 2019
           </h2>
           <button className="btn" onClick={scrollHero}>
             Learn More
@@ -45,36 +47,48 @@ function Home({ viewHeight, scroll }) {
       </div>
 
       <div className="container">
-        <h1>loremEu officia magna sit laboris id eiusmod.</h1>
+        <h1>Take a short questionnaire</h1>
         <p>
-          Lorem sit fugiat in eiusmod consequat esse. Esse ex et mollit
-          consectetur cillum. Et cupidatat pariatur duis labore in aute velit
-          eiusmod velit cillum cupidatat sunt exercitation laboris.
+          Cowlculator needs to know about your farm's activities and practices.
+          You can update your information by retaking the questionnaire at any
+          time if any change occurs on your farm.
         </p>
         <svg height="100" width="100">
           <circle r="50" fill="white" cx="50" cy="50"></circle>
         </svg>
-        <h1>loremEu officia magna sit laboris id eiusmod.</h1>
+        <h1>Access personalized report</h1>
         <p>
-          Lorem sit fugiat in eiusmod consequat esse. Esse ex et mollit
-          consectetur cillum. Et cupidatat pariatur duis labore in aute velit
-          eiusmod velit cillum cupidatat sunt exercitation laboris.
+          Cowlculator generates a personalized report based on the information
+          you provided. This report includes your farm's CO2eq mitigations,
+          CO2eq emissions, and, your potential earnings via carbon credits.
         </p>
-
         <svg height="100" width="100">
           <circle r="50" fill="white" cx="50" cy="50"></circle>
         </svg>
-        <h1>loremEu officia magna sit laboris id eiusmod.</h1>
+        <h1>Take actions</h1>
         <p>
-          Lorem sit fugiat in eiusmod consequat esse. Esse ex et mollit
-          consectetur cillum. Et cupidatat pariatur duis labore in aute velit
-          eiusmod velit cillum cupidatat sunt exercitation laboris.
+          Cowlculator helps you to make decisions on what practices to implement
+          to maximize your environmental and financial rewards.
+        </p>
+        <svg height="100" width="100">
+          <circle r="50" fill="white" cx="50" cy="50"></circle>
+        </svg>
+        <h1>Access meaningful data</h1>
+        <p>
+          Cowlculator's database gathers users' information whil guaranteeing
+          their privacy. Using an authorized email address, acces this dataset
+          to conduct meaningful agricultural research.
         </p>
         <svg height="100" width="100">
           <circle r="50" fill="white" cx="50" cy="50"></circle>
         </svg>
       </div>
-      <button className="btn sticky-bottom">get strated</button>
+      <button
+        className="btn sticky-bottom"
+        onClick={() => navigate("/getstarted")}
+      >
+        get strated
+      </button>
       <p>
         Fugiat ea Lorem quis culpa esse commodo fugiat dolore anim aliqua fugiat
         ad. Ex ea velit sit consectetur aute aliqua cillum minim quis proident

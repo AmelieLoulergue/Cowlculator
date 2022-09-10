@@ -2,8 +2,7 @@ import * as React from "react";
 import './Dashboard.css';
 
 import charts from '../assets/svg/charts.svg';
-import logow from '../assets/img/logo-w.png';
-import carbdown from '../assets/img/carbdown.png';
+import cowlculator from '../assets/img/cowlculator.png';
 
 import plant from '../assets/svg/plant.svg';
 import footprint from '../assets/svg/footprint.svg';
@@ -19,7 +18,6 @@ function Dashboard() {
     return (
       <>
       <div id="dash">
-
         <div id="summary" className="panel">
             <div className="card-section">
                 <div className="card">
