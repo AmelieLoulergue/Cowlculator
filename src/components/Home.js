@@ -86,7 +86,7 @@ function Home({ viewHeight, scroll }) {
         className="btn sticky-bottom"
         onClick={() => navigate("/getstarted")}
       >
-        get strated
+        get started
       </button>
       <p>
         Fugiat ea Lorem quis culpa esse commodo fugiat dolore anim aliqua fugiat
