@@ -61,7 +61,7 @@ function About() {
               Engineer in the food industry, Bertille moved to the USA in 2020.
               During her free time, she participates in projects allowing her to
               improve her skills in data analysis programming languages and
-              learning the Javascript.
+              learning the Javascript language.
             </p>
             <p>
               Her job and interest in agriculture drive her to focus on projects
@@ -70,7 +70,7 @@ function About() {
             <p>
               For Cowlculator Bertille was in charge of the research, project
               management and, collaborated on the backend by tackling
-              calculation.
+              calculations.
             </p>
           </div>
         </div>

@@ -2,6 +2,7 @@ import funcTime from "./funcTime";
 import funcElec from "./funcElec";
 import funcNatGas from "./funcNatGas";
 import funcGas from "./funcGas";
+import funcFertilizer from "./funcFertilizer";
 import funcFuel from "./funcFuel";
 import funcOther from "./funcOther";
 import funcWater from "./funcWater";
@@ -26,6 +27,7 @@ export {
   funcElec,
   funcNatGas,
   funcGas,
+  funcFertilizer,
   funcFuel,
   funcOther,
   funcWater,

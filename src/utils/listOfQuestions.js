@@ -3,7 +3,8 @@ const listOfQuestions = {
     {
       id: "farm_state",
       bloc_name: "project_presentation",
-      question: "What is the state ? (2 letters code and capital letters)",
+      question:
+        "Please indicate the state where the farm is. (2 letters code and capital letters)",
       formInput: { type: "select" },
       userValue: "",
     },
@@ -1151,7 +1152,7 @@ const listOfQuestions = {
     //             {
     //               answerParentQuestion: true,
     //               parentId: "farm_crops_fertilizer_ammonia_anhydrous",
-    //               id: "farm_crops_fertilizer_ammonia_anhydrous_cons",
+    //               id: "ammonia_anhydrous_cons",
     //               question:
     //                 "During the period of time indicated at the beginning of this questionnaire, how many ton of Ammonia anhydrous did you apply?",
 
@@ -1171,7 +1172,7 @@ const listOfQuestions = {
     //           linked_questions: [
     //             {
     //               answerParentQuestion: true,
-    //               id: "farm_crops_fertilizer_ammonia_aqua_cons",
+    //               id: "ammonia_aqua_cons",
     //               question:
     //                 "During the period of time indicated at the beginning of this questionnaire, how many ton of Ammonia aqua did you apply?",
 
@@ -1191,7 +1192,7 @@ const listOfQuestions = {
     //           linked_questions: [
     //             {
     //               answerParentQuestion: true,
-    //               id: "farm_crops_fertilizer_ammonia_nitrate_cons",
+    //               id: "ammonia_nitrate_cons",
     //               question:
     //                 "During the period of time indicated at the beginning of this questionnaire, how many ton of Ammonia nitrate did you apply?",
 
@@ -2178,7 +2179,7 @@ const listOfQuestions = {
                   parentId: "farm_animals_beef_cattle_rep24",
                   id: "farm_animals_beef_cattle_rep24_numb",
                   question:
-                    "How many heads of replacements 0-24mois do you farm? NB: in the time frame reported",
+                    "How many heads of replacements 0-24month do you farm? NB: in the time frame reported",
                   formInput: { type: "number" },
                   userValue: {
                     value: 0,
@@ -2192,7 +2193,7 @@ const listOfQuestions = {
               parentId: "farm_animals_beef_cattle",
               id: "farm_animals_beef_cattle_matur",
               question:
-                "Do you have mature cows composing your beef cattle in the time frame reported? NB: A portion of the offspring are retained to replace mature cows that die or are removed from the herd (culled) each year. Those represents a very fast movement of cattle called 'replacements'.",
+                "Do you have mature cows composing your beef cattle in the time frame reported? ",
 
               formInput: { type: "checkbox" },
               userValue: false,
@@ -2216,7 +2217,7 @@ const listOfQuestions = {
               parentId: "farm_animals_beef_cattle",
               id: "farm_animals_beef_cattle_weanling",
               question:
-                "Do you have weanling system steers/heifers composing your beef cattle in the time frame reported? NB: A portion of the offspring are retained to replace mature cows that die or are removed from the herd (culled) each year. Those represents a very fast movement of cattle called 'replacements'.",
+                "Do you have weanling system steers/heifers composing your beef cattle in the time frame reported? ",
 
               formInput: { type: "checkbox" },
               userValue: false,
@@ -2240,7 +2241,7 @@ const listOfQuestions = {
               parentId: "farm_animals_beef_cattle",
               id: "farm_animals_beef_cattle_yearling",
               question:
-                "Do you have yearling system steers/heifers composing your beef cattle in the time frame reported? NB: A portion of the offspring are retained to replace mature cows that die or are removed from the herd (culled) each year. Those represents a very fast movement of cattle called 'replacements'.",
+                "Do you have yearling system steers/heifers composing your beef cattle in the time frame reported? ",
 
               formInput: { type: "checkbox" },
               userValue: false,
@@ -2264,7 +2265,7 @@ const listOfQuestions = {
               parentId: "farm_animals_beef_cattle",
               id: "farm_animals_beef_cattle_bulls",
               question:
-                "Do you have bulls composing your beef cattle in the time frame reported? NB: A portion of the offspring are retained to replace mature cows that die or are removed from the herd (culled) each year. Those represents a very fast movement of cattle called 'replacements'.",
+                "Do you have bulls composing your beef cattle in the time frame reported? ",
 
               formInput: { type: "checkbox" },
               userValue: false,
