@@ -10,7 +10,6 @@ const RenderQuestion = ({
   answer,
   goPrecedentQuestion,
 }) => {
-  console.log(question);
   const [unit, setUnit] = useState(null);
   return (
     <>
