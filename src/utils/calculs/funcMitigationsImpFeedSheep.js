@@ -2,7 +2,7 @@ import reductionEF_coeff from "../../coeff/reductionEF_coeff.json";
 function funcMitigationsImpFeedSheep({ datasForm, EFSheep }) {
   //Coeff
   let coeffImpFeedSheep = reductionEF_coeff[2].Improved_feeding;
-
+  console.log(coeffImpFeedSheep);
   // Proportion of sheep included in the practice improved feeding
 
   let numbSheepPractices = 0;

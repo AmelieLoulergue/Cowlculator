@@ -60,7 +60,7 @@ function funcNumbTotalBeefDairy({ datasForm }) {
     farm_animals_beef_cattle_weanling_numb +
     farm_animals_beef_cattle_yearling_numb +
     farm_animals_beef_cattle_bulls_numb;
-
+  console.log({ cattleBeef, cattleDairy });
   return { cattleDairy: cattleDairy, cattleBeef: cattleBeef };
 }
 export default funcNumbTotalBeefDairy;

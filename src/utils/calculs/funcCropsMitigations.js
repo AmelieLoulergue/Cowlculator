@@ -278,8 +278,9 @@ function funcCropsMitigations({ datasForm, state, time }) {
         (element) =>
           element.id === "farm_crops_grassland_grazing_practice_portion"
       )?.response?.value === "All of them"
-    )
+    ) {
       grassland_practice = grassland_size;
+    }
   } else {
     if (
       datasForm.find(
@@ -303,25 +304,81 @@ function funcCropsMitigations({ datasForm, state, time }) {
 
   // size of land on which degraded land restoration is practiced
   let degradedRestoration_size = 0;
-  // if (datasForm.practices.degraded_lands.unit[0].selected === true) {
-  //   degradedRestoration_size =
-  //     datasForm.practices.degraded_lands.size * acre_to_ha;
-  // } else {
-  //   if (datasForm.practices.degraded_lands.unit[1].selected === true) {
-  //     degradedRestoration_size =
-  //       datasForm.practices.degraded_lands.size * sqfeet_to_ha;
-  //   }
-  // }
+  if (
+    datasForm.find(
+      (element) =>
+        element.id === "farm_crops_degraded_lands_restoration_practice"
+    )?.response &&
+    datasForm.find(
+      (element) =>
+        element.id === "farm_crops_degraded_lands_restoration_practice_size"
+    )?.response &&
+    datasForm.find(
+      (element) =>
+        element.id === "farm_crops_degraded_lands_restoration_practice_size"
+    )?.response?.unit === "acre"
+  ) {
+    degradedRestoration_size =
+      datasForm.find(
+        (element) =>
+          element.id === "farm_crops_degraded_lands_restoration_practice_size"
+      )?.response?.value * acre_to_ha;
+  } else {
+    if (
+      datasForm.find(
+        (element) =>
+          element.id === "farm_crops_degraded_lands_restoration_practice"
+      )?.response &&
+      datasForm.find(
+        (element) =>
+          element.id === "farm_crops_degraded_lands_restoration_practice_size"
+      )?.response &&
+      datasForm.find(
+        (element) =>
+          element.id === "farm_crops_degraded_lands_restoration_practice_size"
+      )?.response?.unit === "sq feet"
+    ) {
+      degradedRestoration_size =
+        datasForm.find(
+          (element) =>
+            element.id === "farm_crops_degraded_lands_restoration_practice_size"
+        )?.response?.value * sqfeet_to_ha;
+    }
+  }
 
   // size of land on which manure is applied
   let manure_size = 0;
-  // if (datasForm.practices.manure.unit[0].selected === true) {
-  //   manure_size = datasForm.practices.manure.size * acre_to_ha;
-  // } else {
-  //   if (datasForm.practices.manure.unit[1].selected === true) {
-  //     manure_size = datasForm.practices.manure.size * sqfeet_to_ha;
-  //   }
-  // }
+  if (
+    datasForm.find((element) => element.id === "farm_crops_manure_practice")
+      ?.response &&
+    datasForm.find(
+      (element) => element.id === "farm_crops_manure_practice_size"
+    )?.response &&
+    datasForm.find(
+      (element) => element.id === "farm_crops_manure_practice_size"
+    )?.response?.unit === "acre"
+  ) {
+    manure_size =
+      datasForm.find(
+        (element) => element.id === "farm_crops_manure_practice_size"
+      )?.response?.value * acre_to_ha;
+  } else {
+    if (
+      datasForm.find((element) => element.id === "farm_crops_manure_practice")
+        ?.response &&
+      datasForm.find(
+        (element) => element.id === "farm_crops_manure_practice_size"
+      )?.response &&
+      datasForm.find(
+        (element) => element.id === "farm_crops_manure_practice_size"
+      )?.response?.unit === "sq feet"
+    ) {
+      manure_size =
+        datasForm.find(
+          (element) => element.id === "farm_crops_manure_practice_size"
+        )?.response?.value * sqfeet_to_ha;
+    }
+  }
 
   // // Calculate mitigation from each practice on each type of land
   let cropland_practice = 0;
@@ -419,50 +476,38 @@ function funcCropsMitigations({ datasForm, state, time }) {
   }
 
   //Restoration Degraded Lands
-  // let mitigationDegResto = 0;
-  // if (datasForm.practices.practice_plant[8].selected === false) {
-  //   mitigationDegResto = 0;
-  // } else {
-  //   if (datasForm.practices.practice_plant[8].selected === true) {
-  //     mitigationDegResto =
-  //       (deg_resto_coeff * degradedRestoration_size * time) / 1000;
-  //   }
-  // }
+  let mitigationDegResto = 0;
+  if (
+    datasForm.find(
+      (element) =>
+        element.id === "farm_crops_degraded_lands_restoration_practice"
+    )?.response
+  ) {
+    mitigationDegResto =
+      (deg_resto_coeff * degradedRestoration_size * time) / 1000;
+  }
 
   //Manure application
-  // let mitigationManureApp = 0;
-  // if (datasForm.practices.practice_plant[10].selected === false) {
-  //   mitigationManureApp = 0;
-  // } else {
-  //   if (datasForm.practices.practice_plant[10].selected === true) {
-  //     mitigationManureApp = (manure_bios_coeff * manure_size * time) / 1000;
-  //   }
-  // }
+  let mitigationManureApp = 0;
+  if (
+    datasForm.find((element) => element.id === "farm_crops_manure_practice")
+      ?.response
+  ) {
+    mitigationManureApp = (manure_bios_coeff * manure_size * time) / 1000;
+  }
 
-  // //Total crops practices mitigations
-  // let mitigationCropsTotal =
-  //   mitigationManureApp +
-  //   mitigationDegResto +
-  //   mitigationGrassGraz +
-  //   mitigationCropAgrofo +
-  //   mitigationCropLUC +
-  //   mitigationCropWater +
-  //   mitigationCropTillage +
-  //   mitigationCropNut +
-  //   mitigationCropAgro;
+  //Total crops practices mitigations
+  let mitigationCropsTotal =
+    mitigationManureApp +
+    mitigationDegResto +
+    mitigationGrassGraz +
+    mitigationCropAgrofo +
+    mitigationCropLUC +
+    mitigationCropWater +
+    mitigationCropTillage +
+    mitigationCropNut +
+    mitigationCropAgro;
 
-  // return {
-  //   mitigation_total_crops: mitigationCropsTotal,
-  //   mitigation_manure_application: mitigationManureApp,
-  //   mitigation_resto_degraded: mitigationDegResto,
-  //   mitigation_grazing_grasslands: mitigationGrassGraz,
-  //   mitigation_agrofo: mitigationCropAgrofo,
-  //   mitigation_LUC: mitigationCropLUC,
-  //   mitiation_water_croplands: mitigationCropWater,
-  //   mitigation_tillage_croplands: mitigationCropTillage,
-  //   mitigation_nut_croplands: mitigationCropNut,
-  //   mitigation_agro_croplands: mitigationCropAgro,
-  // };
   return {
     mitigationCropAgro: mitigationCropAgro,
     mitigationCropNut: mitigationCropNut,
@@ -471,6 +516,9 @@ function funcCropsMitigations({ datasForm, state, time }) {
     mitigationCropLUC: mitigationCropLUC,
     mitigationCropAgrofo: mitigationCropAgrofo,
     mitigationGrassGraz: mitigationGrassGraz,
+    mitigationDegResto: mitigationDegResto,
+    mitigationManureApp: mitigationManureApp,
+    mitigationCropsTotal: mitigationCropsTotal,
   };
 }
 

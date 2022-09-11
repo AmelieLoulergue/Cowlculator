@@ -7,7 +7,6 @@ function funcAnimalsEF({ datasForm, time, state }) {
     return datasForm.find((data) => data.id === animal)?.response;
   };
   if (datasForm.find((element) => element.id === "farm_animals")) {
-    
     //Define the region
     let region = regions.find((region) => region.Code === state);
     console.log(region, state);
@@ -185,6 +184,12 @@ function funcAnimalsEF({ datasForm, time, state }) {
         farm_animals_beef_cattle_bulls_numb * coeffBeefBullsEF * 25) /
         1000) *
       time;
+    console.log(
+      farm_animals_beef_cattle_rep12_numb,
+      farm_animals_beef_cattle_rep24_numb,
+      coeffBeefRep12EF,
+      coeffBeefRep24EF
+    );
     let farm_animals_sheeps_numb =
       findAnimal("farm_animals_sheeps") &&
       findAnimal("farm_animals_sheeps_numb")?.value
@@ -236,6 +241,7 @@ function funcAnimalsEF({ datasForm, time, state }) {
         EFWaterBuff,
       1
     );
+    console.log("je suis dans la fonction animals EF", EFBeef, EFDairy);
     return {
       EFDairy: EFDairy,
       EFBeef: EFBeef,

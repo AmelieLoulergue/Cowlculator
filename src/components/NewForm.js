@@ -8,7 +8,6 @@ import Lottie from "lottie-react";
 import form_begin from "../assets/anim/form-begin.json";
 import home from "../assets/svg/home.svg";
 import Bg from "./Bg";
-import { Alert } from "@mui/material";
 import AlertComponent from "./alerts/Alert";
 import { useNavigate } from "react-router-dom";
 import ProgressBarForm from "../components/form_components/ProgressBarForm.js";

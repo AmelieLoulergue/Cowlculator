@@ -70,7 +70,7 @@ function RenderInput({
 
   return (
     <div id={"input_" + indexQuestion} className={"response-input"}>
-      {isButtonDisplay && (
+      {isButtonDisplay && indexQuestion !== "farm_state" && (
         <button className="btn-back" onClick={goPrecedentQuestion}>
           <img src={back_arrow} alt="" width="40px"></img>
         </button>
@@ -167,7 +167,7 @@ function RenderInput({
           className="btn"
           onClick={() => {
             sendAnswer();
-            if (formInput.type !== "checkbox" || formInput.type !== "select" ) {
+            if (formInput.type !== "checkbox" || formInput.type !== "select") {
               inputRef.current.value = null;
             }
             window.scrollTo(0, document.body.scrollHeight);

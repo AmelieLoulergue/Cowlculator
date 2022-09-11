@@ -3,13 +3,13 @@ import reductionEF_coeff from "../../coeff/reductionEF_coeff.json";
 function funcMitigationsLTBreedingSheep({ datasForm, EFSheep }) {
   //Coeff
   let coeffLTBreedingSheep = reductionEF_coeff[2].longterm_change_and_breeding;
-
+  console.log(coeffLTBreedingSheep);
   // Proportion of sheep included in the practice LTBreeding
 
   let numbSheepPracticesLTBreeding = 0;
   if (
     datasForm.find((element) => element.id === "farm_animals_sheeps")
-      .response &&
+      ?.response &&
     datasForm.find((element) => element.id === "farm_animals_sheeps_numb")
       ?.response?.value === 0
   ) {
