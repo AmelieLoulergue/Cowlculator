@@ -13,7 +13,7 @@ function About() {
           <h1 className="primaryTitle">About us.</h1>
           <p>
             Cowlculator has been developed by a French team 💙🤍❤️, but beyond
-            the business partnership, this is a family business; linked by blood
+            the business partnership, this is a family affair; linked by blood
             or 10-years friendship.
           </p>
         </div>
