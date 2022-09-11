@@ -16,8 +16,7 @@ function Home({ viewHeight, scroll }) {
   }
   return (
     <div className="has-text-centered">
-      <Firstnav viewHeight={viewHeight} scroll={scroll}></Firstnav>
-      <Bg></Bg>
+      {/* <Firstnav viewHeight={viewHeight} scroll={scroll}></Firstnav> */}
       <div id="hero-container">
         <div className="hero">
           <h2 className="catchPhrase" onClick={scrollHero}>

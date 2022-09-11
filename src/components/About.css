@@ -1,0 +1,22 @@
+.primaryTitle {
+    font-size: 5em;
+    letter-spacing: .8rem;
+    position: relative;
+    width: fit-content;
+    margin: 100px 50px 50px 50px;
+}
+.primaryTitle::after {
+    content: '';
+    height: 2px;
+    width: 100%;
+    background-image: linear-gradient(315deg, #874ff5 0%, #2c60f5 100%);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.card img {
+    width: 100%;
+    border-radius: inherit;
+}

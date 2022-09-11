@@ -231,7 +231,6 @@ const NewForm = ({
           </div>
         )}
       </div>
-      <Bg />
     </div>
   );
 };
