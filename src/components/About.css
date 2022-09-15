@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&display=swap');
+
 .primaryTitle {
     font-size: 5em;
     letter-spacing: .8rem;
@@ -16,7 +18,34 @@
     right: 0;
 }
 
-.card img {
+.subTitle {
+    font-size: 1.2rem;
+}
+
+#about .card img {
     width: 100%;
     border-radius: inherit;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.541);
+    background-image: linear-gradient(315deg, #874ff5 0%, #2c60f5 100%);
+    border: 1.5px solid transparent;
+}
+#about .card h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+#about .card h2::before,#about .card h2::after {
+    content: '-';
+}
+#about .card {
+    background: transparent;
+    border: none;
+    margin-bottom: 50px;
+}
+#about .card p {
+    margin: 20px;
+    text-align: justify;
+    font-size: .95rem;
 }

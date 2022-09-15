@@ -9,10 +9,11 @@ import bertille from '../assets/img/bertille.jpg';
 function About() {
     return (
       <>
+      <div id="about">
       <div className="container">
         <div>
             <h1 className="primaryTitle">About us.</h1>
-            <p>Cowlculator has been developed by a French team 💙🤍❤️, but above the business partnership, this is a family business; linked by blood or 10-years friendship.</p>
+            <p className="subTitle">Cowlculator has been developed by a French team 💙🤍❤️, but above the business partnership, this is a family business; linked by blood or 10-years friendship.</p>
         </div>
         <div className="card-section">
             <div className="card">
@@ -38,6 +39,7 @@ function About() {
                 <p>For Cowlculator Bertille was in charge of the research, project management and, collaborated on the backend by tackling calculation.</p>
             </div>
         </div>
+      </div>
       </div>
       </>
     );
