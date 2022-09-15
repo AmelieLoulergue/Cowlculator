@@ -7,13 +7,10 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { styled } from "@mui/material/styles";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
-const label = { inputProps: { "aria-label": "Switch demo" } };
 const AntSwitch = styled(Switch)(({ theme }) => ({
   width: 28,
   height: 16,
@@ -70,9 +67,10 @@ function RenderInput({
   setUnit,
 }) {
   const inputRef = useRef(null);
+
   return (
     <div id={"input_" + indexQuestion} className={"response-input"}>
-      {isButtonDisplay && (
+      {isButtonDisplay && indexQuestion !== "farm_state" && (
         <button className="btn-back" onClick={goPrecedentQuestion}>
           <img src={back_arrow} alt="" width="40px"></img>
         </button>
@@ -85,30 +83,56 @@ function RenderInput({
               checked={answer || false}
               inputProps={{ "aria-label": "ant design" }}
               onChange={(event) => {
-                setAnswer(
-                  formInput.type === "checkbox"
-                    ? event.target.checked
-                    : event.target.value
-                );
+                setAnswer(event.target.checked);
               }}
             />
             <Typography>YES</Typography>
           </Stack>
         </div>
+      ) : question.formInput.type === "select" &&
+        typeof question.userValue === "object" ? (
+        <Box sx={{ minWidth: 120 }}>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Portion</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={answer || ""}
+              label="Portion"
+              onChange={(event) => {
+                setAnswer(event.target.value);
+              }}
+            >
+              {question.userValue.map((value, index) => (
+                <MenuItem value={value} key={value + index}>
+                  {value}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Box>
       ) : (
         <input
           ref={inputRef}
-          style={formInput.type === "checkbox" ? { width: "3rem" } : {}}
           type={formInput.type}
           onChange={(event) => {
             setAnswer(
-              formInput.type === "checkbox"
-                ? event.target.checked
+              answer && formInput.type === "number"
+                ? { ...answer, value: event.target.value }
+                : formInput.type === "number"
+                ? {
+                    value: event.target.value,
+                    unit:
+                      typeof question.userValue.unit === "string"
+                        ? question.userValue.unit
+                        : "",
+                  }
                 : event.target.value
             );
           }}
-          value={answer || ""}
-          checked={answer || false}
+          value={
+            formInput.type === "number" && answer ? answer.value : answer || ""
+          }
         />
       )}
       {question.userValue.unit &&
@@ -122,15 +146,17 @@ function RenderInput({
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={unit}
+              value={answer?.unit || ""}
               label="Age"
               onChange={(event) => {
-                console.log(unit, event.target.value);
+                setAnswer({ ...answer, unit: event.target.value });
                 setUnit(event.target.value);
               }}
             >
-              {question.userValue.unit.map((unit) => (
-                <MenuItem value={unit}>{unit}</MenuItem>
+              {question.userValue.unit.map((unit, index) => (
+                <MenuItem value={unit} key={unit + index}>
+                  {unit}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -141,7 +167,9 @@ function RenderInput({
           className="btn"
           onClick={() => {
             sendAnswer();
-            inputRef.current.value = null;
+            if (formInput.type !== "checkbox" || formInput.type !== "select") {
+              inputRef.current.value = null;
+            }
             window.scrollTo(0, document.body.scrollHeight);
           }}
         >

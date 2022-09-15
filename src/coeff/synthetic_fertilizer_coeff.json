@@ -1,0 +1,202 @@
+[
+ {
+   "fert_type": "Nitrogen",
+   "fert_name": "ammonia_anhydrous",
+   "Emissions_application_tonsN2OperTon": 0.015076286
+ },
+ {
+   "fert_type": "Nitrogen",
+   "fert_name": "ammonia_aqua",
+   "Emissions_application_tonsN2OperTon": 0.003769071
+ },
+ {
+   "fert_type": "Nitrogen",
+   "fert_name": "ammonium_nitrate",
+   "Emissions_application_tonsN2OperTon": 0.006159214
+ },
+ {
+   "fert_type": "Nitrogen",
+   "fert_name": "ammonium_nitrate_limestone_mixtures",
+   "Emissions_application_tonsN2OperTon": 0.003769071
+ },
+ {
+   "fert_type": "Nitrogen",
+   "fert_name": "ammonium_sulfate",
+   "Emissions_application_tonsN2OperTon": 0.003861
+ },
+ {
+   "fert_type": "Nitrogen",
+   "fert_name": "ammonium_sulfate_nitrate",
+   "Emissions_application_tonsN2OperTon": 0.004780286
+ },
+ {
+   "fert_type": "Nitrogen",
+   "fert_name": "calcium_cyanamide",
+   "Emissions_application_tonsN2OperTon": 0.003861
+ },
+ {
+   "fert_type": "Nitrogen",
+   "fert_name": "calcium_nitrate",
+   "Emissions_application_tonsN2OperTon": 0.002757857
+ },
+ {
+   "fert_type": "Nitrogen",
+   "fert_name": "nitrogen_solutions",
+   "Emissions_application_tonsN2OperTon": 0.006435
+ },
+ {
+   "fert_type": "Nitrogen",
+   "fert_name": "sodium_nitrate",
+   "Emissions_application_tonsN2OperTon": 0.002941714
+ },
+ {
+   "fert_type": "Nitrogen",
+   "fert_name": "urea",
+   "Emissions_application_tonsN2OperTon": 0.008457429
+ },
+ {
+   "fert_type": "Nitrogen",
+   "fert_name": "urea_form",
+   "Emissions_application_tonsN2OperTon": 0.006986571
+ },
+ {
+   "fert_type": "Phosphate",
+   "fert_name": "basic_slag_open_hearth",
+   "Emissions_application_tonsN2OperTon": 0
+ },
+ {
+   "fert_type": "Phosphate",
+   "fert_name": "bone_meal",
+   "Emissions_application_tonsN2OperTon": 0.000597536
+ },
+ {
+   "fert_type": "Phosphate",
+   "fert_name": "phosphoric_acid",
+   "Emissions_application_tonsN2OperTon": 0
+ },
+ {
+   "fert_type": "Phosphate",
+   "fert_name": "rock_phosphate",
+   "Emissions_application_tonsN2OperTon": 0
+ },
+ {
+   "fert_type": "Phosphate",
+   "fert_name": "superphosphate_normal",
+   "Emissions_application_tonsN2OperTon": 0
+ },
+ {
+   "fert_type": "Phosphate",
+   "fert_name": "superphosphate_concentrated",
+   "Emissions_application_tonsN2OperTon": 0
+ },
+ {
+   "fert_type": "Phosphate",
+   "fert_name": "superphosphoric_acid",
+   "Emissions_application_tonsN2OperTon": 0
+ },
+ {
+   "fert_type": "Potassium",
+   "fert_name": "potash",
+   "Emissions_application_tonsN2OperTon": 0
+ },
+ {
+   "fert_type": "Potassium",
+   "fert_name": "potassium_chloride",
+   "Emissions_application_tonsN2OperTon": 0
+ },
+ {
+   "fert_type": "Potassium",
+   "fert_name": "potassium_magnesium_sulfate",
+   "Emissions_application_tonsN2OperTon": 0
+ },
+ {
+   "fert_type": "Potassium",
+   "fert_name": "potassium_sulfate",
+   "Emissions_application_tonsN2OperTon": 0
+ },
+ {
+   "fert_type": "Multiple Nutrients",
+   "fert_name": "ammoniated_superphosphate",
+   "Emissions_application_tonsN2OperTon": 0.000827357
+ },
+ {
+   "fert_type": "Multiple Nutrients",
+   "fert_name": "ammonium_phosphate_nitrate",
+   "Emissions_application_tonsN2OperTon": 0.004964143
+ },
+ {
+   "fert_type": "Multiple Nutrients",
+   "fert_name": "ammonium_phosphate_sulfate",
+   "Emissions_application_tonsN2OperTon": 0.002665929
+ },
+ {
+   "fert_type": "Multiple Nutrients",
+   "fert_name": "diammonium_phosphate",
+   "Emissions_application_tonsN2OperTon": 0.003401357
+ },
+ {
+   "fert_type": "Multiple Nutrients",
+   "fert_name": "monoammonium_phosphate",
+   "Emissions_application_tonsN2OperTon": 0.002022429
+ },
+ {
+   "fert_type": "Multiple Nutrients",
+   "fert_name": "nitric_phosphate",
+   "Emissions_application_tonsN2OperTon": 0.003309429
+ },
+ {
+   "fert_type": "Multiple Nutrients",
+   "fert_name": "nitrate_of_soda_potash",
+   "Emissions_application_tonsN2OperTon": 0.002757857
+ },
+ {
+   "fert_type": "Multiple Nutrients",
+   "fert_name": "potassium_nitrate",
+   "Emissions_application_tonsN2OperTon": 0.002390143
+ },
+ {
+   "fert_type": "Multiple Nutrients",
+   "fert_name": "wood_ashes",
+   "Emissions_application_tonsN2OperTon": 0
+ },
+ {
+   "fert_type": "Multiple Nutrients",
+   "fert_name": "blast_furnace_slag",
+   "Emissions_application_tonsN2OperTon": 0
+ },
+ {
+   "fert_type": "Multiple Nutrients",
+   "fert_name": "dolomite",
+   "Emissions_application_tonsN2OperTon": 0
+ },
+ {
+   "fert_type": "Multiple Nutrients",
+   "fert_name": "gypsum",
+   "Emissions_application_tonsN2OperTon": 0
+ },
+ {
+   "fert_type": "Multiple Nutrients",
+   "fert_name": "kiesserite",
+   "Emissions_application_tonsN2OperTon": 0
+ },
+ {
+   "fert_type": "Multiple Nutrients",
+   "fert_name": "limestone",
+   "Emissions_application_tonsN2OperTon": 0
+ },
+ {
+   "fert_type": "Multiple Nutrients",
+   "fert_name": "lime_sulfur_solution",
+   "Emissions_application_tonsN2OperTon": 0
+ },
+ {
+   "fert_type": "Multiple Nutrients",
+   "fert_name": "magnesium_sulfate",
+   "Emissions_application_tonsN2OperTon": 0
+ },
+ {
+   "fert_type": "Multiple Nutrients",
+   "fert_name": "sulfur",
+   "Emissions_application_tonsN2OperTon": 0
+ }
+]

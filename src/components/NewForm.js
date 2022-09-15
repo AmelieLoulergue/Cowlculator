@@ -8,16 +8,25 @@ import Lottie from "lottie-react";
 import form_begin from "../assets/anim/form-begin.json";
 import home from "../assets/svg/home.svg";
 import Bg from "./Bg";
-import { Alert } from "@mui/material";
 import AlertComponent from "./alerts/Alert";
 import { useNavigate } from "react-router-dom";
 import ProgressBarForm from "../components/form_components/ProgressBarForm.js";
-const NewForm = () => {
+import calculs from "../utils/calculs";
+import elec_state_coeff from "../coeff/elec_state_coeff.json";
+import controlResponse from "../utils/controlResponse";
+const NewForm = ({
+  results,
+  setResults,
+  datasForm,
+  questions,
+  setQuestions,
+}) => {
+  const stateList = elec_state_coeff.map((element) => element.State);
   let navigate = useNavigate();
   const [initForm, setInitForm] = useState(false);
   const [numberOfResponse, setNumberOfResponse] = useState(0);
   const [questionToDisplay, setQuestionToDisplay] = useState(null);
-  const [questions, setQuestions] = useState([]);
+
   const [indexQuestions, setIndexQuestions] = useState(0);
   const [answer, setAnswer] = useState(null);
   const [severity, setSeverity] = useState("");
@@ -26,21 +35,24 @@ const NewForm = () => {
   const [progress, setProgress] = useState(0);
 
   const sendAnswer = () => {
-    if (answer === null && questionToDisplay.formInput.type !== "checkbox") {
-      setSeverity("error");
-      setMessageAlert("Invalid Response");
-      setDisplayAlert(true);
-      setTimeout(() => setDisplayAlert(false), 3000);
-    } else {
-      setSeverity("success");
-      setMessageAlert("Response saved !");
-      setDisplayAlert(true);
-      setTimeout(() => setDisplayAlert(false), 3000);
+    const responseIsOk = controlResponse({
+      setSeverity,
+      answer,
+      questionToDisplay,
+      setMessageAlert,
+      setDisplayAlert,
+      stateList,
+      datasForm,
+    });
+    if (responseIsOk) {
       const newQuestionsList = questions;
 
       if (questionToDisplay?.linked_questions?.length) {
         const questionsLinked = questionToDisplay.linked_questions.filter(
-          (question) => question.answerParentQuestion === answer
+          (question) =>
+            questionToDisplay.formInput.type === "number"
+              ? question.answerParentQuestion === answer.value
+              : question.answerParentQuestion === answer
         );
 
         newQuestionsList.splice(indexQuestions + 1, 0, ...questionsLinked);
@@ -77,7 +89,6 @@ const NewForm = () => {
       const finalQuestions = newQuestionsList.filter(
         (question) => !idsToDelete.includes(question.parentId)
       );
-
       setQuestions(finalQuestions);
       setIndexQuestions(indexQuestions + 1);
       setQuestionToDisplay(finalQuestions[indexQuestions + 1]);
@@ -96,25 +107,22 @@ const NewForm = () => {
     setQuestionToDisplay(listOfQuestions.formQuestions[0]);
   }, []);
   useEffect(() => {
-    const tab = ["pipi", "caca", "pipi", "pipi"];
-    console.log(
-      questions.reduce((accumulator, currentValue) => {
-        if (currentValue.response) {
-          return [
-            ...accumulator,
-            { id: currentValue.id, response: currentValue.response },
-          ];
-        }
-        return accumulator;
-      }, [])
-    );
     setProgress(Math.round((indexQuestions * 100) / questions.length));
   }, [questions]);
 
   return (
     <div className="">
       <div className="buttons-skip-form">
-        <button onClick={() => navigate("/dashboard")}>
+        <button
+          onClick={() => {
+            calculs({
+              datasForm,
+              results,
+              setResults,
+            });
+            navigate("/dashboard");
+          }}
+        >
           Skip and complete later
         </button>
         <ProgressBarForm progress={progress} />
@@ -131,7 +139,7 @@ const NewForm = () => {
             <h3>Are you ready ?</h3>
             <h1>Start filling the form today</h1>
           </div>
-          <div className="btns">
+          <div className="btns" style={{ marginBottom: "5rem" }}>
             <img src={back_arrow} alt=""></img>
             <button
               className="btn"
@@ -205,7 +213,17 @@ const NewForm = () => {
                 <button className="btn-back" onClick={goPrecedentQuestion}>
                   <img src={back_arrow} alt="" width="40px"></img>
                 </button>
-                <button className="btn" onClick={() => navigate("/dashboard")}>
+                <button
+                  className="btn"
+                  onClick={() => {
+                    calculs({
+                      datasForm,
+                      results,
+                      setResults,
+                    });
+                    navigate("/dashboard");
+                  }}
+                >
                   VIEW RESULTS
                 </button>
               </div>
