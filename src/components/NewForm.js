@@ -139,7 +139,7 @@ const NewForm = ({
             <h3>Are you ready ?</h3>
             <h1>Start filling the form today</h1>
           </div>
-          <div className="btns">
+          <div className="btns" style={{ marginBottom: "5rem" }}>
             <img src={back_arrow} alt=""></img>
             <button
               className="btn"
