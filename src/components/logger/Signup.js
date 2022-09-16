@@ -10,7 +10,6 @@ import Lottie from "lottie-react";
 import eyeBlink from "../../assets/anim/eye-blink.json";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import Bg from ".././Bg";
 
 function Register() {
   let navigate = useNavigate();
@@ -89,8 +88,12 @@ function Register() {
   const [isResearcher, setIsResearcher] = useState(
     localStorage.getItem("category_choosed") === "researcher" ? true : false
   );
+  const noNav = `.dash-nav, .nav-margin, .dash-side {
+    display: none !important;
+}`
   return (
     <>
+    <style>{noNav}</style>
       <div className="center-flex">
         <div className="navbar">
           <Link to="../account">
@@ -205,7 +208,6 @@ function Register() {
           </form>
         </div>
       </div>
-      <Bg></Bg>
     </>
   );
 }

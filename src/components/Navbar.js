@@ -72,6 +72,7 @@ function Navbar() {
         </div>
         <div className="nav-spacer"></div>
       </div>
+      <div className="nav-margin"></div>
     </>
   );
 }

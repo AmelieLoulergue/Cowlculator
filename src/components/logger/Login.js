@@ -7,7 +7,6 @@ import { useRef } from "react";
 import Lottie from "lottie-react";
 import eyeBlink from "../../assets/anim/eye-blink.json";
 import { useNavigate } from "react-router-dom";
-import Bg from ".././Bg";
 
 function Login() {
   const pass = useRef();
@@ -22,8 +21,12 @@ function Login() {
     document.getElementById("password").classList.remove("borderGradient");
   };
   let navigate = useNavigate();
+  const noNav = `.dash-nav, .nav-margin, .dash-side {
+    display: none !important;
+}`
   return (
     <>
+    <style>{noNav}</style>
       <div className="center-flex">
         <div className="navbar">
           <Link to="../account">
@@ -77,7 +80,6 @@ function Login() {
           </form>
         </div>
       </div>
-      <Bg></Bg>
     </>
   );
 }

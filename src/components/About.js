@@ -72,7 +72,6 @@ function About() {
           </div>
         </div>
       </div>
-<<<<<<< HEAD
       </div>
       </>
     );
@@ -80,10 +79,3 @@ function About() {
   
   export default About;
   
-=======
-    </>
-  );
-}
-
-export default About;
->>>>>>> 6e219ebfbbff31bd58622244a3375deccc26968d

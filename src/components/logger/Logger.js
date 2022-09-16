@@ -5,11 +5,13 @@ import Lottie from "lottie-react";
 import fandr from '../../assets/anim/fandr.json';
 import home from '../../assets/svg/home.svg';
 
-import Bg from '.././Bg';
-
 function Logger() {
+  const noNav = `.dash-nav, .nav-margin, .dash-side {
+    display: none !important;
+}`
     return (
       <>
+      <style>{noNav}</style>
         <div className="navbar">
           <Link to={"../"}><img src={home}></img></Link>
         </div>
@@ -24,7 +26,6 @@ function Logger() {
               <Link to={"login"} className="signin">Sign in</Link>
             </div>
         </div>
-        <Bg></Bg>
       </>
     );
   }
