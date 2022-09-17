@@ -1,143 +1,152 @@
 .navbar {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 9999;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 9999;
 }
 .navbar img {
-    width: 40px;
+  width: 40px;
 }
 
 #logger {
-    display: flex;
-    height: 100vh;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    flex-wrap: nowrap;
-    justify-content: space-around;
-    margin: auto;
-    overflow: hidden;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  margin: auto;
+  overflow: hidden;
 }
 #logger .Titles {
-    margin-bottom: 5vh;
-    max-width: 65vw;
+  margin-bottom: 5vh;
+  max-width: 65vw;
 }
-#logger .Titles h1 {font-size: 2.3rem;}
-#logger .Titles p {font-size: 1.05rem; text-align: justify;}
+#logger .Titles h1 {
+  font-size: 2.3rem;
+}
+#logger .Titles p {
+  font-size: 1.05rem;
+  text-align: justify;
+}
 #logger svg {
-    height: 50vh !important;
-    width: auto !important;
-    overflow: hidden;
+  height: 50vh !important;
+  width: auto !important;
+  overflow: hidden;
 }
 #logger p {
-    opacity: 0.8;
-    text-align: center;
+  opacity: 0.8;
+  text-align: center;
 }
 #logger .choice {
-    width: 80vw;
-    display: flex;
-    background: rgba(255,255,255,.1);
-    border-radius: 15px;
-    margin-bottom: 5vh;
+  width: 80vw;
+  display: flex;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  margin-bottom: 5vh;
 }
 #logger .choice a {
-    width: 50%;
-    min-height: 70px;
-    border: none;
-    border-radius: inherit;
-    font-size: 18px;
-    font-weight: 500;
-    letter-spacing: 1.5px;
-    cursor: pointer;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 50%;
+  min-height: 70px;
+  border: none;
+  border-radius: inherit;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #logger .choice .signin {
-    background: transparent;
-    color: white;
+  background: transparent;
+  color: white;
 }
 #logger .choice .register {
-    font-weight: bold;
-    color: black;
-    background: white;
+  font-weight: bold;
+  color: black;
+  background: white;
 }
 
 form {
-    flex-grow: 1;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }
-form input:not([type='checkbox']):not([type='radio']) {
-    width: calc(100% - 30px);
-    border-radius: 15px;
-    padding: 15px;
-    background: rgb(21 20 26);
-    color: white;
-    border: solid 1px rgb(35 35 35);
-    margin: 10px auto;
+form input:not([type="checkbox"]):not([type="radio"]) {
+  width: calc(100% - 30px);
+  border-radius: 15px;
+  padding: 15px;
+  background: rgb(21 20 26);
+  color: white;
+  border: solid 1px rgb(35 35 35);
+  margin: 10px auto;
 }
-form input:focus-visible, .borderGradient {
-    background: 
-        linear-gradient(rgb(21 20 26), rgb(21 20 26)) padding-box,
-        linear-gradient(315deg, #874FF5 0%, #2C60F5 100%) border-box !important;
-    border: 2px solid transparent !important;
-    outline: none;
-    transform: translate(-1px, -1px);
-    margin: 9px 0 !important;
+form input:focus-visible,
+.borderGradient {
+  background: linear-gradient(rgb(21 20 26), rgb(21 20 26)) padding-box,
+    linear-gradient(315deg, #874ff5 0%, #2c60f5 100%) border-box !important;
+  border: 2px solid transparent !important;
+  outline: none;
+  transform: translate(-1px, -1px);
+  margin: 9px 0 !important;
 }
 .content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    align-content: center;
-    margin: auto;
-    min-height: 90vh;
-    max-width: 80vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
+  margin: auto;
+  min-height: 90vh;
+  max-width: 80vw;
 }
 .content .title {
-    margin-top: 5vh;
+  margin-top: 5vh;
 }
 .content .title h1 {
-    font-size: 3rem;
+  font-size: 3rem;
 }
 .content .title p {
-    font-size: 1.4rem;
-    font-weight: 200;
+  font-size: 1.4rem;
+  font-weight: 200;
 }
 form .btn {
-    width: 100%;
-    margin: 20px auto calc(5vh + 0.67em) auto;
+  width: 100%;
+  margin: 20px auto calc(5vh + 0.67em) auto;
+}
+form .btn.disabled {
+  background-image: none;
+  color: grey !important;
 }
 form .input {
-    margin-top: 8vh;
+  margin-top: 8vh;
 }
 form .submit {
-    margin-top: auto;
-    text-align: center;
+  margin-top: auto;
+  text-align: center;
 }
 form .submit p {
-    color: rgb(160 160 160);
+  color: rgb(160 160 160);
 }
 form .submit a {
-    color: rgb(220 220 220);
-    text-decoration: none;
+  color: rgb(220 220 220);
+  text-decoration: none;
 }
 
 .eye-pass {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 45px;
-    margin: 10px;
-    cursor: pointer;
-    opacity: .5;
-    transition: .2s;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 45px;
+  margin: 10px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: 0.2s;
 }
 .eye-pass:hover {
-    opacity: 1;
+  opacity: 1;
 }

@@ -4,9 +4,9 @@ import "./Navbar.css";
 import { useState } from "react";
 
 import cowlculator from "../assets/img/cowlculator.png";
-
-function Navbar() {
-  const toggleSideNav = () => {
+import { logout } from "../utils/authentication/controlLog";
+function Navbar({ login, setLogin }) {
+  const toggleSideNav = ({ login }) => {
     document.getElementById("dash-side").classList.toggle("active");
     document.getElementById("dash-nav-icon-burger").classList.toggle("active");
     document.getElementsByClassName("nav-title")[0].classList.toggle("active");
@@ -14,24 +14,33 @@ function Navbar() {
   };
 
   const [scroll, setScroll] = useState(window.scrollY);
+  console.log(login);
   return (
     <>
       <div className="dash-side" id="dash-side">
         <div className="dash-side-container">
-          <div className="dash-profile">
-            <h1>Dashboard</h1>
-            <div>
-              <img></img>
-              <h2>Username</h2>
-              <p>Project name</p>
-              <button className="btn">Disconect</button>
+          {login && (
+            <div className="dash-profile">
+              <h1>Dashboard</h1>
+              <div>
+                <img></img>
+                {login?.email && <h2>{login.email}</h2>}
+                <p>Project name</p>
+                <button className="btn" onClick={() => logout({ setLogin })}>
+                  Disconect
+                </button>
+              </div>
             </div>
-          </div>
+          )}
           <div className="dash-li">
             <ul>
               <li> Home </li>
-              <li> Dashboard </li>
-              <li> Form </li>
+              {login && login.userType === "farmer" && (
+                <>
+                  <li> Dashboard </li>
+                  <li> Form </li>
+                </>
+              )}
               <li> References </li>
               <li> About Us </li>
             </ul>
