@@ -7,8 +7,17 @@ import { useRef } from "react";
 import Lottie from "lottie-react";
 import eyeBlink from "../../assets/anim/eye-blink.json";
 import { useNavigate } from "react-router-dom";
-
-function Login() {
+import Bg from ".././Bg";
+import loginFunc from "../../utils/authentication/login";
+function Login({
+  userProfile,
+  setUserProfile,
+  login,
+  setLogin,
+  setMessageAlert,
+  setSeverity,
+  setDisplayAlert,
+}) {
   const pass = useRef();
 
   const showPass = () => {
@@ -23,10 +32,10 @@ function Login() {
   let navigate = useNavigate();
   const noNav = `.dash-nav, .nav-margin, .dash-side {
     display: none !important;
-}`
+}`;
   return (
     <>
-    <style>{noNav}</style>
+      <style>{noNav}</style>
       <div className="center-flex">
         <div className="navbar">
           <Link to="../account">
@@ -44,12 +53,26 @@ function Login() {
 
           <form>
             <div className="input">
-              <input type="email" placeholder="Email"></input>
+              <input
+                type="email"
+                placeholder="Email"
+                value={userProfile?.email ? userProfile.email : ""}
+                onChange={(event) =>
+                  setUserProfile({ ...userProfile, email: event.target.value })
+                }
+              ></input>
               <div style={{ position: "relative" }}>
                 <input
                   type="password"
                   placeholder="Password"
                   id="password"
+                  value={userProfile?.password ? userProfile.password : ""}
+                  onChange={(event) =>
+                    setUserProfile({
+                      ...userProfile,
+                      password: event.target.value,
+                    })
+                  }
                 ></input>
                 <Lottie
                   lottieRef={pass}
@@ -70,9 +93,22 @@ function Login() {
                 </Link>
               </p>
               <button
-                type="submit"
                 className="btn"
-                onClick={() => navigate("/dashboard")}
+                onClick={(event) => {
+                  event.preventDefault();
+                  loginFunc({
+                    event,
+                    userProfile,
+                    setUserProfile,
+                    login,
+                    setLogin,
+                    url: "https://cowlculatorback.herokuapp.com",
+                    setMessageAlert,
+                    setSeverity,
+                    setDisplayAlert,
+                    navigate,
+                  });
+                }}
               >
                 Sign in
               </button>

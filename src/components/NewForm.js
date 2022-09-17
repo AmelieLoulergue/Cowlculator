@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import listOfQuestions from "../utils/listOfQuestions";
 // import "./NewForm.css";
 import RenderQuestion from "./NewForm/RenderQuestion";
@@ -8,7 +8,7 @@ import Lottie from "lottie-react";
 import form_begin from "../assets/anim/form-begin.json";
 import home from "../assets/svg/home.svg";
 import Bg from "./Bg";
-import AlertComponent from "./alerts/Alert";
+
 import { useNavigate } from "react-router-dom";
 import ProgressBarForm from "../components/form_components/ProgressBarForm.js";
 import calculs from "../utils/calculs";
@@ -20,8 +20,15 @@ const NewForm = ({
   datasForm,
   questions,
   setQuestions,
+  messageAlert,
+  setMessageAlert,
+  displayAlert,
+  setDisplayAlert,
+  severity,
+  setSeverity,
 }) => {
   const stateList = elec_state_coeff.map((element) => element.State);
+  const chatContainer = useRef(null);
   let navigate = useNavigate();
   const [initForm, setInitForm] = useState(false);
   const [numberOfResponse, setNumberOfResponse] = useState(0);
@@ -29,9 +36,7 @@ const NewForm = ({
 
   const [indexQuestions, setIndexQuestions] = useState(0);
   const [answer, setAnswer] = useState(null);
-  const [severity, setSeverity] = useState("");
-  const [messageAlert, setMessageAlert] = useState("");
-  const [displayAlert, setDisplayAlert] = useState(false);
+
   const [progress, setProgress] = useState(0);
 
   const sendAnswer = () => {
@@ -101,15 +106,19 @@ const NewForm = ({
     setQuestionToDisplay(questions[indexQuestions - 1]);
     setAnswer(questions[indexQuestions - 1].response);
   };
-
+  const scrollToMyRef = () => {
+    const scroll =
+      chatContainer.current.scrollHeight - chatContainer.current.clientHeight;
+    chatContainer.current.scrollTo(0, scroll);
+  };
   useEffect(() => {
     setQuestions(listOfQuestions.formQuestions);
     setQuestionToDisplay(listOfQuestions.formQuestions[0]);
+    document.getElementsByClassName("dash-nav")[0].classList.add("form-navbar");
   }, []);
   useEffect(() => {
     setProgress(Math.round((indexQuestions * 100) / questions.length));
   }, [questions]);
-
   return (
     <div className="">
       <div className="buttons-skip-form">
@@ -127,9 +136,6 @@ const NewForm = ({
         </button>
         <ProgressBarForm progress={progress} />
       </div>
-      {displayAlert && (
-        <AlertComponent severity={severity} messageAlert={messageAlert} />
-      )}
       <div className="formChat">
         <div className="beginin">
           <div className="LottieContainer">
@@ -146,7 +152,7 @@ const NewForm = ({
               onClick={() => {
                 setInitForm(true);
                 setTimeout(() => {
-                  window.scrollTo(0, document.body.scrollHeight);
+                  window.scrollBy(0, document.body.scrollHeight - 100);
                 }, 50);
               }}
             >
@@ -156,7 +162,7 @@ const NewForm = ({
           </div>
         </div>
         {initForm && questions.length > 0 && (
-          <div id="questions-form" className="questions">
+          <div id="questions-form" className="questions" ref={chatContainer}>
             {questions.slice(0, indexQuestions).map((question, index) => (
               <div
                 key={`question_form_${index}`}
