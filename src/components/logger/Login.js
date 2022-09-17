@@ -30,8 +30,12 @@ function Login({
     document.getElementById("password").classList.remove("borderGradient");
   };
   let navigate = useNavigate();
+  const noNav = `.dash-nav, .nav-margin, .dash-side {
+    display: none !important;
+}`;
   return (
     <>
+      <style>{noNav}</style>
       <div className="center-flex">
         <div className="navbar">
           <Link to="../account">
@@ -112,7 +116,6 @@ function Login({
           </form>
         </div>
       </div>
-      <Bg></Bg>
     </>
   );
 }

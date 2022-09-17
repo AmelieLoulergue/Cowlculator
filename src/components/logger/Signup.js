@@ -178,8 +178,12 @@ function Register({
       setRegistrationIsValid(false);
     }
   }, [userProfile]);
+  const noNav = `.dash-nav, .nav-margin, .dash-side {
+    display: none !important;
+}`
   return (
     <>
+    <style>{noNav}</style>
       <div className="center-flex">
         <div className="navbar">
           <Link to="../account">
@@ -337,7 +341,6 @@ function Register({
           </form>
         </div>
       </div>
-      <Bg></Bg>
     </>
   );
 }

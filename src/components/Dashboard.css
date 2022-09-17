@@ -10,7 +10,7 @@
 .card-section {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     align-content: center;
     flex-wrap: wrap;
 }

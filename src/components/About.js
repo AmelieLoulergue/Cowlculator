@@ -6,16 +6,13 @@ import clement from "../assets/img/clement.jpg";
 import bertille from "../assets/img/bertille.jpg";
 
 function About() {
-  return (
-    <>
+    return (
+      <>
+      <div id="about">
       <div className="container">
         <div>
-          <h1 className="primaryTitle">About us.</h1>
-          <p>
-            Cowlculator has been developed by a French team 💙🤍❤️, but beyond
-            the business partnership, this is a family affair; linked by blood
-            or 10-years friendship.
-          </p>
+            <h1 className="primaryTitle">About us.</h1>
+            <p className="subTitle">Cowlculator has been developed by a French team 💙🤍❤️, but above the business partnership, this is a family business; linked by blood or 10-years friendship.</p>
         </div>
         <div className="card-section">
           <div className="card">
@@ -75,8 +72,10 @@ function About() {
           </div>
         </div>
       </div>
-    </>
-  );
-}
-
-export default About;
+      </div>
+      </>
+    );
+  }
+  
+  export default About;
+  

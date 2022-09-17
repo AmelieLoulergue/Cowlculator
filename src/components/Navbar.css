@@ -109,6 +109,9 @@
     width: 100vw;
     background: #0c0b1046;
 }
+.nav-margin {
+    height: 100px;
+}
 
 .dash-nav-icon {
     height: 16px;

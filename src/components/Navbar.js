@@ -81,6 +81,7 @@ function Navbar({ login, setLogin }) {
         </div>
         <div className="nav-spacer"></div>
       </div>
+      <div className="nav-margin"></div>
     </>
   );
 }
