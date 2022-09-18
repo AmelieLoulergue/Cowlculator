@@ -12,19 +12,16 @@ import Bg from "./Bg";
 
 import { Doughnut } from "react-chartjs-2";
 
-function Dashboard({ login }) {
+function Dashboard({ login, results }) {
   console.log(login);
   let navigate = useNavigate();
   return (
     <>
+      {/* {results && <p>{JSON.stringify(results)}</p>} */}
       <div id="dash">
         <div id="summary" className="panel">
           {login?.email === "cowlculator.example@gmail.com" ? (
-            <button
-              onClick={() => navigate("/datas")}
-            >
-              See DATAS
-            </button>
+            <button onClick={() => navigate("/datas")}>See DATAS</button>
           ) : (
             <></>
           )}

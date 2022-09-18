@@ -72,19 +72,18 @@ function App() {
     }
   }, [questions]);
   useEffect(() => {
-    if (formIsCompleted) {
-      calculs({ datasForm, results, setResults });
-    }
-    console.log(results);
+    calculs({ datasForm, results, setResults });
+  }, [datasForm]);
+  useEffect(() => {
     if (initForm) {
       localStorage.setItem("datasForm", JSON.stringify(datasForm));
     }
-  }, [datasForm, formIsCompleted]);
+  }, [datasForm]);
   useEffect(() => {
-    console.log(results);
     if (initForm) {
       localStorage.setItem("results", JSON.stringify(results));
     }
+    console.log(results);
   }, [results]);
   useEffect(() => {
     if (login && login !== "false") {
@@ -149,7 +148,7 @@ function App() {
                 ) : isLogin({ login }) && login.userType === "farmer" ? (
                   <>
                     <Navbar login={login} setLogin={setLogin} />
-                    <Dashboard login={login} />
+                    <Dashboard login={login} results={results} />
                   </>
                 ) : (
                   <>
@@ -187,7 +186,7 @@ function App() {
                 ) : isLogin({ login }) && login.userType === "farmer" ? (
                   <>
                     <Navbar login={login} setLogin={setLogin} />
-                    <Dashboard login={login} />
+                    <Dashboard login={login} results={results} />
                   </>
                 ) : (
                   <>
@@ -214,7 +213,7 @@ function App() {
                 ) : isLogin({ login }) && login.userType === "farmer" ? (
                   <>
                     <Navbar login={login} setLogin={setLogin} />
-                    <Dashboard login={login} />
+                    <Dashboard login={login} results={results} />
                   </>
                 ) : (
                   <>
@@ -230,7 +229,7 @@ function App() {
                 isLogin({ login }) ? (
                   <>
                     <Navbar login={login} setLogin={setLogin} />
-                    <Dashboard login={login} />
+                    <Dashboard login={login} results={results} />
                   </>
                 ) : (
                   <>

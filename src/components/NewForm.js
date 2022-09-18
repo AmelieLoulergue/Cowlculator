@@ -37,7 +37,6 @@ const NewForm = ({
       : 0
   );
   const [questionToDisplay, setQuestionToDisplay] = useState(null);
-  console.log(questions);
   const [indexQuestions, setIndexQuestions] = useState(
     localStorage.getItem("indexQuestions")
       ? Number(localStorage.getItem("indexQuestions"))
@@ -124,7 +123,9 @@ const NewForm = ({
     setQuestionToDisplay(listOfQuestions.formQuestions[0]);
     if (localStorage.getItem("questionToDisplay")) {
       setQuestionToDisplay(
-        JSON.parse(localStorage.getItem("questionToDisplay"))
+        localStorage.getItem("questionToDisplay") === "undefined"
+          ? ""
+          : JSON.parse(localStorage.getItem("questionToDisplay"))
       );
     }
     document.getElementsByClassName("dash-nav")[0].classList.add("form-navbar");
@@ -144,7 +145,7 @@ const NewForm = ({
     }
     console.log("je suis là");
   }, [questionToDisplay]);
-  console.log(questionToDisplay, indexQuestions);
+
   return (
     <div className="">
       <div className="buttons-skip-form">
@@ -168,7 +169,6 @@ const NewForm = ({
             <Lottie animationData={form_begin} loop={true} />
           </div>
           <div>
-            {console.log(datasForm)}
             {datasForm.length > 0 ? (
               <>
                 <h3>Nice to see you again !</h3>
