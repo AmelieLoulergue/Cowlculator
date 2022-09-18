@@ -5,8 +5,9 @@ import { useState } from "react";
 
 import cowlculator from "../assets/img/cowlculator.png";
 import { logout } from "../utils/authentication/controlLog";
+import { useNavigate } from "react-router-dom";
 function Navbar({ login, setLogin }) {
-  const toggleSideNav = ({ login }) => {
+  const toggleSideNav = () => {
     document.getElementById("dash-side").classList.toggle("active");
     document.getElementById("dash-nav-icon-burger").classList.toggle("active");
     document.getElementsByClassName("nav-title")[0].classList.toggle("active");
@@ -14,7 +15,7 @@ function Navbar({ login, setLogin }) {
   };
 
   const [scroll, setScroll] = useState(window.scrollY);
-  console.log(login);
+  const navigate = useNavigate();
   return (
     <>
       <div className="dash-side" id="dash-side">
@@ -32,17 +33,79 @@ function Navbar({ login, setLogin }) {
               </div>
             </div>
           )}
+          {!login && (
+            <div className="dash-profile">
+              <button
+                className="btn"
+                onClick={() => {
+                  navigate("/account/login");
+                  toggleSideNav();
+                }}
+              >
+                Log in
+              </button>
+              <button
+                className="btn"
+                onClick={() => {
+                  navigate("/account/register");
+                  toggleSideNav();
+                }}
+              >
+                Register
+              </button>
+            </div>
+          )}
           <div className="dash-li">
             <ul>
-              <li> Home </li>
+              <li
+                onClick={() => {
+                  navigate("/");
+                  toggleSideNav();
+                }}
+              >
+                {" "}
+                Home{" "}
+              </li>
               {login && login.userType === "farmer" && (
                 <>
-                  <li> Dashboard </li>
-                  <li> Form </li>
+                  <li
+                    onClick={() => {
+                      navigate("/dashboard");
+                      toggleSideNav();
+                    }}
+                  >
+                    {" "}
+                    Dashboard{" "}
+                  </li>
+                  <li
+                    onClick={() => {
+                      navigate("/form");
+                      toggleSideNav();
+                    }}
+                  >
+                    {" "}
+                    Form{" "}
+                  </li>
                 </>
               )}
-              <li> References </li>
-              <li> About Us </li>
+              <li
+                onClick={() => {
+                  navigate("/references");
+                  toggleSideNav();
+                }}
+              >
+                {" "}
+                References{" "}
+              </li>
+              <li
+                onClick={() => {
+                  navigate("/about");
+                  toggleSideNav();
+                }}
+              >
+                {" "}
+                About Us{" "}
+              </li>
             </ul>
           </div>
           <div className="copyright">

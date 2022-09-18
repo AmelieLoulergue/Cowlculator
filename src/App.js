@@ -17,6 +17,7 @@ import AlertComponent from "./components/alerts/Alert";
 import ConfirmEmail from "./utils/authentication/ConfirmEmail";
 import { isLogin } from "./utils/authentication/controlLog";
 import ResearcherDatas from "./components/ResearcherDatas";
+import References from "./components/References";
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -40,7 +41,6 @@ function App() {
       : false
   );
   const [userProfile, setUserProfile] = useState(null);
-  console.log(login);
   useEffect(() => {
     setDatasForm(
       questions.reduce((accumulator, currentValue) => {
@@ -68,7 +68,6 @@ function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <div className="App">
-        <Navbar login={login} setLogin={setLogin}></Navbar>
         {displayAlert && (
           <AlertComponent severity={severity} messageAlert={messageAlert} />
         )}
@@ -76,86 +75,187 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={<Home viewHeight={viewHeight} scroll={scroll} />}
+              element={
+                <>
+                  <Navbar login={login} setLogin={setLogin}></Navbar>
+                  <Home viewHeight={viewHeight} scroll={scroll} />
+                </>
+              }
             ></Route>
             <Route
               path="/form"
               element={
-                isLogin({ validUserType: "farmer", login }) ? (
-                  <NewForm
-                    results={results}
-                    setResults={setResults}
-                    questions={questions}
-                    setQuestions={setQuestions}
-                    datasForm={datasForm}
-                    setDatasForm={setDatasForm}
-                    setMessageAlert={setMessageAlert}
-                    setSeverity={setSeverity}
-                    setDisplayAlert={setDisplayAlert}
-                  />
+                isLogin({ login }) ? (
+                  <>
+                    <Navbar login={login} setLogin={setLogin}></Navbar>
+                    <NewForm
+                      results={results}
+                      setResults={setResults}
+                      questions={questions}
+                      setQuestions={setQuestions}
+                      datasForm={datasForm}
+                      setDatasForm={setDatasForm}
+                      setMessageAlert={setMessageAlert}
+                      setSeverity={setSeverity}
+                      setDisplayAlert={setDisplayAlert}
+                    />
+                  </>
                 ) : (
-                  <Home />
+                  <>
+                    <Navbar login={login} setLogin={setLogin}></Navbar>
+                    <Home viewHeight={viewHeight} scroll={scroll} />
+                  </>
                 )
               }
             ></Route>
-            <Route path="/getstarted" element={<Getstarted />}></Route>
-            <Route path="/account" element={<Account />}></Route>
+            <Route
+              path="/getstarted"
+              element={
+                !isLogin({ login }) ? (
+                  <>
+                    <Navbar login={login} setLogin={setLogin} />
+                    <Getstarted />
+                  </>
+                ) : isLogin({ login }) && login.userType === "farmer" ? (
+                  <>
+                    <Navbar login={login} setLogin={setLogin} />
+                    <Dashboard login={login} />
+                  </>
+                ) : (
+                  <>
+                    <Navbar login={login} setLogin={setLogin} />
+                    <ResearcherDatas login={login} />
+                  </>
+                )
+              }
+            ></Route>
+            <Route
+              path="/account"
+              element={
+                <>
+                  <Navbar login={login} setLogin={setLogin} />
+                  <Account />
+                </>
+              }
+            ></Route>
             <Route
               path="/account/login"
               element={
-                <Login
-                  userProfile={userProfile}
-                  setUserProfile={setUserProfile}
-                  login={login}
-                  setLogin={setLogin}
-                  setMessageAlert={setMessageAlert}
-                  setSeverity={setSeverity}
-                  setDisplayAlert={setDisplayAlert}
-                />
+                !isLogin({ login }) ? (
+                  <>
+                    <Navbar login={login} setLogin={setLogin} />
+                    <Login
+                      userProfile={userProfile}
+                      setUserProfile={setUserProfile}
+                      login={login}
+                      setLogin={setLogin}
+                      setMessageAlert={setMessageAlert}
+                      setSeverity={setSeverity}
+                      setDisplayAlert={setDisplayAlert}
+                    />
+                  </>
+                ) : isLogin({ login }) && login.userType === "farmer" ? (
+                  <>
+                    <Navbar login={login} setLogin={setLogin} />
+                    <Dashboard login={login} />
+                  </>
+                ) : (
+                  <>
+                    <Navbar login={login} setLogin={setLogin} />
+                    <ResearcherDatas login={login} />
+                  </>
+                )
               }
             ></Route>
             <Route
               path="/account/register"
               element={
-                <Register
-                  userProfile={userProfile}
-                  setUserProfile={setUserProfile}
-                  setMessageAlert={setMessageAlert}
-                  setSeverity={setSeverity}
-                  setDisplayAlert={setDisplayAlert}
-                />
+                !isLogin({ login }) ? (
+                  <>
+                    <Navbar login={login} setLogin={setLogin} />
+                    <Register
+                      userProfile={userProfile}
+                      setUserProfile={setUserProfile}
+                      setMessageAlert={setMessageAlert}
+                      setSeverity={setSeverity}
+                      setDisplayAlert={setDisplayAlert}
+                    />
+                  </>
+                ) : isLogin({ login }) && login.userType === "farmer" ? (
+                  <>
+                    <Navbar login={login} setLogin={setLogin} />
+                    <Dashboard login={login} />
+                  </>
+                ) : (
+                  <>
+                    <Navbar login={login} setLogin={setLogin} />
+                    <ResearcherDatas login={login} />
+                  </>
+                )
               }
             ></Route>
             <Route
               path="/dashboard"
               element={
-                isLogin({ validUserType: "farmer", login }) ? (
-                  <Dashboard login={login} />
+                isLogin({ login }) ? (
+                  <>
+                    <Navbar login={login} setLogin={setLogin} />
+                    <Dashboard login={login} />
+                  </>
                 ) : (
-                  <Home />
+                  <>
+                    <Navbar login={login} setLogin={setLogin}></Navbar>
+                    <Home viewHeight={viewHeight} scroll={scroll} />
+                  </>
                 )
               }
             ></Route>
             <Route
               path="/datas"
               element={
-                isLogin({ validUserType: "researcher", login }) ? (
-                  <ResearcherDatas login={login} />
+                isLogin({ login }) ? (
+                  <>
+                    <Navbar login={login} setLogin={setLogin} />
+                    <ResearcherDatas login={login} />
+                  </>
                 ) : (
-                  <Home />
+                  <>
+                    <Navbar login={login} setLogin={setLogin} />
+                    <Home />
+                  </>
                 )
               }
             ></Route>
-            <Route path="/about" element={<About />}></Route>
+            <Route
+              path="/about"
+              element={
+                <>
+                  <Navbar login={login} setLogin={setLogin} />
+                  <About />
+                </>
+              }
+            ></Route>
 
             <Route
               path="/confirm-email/:userId/:resetToken"
               element={
-                <ConfirmEmail
-                  setMessageAlert={setMessageAlert}
-                  setSeverity={setSeverity}
-                  setDisplayAlert={setDisplayAlert}
-                />
+                <>
+                  <Navbar login={login} setLogin={setLogin} />
+                  <ConfirmEmail
+                    setMessageAlert={setMessageAlert}
+                    setSeverity={setSeverity}
+                    setDisplayAlert={setDisplayAlert}
+                  />
+                </>
+              }
+            />
+            <Route
+              path="/references"
+              element={
+                <>
+                  <Navbar login={login} setLogin={setLogin} />
+                  <References />
+                </>
               }
             />
           </Routes>

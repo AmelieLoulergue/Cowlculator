@@ -2,6 +2,7 @@ const TOKEN_KEY = "jwt";
 
 export const logout = ({ login, setLogin }) => {
   localStorage.removeItem(TOKEN_KEY);
+  localStorage.removeItem("login");
   setLogin(false);
 };
 
