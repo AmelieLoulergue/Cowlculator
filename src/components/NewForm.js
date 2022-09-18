@@ -20,21 +20,29 @@ const NewForm = ({
   datasForm,
   questions,
   setQuestions,
-  messageAlert,
   setMessageAlert,
-  displayAlert,
   setDisplayAlert,
-  severity,
   setSeverity,
+  setFormIsCompleted,
+  initForm,
+  setInitForm,
 }) => {
   const stateList = elec_state_coeff.map((element) => element.State);
   const chatContainer = useRef(null);
   let navigate = useNavigate();
-  const [initForm, setInitForm] = useState(false);
-  const [numberOfResponse, setNumberOfResponse] = useState(0);
-  const [questionToDisplay, setQuestionToDisplay] = useState(null);
 
-  const [indexQuestions, setIndexQuestions] = useState(0);
+  const [numberOfResponse, setNumberOfResponse] = useState(
+    localStorage.getItem("numberOfResponse")
+      ? Number(JSON.parse(localStorage.getItem("numberOfResponse")))
+      : 0
+  );
+  const [questionToDisplay, setQuestionToDisplay] = useState(null);
+  console.log(questions);
+  const [indexQuestions, setIndexQuestions] = useState(
+    localStorage.getItem("indexQuestions")
+      ? Number(localStorage.getItem("indexQuestions"))
+      : 0
+  );
   const [answer, setAnswer] = useState(null);
 
   const [progress, setProgress] = useState(0);
@@ -114,11 +122,29 @@ const NewForm = ({
   useEffect(() => {
     setQuestions(listOfQuestions.formQuestions);
     setQuestionToDisplay(listOfQuestions.formQuestions[0]);
+    if (localStorage.getItem("questionToDisplay")) {
+      setQuestionToDisplay(
+        JSON.parse(localStorage.getItem("questionToDisplay"))
+      );
+    }
     document.getElementsByClassName("dash-nav")[0].classList.add("form-navbar");
   }, []);
   useEffect(() => {
     setProgress(Math.round((indexQuestions * 100) / questions.length));
   }, [questions]);
+  useEffect(() => {
+    localStorage.setItem("indexQuestions", indexQuestions);
+  }, [indexQuestions]);
+  useEffect(() => {
+    if (questionToDisplay !== null) {
+      localStorage.setItem(
+        "questionToDisplay",
+        JSON.stringify(questionToDisplay)
+      );
+    }
+    console.log("je suis là");
+  }, [questionToDisplay]);
+  console.log(questionToDisplay, indexQuestions);
   return (
     <div className="">
       <div className="buttons-skip-form">
@@ -142,8 +168,18 @@ const NewForm = ({
             <Lottie animationData={form_begin} loop={true} />
           </div>
           <div>
-            <h3>Are you ready ?</h3>
-            <h1>Start filling the form today</h1>
+            {console.log(datasForm)}
+            {datasForm.length > 0 ? (
+              <>
+                <h3>Nice to see you again !</h3>
+                <h1>Keep filling the form today</h1>
+              </>
+            ) : (
+              <>
+                <h3>Are you ready ?</h3>
+                <h1>Start filling the form today</h1>
+              </>
+            )}
           </div>
           <div className="btns" style={{ marginBottom: "5rem" }}>
             <img src={back_arrow} alt=""></img>
@@ -222,11 +258,7 @@ const NewForm = ({
                 <button
                   className="btn"
                   onClick={() => {
-                    calculs({
-                      datasForm,
-                      results,
-                      setResults,
-                    });
+                    setFormIsCompleted(true);
                     navigate("/dashboard");
                   }}
                 >

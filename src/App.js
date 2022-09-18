@@ -24,41 +24,67 @@ const darkTheme = createTheme({
   },
 });
 function App() {
+  const [formIsCompleted, setFormIsCompleted] = useState(false);
   const [viewHeight, setViewHeight] = useState(window.innerHeight);
   const [scroll, setScroll] = useState(window.scrollY);
   const [datasForm, setDatasForm] = useState([]);
   const [messageAlert, setMessageAlert] = useState("");
   const [severity, setSeverity] = useState("");
-
+  const [initForm, setInitForm] = useState(false);
   const [displayAlert, setDisplayAlert] = useState(false);
   useEffect(() => setViewHeight(window.innerHeight), [window]);
 
   const [results, setResults] = useState({});
   const [questions, setQuestions] = useState([]);
-  const [login, setLogin] = useState(
-    localStorage.getItem("login")
-      ? JSON.parse(localStorage.getItem("login"))
-      : false
-  );
-  const [userProfile, setUserProfile] = useState(null);
+  const [login, setLogin] = useState(false);
+  const [userProfile, setUserProfile] = useState({
+    email: "cowlculator.example@gmail.com",
+    password: "CallForCode2022!",
+  });
   useEffect(() => {
-    setDatasForm(
-      questions.reduce((accumulator, currentValue) => {
-        if (currentValue.response) {
-          return [
-            ...accumulator,
-            { id: currentValue.id, response: currentValue.response },
-          ];
-        }
-        return accumulator;
-      }, [])
-    );
+    if (localStorage.getItem("datasForm")) {
+      setDatasForm(JSON.parse(localStorage.getItem("datasForm")));
+    }
+    if (localStorage.getItem("results")) {
+      setResults(JSON.parse(localStorage.getItem("results")));
+    }
+    if (localStorage.getItem("questions")) {
+      setQuestions(JSON.parse(localStorage.getItem("questions")));
+    }
+    if (localStorage.getItem("login")) {
+      setLogin(JSON.parse(localStorage.getItem("login")));
+    }
+  }, []);
+  useEffect(() => {
+    if (initForm) {
+      setDatasForm(
+        questions.reduce((accumulator, currentValue) => {
+          if (currentValue.response) {
+            return [
+              ...accumulator,
+              { id: currentValue.id, response: currentValue.response },
+            ];
+          }
+          return accumulator;
+        }, [])
+      );
+      localStorage.setItem("questions", JSON.stringify(questions));
+    }
   }, [questions]);
   useEffect(() => {
-    calculs({ datasForm, results, setResults });
-  }, [datasForm]);
+    if (formIsCompleted) {
+      calculs({ datasForm, results, setResults });
+    }
+    console.log(results);
+    if (initForm) {
+      localStorage.setItem("datasForm", JSON.stringify(datasForm));
+    }
+  }, [datasForm, formIsCompleted]);
   useEffect(() => {
     console.log(results);
+    if (initForm) {
+      localStorage.setItem("results", JSON.stringify(results));
+    }
   }, [results]);
   useEffect(() => {
     if (login && login !== "false") {
@@ -98,6 +124,10 @@ function App() {
                       setMessageAlert={setMessageAlert}
                       setSeverity={setSeverity}
                       setDisplayAlert={setDisplayAlert}
+                      formIsCompleted={formIsCompleted}
+                      setFormIsCompleted={setFormIsCompleted}
+                      initForm={initForm}
+                      setInitForm={setInitForm}
                     />
                   </>
                 ) : (
