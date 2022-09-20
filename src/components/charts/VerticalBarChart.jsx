@@ -3,8 +3,18 @@ import { Bar } from "react-chartjs-2";
 
 export const BarChart = ({ dataResults, id }) => {
   const labels = [
-    "1st Form - 10/09/2022",
-    "2nd Form - 12/09/2022",
+    [
+      `10/09/2022`,
+      `${Math.round(
+        100 - (dataResults.data2[0] * 100) / dataResults.data1[0]
+      )}% of mitigation`,
+    ],
+    [
+      `12/09/2022`,
+      `${Math.round(
+        100 - (dataResults.data2[1] * 100) / dataResults.data1[1]
+      )}% of mitigation`,
+    ],
   ];
   const data = {
     labels: labels,
@@ -29,7 +39,7 @@ export const BarChart = ({ dataResults, id }) => {
       legend: {
         position: "bottom",
         labels: {
-          font: { size: 12, weight: 500 },
+          font: { size: 10, weight: 500 },
           color: "white",
         },
       },

@@ -46,8 +46,8 @@ function App() {
   const [questions, setQuestions] = useState([]);
   const [login, setLogin] = useState(false);
   const [userProfile, setUserProfile] = useState({
-    email: "cowlculator.example@gmail.com",
-    password: "CallForCode2022!",
+    email: "",
+    password: "",
   });
   useEffect(() => {
     if (localStorage.getItem("datasForm")) {
@@ -73,6 +73,13 @@ function App() {
     } else {
       setQuestionToDisplay(listOfQuestions.formQuestions[0]);
     }
+    if (localStorage.getItem("formIsCompleted")) {
+      setFormIsCompleted(
+        JSON.parse(localStorage.getItem("formIsCompleted")) === "true"
+          ? true
+          : false
+      );
+    }
   }, []);
   useEffect(() => {
     if (initForm) {
@@ -87,6 +94,8 @@ function App() {
           return accumulator;
         }, [])
       );
+    }
+    if (questions.length > 0) {
       localStorage.setItem("questions", JSON.stringify(questions));
     }
   }, [questions]);
@@ -103,14 +112,11 @@ function App() {
   }, [questionToDisplay]);
   useEffect(() => {
     calculs({ datasForm, results, setResults });
-    if (initForm) {
+    if (datasForm.length > 0) {
       localStorage.setItem("datasForm", JSON.stringify(datasForm));
     }
   }, [datasForm]);
   useEffect(() => {
-    if (initForm) {
-      localStorage.setItem("results", JSON.stringify(results));
-    }
     console.log(results);
   }, [results]);
   useEffect(() => {
@@ -118,6 +124,18 @@ function App() {
       localStorage.setItem("login", JSON.stringify(login));
     }
   }, [login]);
+  useEffect(() => {
+    if (formIsCompleted) {
+      console.log({ results }, { datasForm }, { questions });
+      localStorage.setItem("results", JSON.stringify(results));
+    }
+    localStorage.setItem("formIsCompleted", formIsCompleted);
+  }, [formIsCompleted]);
+  useEffect(() => {
+    if (results !== {}) {
+      localStorage.setItem("results", JSON.stringify(results));
+    }
+  }, [results]);
   return (
     <ThemeProvider theme={darkTheme}>
       <div className="App">

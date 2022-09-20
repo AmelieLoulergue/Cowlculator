@@ -13,16 +13,12 @@ import { BarChart } from "./charts/VerticalBarChart";
 import { LineChart } from "./charts/LineChart";
 function Dashboard({ login, results, formIsCompleted }) {
   let navigate = useNavigate();
+  console.log(formIsCompleted);
   return (
     <>
       {/* {results && <p>{JSON.stringify(results)}</p>} */}
       <div id="dash">
         <div id="summary" className="panel">
-          {login?.email === "cowlculator.example@gmail.com" ? (
-            <button onClick={() => navigate("/datas")}>See DATAS</button>
-          ) : (
-            <></>
-          )}
           <div className="card-section">
             <div className="card">
               <div className="card-icon">
@@ -32,27 +28,34 @@ function Dashboard({ login, results, formIsCompleted }) {
                     CO<sub>2</sub> saved
                   </h1>
                 </div>
-                <h2>
-                  {Math.round(results.CO2mitigated * 100) / 100} T of CO2eq/year
-                </h2>
+                {formIsCompleted && (
+                  <h2>
+                    {Math.round(results.CO2mitigated * 100) / 100} T of
+                    CO2eq/year
+                  </h2>
+                )}
               </div>
-              {formIsCompleted ? (
-                <DoughnutChart
-                  id={"chart1"}
-                  dataResults={[
-                    results.utilitiesGraph,
-                    results.fuelGraph,
-                    results.otherGraph,
-                    results.entericFermentationCO2Graph,
-                    results.manureCO2graph,
-                    results.cropsGraph,
-                  ]}
-                />
-              ) : (
-                <button className="btn" onClick={() => navigate("/form")}>
-                  FILL THE FORM
-                </button>
-              )}
+              <div className="card-chart">
+                {formIsCompleted ? (
+                  <DoughnutChart
+                    id={"chart1"}
+                    dataResults={[
+                      results.utilitiesGraph,
+                      results.fuelGraph,
+                      results.otherGraph,
+                      results.entericFermentationCO2Graph,
+                      results.manureCO2graph,
+                      results.cropsGraph,
+                    ]}
+                  />
+                ) : (
+                  <div style={{ textAlign: "center" }}>
+                    <button className="btn" onClick={() => navigate("/form")}>
+                      FILL THE FORM
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
             <div className="card">
               <div className="card-icon">
@@ -62,9 +65,13 @@ function Dashboard({ login, results, formIsCompleted }) {
                     CO<sub>2</sub> impact
                   </h1>
                 </div>
-                <h2>
-                  {Math.round(results.CO2emmited * 100) / 100} T of CO2eq/year
-                </h2>
+                {formIsCompleted && (
+                  <h2>
+                    {Math.round(results.CO2emmited * 100) / 100} T of CO2eq/year
+                  </h2>
+                )}
+              </div>{" "}
+              <div className="card-chart">
                 {formIsCompleted ? (
                   <BarChart
                     id={"chart2"}
@@ -80,9 +87,11 @@ function Dashboard({ login, results, formIsCompleted }) {
                     }}
                   />
                 ) : (
-                  <button className="btn" onClick={() => navigate("/form")}>
-                    FILL THE FORM
-                  </button>
+                  <div style={{ textAlign: "center" }}>
+                    <button className="btn" onClick={() => navigate("/form")}>
+                      FILL THE FORM
+                    </button>
+                  </div>
                 )}
               </div>
             </div>
@@ -92,9 +101,13 @@ function Dashboard({ login, results, formIsCompleted }) {
                   <img src={dollar} alt="dollar sign icon"></img>
                   <h1>New income</h1>
                 </div>
-                <h2>
-                  {Math.round(results.totalCarbonCredits * 100) / 100} $/year
-                </h2>
+                {formIsCompleted && (
+                  <h2>
+                    {Math.round(results.totalCarbonCredits * 100) / 100} $/year
+                  </h2>
+                )}
+              </div>
+              <div className="card-chart">
                 {formIsCompleted ? (
                   <LineChart
                     id={"chart3"}
@@ -110,9 +123,11 @@ function Dashboard({ login, results, formIsCompleted }) {
                     }}
                   />
                 ) : (
-                  <button className="btn" onClick={() => navigate("/form")}>
-                    FILL THE FORM
-                  </button>
+                  <div style={{ textAlign: "center" }}>
+                    <button className="btn" onClick={() => navigate("/form")}>
+                      FILL THE FORM
+                    </button>
+                  </div>
                 )}
               </div>
             </div>

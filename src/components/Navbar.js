@@ -88,6 +88,21 @@ function Navbar({ login, setLogin }) {
                   </li>
                 </>
               )}
+              {((login && login.userType === "researcher") ||
+                (login && login.email === "cowlculator.example@gmail.com")) && (
+                <>
+                  <button
+                    className="btn"
+                    onClick={() => {
+                      navigate("/datas");
+                      toggleSideNav();
+                    }}
+                  >
+                    {" "}
+                    Download datas{" "}
+                  </button>
+                </>
+              )}
               <li
                 onClick={() => {
                   navigate("/references");

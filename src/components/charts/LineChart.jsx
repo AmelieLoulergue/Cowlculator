@@ -1,7 +1,10 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 export const LineChart = ({ id, dataResults }) => {
-  const labels = ["1st Form - 10/09/2022", "2nd Form - 12/09/2022"];
+  const labels = [
+    `10/09/2022`,
+    `12/09/2022`,
+  ];
   const options = {
     plugins: {
       legend: {
@@ -22,6 +25,7 @@ export const LineChart = ({ id, dataResults }) => {
       x: {
         ticks: {
           color: "white",
+          font: { size: 10 },
         },
       },
     },
