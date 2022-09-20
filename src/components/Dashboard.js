@@ -32,15 +32,20 @@ function Dashboard({ login, results, formIsCompleted }) {
                     CO<sub>2</sub> saved
                   </h1>
                 </div>
-                <h2>{Math.round(results.CO2mitigated * 100) / 100} T of CO2</h2>
+                <h2>
+                  {Math.round(results.CO2mitigated * 100) / 100} T of CO2eq/year
+                </h2>
               </div>
               {formIsCompleted ? (
                 <DoughnutChart
                   id={"chart1"}
                   dataResults={[
-                    results.CO2emmited,
-                    results.CO2mitigated,
-                    results.totalCarbonCredits,
+                    results.utilitiesGraph,
+                    results.fuelGraph,
+                    results.otherGraph,
+                    results.entericFermentationCO2Graph,
+                    results.manureCO2graph,
+                    results.cropsGraph,
                   ]}
                 />
               ) : (
@@ -57,9 +62,23 @@ function Dashboard({ login, results, formIsCompleted }) {
                     CO<sub>2</sub> impact
                   </h1>
                 </div>
-                <h2>{Math.round(results.CO2emmited * 100) / 100} T of CO2</h2>
+                <h2>
+                  {Math.round(results.CO2emmited * 100) / 100} T of CO2eq/year
+                </h2>
                 {formIsCompleted ? (
-                  <BarChart id={"chart2"} />
+                  <BarChart
+                    id={"chart2"}
+                    dataResults={{
+                      data1: [
+                        results.totalEmissionsGraph,
+                        results.totalEmissionsGraph / 2,
+                      ],
+                      data2: [
+                        results.totalMitigatedEmissionsGraph,
+                        results.totalMitigatedEmissionsGraph * 1.5,
+                      ],
+                    }}
+                  />
                 ) : (
                   <button className="btn" onClick={() => navigate("/form")}>
                     FILL THE FORM
@@ -74,11 +93,22 @@ function Dashboard({ login, results, formIsCompleted }) {
                   <h1>New income</h1>
                 </div>
                 <h2>
-                  ${Math.round(results.totalCarbonCredits * 100) / 100} per
-                  month
+                  {Math.round(results.totalCarbonCredits * 100) / 100} $/year
                 </h2>
                 {formIsCompleted ? (
-                  <LineChart id={"chart3"} />
+                  <LineChart
+                    id={"chart3"}
+                    dataResults={{
+                      data1: [
+                        results.totalEmissionsGraph,
+                        results.totalEmissionsGraph / 2,
+                      ],
+                      data2: [
+                        results.totalMitigationsGraph,
+                        results.totalMitigationsGraph / 1.5,
+                      ],
+                    }}
+                  />
                 ) : (
                   <button className="btn" onClick={() => navigate("/form")}>
                     FILL THE FORM

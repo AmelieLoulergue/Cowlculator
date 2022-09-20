@@ -11,12 +11,8 @@ let options = {
         weight: 500,
       },
       formatter: function (value, index) {
-        if (value !== 0) {
-          if (index.dataIndex === 2) {
-            return `${Math.round(value * 100) / 100} $/year`;
-          } else {
-            return `${Math.round(value * 100) / 100} TCO2eq`;
-          }
+        if (value > 0) {
+          return `${Math.round(value * 100) / 100} TCO2eq/year`;
         } else {
           return "";
         }
@@ -34,9 +30,12 @@ let options = {
 export const DoughnutChart = ({ id, dataResults }) => {
   const data = {
     labels: [
-      "Tonnes of CO2eq emitted/year",
-      "Tonnes of CO2eq mitigated/year",
-      "Potential carbon credit income $/year",
+      "Utilities",
+      "Fuel",
+      "Other",
+      "Animals’ enteric fermentation",
+      "Animals’ manure",
+      "Crops",
     ],
     datasets: [
       {
@@ -46,6 +45,9 @@ export const DoughnutChart = ({ id, dataResults }) => {
           "rgb(237, 120, 107)",
           "rgb(32, 191, 169)",
           "rgb(253, 185, 90)",
+          "rgb(91, 171, 197)",
+          "rgb(130, 91, 197)",
+          "rgb(144, 222, 93)",
         ],
       },
     ],

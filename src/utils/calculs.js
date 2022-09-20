@@ -182,12 +182,12 @@ function calculs({ datasForm, results, setResults }) {
     entericFermentationCO2 = allFunctions.funcAnimalsEF({
       datasForm,
       regions,
-      time:time,
+      time: time,
       state,
     });
     manureCO2 = allFunctions.funcAnimalsManure({
       datasForm,
-      time:time,
+      time: time,
     });
 
     // Extract EFDairy, EFBeef, EFSheep
@@ -277,7 +277,7 @@ function calculs({ datasForm, results, setResults }) {
     cropsMitigations = allFunctions.funcCropsMitigations({
       datasForm,
       state,
-      time:time,
+      time: time,
     });
     carbonCreditsCrops = allFunctions.funcCarbonCreditsCrops({
       cropsMitigations,
@@ -420,6 +420,128 @@ function calculs({ datasForm, results, setResults }) {
               mitigationEFLTBreedingSheep[0])) /
           time,
     CO2mitigated: cropsMitigations
+      ? (mitigationEFImpFeedDairy[0] +
+          mitigationEFImpFeedBeef[0] +
+          mitigationEFImpFeedSheep[0] +
+          mitigationEFAdditiveBeef[0] +
+          mitigationEFAdditiveDairy[0] +
+          mitigationEFAdditiveSheep[0] +
+          mitigationEFLTBreedingBeef[0] +
+          mitigationEFLTBreedingDairy[0] +
+          mitigationEFLTBreedingSheep[0] +
+          cropsMitigations?.mitigationCropsTotal) /
+        time
+      : (mitigationEFImpFeedDairy[0] +
+          mitigationEFImpFeedBeef[0] +
+          mitigationEFImpFeedSheep[0] +
+          mitigationEFAdditiveBeef[0] +
+          mitigationEFAdditiveDairy[0] +
+          mitigationEFAdditiveSheep[0] +
+          mitigationEFLTBreedingBeef[0] +
+          mitigationEFLTBreedingDairy[0] +
+          mitigationEFLTBreedingSheep[0]) /
+        time,
+    utilitiesGraph:
+      elecCO2 / time + natGasCO2 / time + gasCO2 / time + water / time,
+    fuelGraph: fuelCO2 / time,
+    otherGraph: other / time,
+    entericFermentationCO2Graph:
+      (entericFermentationCO2.EFtotal -
+        (mitigationEFImpFeedDairy[0] +
+          mitigationEFImpFeedBeef[0] +
+          mitigationEFImpFeedSheep[0] +
+          mitigationEFAdditiveBeef[0] +
+          mitigationEFAdditiveDairy[0] +
+          mitigationEFAdditiveSheep[0] +
+          mitigationEFLTBreedingBeef[0] +
+          mitigationEFLTBreedingDairy[0] +
+          mitigationEFLTBreedingSheep[0])) /
+      time,
+    manureCO2Graph: manureCO2 / time,
+    cropsGraph: cropsMitigations
+      ? (fertilizer - cropsMitigations?.mitigationCropsTotal) / time
+      : fertilizer / time,
+    totalEmissionsGraph: entericFermentationCO2
+      ? (elecCO2 +
+          natGasCO2 +
+          gasCO2 +
+          water +
+          fuelCO2 +
+          other +
+          entericFermentationCO2?.EFtotal +
+          manureCO2 +
+          fertilizer) /
+        time
+      : (elecCO2 +
+          natGasCO2 +
+          gasCO2 +
+          water +
+          fuelCO2 +
+          other +
+          manureCO2 +
+          fertilizer) /
+        time,
+    totalMitigatedEmissionsGraph:
+      entericFermentationCO2 && cropsMitigations
+        ? (elecCO2 +
+            natGasCO2 +
+            gasCO2 +
+            water +
+            fuelCO2 +
+            other +
+            entericFermentationCO2?.EFtotal +
+            manureCO2 +
+            fertilizer -
+            (mitigationEFImpFeedDairy[0] +
+              mitigationEFImpFeedBeef[0] +
+              mitigationEFImpFeedSheep[0] +
+              mitigationEFAdditiveBeef[0] +
+              mitigationEFAdditiveDairy[0] +
+              mitigationEFAdditiveSheep[0] +
+              mitigationEFLTBreedingBeef[0] +
+              mitigationEFLTBreedingDairy[0] +
+              mitigationEFLTBreedingSheep[0] +
+              cropsMitigations?.mitigationCropsTotal)) /
+          time
+        : entericFermentationCO2
+        ? (elecCO2 +
+            natGasCO2 +
+            gasCO2 +
+            water +
+            fuelCO2 +
+            other +
+            entericFermentationCO2?.EFtotal +
+            manureCO2 +
+            fertilizer -
+            (mitigationEFImpFeedDairy[0] +
+              mitigationEFImpFeedBeef[0] +
+              mitigationEFImpFeedSheep[0] +
+              mitigationEFAdditiveBeef[0] +
+              mitigationEFAdditiveDairy[0] +
+              mitigationEFAdditiveSheep[0] +
+              mitigationEFLTBreedingBeef[0] +
+              mitigationEFLTBreedingDairy[0] +
+              mitigationEFLTBreedingSheep[0])) /
+          time
+        : (elecCO2 +
+            natGasCO2 +
+            gasCO2 +
+            water +
+            fuelCO2 +
+            other +
+            manureCO2 +
+            fertilizer -
+            (mitigationEFImpFeedDairy[0] +
+              mitigationEFImpFeedBeef[0] +
+              mitigationEFImpFeedSheep[0] +
+              mitigationEFAdditiveBeef[0] +
+              mitigationEFAdditiveDairy[0] +
+              mitigationEFAdditiveSheep[0] +
+              mitigationEFLTBreedingBeef[0] +
+              mitigationEFLTBreedingDairy[0] +
+              mitigationEFLTBreedingSheep[0])) /
+          time,
+    totalMitigationsGraph: cropsMitigations
       ? (mitigationEFImpFeedDairy[0] +
           mitigationEFImpFeedBeef[0] +
           mitigationEFImpFeedSheep[0] +

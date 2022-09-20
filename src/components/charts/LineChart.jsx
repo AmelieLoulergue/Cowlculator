@@ -1,11 +1,7 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
-export const LineChart = ({ id }) => {
-  const labels = [
-    "1st Form - 10/09/2022",
-    "2nd Form - 12/09/2022",
-    "3rd Form - 14/09/2022",
-  ];
+export const LineChart = ({ id, dataResults }) => {
+  const labels = ["1st Form - 10/09/2022", "2nd Form - 12/09/2022"];
   const options = {
     plugins: {
       legend: {
@@ -35,14 +31,14 @@ export const LineChart = ({ id }) => {
     datasets: [
       {
         label: "CO2eq emissions (Tons Co2 eq/year)",
-        data: [65, 59, 80, 81, 56, 55, 40],
+        data: dataResults.data1,
         fill: false,
         borderColor: "rgb(237, 120, 107)",
         tension: 0.1,
       },
       {
         label: "CO2eq mitigations (Tons Co2 eq/year)",
-        data: [68, 40, 30, 90, 40, 50, 42],
+        data: dataResults.data2,
         fill: false,
         borderColor: "rgb(75, 192, 192)",
         tension: 0.1,
