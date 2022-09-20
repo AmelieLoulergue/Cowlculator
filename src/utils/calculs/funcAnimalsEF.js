@@ -39,6 +39,7 @@ function funcAnimalsEF({ datasForm, time, state }) {
           ).coeff
         )
       : 0;
+  console.log(coeffDairyRep12EF);
   let coeffDairyRep24EF =
     findAnimal("farm_animals_dairy_cattle") &&
     findAnimal("farm_animals_dairy_cattle_rep24")
@@ -123,6 +124,7 @@ function funcAnimalsEF({ datasForm, time, state }) {
   )?.value
     ? Number(findAnimal("farm_animals_dairy_cattle_rep12_numb").value)
     : 0;
+  console.log(farm_animals_dairy_cattle_rep12_numb);
   let farm_animals_dairy_cattle_rep24_numb = findAnimal(
     "farm_animals_dairy_cattle_rep24_numb"
   )?.value
@@ -140,29 +142,10 @@ function funcAnimalsEF({ datasForm, time, state }) {
       1000) *
     time;
   console.log(
-    ((farm_animals_dairy_cattle_rep12_numb * coeffDairyRep12EF * 25 +
-      farm_animals_dairy_cattle_rep24_numb * coeffDairyRep24EF * 25 +
-      farm_animals_dairy_cattle_matur_numb * coeffDairyMatureEF * 25) /
-      1000) *
-      time
-  );
-  console.log(
-    "Dairy 12",
+    EFDairy,
     farm_animals_dairy_cattle_rep12_numb,
     coeffDairyRep12EF,
-    farm_animals_dairy_cattle_rep12_numb * coeffDairyRep12EF * 25
-  );
-  console.log(
-    "Dairy 24",
-    farm_animals_dairy_cattle_rep24_numb,
-    coeffDairyRep24EF,
-    farm_animals_dairy_cattle_rep24_numb * coeffDairyRep24EF * 25
-  );
-  console.log(
-    "Dairy matur",
-    farm_animals_dairy_cattle_matur_numb,
-    coeffDairyMatureEF,
-    farm_animals_dairy_cattle_matur_numb * coeffDairyMatureEF * 25
+    time
   );
 
   let farm_animals_beef_cattle_rep12_numb = findAnimal(
@@ -253,7 +236,6 @@ function funcAnimalsEF({ datasForm, time, state }) {
       EFWaterBuff,
     1
   );
-  console.log("je suis dans la fonction animals EF", EFBeef, EFDairy);
   return {
     EFDairy: EFDairy,
     EFBeef: EFBeef,

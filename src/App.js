@@ -18,6 +18,7 @@ import ConfirmEmail from "./utils/authentication/ConfirmEmail";
 import { isLogin } from "./utils/authentication/controlLog";
 import ResearcherDatas from "./components/ResearcherDatas";
 import References from "./components/References";
+import listOfQuestions from "./utils/listOfQuestions";
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -32,6 +33,13 @@ function App() {
   const [severity, setSeverity] = useState("");
   const [initForm, setInitForm] = useState(false);
   const [displayAlert, setDisplayAlert] = useState(false);
+  const [questionToDisplay, setQuestionToDisplay] = useState(null);
+  // console.log(questions);
+  const [indexQuestions, setIndexQuestions] = useState(
+    localStorage.getItem("indexQuestions")
+      ? Number(localStorage.getItem("indexQuestions"))
+      : 0
+  );
   useEffect(() => setViewHeight(window.innerHeight), [window]);
 
   const [results, setResults] = useState({});
@@ -50,9 +58,20 @@ function App() {
     }
     if (localStorage.getItem("questions")) {
       setQuestions(JSON.parse(localStorage.getItem("questions")));
+    } else {
+      setQuestions(listOfQuestions.formQuestions);
     }
     if (localStorage.getItem("login")) {
       setLogin(JSON.parse(localStorage.getItem("login")));
+    }
+    if (localStorage.getItem("questionToDisplay")) {
+      setQuestionToDisplay(
+        localStorage.getItem("questionToDisplay") === "undefined"
+          ? ""
+          : JSON.parse(localStorage.getItem("questionToDisplay"))
+      );
+    } else {
+      setQuestionToDisplay(listOfQuestions.formQuestions[0]);
     }
   }, []);
   useEffect(() => {
@@ -72,9 +91,18 @@ function App() {
     }
   }, [questions]);
   useEffect(() => {
-    calculs({ datasForm, results, setResults });
-  }, [datasForm]);
+    localStorage.setItem("indexQuestions", indexQuestions);
+  }, [indexQuestions]);
   useEffect(() => {
+    if (questionToDisplay !== null) {
+      localStorage.setItem(
+        "questionToDisplay",
+        JSON.stringify(questionToDisplay)
+      );
+    }
+  }, [questionToDisplay]);
+  useEffect(() => {
+    calculs({ datasForm, results, setResults });
     if (initForm) {
       localStorage.setItem("datasForm", JSON.stringify(datasForm));
     }
@@ -127,6 +155,10 @@ function App() {
                       setFormIsCompleted={setFormIsCompleted}
                       initForm={initForm}
                       setInitForm={setInitForm}
+                      questionToDisplay={questionToDisplay}
+                      setQuestionToDisplay={setQuestionToDisplay}
+                      indexQuestions={indexQuestions}
+                      setIndexQuestions={setIndexQuestions}
                     />
                   </>
                 ) : (
@@ -148,7 +180,11 @@ function App() {
                 ) : isLogin({ login }) && login.userType === "farmer" ? (
                   <>
                     <Navbar login={login} setLogin={setLogin} />
-                    <Dashboard login={login} results={results} />
+                    <Dashboard
+                      login={login}
+                      results={results}
+                      formIsCompleted={formIsCompleted}
+                    />
                   </>
                 ) : (
                   <>
@@ -186,7 +222,11 @@ function App() {
                 ) : isLogin({ login }) && login.userType === "farmer" ? (
                   <>
                     <Navbar login={login} setLogin={setLogin} />
-                    <Dashboard login={login} results={results} />
+                    <Dashboard
+                      login={login}
+                      results={results}
+                      formIsCompleted={formIsCompleted}
+                    />
                   </>
                 ) : (
                   <>
@@ -213,7 +253,11 @@ function App() {
                 ) : isLogin({ login }) && login.userType === "farmer" ? (
                   <>
                     <Navbar login={login} setLogin={setLogin} />
-                    <Dashboard login={login} results={results} />
+                    <Dashboard
+                      login={login}
+                      results={results}
+                      formIsCompleted={formIsCompleted}
+                    />
                   </>
                 ) : (
                   <>
@@ -229,7 +273,11 @@ function App() {
                 isLogin({ login }) ? (
                   <>
                     <Navbar login={login} setLogin={setLogin} />
-                    <Dashboard login={login} results={results} />
+                    <Dashboard
+                      login={login}
+                      results={results}
+                      formIsCompleted={formIsCompleted}
+                    />
                   </>
                 ) : (
                   <>

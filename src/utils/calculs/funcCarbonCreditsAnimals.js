@@ -9,27 +9,16 @@ function funcCarbonCreditsAnimals({
   mitigationEFLTBreedingDairy,
   mitigationEFLTBreedingBeef,
 }) {
-  console.log(
-    mitigationEFImpFeedDairy.mitigatedEFDairyImpFeed,
-    mitigationEFImpFeedBeef.mitigatedEFBeefImpFeed,
-    mitigationEFImpFeedSheep.mitigatedEFSheepImpFeed,
-    mitigationEFAdditiveDairy.mitigatedEFDairyAdditive,
-    mitigationEFAdditiveSheep.mitigatedEFSheepAdditive,
-    mitigationEFAdditiveBeef.mitigatedEFBeefAdditive,
-    mitigationEFLTBreedingSheep.mitigatedEFSheepLTBreeding,
-    mitigationEFLTBreedingDairy.mitigatedEFDairyLTBreeding,
-    mitigationEFLTBreedingBeef.mitigatedEFBeefLTBreeding
-  );
   let carbonCreditsAnimals =
-    (mitigationEFImpFeedDairy.mitigatedEFDairyImpFeed +
-      mitigationEFImpFeedBeef.mitigatedEFBeefImpFeed +
-      mitigationEFImpFeedSheep.mitigatedEFSheepImpFeed +
-      mitigationEFAdditiveDairy.mitigatedEFDairyAdditive +
-      mitigationEFAdditiveSheep.mitigatedEFSheepAdditive +
-      mitigationEFAdditiveBeef.mitigatedEFBeefAdditive +
-      mitigationEFLTBreedingSheep.mitigatedEFSheepLTBreeding +
-      mitigationEFLTBreedingDairy.mitigatedEFDairyLTBreeding +
-      mitigationEFLTBreedingBeef.mitigatedEFBeefLTBreeding) *
+    (mitigationEFImpFeedDairy[0] +
+      mitigationEFImpFeedBeef[0] +
+      mitigationEFImpFeedSheep[0] +
+      mitigationEFAdditiveDairy[0] +
+      mitigationEFAdditiveSheep[0] +
+      mitigationEFAdditiveBeef[0] +
+      mitigationEFLTBreedingSheep[0] +
+      mitigationEFLTBreedingDairy[0] +
+      mitigationEFLTBreedingBeef[0]) *
     73.05;
   return carbonCreditsAnimals;
 }

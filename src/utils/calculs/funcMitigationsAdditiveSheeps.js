@@ -3,7 +3,7 @@ import reductionEF_coeff from "../../coeff/reductionEF_coeff.json";
 function funcMitigationsAdditiveSheep({ datasForm, EFSheep }) {
   //Coeff
   let coeffAdditiveSheep = reductionEF_coeff[2].Spec_agents_and_diet_additives;
-  console.log(coeffAdditiveSheep);
+
   // Proportion of sheep included in the practice additives
 
   let numbSheepPracticesAdditive = 0;
@@ -70,9 +70,6 @@ function funcMitigationsAdditiveSheep({ datasForm, EFSheep }) {
   let mitigatedEFSheepAdditive =
     EFSheepAdditive + (1 - numbSheepPracticesAdditive) * EFSheep;
 
-  return {
-    mitigatedEFSheepAdditive: mitigatedEFSheepAdditive,
-    mitigationPercentageSheepAdditive: mitigationPercentageSheepAdditive,
-  };
+  return [mitigatedEFSheepAdditive, mitigationPercentageSheepAdditive];
 }
 export default funcMitigationsAdditiveSheep;

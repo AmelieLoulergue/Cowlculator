@@ -158,7 +158,6 @@ function Register({
     } else if (isResearcher) {
       setUserProfile({ ...userProfile, userType: "researcher" });
     }
-    console.log(userProfile);
   }, [isFarmer, isResearcher]);
   useEffect(() => {
     if (
@@ -255,7 +254,6 @@ function Register({
                   value={userProfile?.password ? userProfile.password : ""}
                   onKeyUp={passChange}
                   onChange={(event) => {
-                    console.log(strengthVal);
                     setUserProfile({
                       ...userProfile,
                       password: event.target.value,
