@@ -14,7 +14,7 @@ function About() {
           <p>
             Cowlculator has been developed by a French team 💙🤍❤️, but beyond
             the business partnership, this is a family affair; linked by blood
-            or 10-years friendship.
+            or 10-year friendship.
           </p>
         </div>
         <div className="card-section">
