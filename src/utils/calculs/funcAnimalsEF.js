@@ -9,12 +9,9 @@ function funcAnimalsEF({ datasForm, time, state }) {
   if (datasForm.find((element) => element.id === "farm_animals")) {
     //Define the region
     let region = regions.find((region) => region.Code === state);
-    console.log(region, state);
     region = region?.Regions_EPA.replace(" ", "_");
-    console.log(region);
     // keep only the coeff for the region
     let coeffEF = [];
-    // console.log(enteric_EF)
     enteric_EF.map((selectRegion) =>
       Object.entries(selectRegion).map((key, value) => {
         if (key[0] !== "name" && key[0] === region) {
@@ -22,7 +19,6 @@ function funcAnimalsEF({ datasForm, time, state }) {
         }
       })
     );
-    console.log(coeffEF);
 
     // National average coeff for beef yearnling and weanling
     let coeffEFNatAv = [];
@@ -33,7 +29,6 @@ function funcAnimalsEF({ datasForm, time, state }) {
         }
       })
     );
-    console.log(coeffEFNatAv);
 
     //Extract animals' coeff based on the region
     let coeffDairyRep12EF =
@@ -184,12 +179,6 @@ function funcAnimalsEF({ datasForm, time, state }) {
         farm_animals_beef_cattle_bulls_numb * coeffBeefBullsEF * 25) /
         1000) *
       time;
-    console.log(
-      farm_animals_beef_cattle_rep12_numb,
-      farm_animals_beef_cattle_rep24_numb,
-      coeffBeefRep12EF,
-      coeffBeefRep24EF
-    );
     let farm_animals_sheeps_numb =
       findAnimal("farm_animals_sheeps") &&
       findAnimal("farm_animals_sheeps_numb")?.value

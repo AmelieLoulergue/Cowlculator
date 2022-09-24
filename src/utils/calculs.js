@@ -181,7 +181,6 @@ function calculs({ datasForm, results, setResults }) {
   // Emissions from enteric fermentation of dairies, beed and sheep
   // Emissions from manure of dairies, beed and sheep
   if (datasForm.find((element) => element.id === "farm_animals")?.response) {
-    console.log("je rentre avant la fonction animalsEF");
     setResults({
       ...results,
       entericFermentationCO2: allFunctions.funcAnimalsEF({
@@ -353,6 +352,19 @@ const fertilizers = datasForm.filter((element) => element.id.includes("fertilize
             time: results.time,
           }).mitigationCropsTotal || carbonCreditsCrops,
       }),
+    });
+  }
+  const farm_crops_fertilizer = datasForm.filter((element) =>
+    element.id.includes("farm_crops_fertilizer")
+  );
+  if (
+    datasForm.find((element) => element.id === "farm_crops_fertilizer")
+      ?.response &&
+    farm_crops_fertilizer.length > 0
+  ) {
+    setResults({
+      ...results,
+      fertilizer: allFunctions.funcFertilizer({ farm_crops_fertilizer }),
     });
   }
   // TO UPDATE WITH NEW OBJECT AMELIE

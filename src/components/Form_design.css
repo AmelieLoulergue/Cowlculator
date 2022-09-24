@@ -72,12 +72,14 @@
 .formChat .ask,
 .formChat .response,
 .formChat .inputField {
+  margin-bottom: 2rem;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   align-content: center;
   align-items: center;
   column-gap: 20px;
+  bottom: 4rem;
 }
 .formChat .ask {
   justify-content: flex-start;
@@ -196,13 +198,13 @@
   padding-right: 1rem;
 }
 .buttons-skip-form {
+  bottom: 0;
   position: fixed;
   z-index: 999;
   display: flex;
   width: 100%;
   justify-content: center;
   background-color: #110f16;
-  padding: 1rem;
 }
 .buttons-skip-form > button {
   /* padding: 1rem; */

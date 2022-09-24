@@ -33,7 +33,6 @@ const controlResponse = ({
     setTimeout(() => setDisplayAlert(false), 3000);
     return false;
   } else if (questionToDisplay.formInput.type === "date") {
-    console.log(answer);
     if (questionToDisplay.id === "start_date") {
       let start = new Date(answer);
       if (new Date(Date.now()) <= start) {
