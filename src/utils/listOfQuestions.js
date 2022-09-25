@@ -682,7 +682,7 @@ const listOfQuestions = {
               id: "farm_crops_grassland_grazing_practice",
               parentId: "farm_crops_grassland",
               question:
-                "For your crop(s), have you implemented Grazing (adapted intensity and timing of grazing), fertilization (alleviating nutrient deficiencies by fertilizer or organic amendments), no fire (apply for grasslands) to reduce emissions & increase sequestration?",
+                "For your crop(s), have you implemented grazing practices (adapted intensity and timing of grazing), fertilization (alleviating nutrient deficiencies by fertilizer or organic amendments), no fire (apply for grasslands) to reduce emissions & increase sequestration?",
               formInput: { type: "checkbox" },
               userValue: false,
               linked_questions: [
@@ -855,7 +855,7 @@ const listOfQuestions = {
           id: "farm_crops_agronomy_practice",
           parentId: "farm_crops",
           question:
-            "For your crop(s), have you implemented agronomy i.e cover crops, crops rotations, perennial crops(applies for crops) to reduce emissions & increase sequestration?",
+            "For your crop(s), have you implemented agronomy practices i.e cover crops, crops rotations, perennial crops(applies for crops) to reduce emissions & increase sequestration?",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
@@ -1036,38 +1036,38 @@ const listOfQuestions = {
             },
           ],
         },
-        {
-          answerParentQuestion: true,
-          id: "farm_crops_organic_soils_restoration_practice",
-          parentId: "farm_crops",
-          question:
-            "For your crop(s), have you implemented Restoration ( applies for organic soils) to reduce emissions & increase sequestration?",
-          formInput: { type: "checkbox" },
-          userValue: false,
-          linked_questions: [
-            {
-              answerParentQuestion: true,
-              parentId: "farm_crops_organic_soils_restoration_practice",
-              id: "farm_crops_organic_soils_restoration_practice_portion",
-              question: "Did you implement this/these practice(s) for:",
+        // {
+        //   answerParentQuestion: true,
+        //   id: "farm_crops_organic_soils_restoration_practice",
+        //   parentId: "farm_crops",
+        //   question:
+        //     "For your crop(s), have you implemented Restoration ( applies for organic soils) to reduce emissions & increase sequestration?",
+        //   formInput: { type: "checkbox" },
+        //   userValue: false,
+        //   linked_questions: [
+        //     {
+        //       answerParentQuestion: true,
+        //       parentId: "farm_crops_organic_soils_restoration_practice",
+        //       id: "farm_crops_organic_soils_restoration_practice_portion",
+        //       question: "Did you implement this/these practice(s) for:",
 
-              formInput: { type: "select" },
-              userValue: ["A portion of them", "All of them"],
-              linked_questions: [
-                {
-                  answerParentQuestion: "A portion of them",
-                  parentId:
-                    "farm_crops_organic_soils_restoration_practice_portion",
-                  id: "farm_crops_organic_soils_restoration_practice_portion_numb",
-                  question: "% of them",
+        //       formInput: { type: "select" },
+        //       userValue: ["A portion of them", "All of them"],
+        //       linked_questions: [
+        //         {
+        //           answerParentQuestion: "A portion of them",
+        //           parentId:
+        //             "farm_crops_organic_soils_restoration_practice_portion",
+        //           id: "farm_crops_organic_soils_restoration_practice_portion_numb",
+        //           question: "% of them",
 
-                  formInput: { type: "number" },
-                  userValue: { value: "100", unit: "%" },
-                },
-              ],
-            },
-          ],
-        },
+        //           formInput: { type: "number" },
+        //           userValue: { value: "100", unit: "%" },
+        //         },
+        //       ],
+        //     },
+        //   ],
+        // },
         {
           answerParentQuestion: true,
           id: "farm_crops_degraded_lands_restoration_practice",
@@ -1089,27 +1089,27 @@ const listOfQuestions = {
             },
           ],
         },
-        {
-          answerParentQuestion: true,
-          id: "farm_crops_soils_bioenergy_practice",
-          parentId: "farm_crops",
-          question:
-            "For your crop(s), have you implemented Soils under bio-energy to reduce emissions & increase sequestration?",
-          formInput: { type: "checkbox" },
-          userValue: false,
-          linked_questions: [
-            {
-              answerParentQuestion: true,
-              parentId: "farm_crops_soils_bioenergy_practice",
-              id: "farm_crops_soils_bioenergy_practice_size",
-              question: "What is the size of your lands under bio-energy ? ",
-              formInput: { type: "number" },
-              userValue: {
-                unit: ["acre", "sq feet"],
-              },
-            },
-          ],
-        },
+        // {
+        //   answerParentQuestion: true,
+        //   id: "farm_crops_soils_bioenergy_practice",
+        //   parentId: "farm_crops",
+        //   question:
+        //     "For your crop(s), have you implemented Soils under bio-energy to reduce emissions & increase sequestration?",
+        //   formInput: { type: "checkbox" },
+        //   userValue: false,
+        //   linked_questions: [
+        //     {
+        //       answerParentQuestion: true,
+        //       parentId: "farm_crops_soils_bioenergy_practice",
+        //       id: "farm_crops_soils_bioenergy_practice_size",
+        //       question: "What is the size of your lands under bio-energy ? ",
+        //       formInput: { type: "number" },
+        //       userValue: {
+        //         unit: ["acre", "sq feet"],
+        //       },
+        //     },
+        //   ],
+        // },
         {
           answerParentQuestion: true,
           id: "farm_crops_manure_practice",
