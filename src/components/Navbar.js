@@ -4,8 +4,9 @@ import "./Navbar.css";
 import { useState } from "react";
 
 import cowlculator from "../assets/img/cowlculator.png";
-
-function Navbar() {
+import { logout } from "../utils/authentication/controlLog";
+import { useNavigate } from "react-router-dom";
+function Navbar({ login, setLogin }) {
   const toggleSideNav = () => {
     document.getElementById("dash-side").classList.toggle("active");
     document.getElementById("dash-nav-icon-burger").classList.toggle("active");
@@ -14,26 +15,112 @@ function Navbar() {
   };
 
   const [scroll, setScroll] = useState(window.scrollY);
+  const navigate = useNavigate();
   return (
     <>
       <div className="dash-side" id="dash-side">
         <div className="dash-side-container">
-          <div className="dash-profile">
-            <h1>Dashboard</h1>
-            <div>
-              <img></img>
-              <h2>Username</h2>
-              <p>Project name</p>
-              <button className="btn">Log out</button>
+          {login && (
+            <div className="dash-profile">
+              <h1>Dashboard</h1>
+              <div>
+                <img></img>
+                {login?.email && <h2>{login.email}</h2>}
+                <p>Project name</p>
+                <button className="btn" onClick={() => logout({ setLogin })}>
+                  Log out
+                </button>
+              </div>
             </div>
-          </div>
+          )}
+          {!login && (
+            <div className="dash-profile">
+              <button
+                className="btn"
+                onClick={() => {
+                  navigate("/account/login");
+                  toggleSideNav();
+                }}
+              >
+                Log in
+              </button>
+              <button
+                className="btn"
+                onClick={() => {
+                  navigate("/account/register");
+                  toggleSideNav();
+                }}
+              >
+                Register
+              </button>
+            </div>
+          )}
           <div className="dash-li">
             <ul>
-              <li> Home </li>
-              <li> Dashboard </li>
-              <li> Form </li>
-              <li> References </li>
-              <li> About Us </li>
+              <li
+                onClick={() => {
+                  navigate("/");
+                  toggleSideNav();
+                }}
+              >
+                {" "}
+                Home{" "}
+              </li>
+              {login && login.userType === "farmer" && (
+                <>
+                  <li
+                    onClick={() => {
+                      navigate("/dashboard");
+                      toggleSideNav();
+                    }}
+                  >
+                    {" "}
+                    Dashboard{" "}
+                  </li>
+                  <li
+                    onClick={() => {
+                      navigate("/form");
+                      toggleSideNav();
+                    }}
+                  >
+                    {" "}
+                    Form{" "}
+                  </li>
+                </>
+              )}
+              {((login && login.userType === "researcher") ||
+                (login && login.email === "cowlculator.example@gmail.com")) && (
+                <>
+                  <button
+                    className="btn"
+                    onClick={() => {
+                      navigate("/datas");
+                      toggleSideNav();
+                    }}
+                  >
+                    {" "}
+                    Download datas{" "}
+                  </button>
+                </>
+              )}
+              <li
+                onClick={() => {
+                  navigate("/references");
+                  toggleSideNav();
+                }}
+              >
+                {" "}
+                References{" "}
+              </li>
+              <li
+                onClick={() => {
+                  navigate("/about");
+                  toggleSideNav();
+                }}
+              >
+                {" "}
+                About Us{" "}
+              </li>
             </ul>
           </div>
           <div className="copyright">
@@ -72,6 +159,7 @@ function Navbar() {
         </div>
         <div className="nav-spacer"></div>
       </div>
+      <div className="nav-margin"></div>
     </>
   );
 }

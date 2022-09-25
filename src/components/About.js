@@ -6,8 +6,9 @@ import clement from "../assets/img/clement.jpg";
 import bertille from "../assets/img/bertille.jpg";
 
 function About() {
-  return (
-    <>
+    return (
+      <>
+      <div id="about">
       <div className="container">
         <div>
           <h1 className="primaryTitle">About us.</h1>
@@ -75,8 +76,10 @@ function About() {
           </div>
         </div>
       </div>
-    </>
-  );
-}
-
-export default About;
+      </div>
+      </>
+    );
+  }
+  
+  export default About;
+  

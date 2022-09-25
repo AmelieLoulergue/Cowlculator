@@ -3,15 +3,7 @@ import fertilizer_coeff from "../../coeff/synthetic_fertilizer_coeff.json";
 // function fertilizers
 function funcFertilizer({ farm_crops_fertilizer }) {
   let fertilizerArray = [];
-  console.log(farm_crops_fertilizer);
-  farm_crops_fertilizer.forEach((element) => {
-    console.log(element.id.split("farm_crops_fertilizer_")[1]);
-    console.log(
-      fertilizer_coeff.find(
-        (coeff) =>
-          coeff.fert_name === element.id.split("farm_crops_fertilizer_")[1]
-      )?.Emissions_application_tonsN2OperTon
-    );
+  farm_crops_fertilizer?.forEach((element) => {
     if (element.response && element.response.value) {
       fertilizerArray.push({
         cons: Number(element.response.value),
@@ -33,7 +25,6 @@ function funcFertilizer({ farm_crops_fertilizer }) {
 
   let sum = 0;
   fertilizerArray.map((calcul) => {
-    console.log(calcul);
     sum += calcul.total;
     return sum;
   });

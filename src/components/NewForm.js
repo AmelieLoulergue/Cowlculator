@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import listOfQuestions from "../utils/listOfQuestions";
+import React, { useEffect, useState, useRef } from "react";
+
 // import "./NewForm.css";
 import RenderQuestion from "./NewForm/RenderQuestion";
 import "./Form_design.css";
@@ -7,8 +7,6 @@ import back_arrow from "../assets/svg/back-arrow.svg";
 import Lottie from "lottie-react";
 import form_begin from "../assets/anim/form-begin.json";
 import home from "../assets/svg/home.svg";
-import Bg from "./Bg";
-import AlertComponent from "./alerts/Alert";
 import { useNavigate } from "react-router-dom";
 import ProgressBarForm from "../components/form_components/ProgressBarForm.js";
 import calculs from "../utils/calculs";
@@ -20,18 +18,27 @@ const NewForm = ({
   datasForm,
   questions,
   setQuestions,
+  setMessageAlert,
+  setDisplayAlert,
+  setSeverity,
+  setFormIsCompleted,
+  initForm,
+  setInitForm,
+  questionToDisplay,
+  setQuestionToDisplay,
+  indexQuestions,
+  setIndexQuestions,
 }) => {
   const stateList = elec_state_coeff.map((element) => element.State);
+  const chatContainer = useRef(null);
   let navigate = useNavigate();
-  const [initForm, setInitForm] = useState(false);
-  const [numberOfResponse, setNumberOfResponse] = useState(0);
-  const [questionToDisplay, setQuestionToDisplay] = useState(null);
 
-  const [indexQuestions, setIndexQuestions] = useState(0);
+  const [numberOfResponse, setNumberOfResponse] = useState(
+    localStorage.getItem("numberOfResponse")
+      ? Number(JSON.parse(localStorage.getItem("numberOfResponse")))
+      : 0
+  );
   const [answer, setAnswer] = useState(null);
-  const [severity, setSeverity] = useState("");
-  const [messageAlert, setMessageAlert] = useState("");
-  const [displayAlert, setDisplayAlert] = useState(false);
   const [progress, setProgress] = useState(0);
 
   const sendAnswer = () => {
@@ -101,10 +108,15 @@ const NewForm = ({
     setQuestionToDisplay(questions[indexQuestions - 1]);
     setAnswer(questions[indexQuestions - 1].response);
   };
-
+  const scrollToMyRef = () => {
+    const scroll =
+      chatContainer.current.scrollHeight - chatContainer.current.clientHeight;
+    chatContainer.current.scrollTo(0, scroll);
+  };
   useEffect(() => {
-    setQuestions(listOfQuestions.formQuestions);
-    setQuestionToDisplay(listOfQuestions.formQuestions[0]);
+    // setQuestions(listOfQuestions.formQuestions);
+    // setQuestionToDisplay(listOfQuestions.formQuestions[0]);
+    document.getElementsByClassName("dash-nav")[0].classList.add("form-navbar");
   }, []);
   useEffect(() => {
     setProgress(Math.round((indexQuestions * 100) / questions.length));
@@ -127,17 +139,23 @@ const NewForm = ({
         </button>
         <ProgressBarForm progress={progress} />
       </div>
-      {displayAlert && (
-        <AlertComponent severity={severity} messageAlert={messageAlert} />
-      )}
       <div className="formChat">
         <div className="beginin">
           <div className="LottieContainer">
             <Lottie animationData={form_begin} loop={true} />
           </div>
           <div>
-            <h3>Are you ready ?</h3>
-            <h1>Start filling the form today</h1>
+            {datasForm.length > 0 ? (
+              <>
+                <h3>Nice to see you again !</h3>
+                <h1>Keep filling the form today</h1>
+              </>
+            ) : (
+              <>
+                <h3>Are you ready ?</h3>
+                <h1>Start filling the form today</h1>
+              </>
+            )}
           </div>
           <div className="btns" style={{ marginBottom: "5rem" }}>
             <img src={back_arrow} alt=""></img>
@@ -146,7 +164,7 @@ const NewForm = ({
               onClick={() => {
                 setInitForm(true);
                 setTimeout(() => {
-                  window.scrollTo(0, document.body.scrollHeight);
+                  window.scrollBy(0, document.body.scrollHeight - 100);
                 }, 50);
               }}
             >
@@ -156,7 +174,7 @@ const NewForm = ({
           </div>
         </div>
         {initForm && questions.length > 0 && (
-          <div id="questions-form" className="questions">
+          <div id="questions-form" className="questions" ref={chatContainer}>
             {questions.slice(0, indexQuestions).map((question, index) => (
               <div
                 key={`question_form_${index}`}
@@ -216,11 +234,7 @@ const NewForm = ({
                 <button
                   className="btn"
                   onClick={() => {
-                    calculs({
-                      datasForm,
-                      results,
-                      setResults,
-                    });
+                    setFormIsCompleted(true);
                     navigate("/dashboard");
                   }}
                 >

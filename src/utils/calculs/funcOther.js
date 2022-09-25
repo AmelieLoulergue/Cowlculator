@@ -2,13 +2,7 @@ import other_coeff from "../../coeff/other_coeff.json";
 //Function other
 function funcOther({ others }) {
   let otherArray = [];
-  console.log(others);
   others.forEach((element) => {
-    console.log(element.id.split("other_")[1]);
-    console.log(
-      other_coeff.find((coeff) => coeff.Other === element.id.split("other_")[1])
-        ?.kg_CO2
-    );
     if (element.response && element.response.value) {
       otherArray.push({
         cons: Number(element.response.value),
@@ -145,7 +139,6 @@ function funcOther({ others }) {
   // ];
   let sum = 0;
   otherArray.map((calcul) => {
-    console.log(calcul);
     sum += calcul.total;
     return sum;
   });
