@@ -24,7 +24,7 @@ function Navbar() {
               <img></img>
               <h2>Username</h2>
               <p>Project name</p>
-              <button className="btn">Disconect</button>
+              <button className="btn">Log out</button>
             </div>
           </div>
           <div className="dash-li">
