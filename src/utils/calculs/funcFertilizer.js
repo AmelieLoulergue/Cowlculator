@@ -37,7 +37,8 @@ function funcFertilizer({ farm_crops_fertilizer }) {
     sum += calcul.total;
     return sum;
   });
+  let fertilizerCO2eq = sum * 298;
 
-  return sum;
+  return fertilizerCO2eq;
 }
 export default funcFertilizer;
