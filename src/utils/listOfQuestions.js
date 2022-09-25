@@ -2726,24 +2726,24 @@ const listOfQuestions = {
       userValue: "",
     },
 
-    {
-      id: "farm_website",
-      question: "Website",
-      formInput: { type: "text" },
-      userValue: "",
-    },
-    {
-      id: "farm_email",
-      question: "Please enter your email",
-      formInput: { type: "text" },
-      userValue: "",
-    },
-    {
-      id: "farm_phone",
-      question: "Please enter your phone",
-      formInput: { type: "text" },
-      userValue: "",
-    },
+    // {
+    //   id: "farm_website",
+    //   question: "Website",
+    //   formInput: { type: "text" },
+    //   userValue: "",
+    // },
+    // {
+    //   id: "farm_email",
+    //   question: "Please enter your email",
+    //   formInput: { type: "text" },
+    //   userValue: "",
+    // },
+    // {
+    //   id: "farm_phone",
+    //   question: "Please enter your phone",
+    //   formInput: { type: "text" },
+    //   userValue: "",
+    // },
   ],
   auth: {},
 };
