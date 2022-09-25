@@ -30,7 +30,7 @@ function About() {
             </p>
             <p>
               For Cowlculator, Amelie was our backend expert and collaborated on
-              the frontend.{" "}
+              the frontend.
             </p>
           </div>
           <div className="card">
@@ -48,7 +48,7 @@ function About() {
             </p>
             <p>
               Clement’s role for the Cowlculator project was frontend and design
-              expert.{" "}
+              expert.
             </p>
           </div>
           <div className="card">
@@ -72,7 +72,6 @@ function About() {
           </div>
         </div>
       </div>
-<<<<<<< HEAD
       </div>
       </>
     );
@@ -80,10 +79,3 @@ function About() {
   
   export default About;
   
-=======
-    </>
-  );
-}
-
-export default About;
->>>>>>> 6e219ebfbbff31bd58622244a3375deccc26968d
