@@ -51,6 +51,46 @@ function Home({ viewHeight, scroll }) {
       </div>
 
       <div className="container">
+        <p>
+          Cowlculator is a free app that helps you, American farmers, to
+          generate <b>carbon credits </b>
+          more efficiently by understanding and managing your carbon balance.
+          <br></br>
+          <br></br>
+          <br></br>
+          Based on the information collected via a form, Cowlculator is
+          providing you insights into your <b>carbon emissions</b>, the{" "}
+          <b>mitigations</b> happening on your farm thanks to the practices you
+          might have implemented, and a estimate of <b>potential earnings</b>.
+          <br></br>
+          <br></br>
+          <br></br>
+          Cowlculator helps you to feel <b>motivated</b> that you can do more,
+          not only for the money but also for the <b>future generations</b>.
+          Cowlculator allows you to <b>keep track of your improvements</b> and
+          reminds you how and why you are doing it!
+          <br></br>
+          <br></br>
+          <br></br>
+          Cowlculator is also a powerful tool for <b>
+            agricultural research
+          </b>{" "}
+          allowing researchers having a professional and authorized email
+          address to access our <b>nationwide database</b> , source of
+          information about farms, their practices and their evolution.
+          <br></br>
+          <br></br>
+          <br></br>
+          Cowlculator research branch helpsresearchers access the necessary
+          information to lead research to influence the local policy makers to
+          make <b>meaningful policies</b> to{" "}
+          <b>
+            support agricultural carbon sequestration and the creation of carbon
+            credits
+          </b>
+          .
+        </p>
+
         <h1>Take a short questionnaire</h1>
         <p>
           Cowlculator needs to know about your farm's activities and practices.
@@ -87,32 +127,14 @@ function Home({ viewHeight, scroll }) {
           <circle r="50" fill="white" cx="50" cy="50"></circle>
         </svg>
       </div>
+      <br></br>
+      <br></br>
       <button
         className="btn sticky-bottom"
         onClick={() => navigate("/getstarted")}
       >
         get started
       </button>
-      <p>
-        Fugiat ea Lorem quis culpa esse commodo fugiat dolore anim aliqua fugiat
-        ad. Ex ea velit sit consectetur aute aliqua cillum minim quis proident
-        ut labore amet sint. Cillum ipsum quis non id occaecat. Ipsum non
-        laborum veniam officia exercitation ullamco labore. Eiusmod ipsum duis
-        mollit veniam exercitation occaecat. In dolore ipsum anim et laboris
-        magna sit deserunt. Velit enim eu Lorem ad proident anim ullamco veniam.
-        Do ad quis commodo aliqua. Qui in deserunt dolore quis nostrud id veniam
-        eiusmod laboris voluptate in sit ullamco. Voluptate proident officia eu
-        sit id Lorem tempor ipsum reprehenderit ex proident. Sit aliquip veniam
-        velit cillum minim do nisi eiusmod pariatur veniam. Veniam qui fugiat ad
-        cupidatat incididunt in qui voluptate nostrud aliquip labore veniam ad.
-        Duis minim excepteur consequat anim est irure sit magna cupidatat esse
-        sint anim minim. Et ut mollit anim minim do laboris reprehenderit. Lorem
-        enim officia velit consectetur sunt laborum dolore exercitation. Officia
-        amet amet minim ea culpa pariatur ipsum nisi ad minim fugiat. Aliqua
-        excepteur officia aliqua aliqua ullamco et reprehenderit ex commodo.
-        Laborum voluptate tempor aute minim. Occaecat duis ad ullamco ea sint
-        excepteur pariatur est ad id. Esse pariatur sint voluptate aliqua in.
-      </p>
     </div>
     </>
   );
