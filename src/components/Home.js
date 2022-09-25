@@ -14,7 +14,12 @@ function Home({ viewHeight, scroll }) {
       behavior: "smooth",
     });
   }
+  const noNavMargin = `
+  .nav-margin { display: none }
+  `
   return (
+    <>
+    <style>{noNavMargin}</style>
     <div className="has-text-centered">
       {/* <Firstnav viewHeight={viewHeight} scroll={scroll}></Firstnav> */}
       <div id="hero-container">
@@ -131,6 +136,7 @@ function Home({ viewHeight, scroll }) {
         get started
       </button>
     </div>
+    </>
   );
 }
 

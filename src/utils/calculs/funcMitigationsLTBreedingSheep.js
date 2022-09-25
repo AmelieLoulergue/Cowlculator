@@ -3,7 +3,6 @@ import reductionEF_coeff from "../../coeff/reductionEF_coeff.json";
 function funcMitigationsLTBreedingSheep({ datasForm, EFSheep }) {
   //Coeff
   let coeffLTBreedingSheep = reductionEF_coeff[2].longterm_change_and_breeding;
-  console.log(coeffLTBreedingSheep);
   // Proportion of sheep included in the practice LTBreeding
 
   let numbSheepPracticesLTBreeding = 0;
@@ -68,9 +67,6 @@ function funcMitigationsLTBreedingSheep({ datasForm, EFSheep }) {
   let mitigatedEFSheepLTBreeding =
     EFSheepLTBreeding + (1 - numbSheepPracticesLTBreeding) * EFSheep;
 
-  return {
-    mitigatedEFSheepLTBreeding: mitigatedEFSheepLTBreeding,
-    mitigationPercentageSheepLTBreeding: mitigationPercentageSheepLTBreeding,
-  };
+  return [mitigatedEFSheepLTBreeding, mitigationPercentageSheepLTBreeding];
 }
 export default funcMitigationsLTBreedingSheep;

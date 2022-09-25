@@ -170,7 +170,9 @@ function RenderInput({
             if (formInput.type !== "checkbox" || formInput.type !== "select") {
               inputRef.current.value = null;
             }
-            window.scrollTo(0, document.body.scrollHeight);
+            setTimeout(() => {
+              window.scrollTo(0, document.body.scrollHeight);
+            }, 50);
           }}
         >
           <img src={sendIcon} alt=""></img>

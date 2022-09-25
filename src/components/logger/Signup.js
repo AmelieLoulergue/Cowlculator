@@ -8,16 +8,68 @@ import { passwordStrength } from "check-password-strength";
 import { useState } from "react";
 import Lottie from "lottie-react";
 import eyeBlink from "../../assets/anim/eye-blink.json";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Bg from ".././Bg";
-
-function Register() {
+import signup from "../../utils/authentication/signup";
+const validateEmail = ({ userProfile }) => {
+  if (
+    String(userProfile.email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      )
+  ) {
+    if (userProfile.userType !== "researcher") {
+      return true;
+    } else if (userProfile.userType === "researcher") {
+      if (
+        userProfile.email.includes(".edu") ||
+        userProfile.email.includes(".gov")
+      ) {
+        return true;
+      } else {
+        document.getElementById("email-message-alert").innerHTML =
+          "Invalid researcher email";
+        setTimeout(() => {
+          document.getElementById("email-message-alert").innerHTML = "";
+        }, 3000);
+        return false;
+      }
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+};
+const validatePassword = ({ password, strength, userProfile }) => {
+  if (
+    (strength !== "Weak" || strength !== "Too weak") &&
+    password.length >= 8
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+};
+function Register({
+  userProfile,
+  setUserProfile,
+  messageAlert,
+  setMessageAlert,
+  severity,
+  setSeverity,
+  displayAlert,
+  setDisplayAlert,
+}) {
   let navigate = useNavigate();
   const [strengthVal, setStrengthVal] = useState("");
+  const [registrationIsValid, setRegistrationIsValid] = useState(false);
   let strength;
   const passChange = () => {
     let indicator = document.getElementById("color-indicators");
+
     strength = passwordStrength(document.getElementById("password").value);
     setStrengthVal(strength.value);
     if (strength.id >= 0) {
@@ -53,6 +105,11 @@ function Register() {
     } else {
       document.getElementById("Symbol").classList.remove("valid");
     }
+    if (userProfile.password.length >= 8) {
+      document.getElementById("Length").classList.add("valid");
+    } else {
+      document.getElementById("Length").classList.remove("valid");
+    }
   };
   const pass = useRef();
   const passConf = useRef();
@@ -84,17 +141,53 @@ function Register() {
     setIsResearcher(!isResearcher);
   };
   const [isFarmer, setIsFarmer] = useState(
-    localStorage.getItem("category_choosed") === "farmer" ? true : false
+    (localStorage.getItem("category_choosed") &&
+      localStorage.getItem("category_choosed") === "farmer") ||
+      !localStorage.getItem("category_choosed")
+      ? true
+      : false
   );
   const [isResearcher, setIsResearcher] = useState(
-    localStorage.getItem("category_choosed") === "researcher" ? true : false
+    localStorage.getItem("category_choosed") &&
+      localStorage.getItem("category_choosed") === "researcher"
+      ? true
+      : false
   );
+  useEffect(() => {
+    if (isFarmer) {
+      setUserProfile({ ...userProfile, userType: "farmer" });
+    } else if (isResearcher) {
+      setUserProfile({ ...userProfile, userType: "researcher" });
+    }
+  }, [isFarmer, isResearcher]);
+  useEffect(() => {
+    if (
+      userProfile?.email &&
+      userProfile?.password &&
+      userProfile?.password === userProfile?.passwordConfirmation &&
+      userProfile?.passwordConfirmation &&
+      userProfile?.userType &&
+      validateEmail({ userProfile }) &&
+      validatePassword({
+        password: userProfile.password,
+        strength: strengthVal,
+      })
+    ) {
+      setRegistrationIsValid(true);
+    } else {
+      setRegistrationIsValid(false);
+    }
+  }, [userProfile]);
+  const noNav = `.dash-nav, .nav-margin, .dash-side {
+    display: none !important;
+}`;
   return (
     <>
+      <style>{noNav}</style>
       <div className="center-flex">
         <div className="navbar">
           <Link to="../account">
-            <img src={back_arrow}></img>
+            <img src={back_arrow} alt="" />
           </Link>
         </div>
         <div className="content">
@@ -143,12 +236,30 @@ function Register() {
                   ></input>
                 </div>
               </div>
-              <input type="email" placeholder="Email"></input>
+              <input
+                type="email"
+                placeholder="Email"
+                value={userProfile?.email ? userProfile.email : ""}
+                onChange={(event) =>
+                  setUserProfile({
+                    ...userProfile,
+                    email: event.target.value,
+                  })
+                }
+              ></input>
+              <div id="email-message-alert"></div>
               <div style={{ position: "relative" }}>
                 <input
                   type="password"
                   placeholder="Password"
+                  value={userProfile?.password ? userProfile.password : ""}
                   onKeyUp={passChange}
+                  onChange={(event) => {
+                    setUserProfile({
+                      ...userProfile,
+                      password: event.target.value,
+                    });
+                  }}
                   id="password"
                 ></input>
                 <Lottie
@@ -169,12 +280,24 @@ function Register() {
                 <li id="Uppercase">Uppercase</li>
                 <li id="Number">Number</li>
                 <li id="Symbol">Symbol</li>
+                <li id="Length">8 characters</li>
               </ul>
               <div style={{ position: "relative" }}>
                 <input
                   type="password"
                   placeholder="Confirm password"
                   id="passwordConfirm"
+                  value={
+                    userProfile?.passwordConfirmation
+                      ? userProfile.passwordConfirmation
+                      : ""
+                  }
+                  onChange={(event) =>
+                    setUserProfile({
+                      ...userProfile,
+                      passwordConfirmation: event.target.value,
+                    })
+                  }
                 ></input>
                 <Lottie
                   lottieRef={passConf}
@@ -195,9 +318,21 @@ function Register() {
                 </Link>
               </p>
               <button
-                type="submit"
-                className="btn"
-                onClick={() => navigate("/form")}
+                className={registrationIsValid ? "btn" : "btn disabled"}
+                onClick={(event) => {
+                  event.preventDefault();
+                  signup({
+                    userProfile,
+                    messageAlert,
+                    setMessageAlert,
+                    severity,
+                    setSeverity,
+                    displayAlert,
+                    setDisplayAlert,
+                    navigate,
+                  });
+                }}
+                disabled={registrationIsValid ? false : true}
               >
                 Register
               </button>
@@ -205,7 +340,6 @@ function Register() {
           </form>
         </div>
       </div>
-      <Bg></Bg>
     </>
   );
 }
