@@ -188,31 +188,6 @@ function App() {
               }
             ></Route>
             <Route
-              path="/getstarted"
-              element={
-                !isLogin({ login }) ? (
-                  <>
-                    <Navbar login={login} setLogin={setLogin} />
-                    <Getstarted />
-                  </>
-                ) : isLogin({ login }) && login.userType === "farmer" ? (
-                  <>
-                    <Navbar login={login} setLogin={setLogin} />
-                    <Dashboard
-                      login={login}
-                      results={results}
-                      formIsCompleted={formIsCompleted}
-                    />
-                  </>
-                ) : (
-                  <>
-                    <Navbar login={login} setLogin={setLogin} />
-                    <ResearcherDatas login={login} />
-                  </>
-                )
-              }
-            ></Route>
-            <Route
               path="/account"
               element={
                 <>

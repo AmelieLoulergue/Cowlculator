@@ -3,7 +3,7 @@ import fertilizer_coeff from "../../coeff/synthetic_fertilizer_coeff.json";
 // function fertilizers
 function funcFertilizer({ farm_crops_fertilizer }) {
   let fertilizerArray = [];
-  farm_crops_fertilizer.forEach((element) => {
+  farm_crops_fertilizer?.forEach((element) => {
     if (element.response && element.response.value) {
       fertilizerArray.push({
         cons: Number(element.response.value),
