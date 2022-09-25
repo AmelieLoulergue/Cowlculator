@@ -493,8 +493,21 @@ body {
 
 .alert-message {
   position: fixed;
+  top: 6rem;
   width: 100%;
   display: flex;
   justify-content: center;
   z-index: 1000;
+}
+.form-navbar {
+  background-color: #0c0b10 !important;
+}
+.researcher-datas {
+  height: 17rem;
+  margin-top: 8rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
 }

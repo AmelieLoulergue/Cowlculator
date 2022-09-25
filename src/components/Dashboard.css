@@ -1,64 +1,114 @@
 /* pannels section */
 .panel {
-    background-color: #111111;
-    border-radius: 20px;
-    margin: 20px;
-    margin-top: 135px;
-    padding: 20px;
-    box-shadow: 0 0 40px 0px #0000007c;
+  background-color: #111111;
+  border-radius: 20px;
+  margin: 20px;
+  /* margin-top: 135px; */
+  padding: 20px;
+  box-shadow: 0 0 40px 0px #0000007c;
+}
+@media only screen and (max-width: 425px) {
+  .panel {
+    margin: 0;
+    padding: 0;
+  }
 }
 .card-section {
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-    align-content: center;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  align-content: center;
+  flex-wrap: wrap;
 }
 .card {
-    width: 100%;
-    min-width: 260px;
-    flex: 1 1;
-    margin: 20px;
+  width: 100%;
+  min-width: 260px;
+  flex: 1 1;
+  margin: 20px;
 }
 .card-icon img {
-    height: 35px;
-    width: 35px;
-    padding: 15px;
-    border-radius: 15px;
-    margin: 15px 20px;
+  height: 35px;
+  width: 35px;
+  padding: 15px;
+  border-radius: 15px;
+  margin: 15px 20px;
 }
 .card {
-    border-radius: 10px;
-    box-shadow: 0 0 40px 0px #000000b9;
-    border-top: 1px solid rgba(255, 255, 255, 0.205);
-    border-right: 1px solid rgba(255, 255, 255, 0.205);
-    transition: .5s;
+  border-radius: 10px;
+  box-shadow: 0 0 40px 0px #000000b9;
+  border-top: 1px solid rgba(255, 255, 255, 0.205);
+  border-right: 1px solid rgba(255, 255, 255, 0.205);
+  transition: 0.5s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.card:nth-child(1) img {background-color: #20BFA9;}
-.card:nth-child(1) h1 {color: #20BFA9;}
-.card:nth-child(1) {background-image: linear-gradient(45deg, #121410 80% ,#20bfaa5d 100%); border-color: #20BFA95d;}
-.card:nth-child(1):hover {background-image: linear-gradient(45deg, #121410 80% ,#20bfaa 100%); border-color: #20BFA9;}
+.card:nth-child(1) img {
+  background-color: #20bfa9;
+}
+.card:nth-child(1) h1 {
+  color: #20bfa9;
+}
+.card:nth-child(1) {
+  background-image: linear-gradient(45deg, #121410 80%, #20bfaa5d 100%);
+  border-color: #20bfa95d;
+}
+.card:nth-child(1):hover {
+  background-image: linear-gradient(45deg, #121410 80%, #20bfaa 100%);
+  border-color: #20bfa9;
+}
 
-.card:nth-child(2) img {background-color: #ED786B;}
-.card:nth-child(2) h1 {color: #ED786B;}
-.card:nth-child(2) {background-image: linear-gradient(45deg, #1a1515 80% ,#ED786B5d 100%); border-color: #ED786B5d;}
-.card:nth-child(2):hover {background-image: linear-gradient(45deg, #1a1515 80% ,#ED786B 100%); border-color: #ED786B;}
+.card:nth-child(2) img {
+  background-color: #ed786b;
+}
+.card:nth-child(2) h1 {
+  color: #ed786b;
+}
+.card:nth-child(2) {
+  background-image: linear-gradient(45deg, #1a1515 80%, #ed786b5d 100%);
+  border-color: #ed786b5d;
+}
+.card:nth-child(2):hover {
+  background-image: linear-gradient(45deg, #1a1515 80%, #ed786b 100%);
+  border-color: #ed786b;
+}
 
-.card:nth-child(3) img {background-color: #FDB95A;}
-.card:nth-child(3) h1 {color: #FDB95A;}
-.card:nth-child(3) {background-image: linear-gradient(45deg, #181813 80% ,#FDB95A5d 100%); border-color: #FDB95A5d;}
-.card:nth-child(3):hover {background-image: linear-gradient(45deg, #181813 80% ,#FDB95A 100%); border-color: #FDB95A;}
+.card:nth-child(3) img {
+  background-color: #fdb95a;
+}
+.card:nth-child(3) h1 {
+  color: #fdb95a;
+}
+.card:nth-child(3) {
+  background-image: linear-gradient(45deg, #181813 80%, #fdb95a5d 100%);
+  border-color: #fdb95a5d;
+}
+.card:nth-child(3):hover {
+  background-image: linear-gradient(45deg, #181813 80%, #fdb95a 100%);
+  border-color: #fdb95a;
+}
 
 .card-top {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .card-top h1 {
-    margin-left: 10px;
-    font-size: 1.7rem;
+  margin-left: 10px;
+  font-size: 1.7rem;
 }
 .card h2 {
-    opacity: .9;
-    margin-top: 0;
-    margin: 0 0 15px 20px;
+  opacity: 0.9;
+  margin-top: 0;
+  margin: 0 0 15px 20px;
+  text-align: center;
+}
+#chart1 {
+  max-width: 350px;
+  max-height: 350px;
+  margin: auto;
+}
+.card-chart {
+  padding: 3rem;
+  width: 100%;
 }

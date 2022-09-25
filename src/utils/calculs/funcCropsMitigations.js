@@ -3,9 +3,7 @@ import coeff_reduction_ghg from "../../coeff/coeff_reduction_ghg.json";
 
 function funcCropsMitigations({ datasForm, state, time }) {
   let region = regions.find((region) => region.Code === state);
-  console.log(region, state);
   let climate = region.Climate.replace(" ", "_");
-  console.log(climate);
 
   let coeff_crops = coeff_reduction_ghg.map((element) => {
     let climate_coeff = element.climate.replace(" ", "_");
@@ -229,13 +227,6 @@ function funcCropsMitigations({ datasForm, state, time }) {
   // Proportions of cropland on which practices applied
 
   const calculProportion = (practice) => {
-    console.log(
-      practice,
-      datasForm.find((element) => element.id === `${practice}_portion`)
-        ?.response,
-      datasForm.find((element) => element.id === `${practice}_portion_numb`)
-        ?.response?.value
-    );
     if (
       grain_size !== 0 ||
       fv_size !== 0 ||
@@ -277,7 +268,7 @@ function funcCropsMitigations({ datasForm, state, time }) {
       datasForm.find(
         (element) =>
           element.id === "farm_crops_grassland_grazing_practice_portion"
-      )?.response?.value === "All of them"
+      )?.response === "All of them"
     ) {
       grassland_practice = grassland_size;
     }
@@ -286,7 +277,7 @@ function funcCropsMitigations({ datasForm, state, time }) {
       datasForm.find(
         (element) =>
           element.id === "farm_crops_grassland_grazing_practice_portion"
-      )?.response?.value === "A portion of them" &&
+      )?.response === "A portion of them" &&
       datasForm.find(
         (element) =>
           element.id === "farm_crops_grassland_grazing_practice_portion_numb"
@@ -301,7 +292,6 @@ function funcCropsMitigations({ datasForm, state, time }) {
           100);
     }
   }
-
   // size of land on which degraded land restoration is practiced
   let degradedRestoration_size = 0;
   if (

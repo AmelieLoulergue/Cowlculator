@@ -82,7 +82,7 @@
 }
 .dash-profile .btn {
     transform: scale(.7);
-    opacity: .4;
+    /* opacity: .4; */
     transition: .5s;
     margin: 20px auto;
 }
@@ -108,6 +108,9 @@
     z-index: 99999;
     width: 100vw;
     background: #0c0b1046;
+}
+.nav-margin {
+    height: 100px;
 }
 
 .dash-nav-icon {
