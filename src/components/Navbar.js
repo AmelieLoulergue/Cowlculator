@@ -28,7 +28,7 @@ function Navbar({ login, setLogin }) {
                 {login?.email && <h2>{login.email}</h2>}
                 <p>Project name</p>
                 <button className="btn" onClick={() => logout({ setLogin })}>
-                  Disconect
+                  Log out
                 </button>
               </div>
             </div>
