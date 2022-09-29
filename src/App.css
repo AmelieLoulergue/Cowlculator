@@ -499,9 +499,6 @@ body {
   justify-content: center;
   z-index: 1000;
 }
-.form-navbar {
-  background-color: #0c0b10 !important;
-}
 .researcher-datas {
   height: 17rem;
   margin-top: 8rem;

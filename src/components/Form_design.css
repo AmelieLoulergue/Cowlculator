@@ -58,8 +58,7 @@
 }
 
 .formChat {
-  min-height: 100vh;
-  margin-top: 5rem;
+  max-height: 100vh;
 }
 .formChat .questions {
   display: flex;
@@ -88,21 +87,6 @@
 }
 .formChat .response {
   justify-content: flex-end;
-}
-
-/* Navbar section */
-.formChat .questions .nav {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-.formChat .questions .nav h1 {
-  text-transform: uppercase;
-  font-size: 1.8rem;
-  text-align: center;
-}
-.formChat .questions .nav img {
-  height: 40px;
 }
 
 /* Question section */

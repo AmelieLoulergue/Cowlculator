@@ -2,7 +2,6 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import NewForm from "./components/NewForm";
-import Getstarted from "./components/Getstarted";
 import Account from "./components/logger/Logger";
 import Login from "./components/logger/Login";
 import Register from "./components/logger/Signup";
