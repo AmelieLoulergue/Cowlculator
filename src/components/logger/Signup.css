@@ -71,3 +71,36 @@
 .typeChoose_type input {
     display: none;
 }
+
+
+/* Animation display */
+svg g.fade {
+    opacity: 0.5;
+}
+svg g#animresearcher, svg g#animfarmer {
+    opacity: 0.5;
+    transition: .5s;
+}
+svg g#animresearcher.active, svg g#animfarmer.active {
+    opacity: 1;
+}
+.signuptitle {
+    margin-top: 0 !important;
+}
+.bigcontainer {
+    margin: 5vh 0;
+    display: flex;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    column-gap: 5vw;
+}
+@media screen and (max-width:965px) {
+    form .input {
+        margin-top: 2vh;
+    }
+    .content {
+        min-height: 70vh;
+    }
+}
