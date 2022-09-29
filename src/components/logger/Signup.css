@@ -95,6 +95,7 @@ svg g#animresearcher.active, svg g#animfarmer.active {
     align-items: center;
     justify-content: center;
     column-gap: 5vw;
+    width: 80vw;
 }
 @media screen and (max-width:965px) {
     form .input {
@@ -102,5 +103,10 @@ svg g#animresearcher.active, svg g#animfarmer.active {
     }
     .content {
         min-height: 70vh;
+    }
+}
+@media screen and (min-width:965px) {
+    .signuptitle * {
+        letter-spacing: .3vw;
     }
 }
