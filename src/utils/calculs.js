@@ -266,15 +266,17 @@ function calculs({ datasForm, results, setResults }) {
         mitigationEFLTBreedingSheep,
       });
     }
-// FERTILIZER
+    // FERTILIZER
 
-const fertilizers = datasForm.filter((element) => element.id.includes("fertilizer"));
-  if (fertilizers.length > 0) {
-    setResults({
-      ...results,
-      fertilizer: allFunctions.funcFertilizer({ fertilizers }),
-    });
-  }
+    const fertilizers = datasForm.filter((element) =>
+      element.id.includes("fertilizer")
+    );
+    if (fertilizers.length > 0) {
+      setResults({
+        ...results,
+        fertilizer: allFunctions.funcFertilizer({ fertilizers }),
+      });
+    }
 
     // Mitigations from practices implemented in crops (t CO2e/time frame)
     // detailed, last values. First value=total
@@ -323,6 +325,7 @@ const fertilizers = datasForm.filter((element) => element.id.includes("fertilize
 
   setResults({
     ...results,
+    state: state,
     time: time,
     elecCO2: elecCO2,
     water: water,
