@@ -208,22 +208,6 @@ function Register({
                 <div className="typeChoose">
                   <div
                     className={
-                      isFarmer
-                        ? "typeChoose_type checkedRadio"
-                        : "typeChoose_type"
-                    }
-                  >
-                    <label htmlFor="farmer">Farmer</label>
-                    <input
-                      name="type"
-                      type="radio"
-                      id="farmer"
-                      onChange={radioCheck}
-                      checked={isFarmer}
-                    ></input>
-                  </div>
-                  <div
-                    className={
                       isResearcher
                         ? "typeChoose_type checkedRadio"
                         : "typeChoose_type"
@@ -236,6 +220,22 @@ function Register({
                       id="researcher"
                       onChange={radioCheck}
                       checked={isResearcher}
+                    ></input>
+                  </div>
+                  <div
+                    className={
+                      isFarmer
+                        ? "typeChoose_type checkedRadio"
+                        : "typeChoose_type"
+                    }
+                  >
+                    <label htmlFor="farmer">Farmer</label>
+                    <input
+                      name="type"
+                      type="radio"
+                      id="farmer"
+                      onChange={radioCheck}
+                      checked={isFarmer}
                     ></input>
                   </div>
                 </div>
