@@ -65,7 +65,7 @@ function funcMitigationsAdditiveDairy({ datasForm, EFDairy, cattleDairy }) {
   // Total EF emissions after mitigation
   let mitigatedEFDairyAdditive =
     EFDairyAdditive + (1 - numbDairyPracticesAdditive) * EFDairy;
-  
-  return [mitigatedEFDairyAdditive, mitigationPercentageDairyAdditive];
+
+  return mitigatedEFDairyAdditive;
 }
 export default funcMitigationsAdditiveDairy;

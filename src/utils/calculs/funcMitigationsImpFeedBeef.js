@@ -62,7 +62,7 @@ function funcMitigationsImpFeedBeef({ datasForm, EFBeef, cattleBeef }) {
   let mitigationPercentageBeefImpFeed = (EFBeefImpFeed * 100) / EFBeef;
   // Total EF emissions after mitigation
   let mitigatedEFBeefImpFeed = EFBeefImpFeed + (1 - numbBeefPractices) * EFBeef;
- 
-  return [mitigatedEFBeefImpFeed, mitigationPercentageBeefImpFeed];
+
+  return mitigatedEFBeefImpFeed;
 }
 export default funcMitigationsImpFeedBeef;

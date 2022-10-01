@@ -362,15 +362,15 @@ function calculs({ datasForm, results, setResults }) {
             entericFermentationCO2?.EFtotal +
             manureCO2 +
             fertilizer -
-            (mitigationEFImpFeedDairy[0] +
-              mitigationEFImpFeedBeef[0] +
-              mitigationEFImpFeedSheep[0] +
-              mitigationEFAdditiveBeef[0] +
-              mitigationEFAdditiveDairy[0] +
-              mitigationEFAdditiveSheep[0] +
-              mitigationEFLTBreedingBeef[0] +
-              mitigationEFLTBreedingDairy[0] +
-              mitigationEFLTBreedingSheep[0] +
+            (mitigationEFImpFeedDairy +
+              mitigationEFImpFeedBeef +
+              mitigationEFImpFeedSheep +
+              mitigationEFAdditiveBeef +
+              mitigationEFAdditiveDairy +
+              mitigationEFAdditiveSheep +
+              mitigationEFLTBreedingBeef +
+              mitigationEFLTBreedingDairy +
+              mitigationEFLTBreedingSheep +
               cropsMitigations?.mitigationCropsTotal)) /
           time
         : entericFermentationCO2
@@ -383,15 +383,15 @@ function calculs({ datasForm, results, setResults }) {
             entericFermentationCO2?.EFtotal +
             manureCO2 +
             fertilizer -
-            (mitigationEFImpFeedDairy[0] +
-              mitigationEFImpFeedBeef[0] +
-              mitigationEFImpFeedSheep[0] +
-              mitigationEFAdditiveBeef[0] +
-              mitigationEFAdditiveDairy[0] +
-              mitigationEFAdditiveSheep[0] +
-              mitigationEFLTBreedingBeef[0] +
-              mitigationEFLTBreedingDairy[0] +
-              mitigationEFLTBreedingSheep[0])) /
+            (mitigationEFImpFeedDairy +
+              mitigationEFImpFeedBeef +
+              mitigationEFImpFeedSheep +
+              mitigationEFAdditiveBeef +
+              mitigationEFAdditiveDairy +
+              mitigationEFAdditiveSheep +
+              mitigationEFLTBreedingBeef +
+              mitigationEFLTBreedingDairy +
+              mitigationEFLTBreedingSheep)) /
           time
         : cropsMitigations
         ? (elecCO2 +
@@ -402,15 +402,15 @@ function calculs({ datasForm, results, setResults }) {
             other +
             manureCO2 +
             fertilizer -
-            (mitigationEFImpFeedDairy[0] +
-              mitigationEFImpFeedBeef[0] +
-              mitigationEFImpFeedSheep[0] +
-              mitigationEFAdditiveBeef[0] +
-              mitigationEFAdditiveDairy[0] +
-              mitigationEFAdditiveSheep[0] +
-              mitigationEFLTBreedingBeef[0] +
-              mitigationEFLTBreedingDairy[0] +
-              mitigationEFLTBreedingSheep[0] +
+            (mitigationEFImpFeedDairy +
+              mitigationEFImpFeedBeef +
+              mitigationEFImpFeedSheep +
+              mitigationEFAdditiveBeef +
+              mitigationEFAdditiveDairy +
+              mitigationEFAdditiveSheep +
+              mitigationEFLTBreedingBeef +
+              mitigationEFLTBreedingDairy +
+              mitigationEFLTBreedingSheep +
               cropsMitigations?.mitigationCropsTotal)) /
           time
         : (elecCO2 +
@@ -421,37 +421,37 @@ function calculs({ datasForm, results, setResults }) {
             other +
             manureCO2 +
             fertilizer -
-            (mitigationEFImpFeedDairy[0] +
-              mitigationEFImpFeedBeef[0] +
-              mitigationEFImpFeedSheep[0] +
-              mitigationEFAdditiveBeef[0] +
-              mitigationEFAdditiveDairy[0] +
-              mitigationEFAdditiveSheep[0] +
-              mitigationEFLTBreedingBeef[0] +
-              mitigationEFLTBreedingDairy[0] +
-              mitigationEFLTBreedingSheep[0])) /
+            (mitigationEFImpFeedDairy +
+              mitigationEFImpFeedBeef +
+              mitigationEFImpFeedSheep +
+              mitigationEFAdditiveBeef +
+              mitigationEFAdditiveDairy +
+              mitigationEFAdditiveSheep +
+              mitigationEFLTBreedingBeef +
+              mitigationEFLTBreedingDairy +
+              mitigationEFLTBreedingSheep)) /
           time,
     CO2mitigated: cropsMitigations
-      ? (mitigationEFImpFeedDairy[0] +
-          mitigationEFImpFeedBeef[0] +
-          mitigationEFImpFeedSheep[0] +
-          mitigationEFAdditiveBeef[0] +
-          mitigationEFAdditiveDairy[0] +
-          mitigationEFAdditiveSheep[0] +
-          mitigationEFLTBreedingBeef[0] +
-          mitigationEFLTBreedingDairy[0] +
-          mitigationEFLTBreedingSheep[0] +
+      ? (mitigationEFImpFeedDairy +
+          mitigationEFImpFeedBeef +
+          mitigationEFImpFeedSheep +
+          mitigationEFAdditiveBeef +
+          mitigationEFAdditiveDairy +
+          mitigationEFAdditiveSheep +
+          mitigationEFLTBreedingBeef +
+          mitigationEFLTBreedingDairy +
+          mitigationEFLTBreedingSheep +
           cropsMitigations?.mitigationCropsTotal) /
         time
-      : (mitigationEFImpFeedDairy[0] +
-          mitigationEFImpFeedBeef[0] +
-          mitigationEFImpFeedSheep[0] +
-          mitigationEFAdditiveBeef[0] +
-          mitigationEFAdditiveDairy[0] +
-          mitigationEFAdditiveSheep[0] +
-          mitigationEFLTBreedingBeef[0] +
-          mitigationEFLTBreedingDairy[0] +
-          mitigationEFLTBreedingSheep[0]) /
+      : (mitigationEFImpFeedDairy +
+          mitigationEFImpFeedBeef +
+          mitigationEFImpFeedSheep +
+          mitigationEFAdditiveBeef +
+          mitigationEFAdditiveDairy +
+          mitigationEFAdditiveSheep +
+          mitigationEFLTBreedingBeef +
+          mitigationEFLTBreedingDairy +
+          mitigationEFLTBreedingSheep) /
         time,
     utilitiesGraph:
       elecCO2 / time + natGasCO2 / time + gasCO2 / time + water / time,
@@ -459,15 +459,15 @@ function calculs({ datasForm, results, setResults }) {
     otherGraph: other / time,
     entericFermentationCO2Graph:
       (entericFermentationCO2.EFtotal -
-        (mitigationEFImpFeedDairy[0] +
-          mitigationEFImpFeedBeef[0] +
-          mitigationEFImpFeedSheep[0] +
-          mitigationEFAdditiveBeef[0] +
-          mitigationEFAdditiveDairy[0] +
-          mitigationEFAdditiveSheep[0] +
-          mitigationEFLTBreedingBeef[0] +
-          mitigationEFLTBreedingDairy[0] +
-          mitigationEFLTBreedingSheep[0])) /
+        (mitigationEFImpFeedDairy +
+          mitigationEFImpFeedBeef +
+          mitigationEFImpFeedSheep +
+          mitigationEFAdditiveBeef +
+          mitigationEFAdditiveDairy +
+          mitigationEFAdditiveSheep +
+          mitigationEFLTBreedingBeef +
+          mitigationEFLTBreedingDairy +
+          mitigationEFLTBreedingSheep)) /
       time,
     manureCO2Graph: manureCO2 / time,
     cropsGraph: cropsMitigations
@@ -504,15 +504,15 @@ function calculs({ datasForm, results, setResults }) {
             entericFermentationCO2?.EFtotal +
             manureCO2 +
             fertilizer -
-            (mitigationEFImpFeedDairy[0] +
-              mitigationEFImpFeedBeef[0] +
-              mitigationEFImpFeedSheep[0] +
-              mitigationEFAdditiveBeef[0] +
-              mitigationEFAdditiveDairy[0] +
-              mitigationEFAdditiveSheep[0] +
-              mitigationEFLTBreedingBeef[0] +
-              mitigationEFLTBreedingDairy[0] +
-              mitigationEFLTBreedingSheep[0] +
+            (mitigationEFImpFeedDairy +
+              mitigationEFImpFeedBeef +
+              mitigationEFImpFeedSheep +
+              mitigationEFAdditiveBeef +
+              mitigationEFAdditiveDairy +
+              mitigationEFAdditiveSheep +
+              mitigationEFLTBreedingBeef +
+              mitigationEFLTBreedingDairy +
+              mitigationEFLTBreedingSheep +
               cropsMitigations?.mitigationCropsTotal)) /
           time
         : entericFermentationCO2
@@ -525,15 +525,15 @@ function calculs({ datasForm, results, setResults }) {
             entericFermentationCO2?.EFtotal +
             manureCO2 +
             fertilizer -
-            (mitigationEFImpFeedDairy[0] +
-              mitigationEFImpFeedBeef[0] +
-              mitigationEFImpFeedSheep[0] +
-              mitigationEFAdditiveBeef[0] +
-              mitigationEFAdditiveDairy[0] +
-              mitigationEFAdditiveSheep[0] +
-              mitigationEFLTBreedingBeef[0] +
-              mitigationEFLTBreedingDairy[0] +
-              mitigationEFLTBreedingSheep[0])) /
+            (mitigationEFImpFeedDairy +
+              mitigationEFImpFeedBeef +
+              mitigationEFImpFeedSheep +
+              mitigationEFAdditiveBeef +
+              mitigationEFAdditiveDairy +
+              mitigationEFAdditiveSheep +
+              mitigationEFLTBreedingBeef +
+              mitigationEFLTBreedingDairy +
+              mitigationEFLTBreedingSheep)) /
           time
         : (elecCO2 +
             natGasCO2 +
@@ -543,37 +543,37 @@ function calculs({ datasForm, results, setResults }) {
             other +
             manureCO2 +
             fertilizer -
-            (mitigationEFImpFeedDairy[0] +
-              mitigationEFImpFeedBeef[0] +
-              mitigationEFImpFeedSheep[0] +
-              mitigationEFAdditiveBeef[0] +
-              mitigationEFAdditiveDairy[0] +
-              mitigationEFAdditiveSheep[0] +
-              mitigationEFLTBreedingBeef[0] +
-              mitigationEFLTBreedingDairy[0] +
-              mitigationEFLTBreedingSheep[0])) /
+            (mitigationEFImpFeedDairy +
+              mitigationEFImpFeedBeef +
+              mitigationEFImpFeedSheep +
+              mitigationEFAdditiveBeef +
+              mitigationEFAdditiveDairy +
+              mitigationEFAdditiveSheep +
+              mitigationEFLTBreedingBeef +
+              mitigationEFLTBreedingDairy +
+              mitigationEFLTBreedingSheep)) /
           time,
     totalMitigationsGraph: cropsMitigations
-      ? (mitigationEFImpFeedDairy[0] +
-          mitigationEFImpFeedBeef[0] +
-          mitigationEFImpFeedSheep[0] +
-          mitigationEFAdditiveBeef[0] +
-          mitigationEFAdditiveDairy[0] +
-          mitigationEFAdditiveSheep[0] +
-          mitigationEFLTBreedingBeef[0] +
-          mitigationEFLTBreedingDairy[0] +
-          mitigationEFLTBreedingSheep[0] +
+      ? (mitigationEFImpFeedDairy +
+          mitigationEFImpFeedBeef +
+          mitigationEFImpFeedSheep +
+          mitigationEFAdditiveBeef +
+          mitigationEFAdditiveDairy +
+          mitigationEFAdditiveSheep +
+          mitigationEFLTBreedingBeef +
+          mitigationEFLTBreedingDairy +
+          mitigationEFLTBreedingSheep +
           cropsMitigations?.mitigationCropsTotal) /
         time
-      : (mitigationEFImpFeedDairy[0] +
-          mitigationEFImpFeedBeef[0] +
-          mitigationEFImpFeedSheep[0] +
-          mitigationEFAdditiveBeef[0] +
-          mitigationEFAdditiveDairy[0] +
-          mitigationEFAdditiveSheep[0] +
-          mitigationEFLTBreedingBeef[0] +
-          mitigationEFLTBreedingDairy[0] +
-          mitigationEFLTBreedingSheep[0]) /
+      : (mitigationEFImpFeedDairy +
+          mitigationEFImpFeedBeef +
+          mitigationEFImpFeedSheep +
+          mitigationEFAdditiveBeef +
+          mitigationEFAdditiveDairy +
+          mitigationEFAdditiveSheep +
+          mitigationEFLTBreedingBeef +
+          mitigationEFLTBreedingDairy +
+          mitigationEFLTBreedingSheep) /
         time,
   });
 }

@@ -11,12 +11,12 @@ import { useNavigate } from "react-router-dom";
 import { DoughnutChart } from "./charts/DoughnoutChart";
 import { BarChart } from "./charts/VerticalBarChart";
 import { LineChart } from "./charts/LineChart";
-function Dashboard({ login, results, formIsCompleted }) {
+function Dashboard({ login, results, formIsCompleted, datasForm }) {
   let navigate = useNavigate();
-  console.log(formIsCompleted);
+  console.log(datasForm);
   return (
-    <>
-      {/* {results && <p>{JSON.stringify(results)}</p>} */}
+    <><div id="stringify"></div>
+      {results && <p>{JSON.stringify(results)}</p>}
       <div id="dash">
         <div id="summary" className="panel">
           <div className="card-section">
