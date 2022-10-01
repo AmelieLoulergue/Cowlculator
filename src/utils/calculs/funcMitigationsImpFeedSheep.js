@@ -64,6 +64,6 @@ function funcMitigationsImpFeedSheep({ datasForm, EFSheep }) {
   let mitigatedEFSheepImpFeed =
     EFSheepImpFeed + (1 - numbSheepPractices) * EFSheep;
 
-  return [mitigatedEFSheepImpFeed, mitigationPercentageSheepImpFeed];
+  return mitigatedEFSheepImpFeed;
 }
 export default funcMitigationsImpFeedSheep;

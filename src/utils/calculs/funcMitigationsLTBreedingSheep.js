@@ -67,6 +67,6 @@ function funcMitigationsLTBreedingSheep({ datasForm, EFSheep }) {
   let mitigatedEFSheepLTBreeding =
     EFSheepLTBreeding + (1 - numbSheepPracticesLTBreeding) * EFSheep;
 
-  return [mitigatedEFSheepLTBreeding, mitigationPercentageSheepLTBreeding];
+  return mitigatedEFSheepLTBreeding;
 }
 export default funcMitigationsLTBreedingSheep;

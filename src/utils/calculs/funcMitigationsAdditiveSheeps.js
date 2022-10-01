@@ -70,6 +70,6 @@ function funcMitigationsAdditiveSheep({ datasForm, EFSheep }) {
   let mitigatedEFSheepAdditive =
     EFSheepAdditive + (1 - numbSheepPracticesAdditive) * EFSheep;
 
-  return [mitigatedEFSheepAdditive, mitigationPercentageSheepAdditive];
+  return mitigatedEFSheepAdditive;
 }
 export default funcMitigationsAdditiveSheep;

@@ -63,6 +63,6 @@ function funcMitigationsImpFeedDairy({ datasForm, EFDairy, cattleDairy }) {
   let mitigatedEFDairyImpFeed =
     EFDairyImpFeed + (1 - numbDairyPractices) * EFDairy;
   
-  return [mitigatedEFDairyImpFeed, mitigationPercentageDairyImpFeed];
+  return mitigatedEFDairyImpFeed
 }
 export default funcMitigationsImpFeedDairy;

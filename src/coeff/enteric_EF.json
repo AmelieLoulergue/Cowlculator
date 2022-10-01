@@ -6,7 +6,7 @@
     "North_Central": 18.9,
     "South_Central": 20.3,
     "West": 20.6,
-    "National Average": 19.5
+    "National_Average": 19.5
   },
   {
     "name": "farm_animals_dairy_cattle_rep24",
@@ -15,7 +15,7 @@
     "North_Central": 57.3,
     "South_Central": 61.5,
     "West": 61,
-    "National Average": 58.7
+    "National_Average": 58.7
   },
   {
     "name": "farm_animals_dairy_cattle_matur",
@@ -24,7 +24,7 @@
     "North_Central": 19.2,
     "South_Central": 116.9,
     "West": 119.1,
-    "National Average": 114.3
+    "National_Average": 114.3
   },
   {
     "name": "farm_animals_beef_cattle_rep12",
@@ -33,7 +33,7 @@
     "North_Central": 20.3,
     "South_Central": 23.5,
     "West": 22.6,
-    "National Average": 22.3
+    "National_Average": 22.3
   },
   {
     "name": "farm_animals_beef_cattle_rep24",
@@ -42,7 +42,7 @@
     "North_Central": 60.7,
     "South_Central": 67.5,
     "West": 64.7,
-    "National Average": 64.9
+    "National_Average": 64.9
   },
   {
     "name": "farm_animals_beef_cattle_matur",
@@ -51,7 +51,7 @@
     "North_Central": 59.4,
     "South_Central": 0.7,
     "West": 68.9,
-    "National Average": 66.5
+    "National_Average": 66.5
   },
   {
     "name": "farm_animals_beef_cattle_wealing",
@@ -60,7 +60,7 @@
     "North_Central": 22.5,
     "South_Central": 23.9,
     "West": 23.4,
-    "National Average": 23
+    "National_Average": 23
   },
   {
     "name": "farm_animals_beef_cattle_yearling",
@@ -69,7 +69,7 @@
     "North_Central": 46.9,
     "South_Central": 47.5,
     "West": 47.5,
-    "National Average": 47.2
+    "National_Average": 47.2
   },
   {
     "name": "farm_animals_beef_cattle_bulls",
@@ -78,7 +78,7 @@
     "North_Central": 99.8,
     "South_Central": 99.8,
     "West": 99.8,
-    "National Average": 99.8
+    "National_Average": 99.8
   },
   {
     "name": "farm_animals_sheeps",
@@ -87,7 +87,7 @@
     "North_Central": null,
     "South_Central": null,
     "West": null,
-    "National Average": 8
+    "National_Average": 8
   },
   {
     "name": "farm_animals_goats",
@@ -96,7 +96,7 @@
     "North_Central": null,
     "South_Central": null,
     "West": null,
-    "National Average": 5
+    "National_Average": 5
   },
   {
     "name": "farm_animals_swine",
@@ -105,7 +105,7 @@
     "North_Central": null,
     "South_Central": null,
     "West": null,
-    "National Average": 1.5
+    "National_Average": 1.5
   },
   {
     "name": "farm_animals_horses",
@@ -114,7 +114,7 @@
     "North_Central": null,
     "South_Central": null,
     "West": null,
-    "National Average": 18
+    "National_Average": 18
   },
   {
     "name": "farm_animals_mules",
@@ -123,7 +123,7 @@
     "North_Central": null,
     "South_Central": null,
     "West": null,
-    "National Average": 10
+    "National_Average": 10
   },
   {
     "name": "farm_animals_water_buffalo",
@@ -132,6 +132,6 @@
     "North_Central": null,
     "South_Central": null,
     "West": null,
-    "National Average": 58
+    "National_Average": 58
   }
 ]

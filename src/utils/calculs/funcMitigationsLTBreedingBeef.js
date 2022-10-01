@@ -63,7 +63,7 @@ function funcMitigationsLTBreedingBeef({ datasForm, EFBeef, cattleBeef }) {
   // Total EF emissions after mitigation
   let mitigatedEFBeefLTBreeding =
     EFBeefLTBreeding + (1 - numbBeefPracticesLTBreeding) * EFBeef;
-  
-  return [mitigatedEFBeefLTBreeding, mitigationPercentageBeefLTBreeding];
+
+  return mitigatedEFBeefLTBreeding;
 }
 export default funcMitigationsLTBreedingBeef;

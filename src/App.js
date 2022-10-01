@@ -19,6 +19,8 @@ import { isLogin } from "./utils/authentication/controlLog";
 import ResearcherDatas from "./components/ResearcherDatas";
 import References from "./components/References";
 import listOfQuestions from "./utils/listOfQuestions";
+import getUserDatas from "./utils/userDatas/getUserDatas";
+import saveUserDatas from "./utils/userDatas/saveUserDatas";
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -34,7 +36,6 @@ function App() {
   const [initForm, setInitForm] = useState(false);
   const [displayAlert, setDisplayAlert] = useState(false);
   const [questionToDisplay, setQuestionToDisplay] = useState(null);
-  // console.log(questions);
   const [indexQuestions, setIndexQuestions] = useState(
     localStorage.getItem("indexQuestions")
       ? Number(localStorage.getItem("indexQuestions"))
@@ -117,7 +118,7 @@ function App() {
     }
   }, [datasForm]);
   useEffect(() => {
-    console.log(results);
+    console.log({ results }, { datasForm });
   }, [results]);
   useEffect(() => {
     if (login && login !== "false") {
@@ -127,7 +128,10 @@ function App() {
   useEffect(() => {
     if (formIsCompleted) {
       console.log({ results }, { datasForm }, { questions });
+      document.getElementById("stringify").innerHTML =
+        JSON.stringify(datasForm);
       localStorage.setItem("results", JSON.stringify(results));
+      saveUserDatas();
     }
     localStorage.setItem("formIsCompleted", formIsCompleted);
   }, [formIsCompleted]);
@@ -219,6 +223,7 @@ function App() {
                       login={login}
                       results={results}
                       formIsCompleted={formIsCompleted}
+                      datasForm={datasForm}
                     />
                   </>
                 ) : (
