@@ -51,19 +51,19 @@ const listOfQuestions = {
       bloc_name: "gas",
       question: "What is the butane consumption ?",
       formInput: { type: "number" },
-      userValue: { value: 0, unit: "kWh" },
+      userValue: { value: 0, unit: "Gal" },
     },
     {
       id: "gas_propane_cons",
       question: "What is the propane consumption ?",
       formInput: { type: "number" },
-      userValue: { value: 0, unit: "kWh" },
+      userValue: { value: 0, unit: "Gal" },
     },
     {
       id: "gas_mix_cons",
       question: "What is the mix butane/propane consumption ?",
       formInput: { type: "number" },
-      userValue: { value: 0, unit: "kWh" },
+      userValue: { value: 0, unit: "Gal" },
     },
     {
       id: "natgas",
@@ -655,7 +655,7 @@ const listOfQuestions = {
           answerParentQuestion: true,
           parentId: "farm_crops",
           id: "farm_crops_grassland",
-          question: "Do you produce grassland?",
+          question: "Is there grassland on the farm?",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
@@ -663,20 +663,20 @@ const listOfQuestions = {
               answerParentQuestion: true,
               id: "farm_crops_grassland_size",
               parentId: "farm_crops_grassland",
-              question: "What is the size of the farm grassland ?",
+              question: "What is the size of the farm's grassland ?",
               formInput: { type: "number" },
               userValue: {
                 unit: ["acre", "sq feet"],
               },
             },
-            {
-              answerParentQuestion: true,
-              id: "farm_crops_grassland_organic",
-              parentId: "farm_crops_grassland",
-              question: "Is it organically grown ?",
-              formInput: { type: "checkbox" },
-              userValue: false,
-            },
+            // {
+            //   answerParentQuestion: true,
+            //   id: "farm_crops_grassland_organic",
+            //   parentId: "farm_crops_grassland",
+            //   question: "Is it organically grown ?",
+            //   formInput: { type: "checkbox" },
+            //   userValue: false,
+            // },
             {
               answerParentQuestion: true,
               id: "farm_crops_grassland_grazing_practice",
@@ -728,14 +728,14 @@ const listOfQuestions = {
                 unit: ["acre", "sq feet"],
               },
             },
-            {
-              answerParentQuestion: true,
-              id: "farm_crops_grain_organic",
-              parentId: "farm_crops_grain",
-              question: "Is it organically grown ?",
-              formInput: { type: "checkbox" },
-              userValue: false,
-            },
+            // {
+            //   answerParentQuestion: true,
+            //   id: "farm_crops_grain_organic",
+            //   parentId: "farm_crops_grain",
+            //   question: "Is it organically grown ?",
+            //   formInput: { type: "checkbox" },
+            //   userValue: false,
+            // },
           ],
         },
         {
@@ -756,14 +756,14 @@ const listOfQuestions = {
                 unit: ["acre", "sq feet"],
               },
             },
-            {
-              answerParentQuestion: true,
-              id: "farm_crops_forage_organic",
-              parentId: "farm_crops_forage",
-              question: "Is it organically grown ?",
-              formInput: { type: "checkbox" },
-              userValue: false,
-            },
+            // {
+            //   answerParentQuestion: true,
+            //   id: "farm_crops_forage_organic",
+            //   parentId: "farm_crops_forage",
+            //   question: "Is it organically grown ?",
+            //   formInput: { type: "checkbox" },
+            //   userValue: false,
+            // },
           ],
         },
         {
@@ -784,14 +784,14 @@ const listOfQuestions = {
                 unit: ["acre", "sq feet"],
               },
             },
-            {
-              answerParentQuestion: true,
-              id: "farm_crops_fv_organic",
-              parentId: "farm_crops_fv",
-              question: "Is it organically grown ?",
-              formInput: { type: "checkbox" },
-              userValue: false,
-            },
+            // {
+            //   answerParentQuestion: true,
+            //   id: "farm_crops_fv_organic",
+            //   parentId: "farm_crops_fv",
+            //   question: "Is it organically grown ?",
+            //   formInput: { type: "checkbox" },
+            //   userValue: false,
+            // },
           ],
         },
         {
@@ -812,14 +812,14 @@ const listOfQuestions = {
                 unit: ["acre", "sq feet"],
               },
             },
-            {
-              answerParentQuestion: true,
-              id: "farm_crops_flowers_organic",
-              parentId: "farm_crops_flowers",
-              question: "Is it organically grown ?",
-              formInput: { type: "checkbox" },
-              userValue: false,
-            },
+            // {
+            //   answerParentQuestion: true,
+            //   id: "farm_crops_flowers_organic",
+            //   parentId: "farm_crops_flowers",
+            //   question: "Is it organically grown ?",
+            //   formInput: { type: "checkbox" },
+            //   userValue: false,
+            // },
           ],
         },
         {
@@ -840,14 +840,14 @@ const listOfQuestions = {
                 unit: ["acre", "sq feet"],
               },
             },
-            {
-              answerParentQuestion: true,
-              id: "farm_crops_herbs_organic",
-              parentId: "farm_crops_herbs",
-              question: "Is it organically grown ?",
-              formInput: { type: "checkbox" },
-              userValue: false,
-            },
+            // {
+            //   answerParentQuestion: true,
+            //   id: "farm_crops_herbs_organic",
+            //   parentId: "farm_crops_herbs",
+            //   question: "Is it organically grown ?",
+            //   formInput: { type: "checkbox" },
+            //   userValue: false,
+            // },
           ],
         },
         {
@@ -886,7 +886,7 @@ const listOfQuestions = {
           id: "farm_crops_nutrient_management_practice",
           parentId: "farm_crops",
           question:
-            "For your crop(s), have you implemented Nutrient management i.e. adjusting application rates, slow- or controlled-release fertilizer forms or nitrification inhibitors (applies for crops) to reduce emissions & increase sequestration?",
+            "For your crop(s), have you implemented nutrient management i.e. adjusting application rates, slow- or controlled-release fertilizer forms or nitrification inhibitors (applies for crops) to reduce emissions & increase sequestration?",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
@@ -917,7 +917,7 @@ const listOfQuestions = {
           id: "farm_crops_residue_management_practice",
           parentId: "farm_crops",
           question:
-            "For your crop(s), have you implemented Tillage and residue management i.e. reduced or no tillage (apply for crops) to reduce emissions & increase sequestration?",
+            "For your crop(s), have you implemented tillage and residue management i.e. reduced or no tillage (apply for crops) to reduce emissions & increase sequestration?",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
@@ -948,7 +948,7 @@ const listOfQuestions = {
           id: "farm_crops_water_management_practice",
           parentId: "farm_crops",
           question:
-            "For your crop(s), have you implemented Water management i.e. more effective irrigation measures (applies for crops) to reduce emissions & increase sequestration?",
+            "For your crop(s), have you implemented water management i.e. more effective irrigation measures (applies for crops) to reduce emissions & increase sequestration?",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
@@ -1010,7 +1010,7 @@ const listOfQuestions = {
           id: "farm_crops_agroforestry_practice",
           parentId: "farm_crops",
           question:
-            "For your crop(s), have you implemented Agro forestry i.e. production of livestock or food crops on land that also grows trees for timber, fire- wood, or other tree products (applies for crops) to reduce emissions & increase sequestration?",
+            "For your crop(s), have you implemented agro forestry i.e. production of livestock or food crops on land that also grows trees for timber, fire- wood, or other tree products (applies for crops) to reduce emissions & increase sequestration?",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
@@ -1041,7 +1041,7 @@ const listOfQuestions = {
         //   id: "farm_crops_organic_soils_restoration_practice",
         //   parentId: "farm_crops",
         //   question:
-        //     "For your crop(s), have you implemented Restoration ( applies for organic soils) to reduce emissions & increase sequestration?",
+        //     "For your crop(s), have you implemented restoration ( applies for organic soils) to reduce emissions & increase sequestration?",
         //   formInput: { type: "checkbox" },
         //   userValue: false,
         //   linked_questions: [
@@ -1073,7 +1073,7 @@ const listOfQuestions = {
           id: "farm_crops_degraded_lands_restoration_practice",
           parentId: "farm_crops",
           question:
-            "For your crop(s), have you implemented Restoration ( applies to degraded lands) to reduce emissions & increase sequestration?",
+            "For your crop(s), have you implemented restoration (applies to degraded lands) to reduce emissions & increase sequestration?",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
@@ -1094,7 +1094,7 @@ const listOfQuestions = {
         //   id: "farm_crops_soils_bioenergy_practice",
         //   parentId: "farm_crops",
         //   question:
-        //     "For your crop(s), have you implemented Soils under bio-energy to reduce emissions & increase sequestration?",
+        //     "For your crop(s), have you implemented soils under bio-energy to reduce emissions & increase sequestration?",
         //   formInput: { type: "checkbox" },
         //   userValue: false,
         //   linked_questions: [
@@ -1136,7 +1136,7 @@ const listOfQuestions = {
           parentId: "farm_crops",
           bloc_name: "fertilizer",
           id: "farm_crops_fertilizer",
-          question: "Do you apply synthetic fertilizer",
+          question: "Do you apply synthetic fertilizer?",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
@@ -1144,7 +1144,7 @@ const listOfQuestions = {
               answerParentQuestion: true,
               id: "farm_crops_fertilizer_ammonia_anhydrous",
               parentId: "farm_crops_fertilizer",
-              question: "Do you use Ammonia anhydrous ?",
+              question: "Do you use ammonia anhydrous ?",
 
               formInput: { type: "checkbox" },
               userValue: false,
@@ -1154,7 +1154,7 @@ const listOfQuestions = {
                   parentId: "farm_crops_fertilizer_ammonia_anhydrous",
                   id: "farm_crops_fertilizer_ammonia_anhydrous_cons",
                   question:
-                    "During the period of time indicated at the beginning of this questionnaire, how many ton of Ammonia anhydrous did you apply?",
+                    "During the period of time indicated at the beginning of this questionnaire, how many tons of ammonia anhydrous did you apply?",
 
                   formInput: { type: "number" },
                   userValue: { value: 0, unit: "ton" },
@@ -1165,7 +1165,7 @@ const listOfQuestions = {
               answerParentQuestion: true,
               id: "farm_crops_fertilizer_ammonia_aqua",
               parentId: "farm_crops_fertilizer",
-              question: "Do you use Ammonia aqua ?",
+              question: "Do you use ammonia aqua ?",
 
               formInput: { type: "checkbox" },
               userValue: false,
@@ -1175,7 +1175,7 @@ const listOfQuestions = {
                   parentId: "farm_crops_fertilizer_ammonia_aqua",
                   id: "farm_crops_fertilizer_ammonia_aqua_cons",
                   question:
-                    "During the period of time indicated at the beginning of this questionnaire, how many ton of Ammonia aqua did you apply?",
+                    "During the period of time indicated at the beginning of this questionnaire, how many tons of ammonia aqua did you apply?",
 
                   formInput: { type: "number" },
                   userValue: { value: 0, unit: "ton" },
@@ -1186,7 +1186,7 @@ const listOfQuestions = {
               answerParentQuestion: true,
               parentId: "farm_crops_fertilizer",
               id: "farm_crops_fertilizer_ammonia_nitrate",
-              question: "Do you use Ammonia nitrate ?",
+              question: "Do you use ammonia nitrate ?",
 
               formInput: { type: "checkbox" },
               userValue: false,
@@ -1196,7 +1196,7 @@ const listOfQuestions = {
                   parentId: "farm_crops_fertilizer_ammonia_nitrate",
                   id: "farm_crops_fertilizer_ammonia_nitrate_cons",
                   question:
-                    "During the period of time indicated at the beginning of this questionnaire, how many ton of Ammonia nitrate did you apply?",
+                    "During the period of time indicated at the beginning of this questionnaire, how many tons of ammonia nitrate did you apply?",
 
                   formInput: { type: "number" },
                   userValue: { value: 0, unit: "ton" },
@@ -1207,7 +1207,7 @@ const listOfQuestions = {
               answerParentQuestion: true,
               parentId: "farm_crops_fertilizer",
               id: "farm_crops_fertilizer_ammonium_nitrate_limestone_mixtures",
-              question: "Do you use Ammonium nitrate limestone mixtures ?",
+              question: "Do you use ammonium nitrate limestone mixtures ?",
 
               formInput: { type: "checkbox" },
               userValue: false,
@@ -1218,7 +1218,7 @@ const listOfQuestions = {
                     "farm_crops_fertilizer_ammonium_nitrate_limestone_mixtures",
                   id: "farm_crops_fertilizer_ammonium_nitrate_limestone_mixtures_cons",
                   question:
-                    "During the period of time indicated at the beginning of this questionnaire, how many ton of Ammonium nitrate limestone mixtures did you apply?",
+                    "During the period of time indicated at the beginning of this questionnaire, how many tons of ammonium nitrate limestone mixtures did you apply?",
 
                   formInput: { type: "number" },
                   userValue: { value: 0, unit: "ton" },
@@ -1239,7 +1239,7 @@ const listOfQuestions = {
                   parentId: "farm_crops_fertilizer_ammonium_sulfate",
                   id: "farm_crops_fertilizer_ammonium_sulfate_cons",
                   question:
-                    "During the period of time indicated at the beginning of this questionnaire, how many ton of ammonium sulfate did you apply?",
+                    "During the period of time indicated at the beginning of this questionnaire, how many tons of ammonium sulfate did you apply?",
 
                   formInput: { type: "number" },
                   userValue: { value: 0, unit: "ton" },
@@ -1260,7 +1260,7 @@ const listOfQuestions = {
                   parentId: "farm_crops_fertilizer_ammonium_sulfate_nitrate",
                   id: "farm_crops_fertilizer_ammonium_sulfate_nitrate_cons",
                   question:
-                    "During the period of time indicated at the beginning of this questionnaire, how many ton of ammonium sulfate nitrate did you apply?",
+                    "During the period of time indicated at the beginning of this questionnaire, how many tons of ammonium sulfate nitrate did you apply?",
 
                   formInput: { type: "number" },
                   userValue: { value: 0, unit: "ton" },
@@ -1281,7 +1281,7 @@ const listOfQuestions = {
                   id: "farm_crops_fertilizer_calcium_cyanamide_cons",
                   parentId: "farm_crops_fertilizer_calcium_cyanamide",
                   question:
-                    "During the period of time indicated at the beginning of this questionnaire, how many ton of calcium cyanamide did you apply?",
+                    "During the period of time indicated at the beginning of this questionnaire, how many tons of calcium cyanamide did you apply?",
 
                   formInput: { type: "number" },
                   userValue: { value: 0, unit: "ton" },
@@ -1302,7 +1302,7 @@ const listOfQuestions = {
                   id: "farm_crops_fertilizer_calcium_nitrate_cons",
                   parentId: "farm_crops_fertilizer_calcium_nitrate",
                   question:
-                    "During the period of time indicated at the beginning of this questionnaire, how many ton of calcium nitrate did you apply?",
+                    "During the period of time indicated at the beginning of this questionnaire, how many tons of calcium nitrate did you apply?",
 
                   formInput: { type: "number" },
                   userValue: { value: 0, unit: "ton" },
@@ -1323,7 +1323,7 @@ const listOfQuestions = {
                   parentId: "farm_crops_fertilizer_nitrogen_solutions",
                   id: "farm_crops_fertilizer_nitrogen_solutions_cons",
                   question:
-                    "During the period of time indicated at the beginning of this questionnaire, how many ton of nitrogen solutions  did you apply?",
+                    "During the period of time indicated at the beginning of this questionnaire, how many tons of nitrogen solutions  did you apply?",
 
                   formInput: { type: "number" },
                   userValue: { value: 0, unit: "ton" },
@@ -1344,7 +1344,7 @@ const listOfQuestions = {
                   parentId: "farm_crops_fertilizer_sodium_nitrate",
                   id: "farm_crops_fertilizer_sodium_nitrate_cons",
                   question:
-                    "During the period of time indicated at the beginning of this questionnaire, how many ton of sodium nitrate did you apply?",
+                    "During the period of time indicated at the beginning of this questionnaire, how many tons of sodium nitrate did you apply?",
 
                   formInput: { type: "number" },
                   userValue: { value: 0, unit: "ton" },
@@ -1365,7 +1365,7 @@ const listOfQuestions = {
                   parentId: "farm_crops_fertilizer_urea",
                   id: "farm_crops_fertilizer_urea_cons",
                   question:
-                    "During the period of time indicated at the beginning of this questionnaire, how many ton of urea did you apply?",
+                    "During the period of time indicated at the beginning of this questionnaire, how many tons of urea did you apply?",
 
                   formInput: { type: "number" },
                   userValue: { value: 0, unit: "ton" },
@@ -1386,7 +1386,7 @@ const listOfQuestions = {
                   parentId: "farm_crops_fertilizer_urea_form",
                   id: "farm_crops_fertilizer_urea_form_cons",
                   question:
-                    "During the period of time indicated at the beginning of this questionnaire, how many ton of urea form did you apply?",
+                    "During the period of time indicated at the beginning of this questionnaire, how many tons of urea form did you apply?",
 
                   formInput: { type: "number" },
                   userValue: { value: 0, unit: "ton" },
@@ -1428,7 +1428,7 @@ const listOfQuestions = {
                   parentId: "farm_crops_fertilizer_bone_meal",
                   id: "farm_crops_fertilizer_bone_meal_cons",
                   question:
-                    "During the period of time indicated at the beginning of this questionnaire, how many ton of bone meal did you apply?",
+                    "During the period of time indicated at the beginning of this questionnaire, how many tons of bone meal did you apply?",
 
                   formInput: { type: "number" },
                   userValue: { value: 0, unit: "ton" },
@@ -1638,7 +1638,7 @@ const listOfQuestions = {
                   parentId: "farm_crops_fertilizer_ammoniated_superphosphate",
                   id: "farm_crops_fertilizer_ammoniated_superphosphate_cons",
                   question:
-                    "During the period of time indicated at the beginning of this questionnaire, how many ton of ammoniated superphosphate did you apply?",
+                    "During the period of time indicated at the beginning of this questionnaire, how many tons of ammoniated superphosphate did you apply?",
 
                   formInput: { type: "number" },
                   userValue: { value: 0, unit: "ton" },
@@ -1659,7 +1659,7 @@ const listOfQuestions = {
                   parentId: "farm_crops_fertilizer_ammonium_phosphate_nitrate",
                   id: "farm_crops_fertilizer_ammonium_phosphate_nitrate_cons",
                   question:
-                    "During the period of time indicated at the beginning of this questionnaire, how many ton of ammonium phosphate nitrate did you apply?",
+                    "During the period of time indicated at the beginning of this questionnaire, how many tons of ammonium phosphate nitrate did you apply?",
 
                   formInput: { type: "number" },
                   userValue: { value: 0, unit: "ton" },
@@ -1680,7 +1680,7 @@ const listOfQuestions = {
                   parentId: "farm_crops_fertilizer_ammonium_phosphate_sulfate",
                   id: "farm_crops_fertilizer_ammonium_phosphate_sulfate_cons",
                   question:
-                    "During the period of time indicated at the beginning of this questionnaire, how many ton of ammonium phosphate sulfate did you apply?",
+                    "During the period of time indicated at the beginning of this questionnaire, how many tons of ammonium phosphate sulfate did you apply?",
 
                   formInput: { type: "number" },
                   userValue: { value: 0, unit: "ton" },
@@ -1701,7 +1701,7 @@ const listOfQuestions = {
                   parentId: "farm_crops_fertilizer_diammonium_phosphate",
                   id: "farm_crops_fertilizer_diammonium_phosphate_cons",
                   question:
-                    "During the period of time indicated at the beginning of this questionnaire, how many ton of diammonium phosphate did you apply?",
+                    "During the period of time indicated at the beginning of this questionnaire, how many tons of diammonium phosphate did you apply?",
 
                   formInput: { type: "number" },
                   userValue: { value: 0, unit: "ton" },
@@ -1722,7 +1722,7 @@ const listOfQuestions = {
                   parentId: "farm_crops_fertilizer_monoammonium_phosphate",
                   id: "farm_crops_fertilizer_monoammonium_phosphate_cons",
                   question:
-                    "During the period of time indicated at the beginning of this questionnaire, how many ton of monoammonium phosphate did you apply?",
+                    "During the period of time indicated at the beginning of this questionnaire, how many tons of monoammonium phosphate did you apply?",
 
                   formInput: { type: "number" },
                   userValue: { value: 0, unit: "ton" },
@@ -1743,7 +1743,7 @@ const listOfQuestions = {
                   parentId: "farm_crops_fertilizer_nitric_phosphate",
                   id: "farm_crops_fertilizer_nitric_phosphate_cons",
                   question:
-                    "During the period of time indicated at the beginning of this questionnaire, how many ton of nitric phosphate did you apply?",
+                    "During the period of time indicated at the beginning of this questionnaire, how many tons of nitric phosphate did you apply?",
 
                   formInput: { type: "number" },
                   userValue: { value: 0, unit: "ton" },
@@ -1764,7 +1764,7 @@ const listOfQuestions = {
                   parentId: "farm_crops_fertilizer_nitrate_of_soda_potash",
                   id: "farm_crops_fertilizer_nitrate_of_soda_potash_cons",
                   question:
-                    "During the period of time indicated at the beginning of this questionnaire, how many ton of Nitrate of soda potash did you apply?",
+                    "During the period of time indicated at the beginning of this questionnaire, how many tons of Nitrate of soda potash did you apply?",
 
                   formInput: { type: "number" },
                   userValue: { value: 0, unit: "ton" },
@@ -1785,7 +1785,7 @@ const listOfQuestions = {
                   parentId: "farm_crops_fertilizer_potassium_nitrate",
                   id: "farm_crops_fertilizer_potassium_nitrate_cons",
                   question:
-                    "During the period of time indicated at the beginning of this questionnaire, how many ton of potassium nitrate did you apply?",
+                    "During the period of time indicated at the beginning of this questionnaire, how many tons of potassium nitrate did you apply?",
 
                   formInput: { type: "number" },
                   userValue: { value: 0, unit: "ton" },
@@ -2006,7 +2006,7 @@ const listOfQuestions = {
               parentId: "farm_animals_dairy_cattle",
               id: "farm_animals_dairy_cattle_rep12",
               question:
-                "Do you have replacements 0-12months composing your dairy cattle in the time frame reported? NB: A portion of the offspring are retained to replace mature cows that die or are removed from the herd (culled) each year. Those represents a very fast movement of cattle called 'replacements'.",
+                "Do you have replacements 0-12 months composing your dairy cattle in the time frame reported? NB: A portion of the offspring are retained to replace mature cows that die or are removed from the herd (culled) each year. Those represents a very fast movement of cattle called 'replacements'.",
 
               formInput: { type: "checkbox" },
               userValue: false,
@@ -2016,7 +2016,7 @@ const listOfQuestions = {
                   parentId: "farm_animals_dairy_cattle_rep12",
                   id: "farm_animals_dairy_cattle_rep12_numb",
                   question:
-                    "How many heads of replacements 0-12mois do you farm? NB: in the time frame reported",
+                    "How many heads of replacements 0-12 months do you farm? NB: in the time frame reported",
                   formInput: { type: "number" },
                   userValue: {
                     value: 0,
@@ -2030,7 +2030,7 @@ const listOfQuestions = {
               parentId: "farm_animals_dairy_cattle",
               id: "farm_animals_dairy_cattle_rep24",
               question:
-                "Do you have replacements 12-24months composing your dairy cattle in the time frame reported? NB: A portion of the offspring are retained to replace mature cows that die or are removed from the herd (culled) each year. Those represents a very fast movement of cattle called 'replacements'.",
+                "Do you have replacements 12-24 months composing your dairy cattle in the time frame reported? NB:A portion of the offspring are retained to replace mature cows that die or are removed from the herd (culled) each year. Those represents a very fast movement of cattle called 'replacements'.",
 
               formInput: { type: "checkbox" },
               userValue: false,
@@ -2040,7 +2040,7 @@ const listOfQuestions = {
                   parentId: "farm_animals_dairy_cattle_rep24",
                   id: "farm_animals_dairy_cattle_rep24_numb",
                   question:
-                    "How many heads of replacements 12-24mois do you farm? NB: in the time frame reported",
+                    "How many heads of replacements 12-24 months do you farm? NB:in the time frame reported",
                   formInput: { type: "number" },
                   userValue: {
                     value: 0,
@@ -2054,7 +2054,7 @@ const listOfQuestions = {
               parentId: "farm_animals_dairy_cattle",
               id: "farm_animals_dairy_cattle_matur",
               question:
-                "Do you have mature cows composing your dairy cattle in the time frame reported? NB: A portion of the offspring are retained to replace mature cows that die or are removed from the herd (culled) each year. Those represents a very fast movement of cattle called 'replacements'.",
+                "Do you have mature cows composing your dairy cattle in the time frame reported?",
 
               formInput: { type: "checkbox" },
               userValue: false,
@@ -2064,7 +2064,7 @@ const listOfQuestions = {
                   parentId: "farm_animals_dairy_cattle_matur",
                   id: "farm_animals_dairy_cattle_matur_numb",
                   question:
-                    "How many heads of mature cows do you farm? NB: in the time frame reported",
+                    "How many heads of mature cows do you farm? NB:in the time frame reported",
                   formInput: { type: "number" },
                   userValue: {
                     value: 0,
@@ -2185,7 +2185,7 @@ const listOfQuestions = {
               parentId: "farm_animals_beef_cattle",
               id: "farm_animals_beef_cattle_rep12",
               question:
-                "Do you have replacements 0-12months composing your beef cattle in the time frame reported? NB: A portion of the offspring are retained to replace mature cows that die or are removed from the herd (culled) each year. Those represents a very fast movement of cattle called 'replacements'.",
+                "Do you have replacements 0-12 months composing your beef cattle in the time frame reported? NB:A portion of the offspring are retained to replace mature cows that die or are removed from the herd (culled) each year. Those represents a very fast movement of cattle called 'replacements'.",
 
               formInput: { type: "checkbox" },
               userValue: false,
@@ -2195,7 +2195,7 @@ const listOfQuestions = {
                   parentId: "farm_animals_beef_cattle_rep12",
                   id: "farm_animals_beef_cattle_rep12_numb",
                   question:
-                    "How many heads of replacements 0-12mois do you farm? NB: in the time frame reported",
+                    "How many heads of replacements 0-12 months do you farm? NB: in the time frame reported",
                   formInput: { type: "number" },
                   userValue: {
                     value: 0,
@@ -2209,7 +2209,7 @@ const listOfQuestions = {
               parentId: "farm_animals_beef_cattle",
               id: "farm_animals_beef_cattle_rep24",
               question:
-                "Do you have replacements 12-24months composing your beef cattle in the time frame reported? NB: A portion of the offspring are retained to replace mature cows that die or are removed from the herd (culled) each year. Those represents a very fast movement of cattle called 'replacements'.",
+                "Do you have replacements 12-24 months composing your beef cattle in the time frame reported? NB:A portion of the offspring are retained to replace mature cows that die or are removed from the herd (culled) each year. Those represents a very fast movement of cattle called 'replacements'.",
 
               formInput: { type: "checkbox" },
               userValue: false,
@@ -2219,7 +2219,7 @@ const listOfQuestions = {
                   parentId: "farm_animals_beef_cattle_rep24",
                   id: "farm_animals_beef_cattle_rep24_numb",
                   question:
-                    "How many heads of replacements 12-24month do you farm? NB: in the time frame reported",
+                    "How many heads of replacements 12-24 months do you farm? NB: in the time frame reported",
                   formInput: { type: "number" },
                   userValue: {
                     value: 0,
@@ -2438,7 +2438,7 @@ const listOfQuestions = {
               parentId: "farm_animals_sheeps",
               id: "farm_animals_sheeps_numb",
               question:
-                "How many heads of sheeps do you farm? NB: in the time frame reported",
+                "How many heads of sheep do you farm? NB: in the time frame reported",
 
               formInput: { type: "number" },
               userValue: {
@@ -2451,7 +2451,7 @@ const listOfQuestions = {
               parentId: "farm_animals_sheeps",
               id: "farm_animals_sheeps_feeding_practice",
               question:
-                "For your sheeps, have you improved feeding practice e.g. replacing roughage with concentrate, feeding, extra dietary oil",
+                "For your sheep, have you improved feeding practice e.g. replacing roughage with concentrate, feeding, extra dietary oil",
               formInput: { type: "checkbox" },
               userValue: false,
               linked_questions: [
@@ -2481,7 +2481,7 @@ const listOfQuestions = {
               parentId: "farm_animals_sheeps",
               id: "farm_animals_sheeps_specific_agent_practice",
               question:
-                "For your sheeps, do you use specific agents and dietary additives e.g. bST, growth hormones, ionophores, propionate precursors",
+                "For your sheep, do you use specific agents and dietary additives e.g. bST, growth hormones, ionophores, propionate precursors",
               formInput: { type: "checkbox" },
               userValue: false,
               linked_questions: [
@@ -2512,7 +2512,7 @@ const listOfQuestions = {
               parentId: "farm_animals_sheeps",
               id: "farm_animals_sheeps_breeding_practice",
               question:
-                "For your sheeps, do you improved Long term structural/management and animal breeding e.g. lifetime management of beef cattle, improved productivity through animal breeding",
+                "For your sheep, do you improved Long term structural/management and animal breeding e.g. lifetime management of beef cattle, improved productivity through animal breeding",
               formInput: { type: "checkbox" },
               userValue: false,
               linked_questions: [
