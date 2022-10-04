@@ -69,3 +69,57 @@
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
 }
+
+/* About App section */
+.aboutApp p {
+    text-align: justify;
+    font-size: 1rem;
+}
+
+/* How it works section */
+.land-hiw {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    column-gap: 5vw;
+    margin: 50px auto;
+}
+
+.land-hiw-svg img {
+    width: 50vw;
+    min-width: 320px;
+    max-width: 400px;
+    max-height: 300px;
+}
+
+.land-hiw:nth-child(5) .land-hiw-svg, .land-hiw:nth-child(7) .land-hiw-svg {
+    order: 2;
+}
+.land-hiw:nth-child(8) {
+    padding-bottom: 100px;
+}
+
+.land-hiw .number {
+    background: white;
+    color: rgb(20, 10, 29);
+    border-radius: 100%;
+    padding: 20px;
+    font-size: 25px;
+    line-height: 15px;
+    width: 15px;
+    height: 15px;
+    font-weight: 600;
+    text-align: center;
+    margin: auto;
+}
+
+@media screen and (max-width:700px) {
+    .land-hiw {
+        flex-direction: column;
+    }
+    .land-hiw:nth-child(4) .land-hiw-svg, .land-hiw:nth-child(6) .land-hiw-svg {
+        order: 2;
+    }
+}
