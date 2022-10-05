@@ -1,5 +1,6 @@
 import * as React from "react";
 import "./Navbar.css";
+import account from "../assets/svg/profile.svg"
 
 import { useState } from "react";
 
@@ -157,7 +158,9 @@ function Navbar({ login, setLogin }) {
             className={scroll > 0 ? "" : "scrolled-icon"}
           ></img>
         </div>
-        <div className="nav-spacer"></div>
+        <div className="nav-spacer">
+          <img src={account}></img>
+        </div>
       </div>
       <div className="nav-margin"></div>
     </>

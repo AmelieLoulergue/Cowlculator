@@ -188,6 +188,10 @@
 .nav-spacer {
     width: 60px;
 }
+.nav-spacer img {
+    height: 40px;
+}
+
 
 @media only screen and (max-width: 600px) {
     .nav-spacer {
