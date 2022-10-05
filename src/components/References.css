@@ -1,0 +1,22 @@
+#ref .card {
+    background: transparent;
+    border: none;
+    margin-bottom: 50px;
+    text-align: justify;
+    padding: 20px;
+}
+
+#ref a {
+    color: rgba(255, 255, 255, .8);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+#ref .card h3 {
+    background-image: linear-gradient(315deg, #874ff5 0%, #2c60f5 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

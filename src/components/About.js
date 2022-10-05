@@ -12,7 +12,7 @@ function About() {
       <div className="container">
         <div>
           <h1 className="primaryTitle">About us.</h1>
-          <p>
+          <p className="subTitle">
             Cowlculator has been developed by a French team 💙🤍❤️, but beyond
             the business partnership, this is a family affair; linked by blood
             or 10-year friendship.
