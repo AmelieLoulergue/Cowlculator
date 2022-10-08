@@ -7,7 +7,13 @@ function funcMitigationsLTBreedingDairy({ datasForm, EFDairy, cattleDairy }) {
 
   let numbDairyPracticesLTBreeding = 0;
 
-  if (!cattleDairy || cattleDairy === 0) {
+  if (
+    !cattleDairy ||
+    cattleDairy === 0 ||
+    !datasForm.find(
+      (data) => data.id === "farm_animals_dairy_cattle_animal_breeding_practice"
+    )?.response
+  ) {
     numbDairyPracticesLTBreeding = 0;
   } else {
     if (
@@ -53,22 +59,24 @@ function funcMitigationsLTBreedingDairy({ datasForm, EFDairy, cattleDairy }) {
   }
   //EF emissions from cattle portion concerned by LTBreeding
   let EFDairyLTBreeding = 0;
+  let mitigatedEFDairyLTBreeding = 0;
   if (
     datasForm.find(
       (data) => data.id === "farm_animals_dairy_cattle_animal_breeding_practice"
-    )?.response
+    )?.response &&
+    cattleDairy &&
+    cattleDairy !== 0 &&
+    numbDairyPracticesLTBreeding !== 0
   ) {
     EFDairyLTBreeding =
       numbDairyPracticesLTBreeding * EFDairy * coeffLTBreedingDairy;
+    mitigatedEFDairyLTBreeding =
+      EFDairyLTBreeding + (1 - numbDairyPracticesLTBreeding) * EFDairy;
   } else {
     EFDairyLTBreeding = 0;
   }
-  // Mitigation percentage
-  let mitigationPercentageDairyLTBreeding = (EFDairyLTBreeding * 100) / EFDairy;
   // Total EF emissions after mitigation
-  let mitigatedEFDairyLTBreeding =
-    EFDairyLTBreeding + (1 - numbDairyPracticesLTBreeding) * EFDairy;
-
+  console.log(mitigatedEFDairyLTBreeding);
   return mitigatedEFDairyLTBreeding;
 }
 export default funcMitigationsLTBreedingDairy;

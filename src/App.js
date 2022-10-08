@@ -2,7 +2,6 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import NewForm from "./components/NewForm";
-import Getstarted from "./components/Getstarted";
 import Account from "./components/logger/Logger";
 import Login from "./components/logger/Login";
 import Register from "./components/logger/Signup";
@@ -29,7 +28,6 @@ const darkTheme = createTheme({
 function App() {
   const [formIsCompleted, setFormIsCompleted] = useState(false);
   const [viewHeight, setViewHeight] = useState(window.innerHeight);
-  const [scroll, setScroll] = useState(window.scrollY);
   const [datasForm, setDatasForm] = useState([]);
   const [messageAlert, setMessageAlert] = useState("");
   const [severity, setSeverity] = useState("");
@@ -41,16 +39,19 @@ function App() {
       ? Number(localStorage.getItem("indexQuestions"))
       : 0
   );
+  const [counterQuestion, setCounterQuestion] = useState(0);
   useEffect(() => setViewHeight(window.innerHeight), [window]);
 
   const [results, setResults] = useState({});
   const [questions, setQuestions] = useState([]);
+  const [allQuestions, setAllQuestions] = useState([]);
   const [login, setLogin] = useState(false);
   const [userProfile, setUserProfile] = useState({
     email: "",
     password: "",
   });
   useEffect(() => {
+    getUserDatas();
     if (localStorage.getItem("datasForm")) {
       setDatasForm(JSON.parse(localStorage.getItem("datasForm")));
     }
@@ -64,6 +65,9 @@ function App() {
     }
     if (localStorage.getItem("login")) {
       setLogin(JSON.parse(localStorage.getItem("login")));
+    }
+    if (localStorage.getItem("counterQuestion")) {
+      setCounterQuestion(JSON.parse(localStorage.getItem("counterQuestion")));
     }
     if (localStorage.getItem("questionToDisplay")) {
       setQuestionToDisplay(
@@ -81,7 +85,63 @@ function App() {
           : false
       );
     }
+    if (localStorage.getItem("initForm")) {
+      setInitForm(
+        JSON.parse(localStorage.getItem("initForm")) === "true" ? true : false
+      );
+    }
   }, []);
+  // useEffect(
+  //   () => console.log(allQuestions, questions),
+  //   [allQuestions, questions]
+  // );
+
+  useEffect(() => {
+    const isAtLeastOneFieldGetLinkedQuestions = (questions) => {
+      return questions.some((question) => !!question.linked_questions);
+    };
+
+    const getAllQuestionsRecursive = (currentValue, accumulatorQuestions) => {
+      if (isAtLeastOneFieldGetLinkedQuestions(currentValue)) {
+        const allLinkedQuestions = currentValue.reduce((accumulator, value) => {
+          if (value.linked_questions) {
+            return [...accumulator, ...value.linked_questions];
+          }
+          return accumulator;
+        }, []);
+
+        return getAllQuestionsRecursive(allLinkedQuestions, [
+          ...accumulatorQuestions,
+          ...allLinkedQuestions.map((value) => ({
+            id: value.id,
+            response: value.response,
+            question: value.question,
+          })),
+        ]);
+      }
+      return accumulatorQuestions;
+    };
+    const result = listOfQuestions.formQuestions.reduce(
+      (accumulator, currentValue) => {
+        const totalQuestions = getAllQuestionsRecursive([currentValue], []);
+
+        return [
+          ...accumulator,
+          {
+            id: currentValue.id,
+            response: currentValue.response,
+            question: currentValue.question,
+          },
+          ...totalQuestions,
+        ];
+      },
+      []
+    );
+
+    setAllQuestions(result);
+  }, []);
+
+  // console.log({ allQuestions });
   useEffect(() => {
     if (initForm) {
       setDatasForm(
@@ -104,6 +164,12 @@ function App() {
     localStorage.setItem("indexQuestions", indexQuestions);
   }, [indexQuestions]);
   useEffect(() => {
+    localStorage.setItem("counterQuestion", counterQuestion);
+  }, [counterQuestion]);
+  useEffect(() => {
+    localStorage.setItem("initForm", initForm);
+  }, [initForm]);
+  useEffect(() => {
     if (questionToDisplay !== null) {
       localStorage.setItem(
         "questionToDisplay",
@@ -118,9 +184,6 @@ function App() {
     }
   }, [datasForm]);
   useEffect(() => {
-    console.log({ results }, { datasForm });
-  }, [results]);
-  useEffect(() => {
     if (login && login !== "false") {
       localStorage.setItem("login", JSON.stringify(login));
     }
@@ -128,18 +191,18 @@ function App() {
   useEffect(() => {
     if (formIsCompleted) {
       console.log({ results }, { datasForm }, { questions });
-      document.getElementById("stringify").innerHTML =
-        JSON.stringify(datasForm);
       localStorage.setItem("results", JSON.stringify(results));
       saveUserDatas();
     }
     localStorage.setItem("formIsCompleted", formIsCompleted);
   }, [formIsCompleted]);
   useEffect(() => {
+    console.log({ results });
     if (results !== {}) {
       localStorage.setItem("results", JSON.stringify(results));
     }
   }, [results]);
+
   return (
     <ThemeProvider theme={darkTheme}>
       <div className="App">
@@ -153,7 +216,7 @@ function App() {
               element={
                 <>
                   <Navbar login={login} setLogin={setLogin}></Navbar>
-                  <Home viewHeight={viewHeight} scroll={scroll} />
+                  <Home />
                 </>
               }
             ></Route>
@@ -181,12 +244,16 @@ function App() {
                       setQuestionToDisplay={setQuestionToDisplay}
                       indexQuestions={indexQuestions}
                       setIndexQuestions={setIndexQuestions}
+                      allQuestions={allQuestions}
+                      setAllQuestions={setAllQuestions}
+                      counterQuestion={counterQuestion}
+                      setCounterQuestion={setCounterQuestion}
                     />
                   </>
                 ) : (
                   <>
                     <Navbar login={login} setLogin={setLogin}></Navbar>
-                    <Home viewHeight={viewHeight} scroll={scroll} />
+                    <Home />
                   </>
                 )
               }
@@ -280,7 +347,7 @@ function App() {
                 ) : (
                   <>
                     <Navbar login={login} setLogin={setLogin}></Navbar>
-                    <Home viewHeight={viewHeight} scroll={scroll} />
+                    <Home />
                   </>
                 )
               }

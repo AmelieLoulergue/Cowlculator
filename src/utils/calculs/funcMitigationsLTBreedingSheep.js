@@ -51,21 +51,21 @@ function funcMitigationsLTBreedingSheep({ datasForm, EFSheep }) {
 
   //EF emissions from cattle portion concerned by LTBreeding
   let EFSheepLTBreeding = 0;
+  let mitigatedEFSheepLTBreeding = 0;
   if (
     datasForm.find(
       (data) => data.id === "farm_animals_sheeps_breeding_practice"
-    )?.response
+    )?.response &&
+    numbSheepPracticesLTBreeding !== 0
   ) {
     EFSheepLTBreeding =
       numbSheepPracticesLTBreeding * EFSheep * coeffLTBreedingSheep;
+    mitigatedEFSheepLTBreeding =
+      EFSheepLTBreeding + (1 - numbSheepPracticesLTBreeding) * EFSheep;
   } else {
     EFSheepLTBreeding = 0;
   }
-  // Mitigation percentage
-  let mitigationPercentageSheepLTBreeding = (EFSheepLTBreeding * 100) / EFSheep;
   // Total EF emissions after mitigation
-  let mitigatedEFSheepLTBreeding =
-    EFSheepLTBreeding + (1 - numbSheepPracticesLTBreeding) * EFSheep;
 
   return mitigatedEFSheepLTBreeding;
 }

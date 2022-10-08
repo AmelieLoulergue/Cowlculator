@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import sendIcon from "../../assets/svg/send.svg";
 import back_arrow from "../../assets/svg/back-arrow.svg";
 import Box from "@mui/material/Box";
@@ -63,11 +63,9 @@ function RenderInput({
   isButtonDisplay = false,
   goPrecedentQuestion,
   question,
-  unit,
   setUnit,
 }) {
-  const inputRef = useRef(null);
-
+  const checkboxRef = useRef(false);
   return (
     <div id={"input_" + indexQuestion} className={"response-input"}>
       {isButtonDisplay && indexQuestion !== "farm_state" && (
@@ -80,7 +78,18 @@ function RenderInput({
           <Stack direction="row" spacing={1} alignItems="center">
             <Typography>NO</Typography>
             <AntSwitch
-              checked={answer || false}
+              autoFocus
+              ref={checkboxRef}
+              onKeyUp={(event) => {
+                if (event.code === "Enter") {
+                  sendAnswer();
+                  checkboxRef.current.value = false;
+                  setTimeout(() => {
+                    window.scrollTo(0, document.body.scrollHeight);
+                  }, 50);
+                }
+              }}
+              checked={answer}
               inputProps={{ "aria-label": "ant design" }}
               onChange={(event) => {
                 setAnswer(event.target.checked);
@@ -99,6 +108,14 @@ function RenderInput({
               id="demo-simple-select"
               value={answer || ""}
               label="Portion"
+              onKeyUp={(event) => {
+                if (event.code === "Enter") {
+                  sendAnswer();
+                  setTimeout(() => {
+                    window.scrollTo(0, document.body.scrollHeight);
+                  }, 50);
+                }
+              }}
               onChange={(event) => {
                 setAnswer(event.target.value);
               }}
@@ -113,8 +130,16 @@ function RenderInput({
         </Box>
       ) : (
         <input
-          ref={inputRef}
           type={formInput.type}
+          onKeyUp={(event) => {
+            if (event.code === "Enter") {
+              sendAnswer();
+              setTimeout(() => {
+                window.scrollTo(0, document.body.scrollHeight);
+              }, 50);
+            }
+          }}
+          autoFocus
           onChange={(event) => {
             setAnswer(
               answer && formInput.type === "number"
@@ -165,11 +190,9 @@ function RenderInput({
       {isButtonDisplay && (
         <button
           className="btn"
+          id={`button-${question.id}`}
           onClick={() => {
             sendAnswer();
-            if (formInput.type !== "checkbox" || formInput.type !== "select") {
-              inputRef.current.value = null;
-            }
             setTimeout(() => {
               window.scrollTo(0, document.body.scrollHeight);
             }, 50);

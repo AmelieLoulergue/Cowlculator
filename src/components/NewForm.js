@@ -28,6 +28,10 @@ const NewForm = ({
   setQuestionToDisplay,
   indexQuestions,
   setIndexQuestions,
+  allQuestions,
+  setAllQuestions,
+  counterQuestion,
+  setCounterQuestion,
 }) => {
   const stateList = elec_state_coeff.map((element) => element.State);
   const chatContainer = useRef(null);
@@ -52,6 +56,18 @@ const NewForm = ({
       datasForm,
     });
     if (responseIsOk) {
+      setAllQuestions(
+        allQuestions.map((question) => {
+          if (question.id === questionToDisplay.id) {
+            return {
+              ...question,
+              response: answer,
+            };
+          } else {
+            return question;
+          }
+        })
+      );
       const newQuestionsList = questions;
 
       if (questionToDisplay?.linked_questions?.length) {
@@ -92,14 +108,17 @@ const NewForm = ({
         idsDeleted: [],
         idsToDelete: [questionToDisplay.id],
       });
-
       const finalQuestions = newQuestionsList.filter(
         (question) => !idsToDelete.includes(question.parentId)
       );
       setQuestions(finalQuestions);
       setIndexQuestions(indexQuestions + 1);
       setQuestionToDisplay(finalQuestions[indexQuestions + 1]);
-      setAnswer(null);
+      setAnswer(
+        finalQuestions[indexQuestions + 1].formInput.type === "checkbox"
+          ? false
+          : null
+      );
     }
   };
 
@@ -108,71 +127,77 @@ const NewForm = ({
     setQuestionToDisplay(questions[indexQuestions - 1]);
     setAnswer(questions[indexQuestions - 1].response);
   };
-  const scrollToMyRef = () => {
-    const scroll =
-      chatContainer.current.scrollHeight - chatContainer.current.clientHeight;
-    chatContainer.current.scrollTo(0, scroll);
-  };
   useEffect(() => {
-    // setQuestions(listOfQuestions.formQuestions);
-    // setQuestionToDisplay(listOfQuestions.formQuestions[0]);
     document.getElementsByClassName("dash-nav")[0].classList.add("form-navbar");
   }, []);
   useEffect(() => {
-    setProgress(Math.round((indexQuestions * 100) / questions.length));
+    setProgress(
+      Math.round(((counterQuestion * 100) / allQuestions.length) * 10) / 10
+    );
+  }, [counterQuestion]);
+  useEffect(() => {
+    if (questionToDisplay) {
+      setCounterQuestion(
+        allQuestions.findIndex((element) => element.id === questionToDisplay.id)
+      );
+    }
   }, [questions]);
 
   return (
     <div className="">
-      <div className="buttons-skip-form">
-        <button
-          onClick={() => {
-            calculs({
-              datasForm,
-              results,
-              setResults,
-            });
-            navigate("/dashboard");
-          }}
-        >
-          Skip and complete later
-        </button>
-        <ProgressBarForm progress={progress} />
-      </div>
-      <div className="formChat">
-        <div className="beginin">
-          <div className="LottieContainer">
-            <Lottie animationData={form_begin} loop={true} />
-          </div>
-          <div>
-            {datasForm.length > 0 ? (
-              <>
-                <h3>Nice to see you again !</h3>
-                <h1>Keep filling the form today</h1>
-              </>
-            ) : (
-              <>
-                <h3>Are you ready ?</h3>
-                <h1>Start filling the form today</h1>
-              </>
-            )}
-          </div>
-          <div className="btns" style={{ marginBottom: "5rem" }}>
-            <img src={back_arrow} alt=""></img>
-            <button
-              className="btn"
-              onClick={() => {
-                setInitForm(true);
-                setTimeout(() => {
-                  window.scrollBy(0, document.body.scrollHeight - 100);
-                }, 50);
-              }}
-            >
-              Let's get started
-            </button>
-            <img src={home} alt=""></img>
-          </div>
+      {initForm && (
+        <div className="buttons-skip-form">
+          <button
+            onClick={() => {
+              calculs({
+                datasForm,
+                results,
+                setResults,
+              });
+              navigate("/dashboard");
+            }}
+          >
+            Skip and complete later
+          </button>
+          <ProgressBarForm progress={progress} />
         </div>
+      )}
+      <div className="formChat">
+        {!initForm && (
+          <div className="beginin">
+            <div className="LottieContainer">
+              <Lottie animationData={form_begin} loop={true} />
+            </div>
+            <div>
+              {datasForm.length > 0 ? (
+                <>
+                  <h3>Nice to see you again !</h3>
+                  <h1>Keep filling the form today</h1>
+                </>
+              ) : (
+                <>
+                  <h3>Are you ready ?</h3>
+                  <h1>Start filling the form today</h1>
+                </>
+              )}
+            </div>
+            <div className="btns" style={{ marginBottom: "5rem" }}>
+              <img src={back_arrow} alt=""></img>
+              <button
+                className="btn"
+                onClick={() => {
+                  setInitForm(true);
+                  setTimeout(() => {
+                    window.scrollBy(0, document.body.scrollHeight - 100);
+                  }, 50);
+                }}
+              >
+                Let's get started
+              </button>
+              <img src={home} alt=""></img>
+            </div>
+          </div>
+        )}
         {initForm && questions.length > 0 && (
           <div id="questions-form" className="questions" ref={chatContainer}>
             {questions.slice(0, indexQuestions).map((question, index) => (
@@ -235,6 +260,7 @@ const NewForm = ({
                   className="btn"
                   onClick={() => {
                     setFormIsCompleted(true);
+                    window.scrollTo(0, 0);
                     navigate("/dashboard");
                   }}
                 >

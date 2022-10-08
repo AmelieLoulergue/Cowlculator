@@ -1,9 +1,5 @@
 import * as React from "react";
 import "./Dashboard.css";
-
-import charts from "../assets/svg/charts.svg";
-import cowlculator from "../assets/img/cowlculator.png";
-import { useRef } from "react";
 import plant from "../assets/svg/plant.svg";
 import footprint from "../assets/svg/footprint.svg";
 import dollar from "../assets/svg/dollar.svg";
@@ -13,10 +9,8 @@ import { BarChart } from "./charts/VerticalBarChart";
 import { LineChart } from "./charts/LineChart";
 function Dashboard({ login, results, formIsCompleted, datasForm }) {
   let navigate = useNavigate();
-  console.log(datasForm);
   return (
-    <><div id="stringify"></div>
-      {results && <p>{JSON.stringify(results)}</p>}
+    <>
       <div id="dash">
         <div id="summary" className="panel">
           <div className="card-section">

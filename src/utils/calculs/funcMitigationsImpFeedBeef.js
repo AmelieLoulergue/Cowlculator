@@ -49,19 +49,22 @@ function funcMitigationsImpFeedBeef({ datasForm, EFBeef, cattleBeef }) {
   // EF emissions mitigated by the practice improved feeding
 
   let EFBeefImpFeed = 0;
+  let mitigatedEFBeefImpFeed = 0;
   if (
     datasForm.find(
       (data) => data.id === "farm_animals_beef_cattle_feeding_practice"
-    )?.response
+    )?.response &&
+    cattleBeef &&
+    cattleBeef !== 0 &&
+    numbBeefPractices !== 0
   ) {
     EFBeefImpFeed = numbBeefPractices * EFBeef * coeffImpFeedBeef;
+    mitigatedEFBeefImpFeed = EFBeefImpFeed + (1 - numbBeefPractices) * EFBeef;
   } else {
     EFBeefImpFeed = 0;
   }
-  // Mitigation percentage
-  let mitigationPercentageBeefImpFeed = (EFBeefImpFeed * 100) / EFBeef;
   // Total EF emissions after mitigation
-  let mitigatedEFBeefImpFeed = EFBeefImpFeed + (1 - numbBeefPractices) * EFBeef;
+  mitigatedEFBeefImpFeed = EFBeefImpFeed + (1 - numbBeefPractices) * EFBeef;
 
   return mitigatedEFBeefImpFeed;
 }

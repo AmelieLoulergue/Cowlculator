@@ -6,7 +6,7 @@ function RenderResponse({ indexQuestion, answer }) {
     <div id={"response_" + indexQuestion} className={"response-input"}>
       {answer === true ? (
         <>YES</>
-      ) : answer === false ? (
+      ) : answer === false || !answer ? (
         <>NO</>
       ) : typeof answer === "object" && answer && answer.value ? (
         <>
@@ -14,7 +14,7 @@ function RenderResponse({ indexQuestion, answer }) {
           <p>{answer.unit}</p>
         </>
       ) : (
-        <p>{answer}</p>
+        <p>{answer ? answer : "NO"}</p>
       )}
     </div>
   );

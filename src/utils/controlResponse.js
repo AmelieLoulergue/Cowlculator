@@ -7,7 +7,7 @@ const controlResponse = ({
   stateList,
   datasForm,
 }) => {
-  if (answer === null && questionToDisplay.formInput.type !== "checkbox") {
+  if (answer === null) {
     setSeverity("error");
     setMessageAlert("Invalid Response");
     setDisplayAlert(true);

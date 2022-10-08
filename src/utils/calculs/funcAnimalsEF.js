@@ -19,7 +19,6 @@ function funcAnimalsEF({ datasForm, time, state }) {
     })
   );
 
-  console.log(coeffEF);
   // National average coeff for beef yearnling and weanling
   let coeffEFNatAv = [];
   enteric_EF.map((changeRegion) =>
@@ -29,7 +28,6 @@ function funcAnimalsEF({ datasForm, time, state }) {
       }
     })
   );
-  console.log(coeffEFNatAv);
   //Extract animals' coeff based on the region
   let coeffDairyRep12EF =
     findAnimal("farm_animals_dairy_cattle") &&
@@ -85,14 +83,6 @@ function funcAnimalsEF({ datasForm, time, state }) {
           ).coeff
         )
       : 0;
-  console.log(
-    coeffEF.find(
-      (element) => element.name === "farm_animals_beef_cattle_wealing"
-    ).coeff,
-    coeffEFNatAv.find(
-      (element) => element.name === "farm_animals_beef_cattle_wealing"
-    ).coeff
-  );
   let coeffBeefWeanEF = coeffEF.find(
     (element) => element.name === "farm_animals_beef_cattle_wealing"
   ).coeff
@@ -106,7 +96,6 @@ function funcAnimalsEF({ datasForm, time, state }) {
           (element) => element.name === "farm_animals_beef_cattle_wealing"
         ).coeff
       );
-  console.log(coeffBeefWeanEF);
   let coeffBeefYearnEF = coeffEF.find(
     (element) => element.name === "farm_animals_beef_cattle_yearling"
   ).coeff
@@ -246,16 +235,6 @@ function funcAnimalsEF({ datasForm, time, state }) {
   let EFMules = ((farm_animals_mules_numb * coeffMulesEF * 25) / 1000) * time;
   let EFWaterBuff =
     ((farm_animals_water_buffalo_numb * coeffWaterBuffEF * 25) / 1000) * time;
-  console.log({
-    coeffBeefRep12EF,
-    coeffBeefRep24EF,
-    coeffBeefMatureEF,
-    coeffBeefBullsEF,
-    coeffBeefWeanEF,
-    coeffBeefYearnEF,
-    EFBeef,
-  });
-  console.log({ EFSheep, EFGoat, EFSwine, EFHorse, EFMules, EFWaterBuff });
   let EFtotal = round(
     EFDairy +
       EFBeef +

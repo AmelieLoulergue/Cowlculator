@@ -206,12 +206,14 @@ const listOfQuestions = {
         {
           answerParentQuestion: true,
           id: "vehicles_type_tractors_diesel",
+          parentId: "vehicles_type_tractors",
           question: "For the tractor(s), do you use diesel ?",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
             {
               answerParentQuestion: true,
+              parentId: "vehicles_type_tractors_diesel",
               id: "vehicles_type_tractors_diesel_cons",
               question: "Diesel tractor consumption",
               formInput: { type: "number" },
