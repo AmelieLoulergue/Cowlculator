@@ -724,7 +724,7 @@ const listOfQuestions = {
               answerParentQuestion: true,
               id: "farm_crops_grain_size",
               parentId: "farm_crops_grain",
-              question: "What is the size of the farm grain ?",
+              question: "What is the size of the grain crops?",
               formInput: { type: "number" },
               userValue: {
                 unit: ["acre", "sq feet"],
@@ -752,7 +752,7 @@ const listOfQuestions = {
               answerParentQuestion: true,
               id: "farm_crops_forage_size",
               parentId: "farm_crops_forage",
-              question: "What is the size of the farm forage ?",
+              question: "What is the size of the forage crops?",
               formInput: { type: "number" },
               userValue: {
                 unit: ["acre", "sq feet"],
@@ -772,7 +772,7 @@ const listOfQuestions = {
           answerParentQuestion: true,
           id: "farm_crops_fv",
           parentId: "farm_crops",
-          question: "Do you produce fv?",
+          question: "Do you produce fruits and vegetables?",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
@@ -780,7 +780,7 @@ const listOfQuestions = {
               answerParentQuestion: true,
               id: "farm_crops_fv_size",
               parentId: "farm_crops_fv",
-              question: "What is the size of the farm fv ?",
+              question: "What is the size of the fruits & vegetables crops ?",
               formInput: { type: "number" },
               userValue: {
                 unit: ["acre", "sq feet"],
@@ -808,7 +808,7 @@ const listOfQuestions = {
               answerParentQuestion: true,
               id: "farm_crops_flowers_size",
               parentId: "farm_crops_flowers",
-              question: "What is the size of the farm flowers ?",
+              question: "What is the size of the flowers crops?",
               formInput: { type: "number" },
               userValue: {
                 unit: ["acre", "sq feet"],
@@ -836,7 +836,7 @@ const listOfQuestions = {
               answerParentQuestion: true,
               id: "farm_crops_herbs_size",
               parentId: "farm_crops_herbs",
-              question: "What is the size of the farm herbs ?",
+              question: "What is the size of the herbs crops?",
               formInput: { type: "number" },
               userValue: {
                 unit: ["acre", "sq feet"],
@@ -2431,7 +2431,7 @@ const listOfQuestions = {
           answerParentQuestion: true,
           parentId: "farm_animals",
           id: "farm_animals_sheeps",
-          question: "Do you produce sheeps ?",
+          question: "Do you produce sheep?",
           formInput: { type: "checkbox" },
           userValue: false,
           linked_questions: [
