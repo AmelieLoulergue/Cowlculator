@@ -1,11 +1,27 @@
 const listOfQuestions = {
   formQuestions: [
     {
+      id: "farm_name",
+      bloc_name: "farm_information",
+      question: "What is the name of the farm ?",
+      formInput: {
+        type: "text",
+      },
+      userValue: "",
+    },
+
+    {
       id: "farm_state",
-      bloc_name: "project_presentation",
+
       question:
         "Please indicate the state where the farm is. (2 letters code and capital letters)",
       formInput: { type: "select" },
+      userValue: "",
+    },
+    {
+      id: "farm_zip_code",
+      question: "Please enter the zip code",
+      formInput: { type: "text" },
       userValue: "",
     },
     {
@@ -2705,47 +2721,6 @@ const listOfQuestions = {
         },
       ],
     },
-    {
-      id: "farm_name",
-      bloc_name: "farm_information",
-      question: "What is the name of the farm ?",
-      formInput: {
-        type: "text",
-      },
-      userValue: "",
-    },
-    // {
-    //   id: "farm_adress",
-    //   bloc_name: "demographics",
-    //   question: "Please enter the farm address (street, city)",
-    //   formInput: { type: "text" },
-    //   userValue: "",
-    // },
-    {
-      id: "farm_zip_code",
-      question: "Please enter the zip code",
-      formInput: { type: "text" },
-      userValue: "",
-    },
-
-    // {
-    //   id: "farm_website",
-    //   question: "Website",
-    //   formInput: { type: "text" },
-    //   userValue: "",
-    // },
-    // {
-    //   id: "farm_email",
-    //   question: "Please enter your email",
-    //   formInput: { type: "text" },
-    //   userValue: "",
-    // },
-    // {
-    //   id: "farm_phone",
-    //   question: "Please enter your phone",
-    //   formInput: { type: "text" },
-    //   userValue: "",
-    // },
   ],
   auth: {},
 };

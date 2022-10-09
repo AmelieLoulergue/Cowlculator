@@ -6,7 +6,7 @@ import { useState } from "react";
 import cowlculator from "../assets/img/cowlculator.png";
 import { logout } from "../utils/authentication/controlLog";
 import { useNavigate } from "react-router-dom";
-function Navbar({ login, setLogin }) {
+function Navbar({ login, setLogin, farmName }) {
   const toggleSideNav = () => {
     document.getElementById("dash-side").classList.toggle("active");
     document.getElementById("dash-nav-icon-burger").classList.toggle("active");
@@ -24,9 +24,8 @@ function Navbar({ login, setLogin }) {
             <div className="dash-profile">
               <h1>Dashboard</h1>
               <div>
-                <img></img>
                 {login?.email && <h2>{login.email}</h2>}
-                <p>Project name</p>
+                <p>{farmName ? farmName : "Farm name"}</p>
                 <button className="btn" onClick={() => logout({ setLogin })}>
                   Log out
                 </button>

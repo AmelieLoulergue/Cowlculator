@@ -58,15 +58,14 @@ function funcMitigationsLTBreedingSheep({ datasForm, EFSheep }) {
     )?.response &&
     numbSheepPracticesLTBreeding !== 0
   ) {
-    EFSheepLTBreeding =
-      numbSheepPracticesLTBreeding * EFSheep * coeffLTBreedingSheep;
     mitigatedEFSheepLTBreeding =
-      EFSheepLTBreeding + (1 - numbSheepPracticesLTBreeding) * EFSheep;
+      numbSheepPracticesLTBreeding * EFSheep * coeffLTBreedingSheep;
+    EFSheepLTBreeding = EFSheep - mitigatedEFSheepLTBreeding;
   } else {
     EFSheepLTBreeding = 0;
   }
   // Total EF emissions after mitigation
 
-  return mitigatedEFSheepLTBreeding;
+  return EFSheepLTBreeding;
 }
 export default funcMitigationsLTBreedingSheep;

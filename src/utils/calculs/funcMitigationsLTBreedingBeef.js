@@ -36,8 +36,11 @@ function funcMitigationsLTBreedingBeef({ datasForm, EFBeef, cattleBeef }) {
             "farm_animals_beef_cattle_breeding_practice_portion_numb"
         )?.response?.value
           ? Number(
-              datasForm.find((data) => data.id === "c_portion_numb").response
-                .value
+              datasForm.find(
+                (data) =>
+                  data.id ===
+                  "farm_animals_beef_cattle_breeding_practice_portion_numb"
+              ).response.value
             ) / 100
           : 0;
         numbBeefPracticesLTBreeding = portionBeefLTBreeding;
@@ -57,14 +60,13 @@ function funcMitigationsLTBreedingBeef({ datasForm, EFBeef, cattleBeef }) {
     cattleBeef !== 0 &&
     numbBeefPracticesLTBreeding !== 0
   ) {
-    EFBeefLTBreeding =
-      numbBeefPracticesLTBreeding * EFBeef * coeffLTBreedingBeef;
     mitigatedEFBeefLTBreeding =
-      EFBeefLTBreeding + (1 - numbBeefPracticesLTBreeding) * EFBeef;
+      numbBeefPracticesLTBreeding * EFBeef * coeffLTBreedingBeef;
+    EFBeefLTBreeding = EFBeef - mitigatedEFBeefLTBreeding;
   } else {
     EFBeefLTBreeding = 0;
   }
 
-  return mitigatedEFBeefLTBreeding;
+  return EFBeefLTBreeding;
 }
 export default funcMitigationsLTBreedingBeef;

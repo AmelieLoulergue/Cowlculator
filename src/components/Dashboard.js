@@ -7,8 +7,85 @@ import { useNavigate } from "react-router-dom";
 import { DoughnutChart } from "./charts/DoughnoutChart";
 import { BarChart } from "./charts/VerticalBarChart";
 import { LineChart } from "./charts/LineChart";
-function Dashboard({ login, results, formIsCompleted, datasForm }) {
+import { useState } from "react";
+function Dashboard({
+  login,
+  results,
+  formIsCompleted,
+  datasForm,
+  allResultsUser,
+}) {
   let navigate = useNavigate();
+  let test = [];
+  console.log(allResultsUser);
+  const [datasGraph2, setDatasGraph2] = useState(
+    allResultsUser
+      .filter((element) => element !== null)
+      .map((element) => [
+        element.find((el) => el.id === "totalEmissionsGraph").response,
+        element.find((el) => el.id === "totalMitigatedEmissionsGraph").response,
+      ])
+  );
+  const dates = allResultsUser
+    .filter((element) => element !== null)
+    .map((element) =>
+      new Date(element.find((el) => el.id === "end_date").response).getTime()
+    );
+  console.log(dates);
+  const max = Math.max(...dates.filter(element => element ));
+  const index = dates.indexOf(max);
+  console.log(index);
+  const currentResult = allResultsUser[index];
+  console.log(currentResult);
+
+  React.useEffect(() => console.log(datasGraph2), [datasGraph2]);
+  const allTotalEmissionsArray = allResultsUser
+    .filter((element) => element !== null)
+    .map(
+      (element) =>
+        element.find((el) => el.id === "totalEmissionsGraph").response
+    );
+
+  console.log(allTotalEmissionsArray);
+  const allTotalMitigatedEmissions = allResultsUser
+    .filter((element) => element !== null)
+    .map(
+      (element) =>
+        element.find((el) => el.id === "totalMitigationsGraph").response
+    );
+  console.log(allTotalMitigatedEmissions);
+  const labelPeriodChart2 = allResultsUser
+    .filter((element) => element !== null)
+    .map((element, index) => {
+      if (
+        element.find((el) => el.id === "start_date")?.response &&
+        element.find((el) => el.id === "end_date")?.response
+      ) {
+        return [
+          `${element
+            .find((el) => el.id === "start_date")
+            ?.response.replaceAll("-", "/")} - ${element
+            .find((el) => el.id === "end_date")
+            ?.response.replaceAll("-", "/")}`,
+          `${Math.round(
+            allTotalMitigatedEmissions[index] / allTotalEmissionsArray[index]
+          )}% of mitigation`,
+        ];
+      }
+    });
+  console.log(labelPeriodChart2);
+  labelPeriodChart2.map((element, index) => {
+    return [
+      ...test,
+      {
+        [`data${index}`]: [
+          allTotalEmissionsArray[index],
+          allTotalMitigatedEmissions[index],
+        ],
+      },
+    ];
+  });
+  console.log(test);
   return (
     <>
       <div id="dash">
@@ -22,24 +99,49 @@ function Dashboard({ login, results, formIsCompleted, datasForm }) {
                     CO<sub>2</sub> saved
                   </h1>
                 </div>
-                {formIsCompleted && (
+                {currentResult && (
                   <h2>
-                    {Math.round(results.CO2mitigated * 100) / 100} T of
-                    CO2eq/year
+                    {isNaN(
+                      Math.round(
+                        currentResult.find(
+                          (element) => element.id === "CO2mitigated"
+                        )?.response * 100
+                      ) / 100
+                    )
+                      ? 0
+                      : Math.round(
+                          currentResult.find(
+                            (element) => element.id === "CO2mitigated"
+                          ).response * 100
+                        ) / 100}{" "}
+                    T of CO2eq/year
                   </h2>
                 )}
               </div>
               <div className="card-chart">
-                {formIsCompleted ? (
+                {currentResult ? (
                   <DoughnutChart
                     id={"chart1"}
                     dataResults={[
-                      results.utilitiesGraph,
-                      results.fuelGraph,
-                      results.otherGraph,
-                      results.entericFermentationCO2Graph,
-                      results.manureCO2graph,
-                      results.cropsGraph,
+                      currentResult.find(
+                        (element) => element.id === "utilitiesGraph"
+                      )?.response,
+                      currentResult.find(
+                        (element) => element.id === "fuelGraph"
+                      )?.response,
+                      currentResult.find(
+                        (element) => element.id === "otherGraph"
+                      )?.response,
+                      currentResult.find(
+                        (element) =>
+                          element.id === "entericFermentationCO2Graph"
+                      )?.response,
+                      currentResult.find(
+                        (element) => element.id === "manureCO2graph"
+                      )?.response,
+                      currentResult.find(
+                        (element) => element.id === "cropsGraph"
+                      )?.response,
                     ]}
                   />
                 ) : (
@@ -59,25 +161,25 @@ function Dashboard({ login, results, formIsCompleted, datasForm }) {
                     CO<sub>2</sub> impact
                   </h1>
                 </div>
-                {formIsCompleted && (
+                {currentResult && (
                   <h2>
-                    {Math.round(results.CO2emmited * 100) / 100} T of CO2eq/year
+                    {Math.round(
+                      currentResult.find(
+                        (element) => element.id === "CO2emmited"
+                      )?.response * 100
+                    ) / 100}{" "}
+                    T of CO2eq/year
                   </h2>
                 )}
               </div>{" "}
               <div className="card-chart">
-                {formIsCompleted ? (
+                {currentResult ? (
                   <BarChart
                     id={"chart2"}
+                    labels={labelPeriodChart2}
                     dataResults={{
-                      data1: [
-                        results.totalEmissionsGraph,
-                        results.totalEmissionsGraph / 2,
-                      ],
-                      data2: [
-                        results.totalMitigatedEmissionsGraph,
-                        results.totalMitigatedEmissionsGraph * 1.5,
-                      ],
+                      data1: allTotalEmissionsArray,
+                      data2: allTotalMitigatedEmissions,
                     }}
                   />
                 ) : (
@@ -95,14 +197,19 @@ function Dashboard({ login, results, formIsCompleted, datasForm }) {
                   <img src={dollar} alt="dollar sign icon"></img>
                   <h1>New income</h1>
                 </div>
-                {formIsCompleted && (
+                {currentResult && (
                   <h2>
-                    {Math.round(results.totalCarbonCredits * 100) / 100} $/year
+                    {Math.round(
+                      currentResult.find(
+                        (element) => element.id === "totalCarbonCredits"
+                      )?.response * 100
+                    ) / 100}{" "}
+                    $/year
                   </h2>
                 )}
               </div>
               <div className="card-chart">
-                {formIsCompleted ? (
+                {currentResult ? (
                   <LineChart
                     id={"chart3"}
                     dataResults={{

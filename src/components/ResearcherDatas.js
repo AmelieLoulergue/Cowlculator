@@ -16,7 +16,13 @@ function ResearcherDatas({ login }) {
               </NativeSelect>
             </FormControl>
           </Box>
-          <button className="btn">DOWNLOAD</button>
+          <a
+            href="https://clous-storage-carbonb-cos-standard-26b.s3.eu-de.cloud-object-storage.appdomain.cloud/CowlculatorDB.csv"
+            className="btn"
+            style={{ minHeight: "30px !important" }}
+          >
+            DOWNLOAD
+          </a>
         </div>
       )}
       {login?.userType === "farmer" && <></>}

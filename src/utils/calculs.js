@@ -168,15 +168,15 @@ function calculs({ datasForm, results, setResults }) {
   let entericFermentationCO2 = 0;
   let manureCO2 = 0;
   let numbTotalBeefDairy = 0;
-  let mitigationEFImpFeedDairy = [0, 0];
-  let mitigationEFImpFeedBeef = [0, 0];
-  let mitigationEFImpFeedSheep = [0, 0];
-  let mitigationEFAdditiveDairy = [0, 0];
-  let mitigationEFAdditiveBeef = [0, 0];
-  let mitigationEFAdditiveSheep = [0, 0];
-  let mitigationEFLTBreedingDairy = [0, 0];
-  let mitigationEFLTBreedingBeef = [0, 0];
-  let mitigationEFLTBreedingSheep = [0, 0];
+  let mitigationEFImpFeedDairy = 0;
+  let mitigationEFImpFeedBeef = 0;
+  let mitigationEFImpFeedSheep = 0;
+  let mitigationEFAdditiveDairy = 0;
+  let mitigationEFAdditiveBeef = 0;
+  let mitigationEFAdditiveSheep = 0;
+  let mitigationEFLTBreedingDairy = 0;
+  let mitigationEFLTBreedingBeef = 0;
+  let mitigationEFLTBreedingSheep = 0;
   let carbonCreditsAnimals = 0;
   if (datasForm.find((element) => element.id === "farm_animals")?.response) {
     entericFermentationCO2 = allFunctions.funcAnimalsEF({
@@ -336,23 +336,32 @@ function calculs({ datasForm, results, setResults }) {
     entericFermentationCO2: entericFermentationCO2,
     manureCO2: manureCO2,
     carbonCreditsAnimals: carbonCreditsAnimals,
-    animals: {
-      mitigationEFImpFeedDairy,
-      mitigationEFImpFeedBeef,
-      mitigationEFImpFeedSheep,
-      mitigationEFAdditiveBeef,
-      mitigationEFAdditiveDairy,
-      mitigationEFAdditiveSheep,
-      mitigationEFLTBreedingBeef,
-      mitigationEFLTBreedingDairy,
-      mitigationEFLTBreedingSheep,
-    },
+
+    mitigationEFImpFeedDairy: mitigationEFImpFeedDairy,
+    mitigationEFImpFeedBeef: mitigationEFImpFeedBeef,
+    mitigationEFImpFeedSheep: mitigationEFImpFeedSheep,
+    mitigationEFAdditiveBeef: mitigationEFAdditiveBeef,
+    mitigationEFAdditiveDairy: mitigationEFAdditiveDairy,
+    mitigationEFAdditiveSheep: mitigationEFAdditiveSheep,
+    mitigationEFLTBreedingBeef: mitigationEFLTBreedingBeef,
+    mitigationEFLTBreedingDairy: mitigationEFLTBreedingDairy,
+    mitigationEFLTBreedingSheep: mitigationEFLTBreedingSheep,
+
     carbonCreditsCrops: carbonCreditsCrops,
-    cropsMitigations: cropsMitigations,
+    mitigationCropAgro: cropsMitigations?.mitigationCropAgro || 0,
+    mitigationCropNut: cropsMitigations?.mitigationCropNut || 0,
+    mitigationCropTillage: cropsMitigations?.mitigationCropTillage || 0,
+    mitigationCropWater: cropsMitigations?.mitigationCropWater || 0,
+    mitigationCropLUC: cropsMitigations?.mitigationCropLUC || 0,
+    mitigationCropAgrofo: cropsMitigations?.mitigationCropAgrofo || 0,
+    mitigationGrassGraz: cropsMitigations?.mitigationGrassGraz || 0,
+    mitigationDegResto: cropsMitigations?.mitigationDegResto || 0,
+    mitigationManureApp: cropsMitigations?.mitigationManureApp || 0,
+    mitigationCropsTotal: cropsMitigations?.mitigationCropsTotal || 0,
     totalCarbonCredits: carbonCreditsCrops + carbonCreditsAnimals,
     fertilizer: fertilizer,
     CO2emmited:
-      entericFermentationCO2 && cropsMitigations
+      entericFermentationCO2 && cropsMitigations?.mitigationCropsTotal
         ? (elecCO2 +
             natGasCO2 +
             gasCO2 +
@@ -457,18 +466,19 @@ function calculs({ datasForm, results, setResults }) {
       elecCO2 / time + natGasCO2 / time + gasCO2 / time + water / time,
     fuelGraph: fuelCO2 / time,
     otherGraph: other / time,
-    entericFermentationCO2Graph:
-      (entericFermentationCO2.EFtotal -
-        (mitigationEFImpFeedDairy +
-          mitigationEFImpFeedBeef +
-          mitigationEFImpFeedSheep +
-          mitigationEFAdditiveBeef +
-          mitigationEFAdditiveDairy +
-          mitigationEFAdditiveSheep +
-          mitigationEFLTBreedingBeef +
-          mitigationEFLTBreedingDairy +
-          mitigationEFLTBreedingSheep)) /
-      time,
+    entericFermentationCO2Graph: entericFermentationCO2?.EFtotal
+      ? (entericFermentationCO2?.EFtotal -
+          (mitigationEFImpFeedDairy +
+            mitigationEFImpFeedBeef +
+            mitigationEFImpFeedSheep +
+            mitigationEFAdditiveBeef +
+            mitigationEFAdditiveDairy +
+            mitigationEFAdditiveSheep +
+            mitigationEFLTBreedingBeef +
+            mitigationEFLTBreedingDairy +
+            mitigationEFLTBreedingSheep)) /
+        time
+      : 0,
     manureCO2Graph: manureCO2 / time,
     cropsGraph: cropsMitigations
       ? (fertilizer - cropsMitigations?.mitigationCropsTotal) / time

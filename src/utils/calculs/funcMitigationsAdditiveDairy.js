@@ -13,34 +13,38 @@ function funcMitigationsAdditiveDairy({ datasForm, EFDairy, cattleDairy }) {
   } else {
     if (
       datasForm.find(
-        (data) => data.id === "farm_animals_dairy_specific_agent_practice"
+        (data) =>
+          data.id === "farm_animals_dairy_cattle_specific_agent_practice"
       )?.response &&
       datasForm.find(
         (data) =>
-          data.id === "farm_animals_dairy_specific_agent_practice_portion"
+          data.id ===
+          "farm_animals_dairy_cattle_specific_agent_practice_portion"
       )?.response === "All of them"
     ) {
       numbDairyPracticesAdditive = 1;
     } else {
       if (
         datasForm.find(
-          (data) => data.id === "farm_animals_dairy_specific_agent_practice"
+          (data) =>
+            data.id === "farm_animals_dairy_cattle_specific_agent_practice"
         )?.response &&
         datasForm.find(
           (data) =>
-            data.id === "farm_animals_dairy_specific_agent_practice_portion"
+            data.id ===
+            "farm_animals_dairy_cattle_specific_agent_practice_portion"
         )?.response === "A portion of them"
       ) {
         let portionDairyAdditive = datasForm.find(
           (data) =>
             data.id ===
-            "farm_animals_dairy_specific_agent_practice_portion_numb"
+            "farm_animals_dairy_cattle_specific_agent_practice_portion_numb"
         )?.response?.value
           ? Number(
               datasForm.find(
                 (data) =>
                   data.id ===
-                  "farm_animals_dairy_specific_agent_practice_portion_numb"
+                  "farm_animals_dairy_cattle_specific_agent_practice_portion_numb"
               ).response.value
             ) / 100
           : 0;
@@ -52,23 +56,30 @@ function funcMitigationsAdditiveDairy({ datasForm, EFDairy, cattleDairy }) {
   //EF emissions from cattle portion concerned by additives
   let EFDairyAdditive = 0;
   let mitigatedEFDairyAdditive = 0;
+
   if (
     datasForm.find(
-      (data) => data.id === "farm_animals_dairy_specific_agent_practice"
+      (data) => data.id === "farm_animals_dairy_cattle_specific_agent_practice"
     )?.response &&
     cattleDairy &&
     cattleDairy !== 0 &&
     numbDairyPracticesAdditive !== 0
   ) {
-    EFDairyAdditive = numbDairyPracticesAdditive * EFDairy * coeffAdditiveDairy;
     mitigatedEFDairyAdditive =
-      EFDairyAdditive + (1 - numbDairyPracticesAdditive) * EFDairy;
+      numbDairyPracticesAdditive * EFDairy * coeffAdditiveDairy;
+    EFDairyAdditive = EFDairy - mitigatedEFDairyAdditive;
   } else {
     EFDairyAdditive = 0;
   }
   // Total EF emissions after mitigation
-
-  console.log(EFDairyAdditive, mitigatedEFDairyAdditive);
-  return mitigatedEFDairyAdditive;
+  console.log({
+    cattleDairy,
+    numbDairyPracticesAdditive,
+    EFDairy,
+    coeffAdditiveDairy,
+    EFDairyAdditive,
+    mitigatedEFDairyAdditive,
+  });
+  return EFDairyAdditive;
 }
 export default funcMitigationsAdditiveDairy;

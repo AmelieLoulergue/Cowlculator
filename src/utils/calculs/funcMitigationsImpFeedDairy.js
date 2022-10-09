@@ -45,7 +45,7 @@ function funcMitigationsImpFeedDairy({ datasForm, EFDairy, cattleDairy }) {
       numbDairyPractices = portionDairy;
     }
   }
-
+  console.log(cattleDairy, numbDairyPractices);
   //EF emissions from cattle portion concerned by improved feeding
   let EFDairyImpFeed = 0;
   let mitigatedEFDairyImpFeed = 0;
@@ -57,15 +57,21 @@ function funcMitigationsImpFeedDairy({ datasForm, EFDairy, cattleDairy }) {
     cattleDairy !== 0 &&
     numbDairyPractices !== 0
   ) {
-    EFDairyImpFeed = numbDairyPractices * EFDairy * coeffImpFeedDairy;
-    mitigatedEFDairyImpFeed =
-      EFDairyImpFeed + (1 - numbDairyPractices) * EFDairy;
+    mitigatedEFDairyImpFeed = numbDairyPractices * EFDairy * coeffImpFeedDairy;
+    EFDairyImpFeed = EFDairy - mitigatedEFDairyImpFeed;
   } else {
     EFDairyImpFeed = 0;
   }
   // Total EF emissions after mitigation
 
-  console.log(EFDairyImpFeed, mitigatedEFDairyImpFeed);
-  return mitigatedEFDairyImpFeed;
+  console.log({
+    cattleDairy,
+    numbDairyPractices,
+    EFDairy,
+    coeffImpFeedDairy,
+    EFDairyImpFeed,
+    mitigatedEFDairyImpFeed,
+  });
+  return EFDairyImpFeed;
 }
 export default funcMitigationsImpFeedDairy;

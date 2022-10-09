@@ -56,14 +56,13 @@ function funcMitigationsImpFeedSheep({ datasForm, EFSheep }) {
       ?.response &&
     numbSheepPractices !== 0
   ) {
-    EFSheepImpFeed = numbSheepPractices * EFSheep * coeffImpFeedSheep;
+    mitigatedEFSheepImpFeed = numbSheepPractices * EFSheep * coeffImpFeedSheep;
     // Total EF emissions after mitigation
-    mitigatedEFSheepImpFeed =
-      EFSheepImpFeed + (1 - numbSheepPractices) * EFSheep;
+    EFSheepImpFeed = EFSheep - mitigatedEFSheepImpFeed;
   } else {
     EFSheepImpFeed = 0;
   }
 
-  return mitigatedEFSheepImpFeed;
+  return EFSheepImpFeed;
 }
 export default funcMitigationsImpFeedSheep;

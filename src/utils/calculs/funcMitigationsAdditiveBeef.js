@@ -62,13 +62,13 @@ function funcMitigationsAdditiveBeef({ datasForm, EFBeef, cattleBeef }) {
     cattleBeef !== 0 &&
     numbBeefPracticesAdditive !== 0
   ) {
-    EFBeefAdditive = numbBeefPracticesAdditive * EFBeef * coeffAdditiveBeef;
     mitigatedEFBeefAdditive =
-      EFBeefAdditive + (1 - numbBeefPracticesAdditive) * EFBeef;
+      numbBeefPracticesAdditive * EFBeef * coeffAdditiveBeef;
+    EFBeefAdditive = EFBeef - mitigatedEFBeefAdditive;
   } else {
     EFBeefAdditive = 0;
   }
 
-  return mitigatedEFBeefAdditive;
+  return EFBeefAdditive;
 }
 export default funcMitigationsAdditiveBeef;

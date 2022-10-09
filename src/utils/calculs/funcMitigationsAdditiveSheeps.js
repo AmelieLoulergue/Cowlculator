@@ -62,14 +62,14 @@ function funcMitigationsAdditiveSheep({ datasForm, EFSheep }) {
     )?.response &&
     numbSheepPracticesAdditive !== 0
   ) {
-    EFSheepAdditive = numbSheepPracticesAdditive * EFSheep * coeffAdditiveSheep;
     mitigatedEFSheepAdditive =
-      EFSheepAdditive + (1 - numbSheepPracticesAdditive) * EFSheep;
+      numbSheepPracticesAdditive * EFSheep * coeffAdditiveSheep;
+    EFSheepAdditive = EFSheep - mitigatedEFSheepAdditive;
   } else {
     EFSheepAdditive = 0;
   }
   // Total EF emissions after mitigation
 
-  return mitigatedEFSheepAdditive;
+  return EFSheepAdditive;
 }
 export default funcMitigationsAdditiveSheep;

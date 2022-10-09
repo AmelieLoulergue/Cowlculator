@@ -58,14 +58,12 @@ function funcMitigationsImpFeedBeef({ datasForm, EFBeef, cattleBeef }) {
     cattleBeef !== 0 &&
     numbBeefPractices !== 0
   ) {
-    EFBeefImpFeed = numbBeefPractices * EFBeef * coeffImpFeedBeef;
-    mitigatedEFBeefImpFeed = EFBeefImpFeed + (1 - numbBeefPractices) * EFBeef;
+    mitigatedEFBeefImpFeed = numbBeefPractices * EFBeef * coeffImpFeedBeef;
+    EFBeefImpFeed = EFBeef - mitigatedEFBeefImpFeed;
   } else {
     EFBeefImpFeed = 0;
   }
-  // Total EF emissions after mitigation
-  mitigatedEFBeefImpFeed = EFBeefImpFeed + (1 - numbBeefPractices) * EFBeef;
 
-  return mitigatedEFBeefImpFeed;
+  return EFBeefImpFeed;
 }
 export default funcMitigationsImpFeedBeef;

@@ -158,6 +158,7 @@ function funcAnimalsEF({ datasForm, time, state }) {
       farm_animals_dairy_cattle_matur_numb * coeffDairyMatureEF * 25) /
       1000) *
     time;
+    
 
   let farm_animals_beef_cattle_rep12_numb = findAnimal(
     "farm_animals_beef_cattle_rep12_numb"

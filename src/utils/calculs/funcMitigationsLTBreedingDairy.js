@@ -68,15 +68,13 @@ function funcMitigationsLTBreedingDairy({ datasForm, EFDairy, cattleDairy }) {
     cattleDairy !== 0 &&
     numbDairyPracticesLTBreeding !== 0
   ) {
-    EFDairyLTBreeding =
-      numbDairyPracticesLTBreeding * EFDairy * coeffLTBreedingDairy;
     mitigatedEFDairyLTBreeding =
-      EFDairyLTBreeding + (1 - numbDairyPracticesLTBreeding) * EFDairy;
+      numbDairyPracticesLTBreeding * EFDairy * coeffLTBreedingDairy;
+    EFDairyLTBreeding = EFDairy - mitigatedEFDairyLTBreeding;
   } else {
     EFDairyLTBreeding = 0;
   }
-  // Total EF emissions after mitigation
-  console.log(mitigatedEFDairyLTBreeding);
-  return mitigatedEFDairyLTBreeding;
+  console.log(EFDairyLTBreeding);
+  return EFDairyLTBreeding;
 }
 export default funcMitigationsLTBreedingDairy;
