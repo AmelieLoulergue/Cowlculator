@@ -68,7 +68,7 @@ function funcMitigationsAdditiveBeef({ datasForm, EFBeef, cattleBeef }) {
   } else {
     EFBeefAdditive = 0;
   }
-
-  return EFBeefAdditive;
+  console.log(EFBeefAdditive);
+  return mitigatedEFBeefAdditive;
 }
 export default funcMitigationsAdditiveBeef;

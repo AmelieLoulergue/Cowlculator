@@ -63,7 +63,7 @@ function funcMitigationsImpFeedBeef({ datasForm, EFBeef, cattleBeef }) {
   } else {
     EFBeefImpFeed = 0;
   }
-
-  return EFBeefImpFeed;
+  console.log(EFBeefImpFeed);
+  return mitigatedEFBeefImpFeed;
 }
 export default funcMitigationsImpFeedBeef;

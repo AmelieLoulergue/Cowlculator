@@ -63,6 +63,6 @@ function funcMitigationsImpFeedSheep({ datasForm, EFSheep }) {
     EFSheepImpFeed = 0;
   }
 
-  return EFSheepImpFeed;
+  return mitigatedEFSheepImpFeed;
 }
 export default funcMitigationsImpFeedSheep;

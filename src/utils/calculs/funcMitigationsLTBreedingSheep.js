@@ -66,6 +66,6 @@ function funcMitigationsLTBreedingSheep({ datasForm, EFSheep }) {
   }
   // Total EF emissions after mitigation
 
-  return EFSheepLTBreeding;
+  return mitigatedEFSheepLTBreeding;
 }
 export default funcMitigationsLTBreedingSheep;

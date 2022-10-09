@@ -66,7 +66,8 @@ function funcMitigationsLTBreedingBeef({ datasForm, EFBeef, cattleBeef }) {
   } else {
     EFBeefLTBreeding = 0;
   }
+  console.log(EFBeefLTBreeding);
 
-  return EFBeefLTBreeding;
+  return mitigatedEFBeefLTBreeding;
 }
 export default funcMitigationsLTBreedingBeef;

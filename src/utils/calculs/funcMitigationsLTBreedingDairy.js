@@ -75,6 +75,6 @@ function funcMitigationsLTBreedingDairy({ datasForm, EFDairy, cattleDairy }) {
     EFDairyLTBreeding = 0;
   }
   console.log(EFDairyLTBreeding);
-  return EFDairyLTBreeding;
+  return mitigatedEFDairyLTBreeding;
 }
 export default funcMitigationsLTBreedingDairy;

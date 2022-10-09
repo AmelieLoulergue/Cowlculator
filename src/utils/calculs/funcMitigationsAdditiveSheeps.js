@@ -70,6 +70,6 @@ function funcMitigationsAdditiveSheep({ datasForm, EFSheep }) {
   }
   // Total EF emissions after mitigation
 
-  return EFSheepAdditive;
+  return mitigatedEFSheepAdditive;
 }
 export default funcMitigationsAdditiveSheep;

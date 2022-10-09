@@ -72,6 +72,6 @@ function funcMitigationsImpFeedDairy({ datasForm, EFDairy, cattleDairy }) {
     EFDairyImpFeed,
     mitigatedEFDairyImpFeed,
   });
-  return EFDairyImpFeed;
+  return mitigatedEFDairyImpFeed;
 }
 export default funcMitigationsImpFeedDairy;

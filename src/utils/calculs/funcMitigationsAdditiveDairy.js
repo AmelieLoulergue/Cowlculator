@@ -80,6 +80,6 @@ function funcMitigationsAdditiveDairy({ datasForm, EFDairy, cattleDairy }) {
     EFDairyAdditive,
     mitigatedEFDairyAdditive,
   });
-  return EFDairyAdditive;
+  return mitigatedEFDairyAdditive;
 }
 export default funcMitigationsAdditiveDairy;
