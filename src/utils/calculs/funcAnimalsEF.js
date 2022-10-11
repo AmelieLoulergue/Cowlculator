@@ -2,7 +2,12 @@ import round from "./round";
 import enteric_EF from "../../coeff/enteric_EF.json";
 import regions from "../../coeff/regions.json";
 // Function animals : emissions from enteric fermentation
-function funcAnimalsEF({ datasForm, time, state }) {
+function funcAnimalsEF({
+  datasForm,
+  time,
+  state,
+  entericFermentationCO2total,
+}) {
   const findAnimal = (animal) => {
     return datasForm.find((data) => data.id === animal)?.response;
   };
@@ -158,7 +163,6 @@ function funcAnimalsEF({ datasForm, time, state }) {
       farm_animals_dairy_cattle_matur_numb * coeffDairyMatureEF * 25) /
       1000) *
     time;
-    
 
   let farm_animals_beef_cattle_rep12_numb = findAnimal(
     "farm_animals_beef_cattle_rep12_numb"
@@ -247,6 +251,7 @@ function funcAnimalsEF({ datasForm, time, state }) {
       EFWaterBuff,
     1
   );
+  entericFermentationCO2total = EFtotal;
   return {
     EFDairy: EFDairy,
     EFBeef: EFBeef,
