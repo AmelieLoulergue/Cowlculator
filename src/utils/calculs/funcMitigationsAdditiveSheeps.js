@@ -55,21 +55,21 @@ function funcMitigationsAdditiveSheep({ datasForm, EFSheep }) {
 
   //EF emissions from cattle portion concerned by additives
   let EFSheepAdditive = 0;
+  let mitigatedEFSheepAdditive = 0;
   if (
     datasForm.find(
       (data) => data.id === "farm_animals_sheeps_specific_agent_practice"
-    )?.response
+    )?.response &&
+    numbSheepPracticesAdditive !== 0
   ) {
-    EFSheepAdditive = numbSheepPracticesAdditive * EFSheep * coeffAdditiveSheep;
+    mitigatedEFSheepAdditive =
+      numbSheepPracticesAdditive * EFSheep * coeffAdditiveSheep;
+    EFSheepAdditive = EFSheep - mitigatedEFSheepAdditive;
   } else {
     EFSheepAdditive = 0;
   }
-  // Mitigation percentage
-  let mitigationPercentageSheepAdditive = (EFSheepAdditive * 100) / EFSheep;
   // Total EF emissions after mitigation
-  let mitigatedEFSheepAdditive =
-    EFSheepAdditive + (1 - numbSheepPracticesAdditive) * EFSheep;
 
-  return [mitigatedEFSheepAdditive, mitigationPercentageSheepAdditive];
+  return mitigatedEFSheepAdditive;
 }
 export default funcMitigationsAdditiveSheep;

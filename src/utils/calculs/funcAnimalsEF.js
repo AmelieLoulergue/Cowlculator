@@ -23,12 +23,11 @@ function funcAnimalsEF({ datasForm, time, state }) {
   let coeffEFNatAv = [];
   enteric_EF.map((changeRegion) =>
     Object.entries(changeRegion).map((key, value) => {
-      if (key[0] !== "name" && key[0] === "National Average") {
+      if (key[0] !== "name" && key[0] === "National_Average") {
         coeffEFNatAv.push({ name: changeRegion.name, coeff: key[1] });
       }
     })
   );
-
   //Extract animals' coeff based on the region
   let coeffDairyRep12EF =
     findAnimal("farm_animals_dairy_cattle") &&
@@ -39,7 +38,6 @@ function funcAnimalsEF({ datasForm, time, state }) {
           ).coeff
         )
       : 0;
-  console.log(coeffDairyRep12EF);
   let coeffDairyRep24EF =
     findAnimal("farm_animals_dairy_cattle") &&
     findAnimal("farm_animals_dairy_cattle_rep24")
@@ -85,38 +83,58 @@ function funcAnimalsEF({ datasForm, time, state }) {
           ).coeff
         )
       : 0;
-  let coeffBeefWeanEF = findAnimal("farm_animals_beef_cattle_wealing")
-    ? coeffEF.find(
-        (element) => element.name === "farm_animals_beef_cattle_wealing"
-      ).coeff
-      ? Number(
-          coeffEF.find(
-            (element) => element.name === "farm_animals_beef_cattle_wealing"
-          ).coeff
-        )
-      : Number(coeffEFNatAv[8].coeff)
-    : 0;
-  let coeffBeefYearnEF = findAnimal("farm_animals_beef_cattle_yearling")
-    ? coeffEF.find(
-        (element) => element.name === "farm_animals_beef_cattle_yearling"
-      ).coeff
-      ? Number(
-          coeffEF.find(
-            (element) => element.name === "farm_animals_beef_cattle_yearling"
-          ).coeff
-        )
-      : Number(coeffEFNatAv[9].coeff)
-    : 0;
-  let coeffBeefBullsEF = findAnimal("farm_animals_beef_cattle_bulls")
-    ? Number(coeffEF[10].coeff)
-    : 0;
+  let coeffBeefWeanEF = coeffEF.find(
+    (element) => element.name === "farm_animals_beef_cattle_wealing"
+  ).coeff
+    ? Number(
+        coeffEF.find(
+          (element) => element.name === "farm_animals_beef_cattle_wealing"
+        ).coeff
+      )
+    : Number(
+        coeffEFNatAv.find(
+          (element) => element.name === "farm_animals_beef_cattle_wealing"
+        ).coeff
+      );
+  let coeffBeefYearnEF = coeffEF.find(
+    (element) => element.name === "farm_animals_beef_cattle_yearling"
+  ).coeff
+    ? Number(
+        coeffEF.find(
+          (element) => element.name === "farm_animals_beef_cattle_yearling"
+        ).coeff
+      )
+    : Number(
+        coeffEFNatAv.find(
+          (element) => element.name === "farm_animals_beef_cattle_yearling"
+        ).coeff
+      );
 
-  let coeffSheepEF = Number(coeffEFNatAv[9].coeff);
-  let coeffGoatEF = Number(coeffEFNatAv[10].coeff);
-  let coeffSwineEF = Number(coeffEFNatAv[11].coeff);
-  let coeffHorseEF = Number(coeffEFNatAv[12].coeff);
-  let coeffMulesEF = Number(coeffEFNatAv[13].coeff);
-  let coeffWaterBuffEF = Number(coeffEFNatAv[14].coeff);
+  let coeffBeefBullsEF = Number(
+    coeffEFNatAv.find(
+      (element) => element.name === "farm_animals_beef_cattle_bulls"
+    ).coeff
+  );
+  let coeffSheepEF = Number(
+    coeffEFNatAv.find((element) => element.name === "farm_animals_sheeps").coeff
+  );
+  let coeffGoatEF = Number(
+    coeffEFNatAv.find((element) => element.name === "farm_animals_goats").coeff
+  );
+  let coeffSwineEF = Number(
+    coeffEFNatAv.find((element) => element.name === "farm_animals_swine").coeff
+  );
+  let coeffHorseEF = Number(
+    coeffEFNatAv.find((element) => element.name === "farm_animals_horses").coeff
+  );
+  let coeffMulesEF = Number(
+    coeffEFNatAv.find((element) => element.name === "farm_animals_mules").coeff
+  );
+  let coeffWaterBuffEF = Number(
+    coeffEFNatAv.find(
+      (element) => element.name === "farm_animals_water_buffalo"
+    ).coeff
+  );
 
   // //Calcul emissions from enteric fermentation for each animal
   let farm_animals_dairy_cattle_rep12_numb = findAnimal(
@@ -124,7 +142,6 @@ function funcAnimalsEF({ datasForm, time, state }) {
   )?.value
     ? Number(findAnimal("farm_animals_dairy_cattle_rep12_numb").value)
     : 0;
-  console.log(farm_animals_dairy_cattle_rep12_numb);
   let farm_animals_dairy_cattle_rep24_numb = findAnimal(
     "farm_animals_dairy_cattle_rep24_numb"
   )?.value
@@ -141,12 +158,6 @@ function funcAnimalsEF({ datasForm, time, state }) {
       farm_animals_dairy_cattle_matur_numb * coeffDairyMatureEF * 25) /
       1000) *
     time;
-  console.log(
-    EFDairy,
-    farm_animals_dairy_cattle_rep12_numb,
-    coeffDairyRep12EF,
-    time
-  );
 
   let farm_animals_beef_cattle_rep12_numb = findAnimal(
     "farm_animals_beef_cattle_rep12_numb"
@@ -225,17 +236,6 @@ function funcAnimalsEF({ datasForm, time, state }) {
   let EFWaterBuff =
     ((farm_animals_water_buffalo_numb * coeffWaterBuffEF * 25) / 1000) * time;
 
-  let EFtotal = round(
-    EFDairy +
-      EFBeef +
-      EFSheep +
-      EFGoat +
-      EFSwine +
-      EFHorse +
-      EFMules +
-      EFWaterBuff,
-    1
-  );
   return {
     EFDairy: EFDairy,
     EFBeef: EFBeef,
@@ -245,7 +245,6 @@ function funcAnimalsEF({ datasForm, time, state }) {
     EFHorse: EFHorse,
     EFMules: EFMules,
     EFWaterBuff: EFWaterBuff,
-    EFtotal: EFtotal,
   };
 }
 export default funcAnimalsEF;

@@ -30,7 +30,16 @@ body {
 .App-link {
   color: #61dafb;
 }
-
+a,
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

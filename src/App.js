@@ -18,6 +18,8 @@ import { isLogin } from "./utils/authentication/controlLog";
 import ResearcherDatas from "./components/ResearcherDatas";
 import References from "./components/References";
 import listOfQuestions from "./utils/listOfQuestions";
+import getUserDatas from "./utils/userDatas/getUserDatas";
+import saveUserDatas from "./utils/userDatas/saveUserDatas";
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -26,34 +28,43 @@ const darkTheme = createTheme({
 function App() {
   const [formIsCompleted, setFormIsCompleted] = useState(false);
   const [viewHeight, setViewHeight] = useState(window.innerHeight);
-  const [scroll, setScroll] = useState(window.scrollY);
   const [datasForm, setDatasForm] = useState([]);
   const [messageAlert, setMessageAlert] = useState("");
   const [severity, setSeverity] = useState("");
   const [initForm, setInitForm] = useState(false);
   const [displayAlert, setDisplayAlert] = useState(false);
   const [questionToDisplay, setQuestionToDisplay] = useState(null);
-  // console.log(questions);
   const [indexQuestions, setIndexQuestions] = useState(
     localStorage.getItem("indexQuestions")
       ? Number(localStorage.getItem("indexQuestions"))
       : 0
   );
+  const [counterQuestion, setCounterQuestion] = useState(0);
   useEffect(() => setViewHeight(window.innerHeight), [window]);
 
   const [results, setResults] = useState({});
   const [questions, setQuestions] = useState([]);
+  const [allQuestions, setAllQuestions] = useState([]);
   const [login, setLogin] = useState(false);
   const [userProfile, setUserProfile] = useState({
     email: "",
     password: "",
   });
+  const [farmName, setFarmName] = useState("");
+  const [allResultsUser, setAllResultsUser] = useState([]);
+
+  useEffect(() => {
+    console.log({ allResultsUser });
+  }, [allResultsUser]);
   useEffect(() => {
     if (localStorage.getItem("datasForm")) {
       setDatasForm(JSON.parse(localStorage.getItem("datasForm")));
     }
     if (localStorage.getItem("results")) {
       setResults(JSON.parse(localStorage.getItem("results")));
+    }
+    if (localStorage.getItem("allQuestions")) {
+      setAllQuestions(JSON.parse(localStorage.getItem("allQuestions")));
     }
     if (localStorage.getItem("questions")) {
       setQuestions(JSON.parse(localStorage.getItem("questions")));
@@ -62,6 +73,9 @@ function App() {
     }
     if (localStorage.getItem("login")) {
       setLogin(JSON.parse(localStorage.getItem("login")));
+    }
+    if (localStorage.getItem("counterQuestion")) {
+      setCounterQuestion(JSON.parse(localStorage.getItem("counterQuestion")));
     }
     if (localStorage.getItem("questionToDisplay")) {
       setQuestionToDisplay(
@@ -79,7 +93,74 @@ function App() {
           : false
       );
     }
+    if (localStorage.getItem("initForm")) {
+      setInitForm(
+        JSON.parse(localStorage.getItem("initForm")) === "true" ? true : false
+      );
+    }
   }, []);
+  // useEffect(
+  //   () => console.log(allQuestions, questions),
+  //   [allQuestions, questions]
+  // );
+  useEffect(() => {
+    if (questions.find((element) => element.id === "farm_name")) {
+      setFarmName(
+        questions.find((element) => element.id === "farm_name").response
+      );
+    }
+  }, [questions]);
+  useEffect(() => {
+    if (!localStorage.getItem("allQuestions")) {
+      const isAtLeastOneFieldGetLinkedQuestions = (questions) => {
+        return questions.some((question) => !!question.linked_questions);
+      };
+
+      const getAllQuestionsRecursive = (currentValue, accumulatorQuestions) => {
+        if (isAtLeastOneFieldGetLinkedQuestions(currentValue)) {
+          const allLinkedQuestions = currentValue.reduce(
+            (accumulator, value) => {
+              if (value.linked_questions) {
+                return [...accumulator, ...value.linked_questions];
+              }
+              return accumulator;
+            },
+            []
+          );
+
+          return getAllQuestionsRecursive(allLinkedQuestions, [
+            ...accumulatorQuestions,
+            ...allLinkedQuestions.map((value) => ({
+              id: value.id,
+              response: value.response,
+              question: value.question,
+            })),
+          ]);
+        }
+        return accumulatorQuestions;
+      };
+      const result = listOfQuestions.formQuestions.reduce(
+        (accumulator, currentValue) => {
+          const totalQuestions = getAllQuestionsRecursive([currentValue], []);
+
+          return [
+            ...accumulator,
+            {
+              id: currentValue.id,
+              response: currentValue.response,
+              question: currentValue.question,
+            },
+            ...totalQuestions,
+          ];
+        },
+        []
+      );
+
+      setAllQuestions(result);
+    }
+  }, []);
+
+  // console.log({ allQuestions });
   useEffect(() => {
     if (initForm) {
       setDatasForm(
@@ -102,6 +183,12 @@ function App() {
     localStorage.setItem("indexQuestions", indexQuestions);
   }, [indexQuestions]);
   useEffect(() => {
+    localStorage.setItem("counterQuestion", counterQuestion);
+  }, [counterQuestion]);
+  useEffect(() => {
+    localStorage.setItem("initForm", initForm);
+  }, [initForm]);
+  useEffect(() => {
     if (questionToDisplay !== null) {
       localStorage.setItem(
         "questionToDisplay",
@@ -116,9 +203,6 @@ function App() {
     }
   }, [datasForm]);
   useEffect(() => {
-    console.log(results);
-  }, [results]);
-  useEffect(() => {
     if (login && login !== "false") {
       localStorage.setItem("login", JSON.stringify(login));
     }
@@ -127,14 +211,61 @@ function App() {
     if (formIsCompleted) {
       console.log({ results }, { datasForm }, { questions });
       localStorage.setItem("results", JSON.stringify(results));
+      saveUserDatas({ allQuestions, results, login }).then(() => {
+        getUserDatas({ login })
+          .then((result) => {
+            if (result.result.length > 0) {
+              setAllResultsUser(result.result.map((item) => item.result));
+            }
+          })
+          // make sure to catch any error
+          .catch(console.error);
+        localStorage.removeItem("results");
+        localStorage.removeItem("allQuestions");
+        localStorage.removeItem("counterQuestion");
+        localStorage.removeItem("formIsCompleted");
+        localStorage.removeItem("indexQuestions");
+        localStorage.removeItem("initForm");
+        localStorage.removeItem("questionToDisplay");
+        localStorage.removeItem("questions");
+        localStorage.removeItem("datasForm");
+        setFormIsCompleted(false);
+        setDatasForm([]);
+        setInitForm(false);
+        setQuestionToDisplay(null);
+        setIndexQuestions(0);
+        setCounterQuestion(0);
+
+        setResults({});
+        setQuestions([]);
+        setAllQuestions([]);
+      });
     }
     localStorage.setItem("formIsCompleted", formIsCompleted);
   }, [formIsCompleted]);
   useEffect(() => {
+    console.log({ results });
     if (results !== {}) {
       localStorage.setItem("results", JSON.stringify(results));
     }
   }, [results]);
+  useEffect(() => {
+    if (allQuestions.length > 0) {
+      localStorage.setItem("allQuestions", JSON.stringify(allQuestions));
+    }
+  }, [allQuestions]);
+  useEffect(() => {
+    // call the function
+    getUserDatas({ login })
+      .then((result) => {
+        if (result.result.length > 0) {
+          setAllResultsUser(result.result.map((item) => item.result));
+        }
+      })
+      // make sure to catch any error
+      .catch(console.error);
+    // console.log(test);
+  }, [login]);
   return (
     <ThemeProvider theme={darkTheme}>
       <div className="App">
@@ -147,8 +278,12 @@ function App() {
               path="/"
               element={
                 <>
-                  <Navbar login={login} setLogin={setLogin}></Navbar>
-                  <Home viewHeight={viewHeight} scroll={scroll} />
+                  <Navbar
+                    farmName={farmName}
+                    login={login}
+                    setLogin={setLogin}
+                  ></Navbar>
+                  <Home />
                 </>
               }
             ></Route>
@@ -157,7 +292,11 @@ function App() {
               element={
                 isLogin({ login }) ? (
                   <>
-                    <Navbar login={login} setLogin={setLogin}></Navbar>
+                    <Navbar
+                      farmName={farmName}
+                      login={login}
+                      setLogin={setLogin}
+                    ></Navbar>
                     <NewForm
                       results={results}
                       setResults={setResults}
@@ -176,12 +315,20 @@ function App() {
                       setQuestionToDisplay={setQuestionToDisplay}
                       indexQuestions={indexQuestions}
                       setIndexQuestions={setIndexQuestions}
+                      allQuestions={allQuestions}
+                      setAllQuestions={setAllQuestions}
+                      counterQuestion={counterQuestion}
+                      setCounterQuestion={setCounterQuestion}
                     />
                   </>
                 ) : (
                   <>
-                    <Navbar login={login} setLogin={setLogin}></Navbar>
-                    <Home viewHeight={viewHeight} scroll={scroll} />
+                    <Navbar
+                      farmName={farmName}
+                      login={login}
+                      setLogin={setLogin}
+                    ></Navbar>
+                    <Home />
                   </>
                 )
               }
@@ -190,7 +337,11 @@ function App() {
               path="/account"
               element={
                 <>
-                  <Navbar login={login} setLogin={setLogin} />
+                  <Navbar
+                    farmName={farmName}
+                    login={login}
+                    setLogin={setLogin}
+                  />
                   <Account />
                 </>
               }
@@ -200,7 +351,11 @@ function App() {
               element={
                 !isLogin({ login }) ? (
                   <>
-                    <Navbar login={login} setLogin={setLogin} />
+                    <Navbar
+                      farmName={farmName}
+                      login={login}
+                      setLogin={setLogin}
+                    />
                     <Login
                       userProfile={userProfile}
                       setUserProfile={setUserProfile}
@@ -213,16 +368,26 @@ function App() {
                   </>
                 ) : isLogin({ login }) && login.userType === "farmer" ? (
                   <>
-                    <Navbar login={login} setLogin={setLogin} />
+                    <Navbar
+                      farmName={farmName}
+                      login={login}
+                      setLogin={setLogin}
+                    />
                     <Dashboard
                       login={login}
                       results={results}
+                      allResultsUser={allResultsUser}
                       formIsCompleted={formIsCompleted}
+                      datasForm={datasForm}
                     />
                   </>
                 ) : (
                   <>
-                    <Navbar login={login} setLogin={setLogin} />
+                    <Navbar
+                      farmName={farmName}
+                      login={login}
+                      setLogin={setLogin}
+                    />
                     <ResearcherDatas login={login} />
                   </>
                 )
@@ -233,7 +398,11 @@ function App() {
               element={
                 !isLogin({ login }) ? (
                   <>
-                    <Navbar login={login} setLogin={setLogin} />
+                    <Navbar
+                      farmName={farmName}
+                      login={login}
+                      setLogin={setLogin}
+                    />
                     <Register
                       userProfile={userProfile}
                       setUserProfile={setUserProfile}
@@ -244,16 +413,25 @@ function App() {
                   </>
                 ) : isLogin({ login }) && login.userType === "farmer" ? (
                   <>
-                    <Navbar login={login} setLogin={setLogin} />
+                    <Navbar
+                      farmName={farmName}
+                      login={login}
+                      setLogin={setLogin}
+                    />
                     <Dashboard
                       login={login}
                       results={results}
                       formIsCompleted={formIsCompleted}
+                      allResultsUser={allResultsUser}
                     />
                   </>
                 ) : (
                   <>
-                    <Navbar login={login} setLogin={setLogin} />
+                    <Navbar
+                      farmName={farmName}
+                      login={login}
+                      setLogin={setLogin}
+                    />
                     <ResearcherDatas login={login} />
                   </>
                 )
@@ -264,17 +442,26 @@ function App() {
               element={
                 isLogin({ login }) ? (
                   <>
-                    <Navbar login={login} setLogin={setLogin} />
+                    <Navbar
+                      farmName={farmName}
+                      login={login}
+                      setLogin={setLogin}
+                    />
                     <Dashboard
                       login={login}
                       results={results}
                       formIsCompleted={formIsCompleted}
+                      allResultsUser={allResultsUser}
                     />
                   </>
                 ) : (
                   <>
-                    <Navbar login={login} setLogin={setLogin}></Navbar>
-                    <Home viewHeight={viewHeight} scroll={scroll} />
+                    <Navbar
+                      farmName={farmName}
+                      login={login}
+                      setLogin={setLogin}
+                    ></Navbar>
+                    <Home />
                   </>
                 )
               }
@@ -284,12 +471,20 @@ function App() {
               element={
                 isLogin({ login }) ? (
                   <>
-                    <Navbar login={login} setLogin={setLogin} />
+                    <Navbar
+                      farmName={farmName}
+                      login={login}
+                      setLogin={setLogin}
+                    />
                     <ResearcherDatas login={login} />
                   </>
                 ) : (
                   <>
-                    <Navbar login={login} setLogin={setLogin} />
+                    <Navbar
+                      farmName={farmName}
+                      login={login}
+                      setLogin={setLogin}
+                    />
                     <Home />
                   </>
                 )
@@ -299,7 +494,11 @@ function App() {
               path="/about"
               element={
                 <>
-                  <Navbar login={login} setLogin={setLogin} />
+                  <Navbar
+                    farmName={farmName}
+                    login={login}
+                    setLogin={setLogin}
+                  />
                   <About />
                 </>
               }
@@ -309,7 +508,11 @@ function App() {
               path="/confirm-email/:userId/:resetToken"
               element={
                 <>
-                  <Navbar login={login} setLogin={setLogin} />
+                  <Navbar
+                    farmName={farmName}
+                    login={login}
+                    setLogin={setLogin}
+                  />
                   <ConfirmEmail
                     setMessageAlert={setMessageAlert}
                     setSeverity={setSeverity}
@@ -322,7 +525,11 @@ function App() {
               path="/references"
               element={
                 <>
-                  <Navbar login={login} setLogin={setLogin} />
+                  <Navbar
+                    farmName={farmName}
+                    login={login}
+                    setLogin={setLogin}
+                  />
                   <References />
                 </>
               }

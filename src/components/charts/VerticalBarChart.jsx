@@ -1,21 +1,8 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
 
-export const BarChart = ({ dataResults, id }) => {
-  const labels = [
-    [
-      `10/09/2022`,
-      `${Math.round(
-        100 - (dataResults.data2[0] * 100) / dataResults.data1[0]
-      )}% of mitigation`,
-    ],
-    [
-      `12/09/2022`,
-      `${Math.round(
-        100 - (dataResults.data2[1] * 100) / dataResults.data1[1]
-      )}% of mitigation`,
-    ],
-  ];
+export const BarChart = ({ dataResults, id, labels }) => {
+  // console.log(dataResults);
   const data = {
     labels: labels,
     datasets: [
@@ -36,6 +23,15 @@ export const BarChart = ({ dataResults, id }) => {
   };
   const options = {
     plugins: {
+      title: {
+        display: true,
+        color: "white",
+        text: "Custom Chart Title",
+        padding: {
+          top: 10,
+          bottom: 30,
+        },
+      },
       legend: {
         position: "bottom",
         labels: {

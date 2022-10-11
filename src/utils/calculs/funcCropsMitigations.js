@@ -1,7 +1,12 @@
 import regions from "../../coeff/regions.json";
 import coeff_reduction_ghg from "../../coeff/coeff_reduction_ghg.json";
 
-function funcCropsMitigations({ datasForm, state, time }) {
+function funcCropsMitigations({
+  datasForm,
+  state,
+  time,
+  cropsMitigationsTotal,
+}) {
   let region = regions.find((region) => region.Code === state);
   let climate = region.Climate.replace(" ", "_");
 
@@ -497,7 +502,7 @@ function funcCropsMitigations({ datasForm, state, time }) {
     mitigationCropTillage +
     mitigationCropNut +
     mitigationCropAgro;
-
+  cropsMitigationsTotal = mitigationCropsTotal;
   return {
     mitigationCropAgro: mitigationCropAgro,
     mitigationCropNut: mitigationCropNut,

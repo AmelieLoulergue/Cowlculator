@@ -18,7 +18,8 @@ function funcFuel({
   let tractorDiesel = vehicles_type_tractors_diesel_cons?.value
     ? vehicles_type_tractors_diesel_cons.value
     : 0;
-  let consDiesel = carDiesel + truckDiesel + tractorDiesel;
+  let consDiesel =
+    Number(carDiesel) + Number(truckDiesel) + Number(tractorDiesel);
   let carGaso = vehicles_type_cars_gasoline_cons?.value
     ? vehicles_type_cars_gasoline_cons.value
     : 0;
@@ -28,10 +29,9 @@ function funcFuel({
   let tractorGaso = vehicles_type_tractors_gasoline_cons?.value
     ? vehicles_type_tractors_gasoline_cons.value
     : 0;
-  let consGasoline = carGaso + truckGaso + tractorGaso;
+  let consGasoline = Number(carGaso) + Number(truckGaso) + Number(tractorGaso);
   let coeffDiesel = fuel_coeff[0].kg_CO2;
   let coeffGasoline = fuel_coeff[1].kg_CO2;
-
   let fuelCO2 = consDiesel * coeffDiesel + consGasoline * coeffGasoline;
   return fuelCO2;
 }
