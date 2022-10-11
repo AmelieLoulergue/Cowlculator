@@ -12,7 +12,7 @@ function About() {
       <div className="container">
         <div>
           <h1 className="primaryTitle">About us.</h1>
-          <p>
+          <p className="subTitle">
             Cowlculator has been developed by a French team 💙🤍❤️, but beyond
             the business partnership, this is a family affair; linked by blood
             or 10-year friendship.
@@ -34,7 +34,7 @@ function About() {
             </p>
             <p>
               For Cowlculator, Amelie was our backend expert and collaborated on
-              the frontend.{" "}
+              the frontend.
             </p>
           </div>
           <div className="card">
@@ -52,7 +52,7 @@ function About() {
             </p>
             <p>
               Clement’s role for the Cowlculator project was frontend and design
-              expert.{" "}
+              expert.
             </p>
           </div>
           <div className="card">

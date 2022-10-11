@@ -103,6 +103,7 @@ form input:focus-visible,
   margin: auto;
   min-height: 90vh;
   max-width: 80vw;
+  min-width: 30vw;
 }
 .content .title {
   margin-top: 5vh;

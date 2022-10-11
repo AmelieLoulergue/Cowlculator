@@ -2,15 +2,14 @@ import * as React from "react";
 import "./Signup.css";
 import "./Logger.css";
 import back_arrow from "../../assets/svg/back-arrow.svg";
-import eye from "../../assets/svg/pass-eye.svg";
 import { Link } from "react-router-dom";
 import { passwordStrength } from "check-password-strength";
 import { useState } from "react";
 import Lottie from "lottie-react";
 import eyeBlink from "../../assets/anim/eye-blink.json";
+import fandr from '../../assets/anim/fandr2.json';
 import { useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Bg from ".././Bg";
 import signup from "../../utils/authentication/signup";
 const validateEmail = ({ userProfile }) => {
   if (
@@ -139,6 +138,8 @@ function Register({
   const radioCheck = (e) => {
     setIsFarmer(!isFarmer);
     setIsResearcher(!isResearcher);
+    document.getElementById('animresearcher').classList.toggle('active')
+    document.getElementById('animfarmer').classList.toggle('active')
   };
   const [isFarmer, setIsFarmer] = useState(
     (localStorage.getItem("category_choosed") &&
@@ -190,154 +191,157 @@ function Register({
             <img src={back_arrow} alt="" />
           </Link>
         </div>
-        <div className="content">
-          <div className="title">
-            <h1>Let's register.</h1>
-            <p>
-              It's great to see new face !<br></br>
-              Don't worry, it's all gonna be easy
-            </p>
-          </div>
+        <div className="bigcontainer">
+          <Lottie animationData={fandr} loop={true}/>
+          <div className="content">
+            <div className="title signuptitle">
+              <h1>Let's register.</h1>
+              <p>
+                It's great to see new face !<br></br>
+                Don't worry, it's all gonna be easy
+              </p>
+            </div>
 
-          <form>
-            <div className="input">
-              <h2>I am a</h2>
-              <div className="typeChoose">
-                <div
-                  className={
-                    isFarmer
-                      ? "typeChoose_type checkedRadio"
-                      : "typeChoose_type"
-                  }
-                >
-                  <label htmlFor="farmer">Farmer</label>
-                  <input
-                    name="type"
-                    type="radio"
-                    id="farmer"
-                    onChange={radioCheck}
-                    checked={isFarmer}
-                  ></input>
+            <form>
+              <div className="input">
+                <h2>I am a</h2>
+                <div className="typeChoose">
+                  <div
+                    className={
+                      isResearcher
+                        ? "typeChoose_type checkedRadio"
+                        : "typeChoose_type"
+                    }
+                  >
+                    <label htmlFor="researcher">Researcher</label>
+                    <input
+                      name="type"
+                      type="radio"
+                      id="researcher"
+                      onChange={radioCheck}
+                      checked={isResearcher}
+                    ></input>
+                  </div>
+                  <div
+                    className={
+                      isFarmer
+                        ? "typeChoose_type checkedRadio"
+                        : "typeChoose_type"
+                    }
+                  >
+                    <label htmlFor="farmer">Farmer</label>
+                    <input
+                      name="type"
+                      type="radio"
+                      id="farmer"
+                      onChange={radioCheck}
+                      checked={isFarmer}
+                    ></input>
+                  </div>
                 </div>
-                <div
-                  className={
-                    isResearcher
-                      ? "typeChoose_type checkedRadio"
-                      : "typeChoose_type"
-                  }
-                >
-                  <label htmlFor="researcher">Researcher</label>
-                  <input
-                    name="type"
-                    type="radio"
-                    id="researcher"
-                    onChange={radioCheck}
-                    checked={isResearcher}
-                  ></input>
-                </div>
-              </div>
-              <input
-                type="email"
-                placeholder="Email"
-                value={userProfile?.email ? userProfile.email : ""}
-                onChange={(event) =>
-                  setUserProfile({
-                    ...userProfile,
-                    email: event.target.value,
-                  })
-                }
-              ></input>
-              <div id="email-message-alert"></div>
-              <div style={{ position: "relative" }}>
                 <input
-                  type="password"
-                  placeholder="Password"
-                  value={userProfile?.password ? userProfile.password : ""}
-                  onKeyUp={passChange}
-                  onChange={(event) => {
-                    setUserProfile({
-                      ...userProfile,
-                      password: event.target.value,
-                    });
-                  }}
-                  id="password"
-                ></input>
-                <Lottie
-                  lottieRef={pass}
-                  autoplay={false}
-                  animationData={eyeBlink}
-                  loop={false}
-                  onMouseDown={showPass}
-                  onMouseUp={hidePass}
-                  className="eye-pass"
-                />
-              </div>
-              <h2>{strengthVal}</h2>
-              <div id="color-indicators"></div>
-              <p>Password must contains :</p>
-              <ul>
-                <li id="Lowercase">Lowercase</li>
-                <li id="Uppercase">Uppercase</li>
-                <li id="Number">Number</li>
-                <li id="Symbol">Symbol</li>
-                <li id="Length">8 characters</li>
-              </ul>
-              <div style={{ position: "relative" }}>
-                <input
-                  type="password"
-                  placeholder="Confirm password"
-                  id="passwordConfirm"
-                  value={
-                    userProfile?.passwordConfirmation
-                      ? userProfile.passwordConfirmation
-                      : ""
-                  }
+                  type="email"
+                  placeholder="Email"
+                  value={userProfile?.email ? userProfile.email : ""}
                   onChange={(event) =>
                     setUserProfile({
                       ...userProfile,
-                      passwordConfirmation: event.target.value,
+                      email: event.target.value,
                     })
                   }
                 ></input>
-                <Lottie
-                  lottieRef={passConf}
-                  autoplay={false}
-                  animationData={eyeBlink}
-                  loop={false}
-                  onMouseDown={showPassConf}
-                  onMouseUp={hidePassConf}
-                  className="eye-pass"
-                />
+                <div id="email-message-alert"></div>
+                <div style={{ position: "relative" }}>
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    value={userProfile?.password ? userProfile.password : ""}
+                    onKeyUp={passChange}
+                    onChange={(event) => {
+                      setUserProfile({
+                        ...userProfile,
+                        password: event.target.value,
+                      });
+                    }}
+                    id="password"
+                  ></input>
+                  <Lottie
+                    lottieRef={pass}
+                    autoplay={false}
+                    animationData={eyeBlink}
+                    loop={false}
+                    onMouseDown={showPass}
+                    onMouseUp={hidePass}
+                    className="eye-pass"
+                  />
+                </div>
+                <h2>{strengthVal}</h2>
+                <div id="color-indicators"></div>
+                <p>Password must contains :</p>
+                <ul>
+                  <li id="Lowercase">Lowercase</li>
+                  <li id="Uppercase">Uppercase</li>
+                  <li id="Number">Number</li>
+                  <li id="Symbol">Symbol</li>
+                  <li id="Length">8 characters</li>
+                </ul>
+                <div style={{ position: "relative" }}>
+                  <input
+                    type="password"
+                    placeholder="Confirm password"
+                    id="passwordConfirm"
+                    value={
+                      userProfile?.passwordConfirmation
+                        ? userProfile.passwordConfirmation
+                        : ""
+                    }
+                    onChange={(event) =>
+                      setUserProfile({
+                        ...userProfile,
+                        passwordConfirmation: event.target.value,
+                      })
+                    }
+                  ></input>
+                  <Lottie
+                    lottieRef={passConf}
+                    autoplay={false}
+                    animationData={eyeBlink}
+                    loop={false}
+                    onMouseDown={showPassConf}
+                    onMouseUp={hidePassConf}
+                    className="eye-pass"
+                  />
+                </div>
               </div>
-            </div>
-            <div className="submit">
-              <p>
-                Already have an account ?{" "}
-                <Link to="../account/login">
-                  <b>Log in</b>
-                </Link>
-              </p>
-              <button
-                className={registrationIsValid ? "btn" : "btn disabled"}
-                onClick={(event) => {
-                  event.preventDefault();
-                  signup({
-                    userProfile,
-                    messageAlert,
-                    setMessageAlert,
-                    severity,
-                    setSeverity,
-                    displayAlert,
-                    setDisplayAlert,
-                    navigate,
-                  });
-                }}
-                disabled={registrationIsValid ? false : true}
-              >
-                Register
-              </button>
-            </div>
-          </form>
+              <div className="submit">
+                <p>
+                  Already have an account ?{" "}
+                  <Link to="../account/login">
+                    <b>Log in</b>
+                  </Link>
+                </p>
+                <button
+                  className={registrationIsValid ? "btn" : "btn disabled"}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    signup({
+                      userProfile,
+                      messageAlert,
+                      setMessageAlert,
+                      severity,
+                      setSeverity,
+                      displayAlert,
+                      setDisplayAlert,
+                      navigate,
+                    });
+                  }}
+                  disabled={registrationIsValid ? false : true}
+                >
+                  Register
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </>
