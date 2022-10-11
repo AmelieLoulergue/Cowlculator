@@ -52,12 +52,7 @@ function App() {
   });
   const [farmName, setFarmName] = useState("");
   const [allResultsUser, setAllResultsUser] = useState([]);
-  useEffect(() => {
-    // call the function
-    getUserDatas({ login, allResultsUser, setAllResultsUser })
-      // make sure to catch any error
-      .catch(console.error);
-  }, [login]);
+
   useEffect(() => {
     console.log({ allResultsUser });
   }, [allResultsUser]);
@@ -217,7 +212,14 @@ function App() {
       console.log({ results }, { datasForm }, { questions });
       localStorage.setItem("results", JSON.stringify(results));
       saveUserDatas({ allQuestions, results, login }).then(() => {
-        getUserDatas({ login, allResultsUser, setAllResultsUser });
+        getUserDatas({ login })
+          .then((result) => {
+            if (result.result.length > 0) {
+              setAllResultsUser(result.result.map((item) => item.result));
+            }
+          })
+          // make sure to catch any error
+          .catch(console.error);
         localStorage.removeItem("results");
         localStorage.removeItem("allQuestions");
         localStorage.removeItem("counterQuestion");
@@ -252,6 +254,18 @@ function App() {
       localStorage.setItem("allQuestions", JSON.stringify(allQuestions));
     }
   }, [allQuestions]);
+  useEffect(() => {
+    // call the function
+    getUserDatas({ login })
+      .then((result) => {
+        if (result.result.length > 0) {
+          setAllResultsUser(result.result.map((item) => item.result));
+        }
+      })
+      // make sure to catch any error
+      .catch(console.error);
+    // console.log(test);
+  }, [login]);
   return (
     <ThemeProvider theme={darkTheme}>
       <div className="App">

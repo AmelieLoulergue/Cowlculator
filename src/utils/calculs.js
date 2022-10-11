@@ -503,66 +503,6 @@ function calculs({ datasForm, results, setResults }) {
           manureCO2 +
           fertilizer) /
         time,
-    totalMitigatedEmissionsGraph:
-      entericFermentationCO2 && cropsMitigations
-        ? (elecCO2 +
-            natGasCO2 +
-            gasCO2 +
-            water +
-            fuelCO2 +
-            other +
-            entericFermentationCO2?.EFtotal +
-            manureCO2 +
-            fertilizer -
-            (mitigationEFImpFeedDairy +
-              mitigationEFImpFeedBeef +
-              mitigationEFImpFeedSheep +
-              mitigationEFAdditiveBeef +
-              mitigationEFAdditiveDairy +
-              mitigationEFAdditiveSheep +
-              mitigationEFLTBreedingBeef +
-              mitigationEFLTBreedingDairy +
-              mitigationEFLTBreedingSheep +
-              cropsMitigations?.mitigationCropsTotal)) /
-          time
-        : entericFermentationCO2
-        ? (elecCO2 +
-            natGasCO2 +
-            gasCO2 +
-            water +
-            fuelCO2 +
-            other +
-            entericFermentationCO2?.EFtotal +
-            manureCO2 +
-            fertilizer -
-            (mitigationEFImpFeedDairy +
-              mitigationEFImpFeedBeef +
-              mitigationEFImpFeedSheep +
-              mitigationEFAdditiveBeef +
-              mitigationEFAdditiveDairy +
-              mitigationEFAdditiveSheep +
-              mitigationEFLTBreedingBeef +
-              mitigationEFLTBreedingDairy +
-              mitigationEFLTBreedingSheep)) /
-          time
-        : (elecCO2 +
-            natGasCO2 +
-            gasCO2 +
-            water +
-            fuelCO2 +
-            other +
-            manureCO2 +
-            fertilizer -
-            (mitigationEFImpFeedDairy +
-              mitigationEFImpFeedBeef +
-              mitigationEFImpFeedSheep +
-              mitigationEFAdditiveBeef +
-              mitigationEFAdditiveDairy +
-              mitigationEFAdditiveSheep +
-              mitigationEFLTBreedingBeef +
-              mitigationEFLTBreedingDairy +
-              mitigationEFLTBreedingSheep)) /
-          time,
     totalMitigationsGraph: cropsMitigations
       ? (mitigationEFImpFeedDairy +
           mitigationEFImpFeedBeef +

@@ -2,7 +2,7 @@ import React from "react";
 import { Bar } from "react-chartjs-2";
 
 export const BarChart = ({ dataResults, id, labels }) => {
-  console.log(dataResults);
+  // console.log(dataResults);
   const data = {
     labels: labels,
     datasets: [

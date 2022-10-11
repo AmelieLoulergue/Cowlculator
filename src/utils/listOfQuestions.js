@@ -2496,6 +2496,7 @@ const listOfQuestions = {
               ],
             },
             {
+              answerParentQuestion: true,
               parentId: "farm_animals_sheeps",
               id: "farm_animals_sheeps_specific_agent_practice",
               question:
@@ -2527,6 +2528,7 @@ const listOfQuestions = {
               ],
             },
             {
+              answerParentQuestion: true,
               parentId: "farm_animals_sheeps",
               id: "farm_animals_sheeps_breeding_practice",
               question:

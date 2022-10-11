@@ -1,5 +1,4 @@
-const getUserDatas = async ({ login, allResultsUser, setAllResultsUser }) => {
-  console.log("getUseDatas");
+const getUserDatas = async ({ login }) => {
   let requestOptions = {
     method: "GET",
     headers: {
@@ -8,11 +7,10 @@ const getUserDatas = async ({ login, allResultsUser, setAllResultsUser }) => {
     },
   };
   const response = await fetch(
-    `http://localhost:3000/api/result/${login.userId}`,
+    `https://cowlculatorback.herokuapp.com/api/result/${login.userId}`,
     requestOptions
   );
   const datas = await response.json();
-  setAllResultsUser(datas.result.map((item) => item.result));
-  return response.error ? false : datas;
+  return datas;
 };
 export default getUserDatas;

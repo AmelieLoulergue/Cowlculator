@@ -21,9 +21,10 @@
   flex-wrap: wrap;
 }
 .card {
-  width: 100%;
+  width: fit-content;
+  padding: 0 1rem;
   min-width: 260px;
-  flex: 1 1;
+  /* flex: 1 1; */
   margin: 20px;
 }
 .card-icon img {
@@ -43,47 +44,47 @@
   flex-direction: column;
   align-items: center;
 }
-.card:nth-child(1) img {
+.saved img {
   background-color: #20bfa9;
 }
-.card:nth-child(1) h1 {
+.saved h1 {
   color: #20bfa9;
 }
-.card:nth-child(1) {
+.saved {
   background-image: linear-gradient(45deg, #121410 80%, #20bfaa5d 100%);
   border-color: #20bfa95d;
 }
-.card:nth-child(1):hover {
+.saved:hover {
   background-image: linear-gradient(45deg, #121410 80%, #20bfaa 100%);
   border-color: #20bfa9;
 }
 
-.card:nth-child(2) img {
+.impact img {
   background-color: #ed786b;
 }
-.card:nth-child(2) h1 {
+.impact h1 {
   color: #ed786b;
 }
-.card:nth-child(2) {
+.impact {
   background-image: linear-gradient(45deg, #1a1515 80%, #ed786b5d 100%);
   border-color: #ed786b5d;
 }
-.card:nth-child(2):hover {
+.impact:hover {
   background-image: linear-gradient(45deg, #1a1515 80%, #ed786b 100%);
   border-color: #ed786b;
 }
 
-.card:nth-child(3) img {
+.income img {
   background-color: #fdb95a;
 }
-.card:nth-child(3) h1 {
+.income h1 {
   color: #fdb95a;
 }
-.card:nth-child(3) {
+.income {
   background-image: linear-gradient(45deg, #181813 80%, #fdb95a5d 100%);
   border-color: #fdb95a5d;
 }
-.card:nth-child(3):hover {
+.income:hover {
   background-image: linear-gradient(45deg, #181813 80%, #fdb95a 100%);
   border-color: #fdb95a;
 }
@@ -110,5 +111,5 @@
 }
 .card-chart {
   padding: 3rem;
-  width: 100%;
+  width: 80%;
 }
