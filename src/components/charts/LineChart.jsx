@@ -3,6 +3,15 @@ import { Line } from "react-chartjs-2";
 export const LineChart = ({ id, dataResults, labels }) => {
   const options = {
     plugins: {
+      title: {
+        display: true,
+        color: "white",
+        text: "Custom Chart Title",
+        padding: {
+          top: 10,
+          bottom: 30,
+        },
+      },
       legend: {
         position: "bottom",
         labels: {

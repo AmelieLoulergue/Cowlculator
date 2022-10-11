@@ -4,18 +4,20 @@ import { Doughnut } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 let options = {
   plugins: {
+    title: {
+      display: true,
+      color: "white",
+      text: "Custom Chart Title",
+      padding: {
+        top: 10,
+        bottom: 30,
+      },
+    },
     datalabels: {
       color: "white",
       font: {
         size: 14,
         weight: 500,
-      },
-      formatter: function (value, index) {
-        if (value > 0) {
-          return `${Math.round(value * 100) / 100} TCO2eq/year`;
-        } else {
-          return "";
-        }
       },
     },
     legend: {
@@ -28,15 +30,30 @@ let options = {
   },
 };
 export const DoughnutChart = ({ id, dataResults }) => {
+  const labels = [
+    dataResults[0] && dataResults[0] !== 0
+      ? `Utilities ${Math.round(dataResults[0] * 100) / 100} TCO2eq/year`
+      : null,
+    dataResults[1] && dataResults[1] !== 0
+      ? `Fuel ${Math.round(dataResults[1] * 100) / 100} TCO2eq/year`
+      : null,
+    dataResults[2] && dataResults[2] !== 0
+      ? `Other ${Math.round(dataResults[2] * 100) / 100} TCO2eq/year`
+      : null,
+    dataResults[3] && dataResults[3] !== 0
+      ? `Animals’ enteric fermentation ${
+          Math.round(dataResults[3] * 100) / 100
+        } TCO2eq/year`
+      : null,
+    dataResults[4] && dataResults[4] !== 0
+      ? `Animals’ manure ${Math.round(dataResults[4] * 100) / 100} TCO2eq/year`
+      : null,
+    dataResults[5] && dataResults[5] !== 0
+      ? `Crops ${Math.round(dataResults[5] * 100) / 100} TCO2eq/year`
+      : null,
+  ];
   const data = {
-    labels: [
-      "Utilities",
-      "Fuel",
-      "Other",
-      "Animals’ enteric fermentation",
-      "Animals’ manure",
-      "Crops",
-    ],
+    labels: labels.filter((label) => label !== null),
     datasets: [
       {
         label: "Dataset 1",
@@ -53,12 +70,5 @@ export const DoughnutChart = ({ id, dataResults }) => {
     ],
   };
 
-  return (
-    <Doughnut
-      data={data}
-      id={id}
-      options={options}
-      plugins={[ChartDataLabels]}
-    />
-  );
+  return <Doughnut data={data} id={id} options={options} />;
 };

@@ -23,6 +23,15 @@ export const BarChart = ({ dataResults, id, labels }) => {
   };
   const options = {
     plugins: {
+      title: {
+        display: true,
+        color: "white",
+        text: "Custom Chart Title",
+        padding: {
+          top: 10,
+          bottom: 30,
+        },
+      },
       legend: {
         position: "bottom",
         labels: {

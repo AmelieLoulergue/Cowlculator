@@ -166,6 +166,7 @@ function calculs({ datasForm, results, setResults }) {
   // Emissions from enteric fermentation of dairies, beed and sheep
   // Emissions from manure of dairies, beed and sheep
   let entericFermentationCO2 = 0;
+  let entericFermentationCO2Total = 0;
   let manureCO2 = 0;
   let numbTotalBeefDairy = 0;
   let mitigationEFImpFeedDairy = 0;
@@ -178,15 +179,17 @@ function calculs({ datasForm, results, setResults }) {
   let mitigationEFLTBreedingBeef = 0;
   let mitigationEFLTBreedingSheep = 0;
   let carbonCreditsAnimals = 0;
-  let entericFermentationCO2total = 0;
   if (datasForm.find((element) => element.id === "farm_animals")?.response) {
     entericFermentationCO2 = allFunctions.funcAnimalsEF({
       datasForm,
       regions,
       time: time,
       state,
-      entericFermentationCO2total,
     });
+    entericFermentationCO2Total = Object.values(entericFermentationCO2).reduce(
+      (partialSum, a) => partialSum + a,
+      0
+    );
     manureCO2 = allFunctions.funcAnimalsManure({
       datasForm,
       time: time,
@@ -292,10 +295,14 @@ function calculs({ datasForm, results, setResults }) {
       datasForm,
       state,
       time: time,
-      cropsMitigationsTotal,
     });
+
+    cropsMitigationsTotal = Object.values(cropsMitigations).reduce(
+      (partialSum, a) => partialSum + a,
+      0
+    );
     carbonCreditsCrops = allFunctions.funcCarbonCreditsCrops({
-      cropsMitigations,
+      cropsMitigationsTotal,
     });
   }
   const farm_crops_fertilizer = datasForm.filter((element) =>
@@ -308,24 +315,6 @@ function calculs({ datasForm, results, setResults }) {
   ) {
     fertilizer = allFunctions.funcFertilizer({ farm_crops_fertilizer });
   }
-  // TO UPDATE WITH NEW OBJECT AMELIE
-  // let carbonCreditsCrops = 0;
-  // if (results && results.cropsMitigations) {
-  //   setResults({
-  //     ...results,
-  //     carbonCreditsCrops: allFunctions.funcCarbonCreditsCrops({
-  //       cropsMitigations: results.cropsMitigations,
-  //     }),
-  //   });
-  // }
-  // if (results && results.animalsMitigations) {
-  //   setResults({
-  //     ...results,
-  //     carbonCreditsAnimals: allFunctions.funcCarbonCreditsAnimals({
-  //       animalsMitigations: results.animalsMitigations,
-  //     }),
-  //   });
-  // }
 
   setResults({
     ...results,
@@ -361,16 +350,17 @@ function calculs({ datasForm, results, setResults }) {
     mitigationGrassGraz: cropsMitigations?.mitigationGrassGraz || 0,
     mitigationDegResto: cropsMitigations?.mitigationDegResto || 0,
     mitigationManureApp: cropsMitigations?.mitigationManureApp || 0,
-    mitigationCropsTotal: cropsMitigationsTotal,
+    mitigationCropsTotal: cropsMitigations?.mitigationCropsTotal || 0,
     totalCarbonCredits: carbonCreditsCrops + carbonCreditsAnimals,
     fertilizer: fertilizer,
     CO2emmited:
       (elecCO2 +
         natGasCO2 +
+        gasCO2 +
         water +
         fuelCO2 +
         other +
-        entericFermentationCO2total +
+        entericFermentationCO2Total +
         manureCO2 +
         fertilizer -
         (mitigationEFImpFeedDairy +
@@ -401,19 +391,21 @@ function calculs({ datasForm, results, setResults }) {
     fuelGraph: fuelCO2 / time,
     otherGraph: other / time,
     entericFermentationCO2Graph:
-      (entericFermentationCO2total -
-        (mitigationEFImpFeedDairy +
-          mitigationEFImpFeedBeef +
-          mitigationEFImpFeedSheep +
-          mitigationEFAdditiveBeef +
-          mitigationEFAdditiveDairy +
-          mitigationEFAdditiveSheep +
-          mitigationEFLTBreedingBeef +
-          mitigationEFLTBreedingDairy +
-          mitigationEFLTBreedingSheep)) /
-      time,
+      entericFermentationCO2Total -
+      (mitigationEFImpFeedDairy +
+        mitigationEFImpFeedBeef +
+        mitigationEFImpFeedSheep +
+        mitigationEFAdditiveBeef +
+        mitigationEFAdditiveDairy +
+        mitigationEFAdditiveSheep +
+        mitigationEFLTBreedingBeef +
+        mitigationEFLTBreedingDairy +
+        mitigationEFLTBreedingSheep) /
+        time,
     manureCO2Graph: manureCO2 / time,
-    cropsGraph: (fertilizer - cropsMitigationsTotal) / time,
+    cropsGraph: results?.cropsMitigations?.mitigationCropsTotal
+      ? (fertilizer - results?.cropsMitigations?.mitigationCropsTotal) / time
+      : fertilizer / time,
     totalEmissionsGraph:
       (elecCO2 +
         natGasCO2 +
@@ -421,7 +413,7 @@ function calculs({ datasForm, results, setResults }) {
         water +
         fuelCO2 +
         other +
-        entericFermentationCO2total +
+        entericFermentationCO2Total +
         manureCO2 +
         fertilizer) /
       time,

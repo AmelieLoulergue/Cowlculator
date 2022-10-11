@@ -16,7 +16,6 @@ function Dashboard({
   allResultsUser,
 }) {
   let navigate = useNavigate();
-  let test = [];
   const dates = allResultsUser
     .filter((element) => element !== null)
     .map((element) =>
@@ -25,8 +24,6 @@ function Dashboard({
   const max = Math.max(...dates.filter((element) => element));
   const index = dates.indexOf(max);
   let currentResult = allResultsUser[index];
-  console.log(max, index);
-
   const allTotalEmissionsArray = allResultsUser
     .filter((element) => element !== null)
     .map(
@@ -36,10 +33,7 @@ function Dashboard({
 
   const allTotalMitigatedEmissions = allResultsUser
     .filter((element) => element !== null)
-    .map(
-      (element) =>
-        element.find((el) => el.id === "totalMitigationsGraph").response
-    );
+    .map((element) => element.find((el) => el.id === "CO2emmited").response);
   const allCO2emmitedArray = allResultsUser
     .filter((element) => element !== null)
     .map((element) => element.find((el) => el.id === "CO2emmited").response);
@@ -47,6 +41,7 @@ function Dashboard({
   const allCO2mitigatedEmissions = allResultsUser
     .filter((element) => element !== null)
     .map((element) => element.find((el) => el.id === "CO2mitigated").response);
+  console.log(allCO2mitigatedEmissions[0] / allCO2emmitedArray[0]);
   const labelPeriodChart2 = allResultsUser
     .filter((element) => element !== null)
     .map((element, index) => {
@@ -61,7 +56,7 @@ function Dashboard({
             .find((el) => el.id === "end_date")
             ?.response.replaceAll("-", "/")}`,
           `${Math.round(
-            allTotalMitigatedEmissions[index] / allTotalEmissionsArray[index]
+            (allCO2mitigatedEmissions[index] / allCO2emmitedArray[index]) * 100
           )}% of mitigation`,
         ];
       }
@@ -95,7 +90,7 @@ function Dashboard({
                       <div className="card-top">
                         <img src={plant} alt="plant icon"></img>
                         <h1>
-                          CO<sub>2</sub> saved
+                          CO<sub>2</sub> mitigated
                         </h1>
                       </div>
                       {currentResult && (
@@ -113,7 +108,7 @@ function Dashboard({
                                   (element) => element.id === "CO2mitigated"
                                 ).response * 100
                               ) / 100}{" "}
-                          T of CO2eq/year
+                          Tonne CO2eq/year
                         </h2>
                       )}
                     </div>
@@ -127,7 +122,7 @@ function Dashboard({
                       <div className="card-top">
                         <img src={footprint} alt="carbon footprint icon"></img>
                         <h1>
-                          CO<sub>2</sub> impact
+                          CO<sub>2</sub> emitted
                         </h1>
                       </div>
                       {currentResult && (
@@ -137,7 +132,7 @@ function Dashboard({
                               (element) => element.id === "CO2emmited"
                             )?.response * 100
                           ) / 100}{" "}
-                          T of CO2eq/year
+                          Tonne CO2eq/year
                         </h2>
                       )}
                     </div>{" "}
@@ -150,7 +145,7 @@ function Dashboard({
                     <div className="card-icon">
                       <div className="card-top">
                         <img src={dollar} alt="dollar sign icon"></img>
-                        <h1>New income</h1>
+                        <h1>Estimated carbon credits</h1>
                       </div>
                       {currentResult && (
                         <h2>
@@ -186,7 +181,7 @@ function Dashboard({
                             element.id === "entericFermentationCO2Graph"
                         )?.response,
                         currentResult.find(
-                          (element) => element.id === "manureCO2graph"
+                          (element) => element.id === "manureCO2Graph"
                         )?.response,
                         currentResult.find(
                           (element) => element.id === "cropsGraph"
@@ -211,7 +206,7 @@ function Dashboard({
                       labels={labelPeriodChart2}
                       dataResults={{
                         data1: allTotalEmissionsArray,
-                        data2: allTotalMitigatedEmissions,
+                        data2: allCO2emmitedArray,
                       }}
                     />
                   ) : (
