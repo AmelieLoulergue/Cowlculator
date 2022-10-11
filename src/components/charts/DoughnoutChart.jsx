@@ -30,6 +30,7 @@ let options = {
   },
 };
 export const DoughnutChart = ({ id, dataResults }) => {
+  console.log(dataResults);
   const labels = [
     dataResults[0] && dataResults[0] !== 0
       ? `Utilities ${Math.round(dataResults[0] * 100) / 100} TCO2eq/year`
@@ -52,12 +53,13 @@ export const DoughnutChart = ({ id, dataResults }) => {
       ? `Crops ${Math.round(dataResults[5] * 100) / 100} TCO2eq/year`
       : null,
   ];
+  console.log(dataResults.filter((data) => data !== 0));
   const data = {
     labels: labels.filter((label) => label !== null),
     datasets: [
       {
         label: "Dataset 1",
-        data: dataResults,
+        data: dataResults.filter((data) => data !== 0),
         backgroundColor: [
           "rgb(237, 120, 107)",
           "rgb(32, 191, 169)",
