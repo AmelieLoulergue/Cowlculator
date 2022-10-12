@@ -19,6 +19,7 @@ import ResearcherDatas from "./components/ResearcherDatas";
 import References from "./components/References";
 import listOfQuestions from "./utils/listOfQuestions";
 import getUserDatas from "./utils/userDatas/getUserDatas";
+import getAllResults from "./utils/userDatas/getAllResults";
 import saveUserDatas from "./utils/userDatas/saveUserDatas";
 const darkTheme = createTheme({
   palette: {
@@ -52,10 +53,13 @@ function App() {
   });
   const [farmName, setFarmName] = useState("");
   const [allResultsUser, setAllResultsUser] = useState([]);
-
+  const [allResults, setAllResults] = useState([]);
   useEffect(() => {
     console.log({ allResultsUser });
   }, [allResultsUser]);
+  useEffect(() => {
+    console.log({ allResults });
+  }, [allResults]);
   useEffect(() => {
     if (localStorage.getItem("datasForm")) {
       setDatasForm(JSON.parse(localStorage.getItem("datasForm")));
@@ -255,7 +259,6 @@ function App() {
     }
   }, [allQuestions]);
   useEffect(() => {
-    // call the function
     getUserDatas({ login })
       .then((result) => {
         if (result.result.length > 0) {
@@ -264,6 +267,16 @@ function App() {
       })
       // make sure to catch any error
       .catch(console.error);
+    getAllResults({ login })
+      .then((result) => {
+        setAllResults(
+          result.result.map((item) => [
+            { id: "userId", response: item.user },
+            ...item.result,
+          ])
+        );
+      })
+      .catch(console.error); // call the function
     // console.log(test);
   }, [login]);
   return (
@@ -388,7 +401,7 @@ function App() {
                       login={login}
                       setLogin={setLogin}
                     />
-                    <ResearcherDatas login={login} />
+                    <ResearcherDatas allResults={allResults} login={login} />
                   </>
                 )
               }
@@ -432,7 +445,7 @@ function App() {
                       login={login}
                       setLogin={setLogin}
                     />
-                    <ResearcherDatas login={login} />
+                    <ResearcherDatas allResults={allResults} login={login} />
                   </>
                 )
               }
@@ -476,7 +489,7 @@ function App() {
                       login={login}
                       setLogin={setLogin}
                     />
-                    <ResearcherDatas login={login} />
+                    <ResearcherDatas allResults={allResults} login={login} />
                   </>
                 ) : (
                   <>
