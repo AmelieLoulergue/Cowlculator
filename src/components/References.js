@@ -64,9 +64,10 @@ function References() {
             <div className="card">
               <h3>United States Environmental Protection Agency (EPA)</h3>
               <p>
-                United States Environmental Protection Agency (EPA), 2018,
+                United States Environmental Protection Agency (EPA), 2020,
                 Emissions & Generation Resource Integrated Database (eGRID), 3.
-                State Output Emission Rates (eGRID2018)
+                State Output Emission Rates (eGRID2020)
+                https://www.epa.gov/egrid/download-data
               </p>
             </div>
           </div>
