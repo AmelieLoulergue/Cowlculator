@@ -3,6 +3,7 @@
     text-align: center;
     position: fixed;
     z-index: 9999;
+    width: 100%;
     background: linear-gradient(315deg, #874FF5 10%, #2C60F5 50%, #874FF5 90%);
     background-size: 200%;
     background-position: left;
@@ -24,7 +25,7 @@
 .dash-side-container {
     background: #0c0b10;
     height: calc(100vh - 10px);
-    width: calc(100vw - 10px);
+    width: calc(100vw - (100vw - 100%) - 10px);
     border-radius: 10px;
     margin: 5px;
     display: flex;
