@@ -26,6 +26,7 @@ function Navbar({ login, setLogin, farmName }) {
               <h1>Dashboard</h1>
               <div>
                 {login?.email && <h2>{login.email}</h2>}
+                {login.type === « farmer » && <>Project Name</>}
                 <p>{farmName ? farmName : "Farm name"}</p>
                 <button className="btn" onClick={() => logout({ setLogin })}>
                   Log out
