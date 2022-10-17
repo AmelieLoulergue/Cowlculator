@@ -7,13 +7,13 @@ export const BarChart = ({ dataResults, id, labels }) => {
     labels: labels,
     datasets: [
       {
-        label: "Emissions if no mitigations (Tons Co2 eq/year)",
+        label: "Emissions if no mitigations",
         data: dataResults.data1,
         borderColor: "rgb(237, 120, 107 )",
         backgroundColor: "rgb(237, 120, 107)",
       },
       {
-        label: "Mitigated emissions (Tons Co2 eq/year)",
+        label: "Mitigated emissions",
         data: dataResults.data2,
         color: "white",
         borderColor: "rgb(32, 191, 169)",
@@ -26,7 +26,7 @@ export const BarChart = ({ dataResults, id, labels }) => {
       title: {
         display: true,
         color: "white",
-        text: "Custom Chart Title",
+        text: "Comparison of mitigated emissions and not mitigated emissions in tonne CO<sub>2</sub>eq/year",
         padding: {
           top: 10,
           bottom: 30,

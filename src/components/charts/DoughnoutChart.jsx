@@ -7,7 +7,7 @@ let options = {
     title: {
       display: true,
       color: "white",
-      text: "Custom Chart Title",
+      text: "CO<sub>2</sub>eq emissions repartition in tonne CO<sub>2</sub>eq/year",
       padding: {
         top: 10,
         bottom: 30,
@@ -33,24 +33,24 @@ export const DoughnutChart = ({ id, dataResults }) => {
   console.log(dataResults);
   const labels = [
     dataResults[0] && dataResults[0] !== 0
-      ? `Utilities ${Math.round(dataResults[0] * 100) / 100} TCO2eq/year`
+      ? `Utilities: ${Math.round(dataResults[0] * 100) / 100} `
       : null,
     dataResults[1] && dataResults[1] !== 0
-      ? `Fuel ${Math.round(dataResults[1] * 100) / 100} TCO2eq/year`
+      ? `Fuel: ${Math.round(dataResults[1] * 100) / 100} `
       : null,
     dataResults[2] && dataResults[2] !== 0
-      ? `Other ${Math.round(dataResults[2] * 100) / 100} TCO2eq/year`
+      ? `Other: ${Math.round(dataResults[2] * 100) / 100} `
       : null,
     dataResults[3] && dataResults[3] !== 0
-      ? `Animals’ enteric fermentation ${
+      ? `Animals’ enteric fermentation: ${
           Math.round(dataResults[3] * 100) / 100
-        } TCO2eq/year`
+        } `
       : null,
     dataResults[4] && dataResults[4] !== 0
-      ? `Animals’ manure ${Math.round(dataResults[4] * 100) / 100} TCO2eq/year`
+      ? `Animals’ manure: ${Math.round(dataResults[4] * 100) / 100} `
       : null,
     dataResults[5] && dataResults[5] !== 0
-      ? `Crops ${Math.round(dataResults[5] * 100) / 100} TCO2eq/year`
+      ? `Crops: ${Math.round(dataResults[5] * 100) / 100}`
       : null,
   ];
   console.log(dataResults.filter((data) => data !== 0));

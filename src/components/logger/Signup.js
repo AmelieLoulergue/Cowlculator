@@ -7,7 +7,7 @@ import { passwordStrength } from "check-password-strength";
 import { useState } from "react";
 import Lottie from "lottie-react";
 import eyeBlink from "../../assets/anim/eye-blink.json";
-import fandr from '../../assets/anim/fandr2.json';
+import fandr from "../../assets/anim/fandr2.json";
 import { useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import signup from "../../utils/authentication/signup";
@@ -138,8 +138,8 @@ function Register({
   const radioCheck = (e) => {
     setIsFarmer(!isFarmer);
     setIsResearcher(!isResearcher);
-    document.getElementById('animresearcher').classList.toggle('active')
-    document.getElementById('animfarmer').classList.toggle('active')
+    document.getElementById("animresearcher").classList.toggle("active");
+    document.getElementById("animfarmer").classList.toggle("active");
   };
   const [isFarmer, setIsFarmer] = useState(
     (localStorage.getItem("category_choosed") &&
@@ -192,7 +192,7 @@ function Register({
           </Link>
         </div>
         <div className="bigcontainer">
-          <Lottie animationData={fandr} loop={true}/>
+          <Lottie animationData={fandr} loop={true} />
           <div className="content">
             <div className="title signuptitle">
               <h1>Let's register.</h1>
