@@ -98,7 +98,7 @@ b {
     max-height: 300px;
 }
 
-.land-hiw:nth-child(5) .land-hiw-svg, .land-hiw:nth-child(7) .land-hiw-svg {
+.land-hiw:nth-child(2n + 1) .land-hiw-svg {
     order: 2;
 }
 .land-hiw:nth-child(8) {
@@ -123,7 +123,7 @@ b {
     .land-hiw {
         flex-direction: column;
     }
-    .land-hiw:nth-child(4) .land-hiw-svg, .land-hiw:nth-child(6) .land-hiw-svg {
+    .land-hiw:nth-child(n) .land-hiw-svg {
         order: 2;
     }
 }
