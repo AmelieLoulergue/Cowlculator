@@ -102,7 +102,7 @@ function Login({
                     setUserProfile,
                     login,
                     setLogin,
-                    url: "https://cowlculatorback.herokuapp.com/",
+                    url: "https://cowlculatorback.herokuapp.com",
                     setMessageAlert,
                     setSeverity,
                     setDisplayAlert,
