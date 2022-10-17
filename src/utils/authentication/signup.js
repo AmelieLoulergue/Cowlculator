@@ -13,7 +13,7 @@ const signup = async ({
     body: JSON.stringify(rest),
   };
   const response = await fetch(
-    "http://localhost:3000" + "/api/auth/signup",
+    "https://cowlculatorback.herokuapp.com" + "/api/auth/signup",
     requestOptions
   );
   if (response.status === 200) {
