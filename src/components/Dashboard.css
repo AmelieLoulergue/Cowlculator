@@ -24,7 +24,7 @@
   width: fit-content;
   padding: 0 1rem;
   min-width: 260px;
-  /* flex: 1 1; */
+  flex: 1 1;
   margin: 20px;
 }
 .card-icon img {

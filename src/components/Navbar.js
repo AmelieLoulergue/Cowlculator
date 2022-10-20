@@ -1,6 +1,12 @@
 import * as React from "react";
 import "./Navbar.css";
 import account from "../assets/svg/profile.svg";
+import home from "../assets/svg/home.svg";
+import dashboard from "../assets/svg/dashboard.svg";
+import form from "../assets/svg/form.svg";
+import download from "../assets/svg/download.svg";
+import book from "../assets/svg/book.svg";
+import group from "../assets/svg/group.svg";
 
 import { useState } from "react";
 
@@ -64,8 +70,10 @@ function Navbar({ login, setLogin, farmName }) {
                   toggleSideNav();
                 }}
               >
-                {" "}
-                Home{" "}
+                <div>
+                  <img src={home}></img>
+                  Home{" "}
+                </div>
               </li>
               {login && login.userType === "farmer" && (
                 <>
@@ -75,8 +83,10 @@ function Navbar({ login, setLogin, farmName }) {
                       toggleSideNav();
                     }}
                   >
-                    {" "}
-                    Dashboard{" "}
+                    <div>
+                      <img src={dashboard}></img>
+                      Dashboard{" "}
+                    </div>
                   </li>
                   <li
                     onClick={() => {
@@ -84,8 +94,10 @@ function Navbar({ login, setLogin, farmName }) {
                       toggleSideNav();
                     }}
                   >
-                    {" "}
-                    Form{" "}
+                    <div>
+                      <img src={form}></img>
+                      Form{" "}
+                    </div>
                   </li>
                 </>
               )}
@@ -99,8 +111,10 @@ function Navbar({ login, setLogin, farmName }) {
                       toggleSideNav();
                     }}
                   >
-                    {" "}
-                    Download datas{" "}
+                    <div>
+                      <img src={download}></img>
+                      Download datas{" "}
+                    </div>
                   </button>
                 </>
               )}
@@ -110,8 +124,10 @@ function Navbar({ login, setLogin, farmName }) {
                   toggleSideNav();
                 }}
               >
-                {" "}
-                References{" "}
+                <div>
+                  <img src={book}></img>
+                  References{" "}
+                </div>
               </li>
               <li
                 onClick={() => {
@@ -119,28 +135,12 @@ function Navbar({ login, setLogin, farmName }) {
                   toggleSideNav();
                 }}
               >
-                {" "}
-                About Us{" "}
+                <div>
+                  <img src={group}></img>
+                  About Us{" "}
+                </div>
               </li>
             </ul>
-          </div>
-          <div className="copyright">
-            <p>© Cowlculator 2022</p>
-            <p>
-              Made with 💙🤍❤️ by
-              <br></br>
-              <span>
-                <small>Bertille Dormoy Smith</small>
-              </span>
-              <br></br>
-              <span>
-                <small>Amélie Loulergue</small>
-              </span>
-              <br></br>
-              <span>
-                <small>Clément Loulergue</small>
-              </span>
-            </p>
           </div>
         </div>
       </div>
