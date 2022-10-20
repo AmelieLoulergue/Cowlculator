@@ -159,7 +159,9 @@ function Navbar({ login, setLogin, farmName }) {
           ></img>
         </div>
         <div className="nav-spacer">
-          <img src={account}></img>
+          <img src={account} onClick={() => {
+                  navigate("/account");
+                }}></img>
         </div>
       </div>
       <div className="nav-margin"></div>

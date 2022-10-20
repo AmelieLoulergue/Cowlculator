@@ -7,7 +7,6 @@ import { useRef } from "react";
 import Lottie from "lottie-react";
 import eyeBlink from "../../assets/anim/eye-blink.json";
 import { useNavigate } from "react-router-dom";
-import Bg from ".././Bg";
 import loginFunc from "../../utils/authentication/login";
 function Login({
   userProfile,
