@@ -1,0 +1,72 @@
+#footer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 50px;
+    align-content: center;
+    align-items: center;
+    justify-items: center;
+    padding: 50px;
+    grid-template: "links copy logos";
+}
+
+@media screen and (max-width:950px) {
+    #footer {
+        grid-template-columns: 1fr;
+        grid-template:  "links"
+                        "logos"
+                        "copy";
+    }
+}
+
+#footer .logos {
+    grid-area: logos;
+}
+#footer .logos img {
+    max-width: 200px;
+    display: flex;
+    align-items: center;
+    filter: grayscale(1);
+    transition: .2s ease-out;
+    padding: 10px;
+}
+#footer .logos img:hover {
+    filter: grayscale(0);
+}
+
+#footer .copyright {
+    text-align: center;
+    grid-area: copy;
+}
+
+#footer .links {
+    text-align: center;
+    grid-area: links;
+}
+#footer .links li {
+    list-style: none;
+    cursor: pointer;
+    position: relative;
+    opacity: .6;
+    transition: .3s ease-out;
+}
+#footer .links li::after {
+    content: '';
+    height: 2px;
+    width: 0%;
+    background: linear-gradient(315deg, #874FF5 10%, #2C60F5 50%, #874FF5 90%);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    transition: .3s ease-out;
+}
+#footer .links li:hover {
+    opacity: 1;
+}
+#footer .links li:hover::after {
+    width: 100%;
+}
+#footer .links ul {
+    padding-inline: 0;
+}
