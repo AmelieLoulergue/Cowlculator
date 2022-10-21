@@ -7,7 +7,7 @@ let options = {
     title: {
       display: true,
       color: "white",
-      text: "CO&sub2;eq emissions repartition in tonne CO&sub2;eq/year",
+      text: "CO₂eq emissions repartition in tonne CO₂eq/year",
       padding: {
         top: 10,
         bottom: 30,

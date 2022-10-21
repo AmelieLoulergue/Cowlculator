@@ -26,7 +26,7 @@ export const BarChart = ({ dataResults, id, labels }) => {
       title: {
         display: true,
         color: "white",
-        text: "Comparison of mitigated emissions and not mitigated emissions in tonne CO2eq/year",
+        text: "Comparison of mitigated emissions and not mitigated emissions in tonne CO₂eq/year",
         padding: {
           top: 10,
           bottom: 30,
