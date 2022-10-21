@@ -17,6 +17,7 @@
     "chart.js": "^3.9.1",
     "chartjs-plugin-datalabels": "^2.0.0",
     "check-password-strength": "^2.0.5",
+    "humanize-plus": "^1.8.2",
     "lottie-react": "^2.3.0",
     "lottie-web": "^5.9.4",
     "react": "^18.1.0",

@@ -99,15 +99,15 @@ function Dashboard({
                             Math.round(
                               currentResult.find(
                                 (element) => element.id === "CO2mitigated"
-                              )?.response * 100
-                            ) / 100
+                              )?.response * 10
+                            ) / 10
                           )
                             ? 0
                             : Math.round(
                                 currentResult.find(
                                   (element) => element.id === "CO2mitigated"
-                                ).response * 100
-                              ) / 100}{" "}
+                                ).response * 1
+                              ) / 1}{" "}
                           Tonne CO2eq/year
                         </h2>
                       )}
@@ -130,8 +130,8 @@ function Dashboard({
                           {Math.round(
                             currentResult.find(
                               (element) => element.id === "CO2emmited"
-                            )?.response * 100
-                          ) / 100}{" "}
+                            )?.response * 1
+                          ) / 1}
                           Tonne CO2eq/year
                         </h2>
                       )}
@@ -152,8 +152,8 @@ function Dashboard({
                           {Math.round(
                             currentResult.find(
                               (element) => element.id === "totalCarbonCredits"
-                            )?.response * 100
-                          ) / 100}{" "}
+                            )?.response * 1
+                          ) / 1}{" "}
                           $/year
                         </h2>
                       )}
