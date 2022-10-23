@@ -31,6 +31,8 @@ function Footer() {
             <li>
               <Link to="/account/register">Create your profile</Link>
             </li>
+            <li>Fill the form</li>
+            <li>Access downloadable data</li>
           </ul>
         </div>
 

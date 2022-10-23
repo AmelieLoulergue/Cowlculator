@@ -55,7 +55,7 @@ function Home({ viewHeight, scroll }) {
         </div>
 
         <div className="container">
-          <div className="aboutApp">
+          <div id="app" className="aboutApp">
             <h1 className="primaryTitle">About the app</h1>
             <p>
               Cowlculator is a free app that helps you, American farmers, to
