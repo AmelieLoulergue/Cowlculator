@@ -9,7 +9,7 @@ const updateUserDatas = async ({ login, farmName, setLogin }) => {
       body: JSON.stringify({ farmName: farmName }),
     };
     const response = await fetch(
-      `http://localhost:3000/api/auth/user/${login.userId}`,
+      `https://cowlculatorback.herokuapp.com/api/auth/user/${login.userId}`,
       requestOptions
     );
     const datas = await response.json();

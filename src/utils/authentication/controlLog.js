@@ -16,7 +16,7 @@ export const isLogin = async ({ login, setLogin }) => {
       },
     };
     const response = await fetch(
-      `http://localhost:3000/api/result/user/${login.userId}`,
+      `https://cowlculatorback.herokuapp.com/api/result/user/${login.userId}`,
       requestOptions
     );
     const datas = await response.json();

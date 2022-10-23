@@ -18,7 +18,7 @@ const saveUserDatas = async ({ allQuestions, results, login }) => {
     body: JSON.stringify({ result: resultToSend }),
   };
   const response = await fetch(
-    "http://localhost:3000/api/result",
+    "https://cowlculatorback.herokuapp.com/api/result",
     requestOptions
   );
   const datas = await response.json();

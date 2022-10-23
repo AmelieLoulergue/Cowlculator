@@ -6,7 +6,7 @@ const ConfirmEmail = ({ setMessageAlert, setSeverity, setDisplayAlert }) => {
   confirmEmail({
     userId,
     resetToken,
-    url: "http://localhost:3000",
+    url: "https://cowlculatorback.herokuapp.com",
     navigate,
     setMessageAlert,
     setSeverity,
