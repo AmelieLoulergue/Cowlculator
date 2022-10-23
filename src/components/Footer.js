@@ -20,7 +20,7 @@ function Footer() {
                 <li>About the team</li>
                 <li>Access your profile</li>
                 <li>Fill the form</li>
-                <li>Your researcher? Download datas</li>
+                <li>Are you a researcher? Download datas</li>
             </ul>
         </div>
 
