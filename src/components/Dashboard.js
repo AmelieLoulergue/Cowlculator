@@ -149,10 +149,11 @@ function Dashboard({ allResultsUser }) {
                   </div>
                 </div>
               </div>
-              <div className="column is-4 is-12-touch">
+              <div className="column is-6 is-12-touch">
                 <div className="card-chart">
                   {currentResult ? (
                     <DoughnutChart
+                      responsive={false}
                       id={"chart1"}
                       dataResults={[
                         currentResult.find(
@@ -185,11 +186,19 @@ function Dashboard({ allResultsUser }) {
                   )}
                 </div>
               </div>
-
-              <div className="column is-4 is-12-touch">
+              <div className="column is-6 is-12-touch">
+                <div className="card-chart has-text-centered">
+                  C'est super vraiment, félicitations !! BRAVO !! Génialissime
+                </div>{" "}
+              </div>
+              <div className="column is-6 is-hidden-mobile">
+                <div className="card-chart has-text-centered">ADVICE</div>{" "}
+              </div>
+              <div className="column is-6 is-12-touch">
                 <div className="card-chart">
                   {currentResult ? (
                     <BarChart
+                      responsive={false}
                       id={"chart2"}
                       labels={labelPeriodChart2}
                       dataResults={{
@@ -206,11 +215,14 @@ function Dashboard({ allResultsUser }) {
                   )}
                 </div>
               </div>
-
-              <div className="column is-4 is-12-touch">
+              <div className="column is-6 is-hidden-desktop">
+                <div className="card-chart has-text-centered">ADVICE</div>{" "}
+              </div>
+              <div className="column is-6 is-12-touch ">
                 <div className="card-chart">
                   {currentResult ? (
                     <LineChart
+                      responsive={false}
                       labels={labelPeriodChart3}
                       id={"chart3"}
                       dataResults={{
@@ -226,6 +238,9 @@ function Dashboard({ allResultsUser }) {
                     </div>
                   )}
                 </div>
+              </div>
+              <div className="column is-6 ">
+                <div className="card-chart has-text-centered">ADVICE</div>{" "}
               </div>
             </div>
           </div>
