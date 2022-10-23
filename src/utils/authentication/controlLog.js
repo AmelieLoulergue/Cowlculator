@@ -20,7 +20,6 @@ export const isLogin = async ({ login, setLogin }) => {
       requestOptions
     );
     const datas = await response.json();
-    console.log(datas);
     if (datas.error) {
       setLogin(false);
       return false;

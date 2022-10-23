@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { DoughnutChart } from "./charts/DoughnoutChart";
 import { BarChart } from "./charts/VerticalBarChart";
 import { LineChart } from "./charts/LineChart";
+import advices from "../utils/calculs/advice";
 function Dashboard({ allResultsUser }) {
   let navigate = useNavigate();
   allResultsUser.sort((a, b) => {
@@ -16,7 +17,8 @@ function Dashboard({ allResultsUser }) {
     );
   });
   let currentResult = allResultsUser[allResultsUser.length - 1];
-
+  let advicesArray = advices({ result: currentResult });
+  console.log(advicesArray);
   const allTotalEmissionsArray = allResultsUser
     .filter((element) => element !== null)
     .map(
@@ -188,7 +190,12 @@ function Dashboard({ allResultsUser }) {
               </div>
               <div className="column is-6 is-12-touch">
                 <div className="card-chart has-text-centered">
-                  C'est super vraiment, félicitations !! BRAVO !! Génialissime
+                  {advicesArray?.map((advice) => (
+                    <>
+                      {advice}
+                      <br />
+                    </>
+                  ))}
                 </div>{" "}
               </div>
               <div className="column is-6 is-hidden-mobile">
