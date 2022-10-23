@@ -182,9 +182,10 @@ function Register({
   const noNav = `.dash-nav, .nav-margin, .dash-side {
     display: none !important;
 }`;
+const noFoot = `#footer {display: none !important}`;
   return (
     <>
-      <style>{noNav}</style>
+      <style>{noNav}{noFoot}</style>
       <div className="center-flex">
         <div className="navbar">
           <Link to="../account">

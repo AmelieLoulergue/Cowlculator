@@ -7,6 +7,7 @@ import Register from "./components/logger/Signup";
 import Dashboard from "./components/Dashboard";
 import About from "./components/About";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import Bg from "./components/Bg";
 import { useState, useEffect } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
@@ -590,6 +591,7 @@ function App() {
             />
           </Routes>
         </BrowserRouter>
+        <Footer></Footer>
         <Bg></Bg>
       </div>
     </ThemeProvider>

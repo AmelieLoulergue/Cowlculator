@@ -160,7 +160,7 @@ function Home({ viewHeight, scroll }) {
               <div className="number">4</div>
               <h1>Access meaningful data</h1>
               <p>
-                Cowlculator's database gathers users' information whil
+                Cowlculator's database gathers users' information while
                 guaranteeing their privacy. Using an authorized email address,
                 acces this dataset to conduct meaningful agricultural research.
               </p>

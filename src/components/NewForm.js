@@ -153,9 +153,11 @@ const NewForm = ({
       setCounterQuestion(allQuestions.length);
     }
   }, [questions]);
+  const noFoot = `#footer {display: none !important}`;
 
   return (
     <div className="">
+      <style>{noFoot}</style>
       {initForm && (
         <div className="buttons-skip-form">
           <button
