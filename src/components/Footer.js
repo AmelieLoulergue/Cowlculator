@@ -4,8 +4,8 @@ import "./Footer.css";
 import mif from "../assets/img/mif.png";
 import wwc from "../assets/img/wwc-circle.png";
 import logo from "../assets/img/cowlculator.png";
-import { Link } from "react-router-dom";
-function Footer() {
+import { HashLink as Link } from "react-router-hash-link";
+function Footer({ login }) {
   return (
     <>
       <div id="footer">
@@ -16,28 +16,34 @@ function Footer() {
               <Link to="/">Home page</Link>
             </li>
             <li>
-              <Link to="/">
-                <a href="app">About the app</a>
-              </Link>
+              <Link to="/#app">About the app</Link>
             </li>
             <li>
-              <Link to="/">
-                <a href="steps">How to get your results?</a>
-              </Link>
+              <Link to="/#steps">How to get your results?</Link>
             </li>
             <li>
               <Link to="/About">Meet the team</Link>
             </li>
-            <li>
-              <Link to="/account/register">Create your profile</Link>
-            </li>
-            <li>Fill the form</li>
-            <li>Access downloadable data</li>
+            {!login && (
+              <li>
+                <Link to="/account/register">Create your profile</Link>
+              </li>
+            )}
+            {login?.userType === "farmer" && (
+              <li>
+                <Link to="/form">Fill the form</Link>
+              </li>
+            )}
+            {login?.userType === "researcher" && (
+              <li>
+                <Link to="/datas">Access downloadable data</Link>
+              </li>
+            )}
           </ul>
         </div>
 
         <div className="copyright">
-          <img src={logo}></img>
+          <img src={logo} alt=""></img>
           <p>© Cowlculator 2022</p>
           <p>
             Made with 💙🤍❤️ by

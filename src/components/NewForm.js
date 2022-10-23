@@ -33,6 +33,7 @@ const NewForm = ({
   counterQuestion,
   setCounterQuestion,
   allResultsUser,
+  login,
 }) => {
   console.log({ allResultsUser, questions });
   const stateList = elec_state_coeff.map((element) => element.State);
@@ -136,17 +137,38 @@ const NewForm = ({
   };
   useEffect(() => {
     document.getElementsByClassName("dash-nav")[0].classList.add("form-navbar");
-    
+
     if (allResultsUser?.length) {
       console.log(allResultsUser[0]);
+      setQuestions(
+        questions.map((question) => {
+          if (question.id === "farm_name") {
+            return { ...question, response: login?.farmName };
+          } else if (question.id === "farm_state") {
+            return {
+              ...question,
+              response: allResultsUser[0].find(
+                (element) => element.id === "farm_state"
+              )?.response,
+            };
+          } else if (question.id === "farm_zip_code") {
+            return {
+              ...question,
+              response: allResultsUser[0].find(
+                (element) => element.id === "farm_zip_code"
+              )?.response,
+            };
+          }
+          return question;
+        })
+      );
       setQuestionToDisplay(listOfQuestions.formQuestions[3]);
     }
   }, []);
   useEffect(() => {
     if (allResultsUser?.length) {
       setProgress(
-        Math.round(((counterQuestion * 100) / (allQuestions.length - 3)) * 10) /
-          10
+        Math.round(((counterQuestion * 100) / allQuestions.length) * 10) / 10
       );
     } else {
       setProgress(
@@ -225,7 +247,7 @@ const NewForm = ({
         {initForm && questions.length > 0 && (
           <div id="questions-form" className="questions" ref={chatContainer}>
             {questions
-              .slice(allResultsUser?.length ? 2 : 0, indexQuestions)
+              .slice(allResultsUser?.length ? 3 : 0, indexQuestions)
               .map((question, index) => (
                 <div
                   key={`question_form_${index}`}

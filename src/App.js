@@ -22,6 +22,8 @@ import getUserDatas from "./utils/userDatas/getUserDatas";
 import getAllResults from "./utils/userDatas/getAllResults";
 import saveUserDatas from "./utils/userDatas/saveUserDatas";
 import updateUserDatas from "./utils/userDatas/updateUserDatas";
+import Logger from "./components/logger/Logger";
+import { CircularProgress } from "@mui/material";
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -50,7 +52,11 @@ function App() {
   const [farmName, setFarmName] = useState("");
   const [allResultsUser, setAllResultsUser] = useState([]);
   const [allResults, setAllResults] = useState([]);
-
+  const [timer, setTimer] = useState(true);
+  const goTimer = () => {
+    console.log("timer");
+    setTimeout(() => setTimer(false), 500);
+  };
   useEffect(() => {
     if (login.userId && localStorage.getItem(`datasForm${login.userId}`)) {
       setDatasForm(
@@ -97,6 +103,9 @@ function App() {
       setInitForm(
         JSON.parse(localStorage.getItem("initForm")) === "true" ? true : false
       );
+    }
+    if (timer) {
+      goTimer();
     }
   }, []);
   useEffect(() => {
@@ -307,7 +316,7 @@ function App() {
                     login={login}
                     setLogin={setLogin}
                   ></Navbar>
-                  <Home /> <Footer />
+                  <Home /> <Footer login={login} />
                 </>
               }
             ></Route>
@@ -322,6 +331,7 @@ function App() {
                       setLogin={setLogin}
                     ></Navbar>
                     <NewForm
+                      login={login}
                       results={results}
                       setResults={setResults}
                       questions={questions}
@@ -345,16 +355,33 @@ function App() {
                       setCounterQuestion={setCounterQuestion}
                       allResultsUser={allResultsUser}
                     />{" "}
-                    <Footer />
+                    <Footer login={login} />
                   </>
                 ) : (
                   <>
-                    <Navbar
-                      farmName={farmName}
-                      login={login}
-                      setLogin={setLogin}
-                    ></Navbar>
-                    <Home /> <Footer />
+                    {timer && (
+                      <div
+                        style={{
+                          height: "100vh",
+                          width: "100%",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <CircularProgress />
+                      </div>
+                    )}
+                    {!timer && (
+                      <>
+                        <Navbar
+                          farmName={farmName}
+                          login={login}
+                          setLogin={setLogin}
+                        ></Navbar>
+                        <Home /> <Footer login={login} />
+                      </>
+                    )}
                   </>
                 )
               }
@@ -369,7 +396,7 @@ function App() {
                       login={login}
                       setLogin={setLogin}
                     />
-                    <Login
+                    <Logger
                       userProfile={userProfile}
                       setUserProfile={setUserProfile}
                       login={login}
@@ -378,7 +405,7 @@ function App() {
                       setSeverity={setSeverity}
                       setDisplayAlert={setDisplayAlert}
                     />{" "}
-                    <Footer />
+                    <Footer login={login} />
                   </>
                 ) : loggedUser && login.userType === "farmer" ? (
                   <>
@@ -387,7 +414,8 @@ function App() {
                       login={login}
                       setLogin={setLogin}
                     />
-                    <Dashboard allResultsUser={allResultsUser} /> <Footer />
+                    <Dashboard allResultsUser={allResultsUser} />{" "}
+                    <Footer login={login} />
                   </>
                 ) : (
                   <>
@@ -397,7 +425,7 @@ function App() {
                       setLogin={setLogin}
                     />
                     <ResearcherDatas allResults={allResults} login={login} />{" "}
-                    <Footer />
+                    <Footer login={login} />
                   </>
                 )
               }
@@ -421,7 +449,7 @@ function App() {
                       setSeverity={setSeverity}
                       setDisplayAlert={setDisplayAlert}
                     />{" "}
-                    <Footer />
+                    <Footer login={login} />
                   </>
                 ) : loggedUser && login.userType === "farmer" ? (
                   <>
@@ -430,7 +458,8 @@ function App() {
                       login={login}
                       setLogin={setLogin}
                     />
-                    <Dashboard allResultsUser={allResultsUser} /> <Footer />
+                    <Dashboard allResultsUser={allResultsUser} />{" "}
+                    <Footer login={login} />
                   </>
                 ) : (
                   <>
@@ -440,7 +469,7 @@ function App() {
                       setLogin={setLogin}
                     />
                     <ResearcherDatas allResults={allResults} login={login} />{" "}
-                    <Footer />
+                    <Footer login={login} />
                   </>
                 )
               }
@@ -462,7 +491,7 @@ function App() {
                       setSeverity={setSeverity}
                       setDisplayAlert={setDisplayAlert}
                     />{" "}
-                    <Footer />
+                    <Footer login={login} />
                   </>
                 ) : loggedUser && login.userType === "farmer" ? (
                   <>
@@ -477,7 +506,7 @@ function App() {
                       formIsCompleted={formIsCompleted}
                       allResultsUser={allResultsUser}
                     />{" "}
-                    <Footer />
+                    <Footer login={login} />
                   </>
                 ) : (
                   <>
@@ -487,7 +516,7 @@ function App() {
                       setLogin={setLogin}
                     />
                     <ResearcherDatas allResults={allResults} login={login} />
-                    <Footer />
+                    <Footer login={login} />
                   </>
                 )
               }
@@ -508,25 +537,42 @@ function App() {
                       formIsCompleted={formIsCompleted}
                       allResultsUser={allResultsUser}
                     />
-                    <Footer />
+                    <Footer login={login} />
                   </>
                 ) : (
                   <>
-                    <Navbar
-                      farmName={farmName}
-                      login={login}
-                      setLogin={setLogin}
-                    ></Navbar>
-                    <Login
-                      userProfile={userProfile}
-                      setUserProfile={setUserProfile}
-                      login={login}
-                      setLogin={setLogin}
-                      setMessageAlert={setMessageAlert}
-                      setSeverity={setSeverity}
-                      setDisplayAlert={setDisplayAlert}
-                    />
-                    <Footer />
+                    {timer && (
+                      <div
+                        style={{
+                          height: "100vh",
+                          width: "100%",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <CircularProgress />
+                      </div>
+                    )}
+                    {!timer && (
+                      <>
+                        <Navbar
+                          farmName={farmName}
+                          login={login}
+                          setLogin={setLogin}
+                        ></Navbar>
+                        <Login
+                          userProfile={userProfile}
+                          setUserProfile={setUserProfile}
+                          login={login}
+                          setLogin={setLogin}
+                          setMessageAlert={setMessageAlert}
+                          setSeverity={setSeverity}
+                          setDisplayAlert={setDisplayAlert}
+                        />
+                        <Footer login={login} />
+                      </>
+                    )}
                   </>
                 )
               }
@@ -542,7 +588,7 @@ function App() {
                       setLogin={setLogin}
                     />
                     <ResearcherDatas allResults={allResults} login={login} />
-                    <Footer />
+                    <Footer login={login} />
                   </>
                 ) : (
                   <>
@@ -552,7 +598,7 @@ function App() {
                       setLogin={setLogin}
                     />
                     <Home />
-                    <Footer />
+                    <Footer login={login} />
                   </>
                 )
               }
@@ -567,7 +613,7 @@ function App() {
                     setLogin={setLogin}
                   />
                   <About />
-                  <Footer />
+                  <Footer login={login} />
                 </>
               }
             ></Route>
@@ -586,7 +632,7 @@ function App() {
                     setSeverity={setSeverity}
                     setDisplayAlert={setDisplayAlert}
                   />
-                  <Footer />
+                  <Footer login={login} />
                 </>
               }
             />
@@ -600,7 +646,7 @@ function App() {
                     setLogin={setLogin}
                   />
                   <References />
-                  <Footer />
+                  <Footer login={login} />
                 </>
               }
             />
