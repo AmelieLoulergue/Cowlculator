@@ -1,5 +1,4 @@
 const getAllResults = async ({ login, filters }) => {
-  console.log(filters);
   let requestOptions = {
     method: "GET",
     headers: {
@@ -12,7 +11,6 @@ const getAllResults = async ({ login, filters }) => {
     requestOptions
   );
   const datas = await response.json();
-  console.log(datas);
   return datas;
 };
 export default getAllResults;

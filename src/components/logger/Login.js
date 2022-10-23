@@ -7,7 +7,6 @@ import { useRef } from "react";
 import Lottie from "lottie-react";
 import eyeBlink from "../../assets/anim/eye-blink.json";
 import { useNavigate } from "react-router-dom";
-import Bg from ".././Bg";
 import loginFunc from "../../utils/authentication/login";
 function Login({
   userProfile,
@@ -39,7 +38,7 @@ function Login({
       <div className="center-flex">
         <div className="navbar">
           <Link to="../account">
-            <img src={back_arrow}></img>
+            <img src={back_arrow} alt=""></img>
           </Link>
         </div>
         <div className="content">

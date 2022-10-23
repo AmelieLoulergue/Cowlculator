@@ -2,7 +2,6 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import NewForm from "./components/NewForm";
-import Account from "./components/logger/Logger";
 import Login from "./components/logger/Login";
 import Register from "./components/logger/Signup";
 import Dashboard from "./components/Dashboard";
@@ -28,25 +27,20 @@ const darkTheme = createTheme({
 });
 function App() {
   const [formIsCompleted, setFormIsCompleted] = useState(false);
-  const [viewHeight, setViewHeight] = useState(window.innerHeight);
   const [datasForm, setDatasForm] = useState([]);
   const [messageAlert, setMessageAlert] = useState("");
   const [severity, setSeverity] = useState("");
   const [initForm, setInitForm] = useState(false);
   const [displayAlert, setDisplayAlert] = useState(false);
   const [questionToDisplay, setQuestionToDisplay] = useState(null);
-  const [indexQuestions, setIndexQuestions] = useState(
-    localStorage.getItem("indexQuestions")
-      ? Number(localStorage.getItem("indexQuestions"))
-      : 0
-  );
+  const [indexQuestions, setIndexQuestions] = useState(0);
   const [counterQuestion, setCounterQuestion] = useState(0);
-  useEffect(() => setViewHeight(window.innerHeight), [window]);
 
   const [results, setResults] = useState({});
   const [questions, setQuestions] = useState([]);
   const [allQuestions, setAllQuestions] = useState([]);
   const [login, setLogin] = useState(false);
+  const [loggedUser, setLoggedUser] = useState(false);
   const [userProfile, setUserProfile] = useState({
     email: "",
     password: "",
@@ -54,18 +48,19 @@ function App() {
   const [farmName, setFarmName] = useState("");
   const [allResultsUser, setAllResultsUser] = useState([]);
   const [allResults, setAllResults] = useState([]);
+
   useEffect(() => {
-    console.log({ allResultsUser });
-  }, [allResultsUser]);
-  useEffect(() => {
-    console.log({ allResults });
-  }, [allResults]);
-  useEffect(() => {
-    if (localStorage.getItem("datasForm")) {
-      setDatasForm(JSON.parse(localStorage.getItem("datasForm")));
+    if (login.userId && localStorage.getItem(`datasForm${login.userId}`)) {
+      setDatasForm(
+        JSON.parse(localStorage.getItem(`datasForm${login.userId}`))
+      );
     }
-    if (localStorage.getItem("results")) {
-      setResults(JSON.parse(localStorage.getItem("results")));
+    if (localStorage.getItem("indexQuestions")) {
+      console.log(Number(localStorage.getItem("indexQuestions")));
+      setIndexQuestions(Number(localStorage.getItem("indexQuestions")));
+    }
+    if (login.userId && localStorage.getItem("results")) {
+      setResults(JSON.parse(localStorage.getItem(`results${login.userId}`)));
     }
     if (localStorage.getItem("allQuestions")) {
       setAllQuestions(JSON.parse(localStorage.getItem("allQuestions")));
@@ -103,10 +98,6 @@ function App() {
       );
     }
   }, []);
-  // useEffect(
-  //   () => console.log(allQuestions, questions),
-  //   [allQuestions, questions]
-  // );
   useEffect(() => {
     if (questions.find((element) => element.id === "farm_name")) {
       setFarmName(
@@ -164,7 +155,6 @@ function App() {
     }
   }, []);
 
-  // console.log({ allQuestions });
   useEffect(() => {
     if (initForm) {
       setDatasForm(
@@ -182,15 +172,25 @@ function App() {
     if (questions.length > 0) {
       localStorage.setItem("questions", JSON.stringify(questions));
     }
+    console.log({ questions });
   }, [questions]);
   useEffect(() => {
-    localStorage.setItem("indexQuestions", indexQuestions);
+    if (indexQuestions !== 0) {
+      localStorage.setItem("indexQuestions", JSON.stringify(indexQuestions));
+    }
+    console.log({ indexQuestions });
   }, [indexQuestions]);
   useEffect(() => {
-    localStorage.setItem("counterQuestion", counterQuestion);
+    if (counterQuestion !== 0) {
+      localStorage.setItem("counterQuestion", counterQuestion);
+    }
+    console.log({ counterQuestion });
   }, [counterQuestion]);
   useEffect(() => {
-    localStorage.setItem("initForm", initForm);
+    if (initForm !== undefined) {
+      localStorage.setItem("initForm", JSON.stringify(initForm));
+    }
+    console.log({ initForm });
   }, [initForm]);
   useEffect(() => {
     if (questionToDisplay !== null) {
@@ -199,12 +199,17 @@ function App() {
         JSON.stringify(questionToDisplay)
       );
     }
+    console.log(questionToDisplay);
   }, [questionToDisplay]);
   useEffect(() => {
     calculs({ datasForm, results, setResults });
     if (datasForm.length > 0) {
-      localStorage.setItem("datasForm", JSON.stringify(datasForm));
+      localStorage.setItem(
+        `datasForm${login.userId}`,
+        JSON.stringify(datasForm)
+      );
     }
+    console.log({ datasForm });
   }, [datasForm]);
   useEffect(() => {
     if (login && login !== "false") {
@@ -213,8 +218,9 @@ function App() {
   }, [login]);
   useEffect(() => {
     if (formIsCompleted) {
-      console.log({ results }, { datasForm }, { questions });
-      localStorage.setItem("results", JSON.stringify(results));
+      if (login.userId) {
+        localStorage.setItem(`results${login.userId}`, JSON.stringify(results));
+      }
       saveUserDatas({ allQuestions, results, login }).then(() => {
         getUserDatas({ login })
           .then((result) => {
@@ -224,15 +230,15 @@ function App() {
           })
           // make sure to catch any error
           .catch(console.error);
-        localStorage.removeItem("results");
+        localStorage.removeItem(`results${login.userId}`);
         localStorage.removeItem("allQuestions");
         localStorage.removeItem("counterQuestion");
         localStorage.removeItem("formIsCompleted");
         localStorage.removeItem("indexQuestions");
-        localStorage.removeItem("initForm");
+        localStorage.setItem("initForm", "false");
         localStorage.removeItem("questionToDisplay");
         localStorage.removeItem("questions");
-        localStorage.removeItem("datasForm");
+        localStorage.removeItem(`datasForm${login.userId}`);
         setFormIsCompleted(false);
         setDatasForm([]);
         setInitForm(false);
@@ -246,17 +252,19 @@ function App() {
       });
     }
     localStorage.setItem("formIsCompleted", formIsCompleted);
+    console.log({ formIsCompleted });
   }, [formIsCompleted]);
   useEffect(() => {
-    console.log({ results });
-    if (results !== {}) {
-      localStorage.setItem("results", JSON.stringify(results));
+    if (results !== {} && login.userId) {
+      localStorage.setItem(`results${login.userId}`, JSON.stringify(results));
     }
+    console.log({ results });
   }, [results]);
   useEffect(() => {
     if (allQuestions.length > 0) {
       localStorage.setItem("allQuestions", JSON.stringify(allQuestions));
     }
+    console.log({ allQuestions });
   }, [allQuestions]);
   useEffect(() => {
     getUserDatas({ login })
@@ -276,8 +284,11 @@ function App() {
           ])
         );
       })
-      .catch(console.error); // call the function
-    // console.log(test);
+      .catch(console.error);
+  }, [login]);
+  useEffect(() => {
+    isLogin({ login, setLogin }).then((response) => setLoggedUser(response));
+    console.log(login);
   }, [login]);
   return (
     <ThemeProvider theme={darkTheme}>
@@ -303,7 +314,7 @@ function App() {
             <Route
               path="/form"
               element={
-                isLogin({ login }) ? (
+                loggedUser ? (
                   <>
                     <Navbar
                       farmName={farmName}
@@ -349,20 +360,7 @@ function App() {
             <Route
               path="/account"
               element={
-                <>
-                  <Navbar
-                    farmName={farmName}
-                    login={login}
-                    setLogin={setLogin}
-                  />
-                  <Account />
-                </>
-              }
-            ></Route>
-            <Route
-              path="/account/login"
-              element={
-                !isLogin({ login }) ? (
+                !loggedUser ? (
                   <>
                     <Navbar
                       farmName={farmName}
@@ -379,20 +377,55 @@ function App() {
                       setDisplayAlert={setDisplayAlert}
                     />
                   </>
-                ) : isLogin({ login }) && login.userType === "farmer" ? (
+                ) : loggedUser && login.userType === "farmer" ? (
                   <>
                     <Navbar
                       farmName={farmName}
                       login={login}
                       setLogin={setLogin}
                     />
-                    <Dashboard
+                    <Dashboard allResultsUser={allResultsUser} />
+                  </>
+                ) : (
+                  <>
+                    <Navbar
+                      farmName={farmName}
                       login={login}
-                      results={results}
-                      allResultsUser={allResultsUser}
-                      formIsCompleted={formIsCompleted}
-                      datasForm={datasForm}
+                      setLogin={setLogin}
                     />
+                    <ResearcherDatas allResults={allResults} login={login} />
+                  </>
+                )
+              }
+            ></Route>
+            <Route
+              path="/account/login"
+              element={
+                !loggedUser ? (
+                  <>
+                    <Navbar
+                      farmName={farmName}
+                      login={login}
+                      setLogin={setLogin}
+                    />
+                    <Login
+                      userProfile={userProfile}
+                      setUserProfile={setUserProfile}
+                      login={login}
+                      setLogin={setLogin}
+                      setMessageAlert={setMessageAlert}
+                      setSeverity={setSeverity}
+                      setDisplayAlert={setDisplayAlert}
+                    />
+                  </>
+                ) : loggedUser && login.userType === "farmer" ? (
+                  <>
+                    <Navbar
+                      farmName={farmName}
+                      login={login}
+                      setLogin={setLogin}
+                    />
+                    <Dashboard allResultsUser={allResultsUser} />
                   </>
                 ) : (
                   <>
@@ -409,7 +442,7 @@ function App() {
             <Route
               path="/account/register"
               element={
-                !isLogin({ login }) ? (
+                !loggedUser ? (
                   <>
                     <Navbar
                       farmName={farmName}
@@ -424,7 +457,7 @@ function App() {
                       setDisplayAlert={setDisplayAlert}
                     />
                   </>
-                ) : isLogin({ login }) && login.userType === "farmer" ? (
+                ) : loggedUser && login.userType === "farmer" ? (
                   <>
                     <Navbar
                       farmName={farmName}
@@ -453,7 +486,7 @@ function App() {
             <Route
               path="/dashboard"
               element={
-                isLogin({ login }) ? (
+                loggedUser ? (
                   <>
                     <Navbar
                       farmName={farmName}
@@ -474,7 +507,15 @@ function App() {
                       login={login}
                       setLogin={setLogin}
                     ></Navbar>
-                    <Home />
+                    <Login
+                      userProfile={userProfile}
+                      setUserProfile={setUserProfile}
+                      login={login}
+                      setLogin={setLogin}
+                      setMessageAlert={setMessageAlert}
+                      setSeverity={setSeverity}
+                      setDisplayAlert={setDisplayAlert}
+                    />
                   </>
                 )
               }
@@ -482,7 +523,7 @@ function App() {
             <Route
               path="/datas"
               element={
-                isLogin({ login }) ? (
+                loggedUser ? (
                   <>
                     <Navbar
                       farmName={farmName}

@@ -49,7 +49,6 @@ function funcMitigationsImpFeedSheep({ datasForm, EFSheep }) {
   }
 
   //EF emissions from cattle portion concerned by improved feeding
-  let EFSheepImpFeed = 0;
   let mitigatedEFSheepImpFeed = 0;
   if (
     datasForm.find((data) => data.id === "farm_animals_sheeps_feeding_practice")
@@ -57,12 +56,7 @@ function funcMitigationsImpFeedSheep({ datasForm, EFSheep }) {
     numbSheepPractices !== 0
   ) {
     mitigatedEFSheepImpFeed = numbSheepPractices * EFSheep * coeffImpFeedSheep;
-    // Total EF emissions after mitigation
-    EFSheepImpFeed = EFSheep - mitigatedEFSheepImpFeed;
-  } else {
-    EFSheepImpFeed = 0;
   }
-
   return mitigatedEFSheepImpFeed;
 }
 export default funcMitigationsImpFeedSheep;

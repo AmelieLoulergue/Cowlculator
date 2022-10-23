@@ -1,11 +1,7 @@
 import React from "react";
-import Box from "@mui/material/Box";
-import FormControl from "@mui/material/FormControl";
-import NativeSelect from "@mui/material/NativeSelect";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 
 function ResearcherDatas({ login, allResults }) {
-  console.log(allResults);
   const headers = allResults[0]?.map((element) => element.id);
   const columnsTest = headers?.map((header) => {
     return {
@@ -33,10 +29,9 @@ function ResearcherDatas({ login, allResults }) {
       })
     )
   );
-  console.log(rowsTest2);
   let empty = [];
-  rowsTest2.map((row) => {
-    Object.entries(row).map((rowItem) => {
+  rowsTest2.forEach((row) => {
+    Object.entries(row).forEach((rowItem) => {
       if (
         rowItem[1] === 0 ||
         rowItem[1] === undefined ||
@@ -46,12 +41,10 @@ function ResearcherDatas({ login, allResults }) {
       }
     });
   });
-  console.log(empty);
   const counts = {};
   empty.forEach(function (x) {
     counts[x] = (counts[x] || 0) + 1;
   });
-  console.log(counts);
   let emptyKeys = Object.entries(counts)
     .map((element) => {
       if (element[1] === allResults.length) {
@@ -75,7 +68,6 @@ function ResearcherDatas({ login, allResults }) {
     )
   );
 
-  console.log(test45);
   return (
     <>
       {(login?.userType === "researcher" ||
@@ -104,7 +96,8 @@ function ResearcherDatas({ login, allResults }) {
                 alignItems: "center",
               }}
             >
-              You can download all the data as csv by clicking on this button : <br />
+              You can download all the data as csv by clicking on this button :{" "}
+              <br />
               <div style={{ padding: "1rem" }}>
                 <a
                   href="https://clous-storage-carbonb-cos-standard-26b.s3.eu-de.cloud-object-storage.appdomain.cloud/CowlculatorDB.csv"
@@ -137,7 +130,6 @@ function ResearcherDatas({ login, allResults }) {
               columns={test44 ? test44 : []}
               pageSize={10}
               rowsPerPageOptions={[10]}
-              onFilterModelChange={(event) => console.log(event.items)}
               components={{ Toolbar: GridToolbar }}
             />
           </div>

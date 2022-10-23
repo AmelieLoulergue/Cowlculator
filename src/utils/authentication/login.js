@@ -1,9 +1,6 @@
-import React from "react";
 const TOKEN_KEY = "jwt";
 const loginFunc = async ({
   userProfile,
-  setUserProfile,
-  login,
   setLogin,
   url,
   navigate,

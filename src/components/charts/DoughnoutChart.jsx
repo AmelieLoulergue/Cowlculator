@@ -1,7 +1,6 @@
 import React from "react";
 import "chart.js/auto";
 import { Doughnut } from "react-chartjs-2";
-import ChartDataLabels from "chartjs-plugin-datalabels";
 let options = {
   plugins: {
     title: {
@@ -30,7 +29,6 @@ let options = {
   },
 };
 export const DoughnutChart = ({ id, dataResults }) => {
-  console.log(dataResults);
   const labels = [
     dataResults[0] && dataResults[0] !== 0
       ? `Utilities: ${Math.round(dataResults[0] * 100) / 100} `
@@ -53,7 +51,6 @@ export const DoughnutChart = ({ id, dataResults }) => {
       ? `Crops: ${Math.round(dataResults[5] * 100) / 100}`
       : null,
   ];
-  console.log(dataResults.filter((data) => data !== 0));
   const data = {
     labels: labels.filter((label) => label !== null),
     datasets: [

@@ -54,7 +54,6 @@ function funcMitigationsAdditiveDairy({ datasForm, EFDairy, cattleDairy }) {
   }
 
   //EF emissions from cattle portion concerned by additives
-  let EFDairyAdditive = 0;
   let mitigatedEFDairyAdditive = 0;
 
   if (
@@ -67,19 +66,7 @@ function funcMitigationsAdditiveDairy({ datasForm, EFDairy, cattleDairy }) {
   ) {
     mitigatedEFDairyAdditive =
       numbDairyPracticesAdditive * EFDairy * coeffAdditiveDairy;
-    EFDairyAdditive = EFDairy - mitigatedEFDairyAdditive;
-  } else {
-    EFDairyAdditive = 0;
   }
-  // Total EF emissions after mitigation
-  console.log({
-    cattleDairy,
-    numbDairyPracticesAdditive,
-    EFDairy,
-    coeffAdditiveDairy,
-    EFDairyAdditive,
-    mitigatedEFDairyAdditive,
-  });
   return mitigatedEFDairyAdditive;
 }
 export default funcMitigationsAdditiveDairy;

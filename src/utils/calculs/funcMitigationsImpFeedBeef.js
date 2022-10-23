@@ -47,8 +47,6 @@ function funcMitigationsImpFeedBeef({ datasForm, EFBeef, cattleBeef }) {
   }
 
   // EF emissions mitigated by the practice improved feeding
-
-  let EFBeefImpFeed = 0;
   let mitigatedEFBeefImpFeed = 0;
   if (
     datasForm.find(
@@ -59,11 +57,7 @@ function funcMitigationsImpFeedBeef({ datasForm, EFBeef, cattleBeef }) {
     numbBeefPractices !== 0
   ) {
     mitigatedEFBeefImpFeed = numbBeefPractices * EFBeef * coeffImpFeedBeef;
-    EFBeefImpFeed = EFBeef - mitigatedEFBeefImpFeed;
-  } else {
-    EFBeefImpFeed = 0;
   }
-  console.log(EFBeefImpFeed);
   return mitigatedEFBeefImpFeed;
 }
 export default funcMitigationsImpFeedBeef;

@@ -21,7 +21,7 @@ function CircularProgressWithLabel(props) {
         }}
       >
         <Typography variant="caption" component="div" color="text.secondary">
-          {`${props.value || 100}%`}
+          {`${props?.value || 0}%`}
         </Typography>
       </Box>
     </Box>
