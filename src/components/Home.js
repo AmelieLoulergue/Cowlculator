@@ -105,7 +105,9 @@ function Home({ viewHeight, scroll }) {
           >
             get started
           </button>
-          <h1 className="primaryTitle">Which steps?</h1>
+          <h1 id="steps" className="primaryTitle">
+            Which steps?
+          </h1>
 
           <div className="land-hiw">
             <div className="land-hiw-svg">

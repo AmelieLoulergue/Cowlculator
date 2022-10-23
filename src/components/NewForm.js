@@ -136,16 +136,12 @@ const NewForm = ({
     document.getElementsByClassName("dash-nav")[0].classList.add("form-navbar");
   }, []);
   useEffect(() => {
-    console.log("icccciii", counterQuestion, allQuestions.length);
     setProgress(
       Math.round(((counterQuestion * 100) / allQuestions.length) * 10) / 10
     );
   }, [counterQuestion]);
   useEffect(() => {
     if (questionToDisplay) {
-      console.log(
-        allQuestions.findIndex((element) => element.id === questionToDisplay.id)
-      );
       setCounterQuestion(
         allQuestions.findIndex((element) => element.id === questionToDisplay.id)
       );

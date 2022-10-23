@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { DoughnutChart } from "./charts/DoughnoutChart";
 import { BarChart } from "./charts/VerticalBarChart";
 import { LineChart } from "./charts/LineChart";
+import advices from "../utils/calculs/advice";
 function Dashboard({ allResultsUser }) {
   let navigate = useNavigate();
   allResultsUser.sort((a, b) => {
@@ -16,7 +17,8 @@ function Dashboard({ allResultsUser }) {
     );
   });
   let currentResult = allResultsUser[allResultsUser.length - 1];
-
+  let advicesArray = advices({ result: currentResult });
+  console.log(advicesArray);
   const allTotalEmissionsArray = allResultsUser
     .filter((element) => element !== null)
     .map(
@@ -149,10 +151,11 @@ function Dashboard({ allResultsUser }) {
                   </div>
                 </div>
               </div>
-              <div className="column is-4 is-12-touch">
+              <div className="column is-6 is-12-touch">
                 <div className="card-chart">
                   {currentResult ? (
                     <DoughnutChart
+                      responsive={false}
                       id={"chart1"}
                       dataResults={[
                         currentResult.find(
@@ -185,11 +188,24 @@ function Dashboard({ allResultsUser }) {
                   )}
                 </div>
               </div>
-
-              <div className="column is-4 is-12-touch">
+              <div className="column is-6 is-12-touch">
+                <div className="card-chart has-text-centered">
+                  {advicesArray?.map((advice) => (
+                    <>
+                      {advice}
+                      <br />
+                    </>
+                  ))}
+                </div>{" "}
+              </div>
+              <div className="column is-6 is-hidden-mobile">
+                <div className="card-chart has-text-centered">ADVICE</div>{" "}
+              </div>
+              <div className="column is-6 is-12-touch">
                 <div className="card-chart">
                   {currentResult ? (
                     <BarChart
+                      responsive={false}
                       id={"chart2"}
                       labels={labelPeriodChart2}
                       dataResults={{
@@ -206,11 +222,14 @@ function Dashboard({ allResultsUser }) {
                   )}
                 </div>
               </div>
-
-              <div className="column is-4 is-12-touch">
+              <div className="column is-6 is-hidden-desktop">
+                <div className="card-chart has-text-centered">ADVICE</div>{" "}
+              </div>
+              <div className="column is-6 is-12-touch ">
                 <div className="card-chart">
                   {currentResult ? (
                     <LineChart
+                      responsive={false}
                       labels={labelPeriodChart3}
                       id={"chart3"}
                       dataResults={{
@@ -226,6 +245,9 @@ function Dashboard({ allResultsUser }) {
                     </div>
                   )}
                 </div>
+              </div>
+              <div className="column is-6 ">
+                <div className="card-chart has-text-centered">ADVICE</div>{" "}
               </div>
             </div>
           </div>

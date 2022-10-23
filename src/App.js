@@ -57,7 +57,6 @@ function App() {
       );
     }
     if (localStorage.getItem("indexQuestions")) {
-      console.log(Number(localStorage.getItem("indexQuestions")));
       setIndexQuestions(Number(localStorage.getItem("indexQuestions")));
     }
     if (login.userId && localStorage.getItem("results")) {
@@ -173,25 +172,21 @@ function App() {
     if (questions.length > 0) {
       localStorage.setItem("questions", JSON.stringify(questions));
     }
-    console.log({ questions });
   }, [questions]);
   useEffect(() => {
     if (indexQuestions !== 0) {
       localStorage.setItem("indexQuestions", JSON.stringify(indexQuestions));
     }
-    console.log({ indexQuestions });
   }, [indexQuestions]);
   useEffect(() => {
     if (counterQuestion !== 0) {
       localStorage.setItem("counterQuestion", counterQuestion);
     }
-    console.log({ counterQuestion });
   }, [counterQuestion]);
   useEffect(() => {
     if (initForm !== undefined) {
       localStorage.setItem("initForm", JSON.stringify(initForm));
     }
-    console.log({ initForm });
   }, [initForm]);
   useEffect(() => {
     if (questionToDisplay !== null) {
@@ -200,7 +195,6 @@ function App() {
         JSON.stringify(questionToDisplay)
       );
     }
-    console.log(questionToDisplay);
   }, [questionToDisplay]);
   useEffect(() => {
     calculs({ datasForm, results, setResults });
@@ -210,7 +204,6 @@ function App() {
         JSON.stringify(datasForm)
       );
     }
-    console.log({ datasForm });
   }, [datasForm]);
   useEffect(() => {
     if (login && login !== "false") {
@@ -253,19 +246,16 @@ function App() {
       });
     }
     localStorage.setItem("formIsCompleted", formIsCompleted);
-    console.log({ formIsCompleted });
   }, [formIsCompleted]);
   useEffect(() => {
     if (results !== {} && login.userId) {
       localStorage.setItem(`results${login.userId}`, JSON.stringify(results));
     }
-    console.log({ results });
   }, [results]);
   useEffect(() => {
     if (allQuestions.length > 0) {
       localStorage.setItem("allQuestions", JSON.stringify(allQuestions));
     }
-    console.log({ allQuestions });
   }, [allQuestions]);
   useEffect(() => {
     getUserDatas({ login })
@@ -289,7 +279,6 @@ function App() {
   }, [login]);
   useEffect(() => {
     isLogin({ login, setLogin }).then((response) => setLoggedUser(response));
-    console.log(login);
   }, [login]);
   return (
     <ThemeProvider theme={darkTheme}>
@@ -308,7 +297,7 @@ function App() {
                     login={login}
                     setLogin={setLogin}
                   ></Navbar>
-                  <Home />
+                  <Home /> <Footer />
                 </>
               }
             ></Route>
@@ -344,7 +333,8 @@ function App() {
                       setAllQuestions={setAllQuestions}
                       counterQuestion={counterQuestion}
                       setCounterQuestion={setCounterQuestion}
-                    />
+                    />{" "}
+                    <Footer />
                   </>
                 ) : (
                   <>
@@ -353,7 +343,7 @@ function App() {
                       login={login}
                       setLogin={setLogin}
                     ></Navbar>
-                    <Home />
+                    <Home /> <Footer />
                   </>
                 )
               }
@@ -376,7 +366,8 @@ function App() {
                       setMessageAlert={setMessageAlert}
                       setSeverity={setSeverity}
                       setDisplayAlert={setDisplayAlert}
-                    />
+                    />{" "}
+                    <Footer />
                   </>
                 ) : loggedUser && login.userType === "farmer" ? (
                   <>
@@ -385,7 +376,7 @@ function App() {
                       login={login}
                       setLogin={setLogin}
                     />
-                    <Dashboard allResultsUser={allResultsUser} />
+                    <Dashboard allResultsUser={allResultsUser} /> <Footer />
                   </>
                 ) : (
                   <>
@@ -394,7 +385,8 @@ function App() {
                       login={login}
                       setLogin={setLogin}
                     />
-                    <ResearcherDatas allResults={allResults} login={login} />
+                    <ResearcherDatas allResults={allResults} login={login} />{" "}
+                    <Footer />
                   </>
                 )
               }
@@ -417,7 +409,8 @@ function App() {
                       setMessageAlert={setMessageAlert}
                       setSeverity={setSeverity}
                       setDisplayAlert={setDisplayAlert}
-                    />
+                    />{" "}
+                    <Footer />
                   </>
                 ) : loggedUser && login.userType === "farmer" ? (
                   <>
@@ -426,7 +419,7 @@ function App() {
                       login={login}
                       setLogin={setLogin}
                     />
-                    <Dashboard allResultsUser={allResultsUser} />
+                    <Dashboard allResultsUser={allResultsUser} /> <Footer />
                   </>
                 ) : (
                   <>
@@ -435,7 +428,8 @@ function App() {
                       login={login}
                       setLogin={setLogin}
                     />
-                    <ResearcherDatas allResults={allResults} login={login} />
+                    <ResearcherDatas allResults={allResults} login={login} />{" "}
+                    <Footer />
                   </>
                 )
               }
@@ -456,7 +450,8 @@ function App() {
                       setMessageAlert={setMessageAlert}
                       setSeverity={setSeverity}
                       setDisplayAlert={setDisplayAlert}
-                    />
+                    />{" "}
+                    <Footer />
                   </>
                 ) : loggedUser && login.userType === "farmer" ? (
                   <>
@@ -470,7 +465,8 @@ function App() {
                       results={results}
                       formIsCompleted={formIsCompleted}
                       allResultsUser={allResultsUser}
-                    />
+                    />{" "}
+                    <Footer />
                   </>
                 ) : (
                   <>
@@ -480,6 +476,7 @@ function App() {
                       setLogin={setLogin}
                     />
                     <ResearcherDatas allResults={allResults} login={login} />
+                    <Footer />
                   </>
                 )
               }
@@ -500,6 +497,7 @@ function App() {
                       formIsCompleted={formIsCompleted}
                       allResultsUser={allResultsUser}
                     />
+                    <Footer />
                   </>
                 ) : (
                   <>
@@ -517,6 +515,7 @@ function App() {
                       setSeverity={setSeverity}
                       setDisplayAlert={setDisplayAlert}
                     />
+                    <Footer />
                   </>
                 )
               }
@@ -532,6 +531,7 @@ function App() {
                       setLogin={setLogin}
                     />
                     <ResearcherDatas allResults={allResults} login={login} />
+                    <Footer />
                   </>
                 ) : (
                   <>
@@ -541,6 +541,7 @@ function App() {
                       setLogin={setLogin}
                     />
                     <Home />
+                    <Footer />
                   </>
                 )
               }
@@ -555,6 +556,7 @@ function App() {
                     setLogin={setLogin}
                   />
                   <About />
+                  <Footer />
                 </>
               }
             ></Route>
@@ -573,6 +575,7 @@ function App() {
                     setSeverity={setSeverity}
                     setDisplayAlert={setDisplayAlert}
                   />
+                  <Footer />
                 </>
               }
             />
@@ -586,12 +589,13 @@ function App() {
                     setLogin={setLogin}
                   />
                   <References />
+                  <Footer />
                 </>
               }
             />
           </Routes>
         </BrowserRouter>
-        <Footer></Footer>
+
         <Bg></Bg>
       </div>
     </ThemeProvider>
