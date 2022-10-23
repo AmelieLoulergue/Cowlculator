@@ -15,12 +15,24 @@ function Footer() {
             <li>
               <Link to="/">Home page</Link>
             </li>
-            <li>About the app</li>
-            <li>How to get your results?</li>
-            <li>About the team</li>
-            <li>Access your profile</li>
+            <li>
+              <Link to="/">
+                <a href="app">About the app</a>
+              </Link>
+            </li>
+            <li>
+              <Link to="/">
+                <a href="steps">How to get your results?</a>
+              </Link>
+            </li>
+            <li>
+              <Link to="/About">Meet the team</Link>
+            </li>
+            <li>
+              <Link to="/account/register">Create your profile</Link>
+            </li>
             <li>Fill the form</li>
-            <li>Your researcher? Download datas</li>
+            <li>Access downloadable data</li>
           </ul>
         </div>
 
