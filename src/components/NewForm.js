@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-
+import listOfQuestions from "../utils/listOfQuestions";
 // import "./NewForm.css";
 import RenderQuestion from "./NewForm/RenderQuestion";
 import "./Form_design.css";
@@ -32,7 +32,9 @@ const NewForm = ({
   setAllQuestions,
   counterQuestion,
   setCounterQuestion,
+  allResultsUser,
 }) => {
+  console.log({ allResultsUser, questions });
   const stateList = elec_state_coeff.map((element) => element.State);
   const chatContainer = useRef(null);
   let navigate = useNavigate();
@@ -134,11 +136,23 @@ const NewForm = ({
   };
   useEffect(() => {
     document.getElementsByClassName("dash-nav")[0].classList.add("form-navbar");
+    
+    if (allResultsUser?.length) {
+      console.log(allResultsUser[0]);
+      setQuestionToDisplay(listOfQuestions.formQuestions[3]);
+    }
   }, []);
   useEffect(() => {
-    setProgress(
-      Math.round(((counterQuestion * 100) / allQuestions.length) * 10) / 10
-    );
+    if (allResultsUser?.length) {
+      setProgress(
+        Math.round(((counterQuestion * 100) / (allQuestions.length - 3)) * 10) /
+          10
+      );
+    } else {
+      setProgress(
+        Math.round(((counterQuestion * 100) / allQuestions.length) * 10) / 10
+      );
+    }
   }, [counterQuestion]);
   useEffect(() => {
     if (questionToDisplay) {
@@ -148,9 +162,10 @@ const NewForm = ({
     } else {
       setCounterQuestion(allQuestions.length);
     }
-  }, [questions]);
-  const noFoot = `#footer {display: none !important}`;
+  }, [questions, questionToDisplay]);
 
+  const noFoot = `#footer {display: none !important}`;
+  console.log(questionToDisplay);
   return (
     <div className="">
       <style>{noFoot}</style>
@@ -209,31 +224,33 @@ const NewForm = ({
         )}
         {initForm && questions.length > 0 && (
           <div id="questions-form" className="questions" ref={chatContainer}>
-            {questions.slice(0, indexQuestions).map((question, index) => (
-              <div
-                key={`question_form_${index}`}
-                className={question.is_hidden ? "is-hidden" : ""}
-              >
-                {question.bloc_name && (
-                  <div className="nav">
-                    <h1>{question.bloc_name.replace("_", " ")}</h1>
-                  </div>
-                )}
-                {question.question && (
-                  <div key={question.id} id={question.id}>
-                    <RenderQuestion
-                      numberOfResponse={numberOfResponse}
-                      setNumberOfResponse={setNumberOfResponse}
-                      question={question}
-                      response={question.response}
-                      questions={questions}
-                      setQuestions={setQuestions}
-                      indexQuestionArray={index}
-                    />
-                  </div>
-                )}
-              </div>
-            ))}
+            {questions
+              .slice(allResultsUser?.length ? 2 : 0, indexQuestions)
+              .map((question, index) => (
+                <div
+                  key={`question_form_${index}`}
+                  className={question.is_hidden ? "is-hidden" : ""}
+                >
+                  {question.bloc_name && (
+                    <div className="nav">
+                      <h1>{question.bloc_name.replace("_", " ")}</h1>
+                    </div>
+                  )}
+                  {question.question && (
+                    <div key={question.id} id={question.id}>
+                      <RenderQuestion
+                        numberOfResponse={numberOfResponse}
+                        setNumberOfResponse={setNumberOfResponse}
+                        question={question}
+                        response={question.response}
+                        questions={questions}
+                        setQuestions={setQuestions}
+                        indexQuestionArray={index}
+                      />
+                    </div>
+                  )}
+                </div>
+              ))}
             {questionToDisplay && (
               <>
                 <div className="nav">

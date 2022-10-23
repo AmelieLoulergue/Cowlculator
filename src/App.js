@@ -21,6 +21,7 @@ import listOfQuestions from "./utils/listOfQuestions";
 import getUserDatas from "./utils/userDatas/getUserDatas";
 import getAllResults from "./utils/userDatas/getAllResults";
 import saveUserDatas from "./utils/userDatas/saveUserDatas";
+import updateUserDatas from "./utils/userDatas/updateUserDatas";
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -99,10 +100,19 @@ function App() {
     }
   }, []);
   useEffect(() => {
-    if (questions.find((element) => element.id === "farm_name")) {
+    if (
+      questions.find((element) => element.id === "farm_name") &&
+      !login?.farmName
+    ) {
       setFarmName(
         questions.find((element) => element.id === "farm_name").response
       );
+      updateUserDatas({
+        login: login,
+        farmName: questions.find((element) => element.id === "farm_name")
+          .response,
+        setLogin: setLogin,
+      });
     }
   }, [questions]);
   useEffect(() => {
@@ -153,7 +163,7 @@ function App() {
 
       setAllQuestions(result);
     }
-  }, []);
+  }, [questions]);
 
   useEffect(() => {
     if (initForm) {
@@ -172,7 +182,7 @@ function App() {
     if (questions.length > 0) {
       localStorage.setItem("questions", JSON.stringify(questions));
     }
-  }, [questions]);
+  }, [questions, initForm]);
   useEffect(() => {
     if (indexQuestions !== 0) {
       localStorage.setItem("indexQuestions", JSON.stringify(indexQuestions));
@@ -236,12 +246,12 @@ function App() {
         setFormIsCompleted(false);
         setDatasForm([]);
         setInitForm(false);
-        setQuestionToDisplay(null);
-        setIndexQuestions(0);
-        setCounterQuestion(0);
+        setQuestionToDisplay(listOfQuestions.formQuestions[3]);
+        setIndexQuestions(3);
+        setCounterQuestion(3);
 
         setResults({});
-        setQuestions([]);
+        setQuestions(listOfQuestions.formQuestions);
         setAllQuestions([]);
       });
     }
@@ -260,7 +270,7 @@ function App() {
   useEffect(() => {
     getUserDatas({ login })
       .then((result) => {
-        if (result.result.length > 0) {
+        if (result?.result?.length > 0) {
           setAllResultsUser(result.result.map((item) => item.result));
         }
       })
@@ -333,6 +343,7 @@ function App() {
                       setAllQuestions={setAllQuestions}
                       counterQuestion={counterQuestion}
                       setCounterQuestion={setCounterQuestion}
+                      allResultsUser={allResultsUser}
                     />{" "}
                     <Footer />
                   </>

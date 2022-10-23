@@ -73,6 +73,15 @@ function Dashboard({ allResultsUser }) {
         <div id="summary" className="panel">
           <div className="card-section">
             <div className="columns is-multiline">
+              {!currentResult && (
+                <div className="column is-12">
+                  <div style={{ textAlign: "center" }}>
+                    <button className="btn" onClick={() => navigate("/form")}>
+                      FILL THE FORM
+                    </button>
+                  </div>
+                </div>
+              )}
               <div className="column is-4 is-12-touch">
                 <div className="is-flex is-centered">
                   <div className="card saved">
@@ -180,27 +189,27 @@ function Dashboard({ allResultsUser }) {
                       ]}
                     />
                   ) : (
-                    <div style={{ textAlign: "center" }}>
-                      <button className="btn" onClick={() => navigate("/form")}>
-                        FILL THE FORM
-                      </button>
-                    </div>
+                    <></>
                   )}
                 </div>
               </div>
-              <div className="column is-6 is-12-touch">
-                <div className="card-chart has-text-centered">
-                  {advicesArray?.map((advice) => (
-                    <>
-                      {advice}
-                      <br />
-                    </>
-                  ))}
-                </div>{" "}
-              </div>
-              <div className="column is-6 is-hidden-mobile">
-                <div className="card-chart has-text-centered">ADVICE</div>{" "}
-              </div>
+              {currentResult && (
+                <div className="column is-6 is-12-touch">
+                  <div className="card-chart has-text-centered">
+                    {advicesArray?.map((advice) => (
+                      <>
+                        {advice}
+                        <br />
+                      </>
+                    ))}
+                  </div>{" "}
+                </div>
+              )}
+              {currentResult && (
+                <div className="column is-6 is-hidden-mobile">
+                  <div className="card-chart has-text-centered">ADVICE</div>{" "}
+                </div>
+              )}
               <div className="column is-6 is-12-touch">
                 <div className="card-chart">
                   {currentResult ? (
@@ -214,17 +223,15 @@ function Dashboard({ allResultsUser }) {
                       }}
                     />
                   ) : (
-                    <div style={{ textAlign: "center" }}>
-                      <button className="btn" onClick={() => navigate("/form")}>
-                        FILL THE FORM
-                      </button>
-                    </div>
+                    <></>
                   )}
                 </div>
               </div>
-              <div className="column is-6 is-hidden-desktop">
-                <div className="card-chart has-text-centered">ADVICE</div>{" "}
-              </div>
+              {currentResult && (
+                <div className="column is-6 is-hidden-desktop">
+                  <div className="card-chart has-text-centered">ADVICE</div>{" "}
+                </div>
+              )}
               <div className="column is-6 is-12-touch ">
                 <div className="card-chart">
                   {currentResult ? (
@@ -238,17 +245,15 @@ function Dashboard({ allResultsUser }) {
                       }}
                     />
                   ) : (
-                    <div style={{ textAlign: "center" }}>
-                      <button className="btn" onClick={() => navigate("/form")}>
-                        FILL THE FORM
-                      </button>
-                    </div>
+                    <></>
                   )}
                 </div>
               </div>
-              <div className="column is-6 ">
-                <div className="card-chart has-text-centered">ADVICE</div>{" "}
-              </div>
+              {currentResult && (
+                <div className="column is-6 ">
+                  <div className="card-chart has-text-centered">ADVICE</div>{" "}
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -7,7 +7,7 @@ const getAllResults = async ({ login, filters }) => {
     },
   };
   const response = await fetch(
-    `https://cowlculatorback.herokuapp.com/api/result/researcher/`,
+    `http://localhost:3000/api/result/researcher/`,
     requestOptions
   );
   const datas = await response.json();
