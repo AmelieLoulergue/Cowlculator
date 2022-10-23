@@ -55,7 +55,7 @@ function Home({ viewHeight, scroll }) {
         </div>
 
         <div className="container">
-          <div className="aboutApp">
+          <div id="app" className="aboutApp">
             <h1 className="primaryTitle">About the app</h1>
             <p>
               Cowlculator is a free app that helps you, American farmers, to
@@ -105,7 +105,9 @@ function Home({ viewHeight, scroll }) {
           >
             get started
           </button>
-          <h1 className="primaryTitle">Which steps?</h1>
+          <h1 id="steps" className="primaryTitle">
+            Which steps?
+          </h1>
 
           <div className="land-hiw">
             <div className="land-hiw-svg">

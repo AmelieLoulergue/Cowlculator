@@ -21,6 +21,9 @@ import listOfQuestions from "./utils/listOfQuestions";
 import getUserDatas from "./utils/userDatas/getUserDatas";
 import getAllResults from "./utils/userDatas/getAllResults";
 import saveUserDatas from "./utils/userDatas/saveUserDatas";
+import updateUserDatas from "./utils/userDatas/updateUserDatas";
+import Logger from "./components/logger/Logger";
+import { CircularProgress } from "@mui/material";
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -49,7 +52,11 @@ function App() {
   const [farmName, setFarmName] = useState("");
   const [allResultsUser, setAllResultsUser] = useState([]);
   const [allResults, setAllResults] = useState([]);
-
+  const [timer, setTimer] = useState(true);
+  const goTimer = () => {
+    console.log("timer");
+    setTimeout(() => setTimer(false), 500);
+  };
   useEffect(() => {
     if (login.userId && localStorage.getItem(`datasForm${login.userId}`)) {
       setDatasForm(
@@ -57,7 +64,6 @@ function App() {
       );
     }
     if (localStorage.getItem("indexQuestions")) {
-      console.log(Number(localStorage.getItem("indexQuestions")));
       setIndexQuestions(Number(localStorage.getItem("indexQuestions")));
     }
     if (login.userId && localStorage.getItem("results")) {
@@ -98,12 +104,24 @@ function App() {
         JSON.parse(localStorage.getItem("initForm")) === "true" ? true : false
       );
     }
+    if (timer) {
+      goTimer();
+    }
   }, []);
   useEffect(() => {
-    if (questions.find((element) => element.id === "farm_name")) {
+    if (
+      questions.find((element) => element.id === "farm_name") &&
+      !login?.farmName
+    ) {
       setFarmName(
         questions.find((element) => element.id === "farm_name").response
       );
+      updateUserDatas({
+        login: login,
+        farmName: questions.find((element) => element.id === "farm_name")
+          .response,
+        setLogin: setLogin,
+      });
     }
   }, [questions]);
   useEffect(() => {
@@ -154,7 +172,7 @@ function App() {
 
       setAllQuestions(result);
     }
-  }, []);
+  }, [questions]);
 
   useEffect(() => {
     if (initForm) {
@@ -173,25 +191,21 @@ function App() {
     if (questions.length > 0) {
       localStorage.setItem("questions", JSON.stringify(questions));
     }
-    console.log({ questions });
-  }, [questions]);
+  }, [questions, initForm]);
   useEffect(() => {
     if (indexQuestions !== 0) {
       localStorage.setItem("indexQuestions", JSON.stringify(indexQuestions));
     }
-    console.log({ indexQuestions });
   }, [indexQuestions]);
   useEffect(() => {
     if (counterQuestion !== 0) {
       localStorage.setItem("counterQuestion", counterQuestion);
     }
-    console.log({ counterQuestion });
   }, [counterQuestion]);
   useEffect(() => {
     if (initForm !== undefined) {
       localStorage.setItem("initForm", JSON.stringify(initForm));
     }
-    console.log({ initForm });
   }, [initForm]);
   useEffect(() => {
     if (questionToDisplay !== null) {
@@ -200,7 +214,6 @@ function App() {
         JSON.stringify(questionToDisplay)
       );
     }
-    console.log(questionToDisplay);
   }, [questionToDisplay]);
   useEffect(() => {
     calculs({ datasForm, results, setResults });
@@ -210,7 +223,6 @@ function App() {
         JSON.stringify(datasForm)
       );
     }
-    console.log({ datasForm });
   }, [datasForm]);
   useEffect(() => {
     if (login && login !== "false") {
@@ -243,34 +255,31 @@ function App() {
         setFormIsCompleted(false);
         setDatasForm([]);
         setInitForm(false);
-        setQuestionToDisplay(null);
-        setIndexQuestions(0);
-        setCounterQuestion(0);
+        setQuestionToDisplay(listOfQuestions.formQuestions[3]);
+        setIndexQuestions(3);
+        setCounterQuestion(3);
 
         setResults({});
-        setQuestions([]);
+        setQuestions(listOfQuestions.formQuestions);
         setAllQuestions([]);
       });
     }
     localStorage.setItem("formIsCompleted", formIsCompleted);
-    console.log({ formIsCompleted });
   }, [formIsCompleted]);
   useEffect(() => {
     if (results !== {} && login.userId) {
       localStorage.setItem(`results${login.userId}`, JSON.stringify(results));
     }
-    console.log({ results });
   }, [results]);
   useEffect(() => {
     if (allQuestions.length > 0) {
       localStorage.setItem("allQuestions", JSON.stringify(allQuestions));
     }
-    console.log({ allQuestions });
   }, [allQuestions]);
   useEffect(() => {
     getUserDatas({ login })
       .then((result) => {
-        if (result.result.length > 0) {
+        if (result?.result?.length > 0) {
           setAllResultsUser(result.result.map((item) => item.result));
         }
       })
@@ -289,7 +298,6 @@ function App() {
   }, [login]);
   useEffect(() => {
     isLogin({ login, setLogin }).then((response) => setLoggedUser(response));
-    console.log(login);
   }, [login]);
   return (
     <ThemeProvider theme={darkTheme}>
@@ -308,7 +316,7 @@ function App() {
                     login={login}
                     setLogin={setLogin}
                   ></Navbar>
-                  <Home />
+                  <Home /> <Footer login={login} />
                 </>
               }
             ></Route>
@@ -323,6 +331,7 @@ function App() {
                       setLogin={setLogin}
                     ></Navbar>
                     <NewForm
+                      login={login}
                       results={results}
                       setResults={setResults}
                       questions={questions}
@@ -344,16 +353,35 @@ function App() {
                       setAllQuestions={setAllQuestions}
                       counterQuestion={counterQuestion}
                       setCounterQuestion={setCounterQuestion}
-                    />
+                      allResultsUser={allResultsUser}
+                    />{" "}
+                    <Footer login={login} />
                   </>
                 ) : (
                   <>
-                    <Navbar
-                      farmName={farmName}
-                      login={login}
-                      setLogin={setLogin}
-                    ></Navbar>
-                    <Home />
+                    {timer && (
+                      <div
+                        style={{
+                          height: "100vh",
+                          width: "100%",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <CircularProgress />
+                      </div>
+                    )}
+                    {!timer && (
+                      <>
+                        <Navbar
+                          farmName={farmName}
+                          login={login}
+                          setLogin={setLogin}
+                        ></Navbar>
+                        <Home /> <Footer login={login} />
+                      </>
+                    )}
                   </>
                 )
               }
@@ -368,7 +396,7 @@ function App() {
                       login={login}
                       setLogin={setLogin}
                     />
-                    <Login
+                    <Logger
                       userProfile={userProfile}
                       setUserProfile={setUserProfile}
                       login={login}
@@ -376,7 +404,8 @@ function App() {
                       setMessageAlert={setMessageAlert}
                       setSeverity={setSeverity}
                       setDisplayAlert={setDisplayAlert}
-                    />
+                    />{" "}
+                    <Footer login={login} />
                   </>
                 ) : loggedUser && login.userType === "farmer" ? (
                   <>
@@ -385,7 +414,8 @@ function App() {
                       login={login}
                       setLogin={setLogin}
                     />
-                    <Dashboard allResultsUser={allResultsUser} />
+                    <Dashboard allResultsUser={allResultsUser} />{" "}
+                    <Footer login={login} />
                   </>
                 ) : (
                   <>
@@ -394,7 +424,8 @@ function App() {
                       login={login}
                       setLogin={setLogin}
                     />
-                    <ResearcherDatas allResults={allResults} login={login} />
+                    <ResearcherDatas allResults={allResults} login={login} />{" "}
+                    <Footer login={login} />
                   </>
                 )
               }
@@ -417,7 +448,8 @@ function App() {
                       setMessageAlert={setMessageAlert}
                       setSeverity={setSeverity}
                       setDisplayAlert={setDisplayAlert}
-                    />
+                    />{" "}
+                    <Footer login={login} />
                   </>
                 ) : loggedUser && login.userType === "farmer" ? (
                   <>
@@ -426,7 +458,8 @@ function App() {
                       login={login}
                       setLogin={setLogin}
                     />
-                    <Dashboard allResultsUser={allResultsUser} />
+                    <Dashboard allResultsUser={allResultsUser} />{" "}
+                    <Footer login={login} />
                   </>
                 ) : (
                   <>
@@ -435,7 +468,8 @@ function App() {
                       login={login}
                       setLogin={setLogin}
                     />
-                    <ResearcherDatas allResults={allResults} login={login} />
+                    <ResearcherDatas allResults={allResults} login={login} />{" "}
+                    <Footer login={login} />
                   </>
                 )
               }
@@ -456,7 +490,8 @@ function App() {
                       setMessageAlert={setMessageAlert}
                       setSeverity={setSeverity}
                       setDisplayAlert={setDisplayAlert}
-                    />
+                    />{" "}
+                    <Footer login={login} />
                   </>
                 ) : loggedUser && login.userType === "farmer" ? (
                   <>
@@ -470,7 +505,8 @@ function App() {
                       results={results}
                       formIsCompleted={formIsCompleted}
                       allResultsUser={allResultsUser}
-                    />
+                    />{" "}
+                    <Footer login={login} />
                   </>
                 ) : (
                   <>
@@ -480,6 +516,7 @@ function App() {
                       setLogin={setLogin}
                     />
                     <ResearcherDatas allResults={allResults} login={login} />
+                    <Footer login={login} />
                   </>
                 )
               }
@@ -500,23 +537,42 @@ function App() {
                       formIsCompleted={formIsCompleted}
                       allResultsUser={allResultsUser}
                     />
+                    <Footer login={login} />
                   </>
                 ) : (
                   <>
-                    <Navbar
-                      farmName={farmName}
-                      login={login}
-                      setLogin={setLogin}
-                    ></Navbar>
-                    <Login
-                      userProfile={userProfile}
-                      setUserProfile={setUserProfile}
-                      login={login}
-                      setLogin={setLogin}
-                      setMessageAlert={setMessageAlert}
-                      setSeverity={setSeverity}
-                      setDisplayAlert={setDisplayAlert}
-                    />
+                    {timer && (
+                      <div
+                        style={{
+                          height: "100vh",
+                          width: "100%",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <CircularProgress />
+                      </div>
+                    )}
+                    {!timer && (
+                      <>
+                        <Navbar
+                          farmName={farmName}
+                          login={login}
+                          setLogin={setLogin}
+                        ></Navbar>
+                        <Login
+                          userProfile={userProfile}
+                          setUserProfile={setUserProfile}
+                          login={login}
+                          setLogin={setLogin}
+                          setMessageAlert={setMessageAlert}
+                          setSeverity={setSeverity}
+                          setDisplayAlert={setDisplayAlert}
+                        />
+                        <Footer login={login} />
+                      </>
+                    )}
                   </>
                 )
               }
@@ -532,6 +588,7 @@ function App() {
                       setLogin={setLogin}
                     />
                     <ResearcherDatas allResults={allResults} login={login} />
+                    <Footer login={login} />
                   </>
                 ) : (
                   <>
@@ -541,6 +598,7 @@ function App() {
                       setLogin={setLogin}
                     />
                     <Home />
+                    <Footer login={login} />
                   </>
                 )
               }
@@ -555,6 +613,7 @@ function App() {
                     setLogin={setLogin}
                   />
                   <About />
+                  <Footer login={login} />
                 </>
               }
             ></Route>
@@ -573,6 +632,7 @@ function App() {
                     setSeverity={setSeverity}
                     setDisplayAlert={setDisplayAlert}
                   />
+                  <Footer login={login} />
                 </>
               }
             />
@@ -586,12 +646,13 @@ function App() {
                     setLogin={setLogin}
                   />
                   <References />
+                  <Footer login={login} />
                 </>
               }
             />
           </Routes>
         </BrowserRouter>
-        <Footer></Footer>
+
         <Bg></Bg>
       </div>
     </ThemeProvider>
