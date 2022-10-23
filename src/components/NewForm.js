@@ -124,6 +124,11 @@ const NewForm = ({
 
   const goPrecedentQuestion = () => {
     setIndexQuestions(indexQuestions - 1);
+    setCounterQuestion(
+      allQuestions.findIndex(
+        (element) => element.id === questions[indexQuestions - 1].id
+      )
+    );
     setQuestionToDisplay(questions[indexQuestions - 1]);
     setAnswer(questions[indexQuestions - 1].response);
   };
@@ -131,15 +136,21 @@ const NewForm = ({
     document.getElementsByClassName("dash-nav")[0].classList.add("form-navbar");
   }, []);
   useEffect(() => {
+    console.log("icccciii", counterQuestion, allQuestions.length);
     setProgress(
       Math.round(((counterQuestion * 100) / allQuestions.length) * 10) / 10
     );
   }, [counterQuestion]);
   useEffect(() => {
     if (questionToDisplay) {
+      console.log(
+        allQuestions.findIndex((element) => element.id === questionToDisplay.id)
+      );
       setCounterQuestion(
         allQuestions.findIndex((element) => element.id === questionToDisplay.id)
       );
+    } else {
+      setCounterQuestion(allQuestions.length);
     }
   }, [questions]);
   const noFoot = `#footer {display: none !important}`;

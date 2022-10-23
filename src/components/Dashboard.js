@@ -7,33 +7,22 @@ import { useNavigate } from "react-router-dom";
 import { DoughnutChart } from "./charts/DoughnoutChart";
 import { BarChart } from "./charts/VerticalBarChart";
 import { LineChart } from "./charts/LineChart";
-import { useState, useEffect } from "react";
-function Dashboard({
-  login,
-  results,
-  formIsCompleted,
-  datasForm,
-  allResultsUser,
-}) {
+function Dashboard({ allResultsUser }) {
   let navigate = useNavigate();
-  const dates = allResultsUser
-    .filter((element) => element !== null)
-    .map((element) =>
-      new Date(element.find((el) => el.id === "end_date").response).getTime()
+  allResultsUser.sort((a, b) => {
+    return (
+      Number(new Date(a.find((el) => el.id === "end_date").response)) -
+      Number(new Date(b.find((el) => el.id === "end_date").response))
     );
-  const max = Math.max(...dates.filter((element) => element));
-  const index = dates.indexOf(max);
-  let currentResult = allResultsUser[index];
+  });
+  let currentResult = allResultsUser[allResultsUser.length - 1];
+
   const allTotalEmissionsArray = allResultsUser
     .filter((element) => element !== null)
     .map(
       (element) =>
         element.find((el) => el.id === "totalEmissionsGraph").response
     );
-
-  const allTotalMitigatedEmissions = allResultsUser
-    .filter((element) => element !== null)
-    .map((element) => element.find((el) => el.id === "CO2emmited").response);
   const allCO2emmitedArray = allResultsUser
     .filter((element) => element !== null)
     .map((element) => element.find((el) => el.id === "CO2emmited").response);
@@ -41,7 +30,6 @@ function Dashboard({
   const allCO2mitigatedEmissions = allResultsUser
     .filter((element) => element !== null)
     .map((element) => element.find((el) => el.id === "CO2mitigated").response);
-  console.log(allCO2mitigatedEmissions[0] / allCO2emmitedArray[0]);
   const labelPeriodChart2 = allResultsUser
     .filter((element) => element !== null)
     .map((element, index) => {
@@ -99,15 +87,15 @@ function Dashboard({
                             Math.round(
                               currentResult.find(
                                 (element) => element.id === "CO2mitigated"
-                              )?.response * 100
-                            ) / 100
+                              )?.response * 10
+                            ) / 10
                           )
                             ? 0
                             : Math.round(
                                 currentResult.find(
                                   (element) => element.id === "CO2mitigated"
-                                ).response * 100
-                              ) / 100}{" "}
+                                ).response * 1
+                              ) / 1}{" "}
                           Tonne CO2eq/year
                         </h2>
                       )}
@@ -130,8 +118,8 @@ function Dashboard({
                           {Math.round(
                             currentResult.find(
                               (element) => element.id === "CO2emmited"
-                            )?.response * 100
-                          ) / 100}{" "}
+                            )?.response * 1
+                          ) / 1}
                           Tonne CO2eq/year
                         </h2>
                       )}
@@ -152,8 +140,8 @@ function Dashboard({
                           {Math.round(
                             currentResult.find(
                               (element) => element.id === "totalCarbonCredits"
-                            )?.response * 100
-                          ) / 100}{" "}
+                            )?.response * 1
+                          ) / 1}{" "}
                           $/year
                         </h2>
                       )}
@@ -161,10 +149,11 @@ function Dashboard({
                   </div>
                 </div>
               </div>
-              <div className="column is-4 is-12-touch">
+              <div className="column is-6 is-12-touch">
                 <div className="card-chart">
                   {currentResult ? (
                     <DoughnutChart
+                      responsive={false}
                       id={"chart1"}
                       dataResults={[
                         currentResult.find(
@@ -197,11 +186,19 @@ function Dashboard({
                   )}
                 </div>
               </div>
-
-              <div className="column is-4 is-12-touch">
+              <div className="column is-6 is-12-touch">
+                <div className="card-chart has-text-centered">
+                  C'est super vraiment, félicitations !! BRAVO !! Génialissime
+                </div>{" "}
+              </div>
+              <div className="column is-6 is-hidden-mobile">
+                <div className="card-chart has-text-centered">ADVICE</div>{" "}
+              </div>
+              <div className="column is-6 is-12-touch">
                 <div className="card-chart">
                   {currentResult ? (
                     <BarChart
+                      responsive={false}
                       id={"chart2"}
                       labels={labelPeriodChart2}
                       dataResults={{
@@ -218,11 +215,14 @@ function Dashboard({
                   )}
                 </div>
               </div>
-
-              <div className="column is-4 is-12-touch">
+              <div className="column is-6 is-hidden-desktop">
+                <div className="card-chart has-text-centered">ADVICE</div>{" "}
+              </div>
+              <div className="column is-6 is-12-touch ">
                 <div className="card-chart">
                   {currentResult ? (
                     <LineChart
+                      responsive={false}
                       labels={labelPeriodChart3}
                       id={"chart3"}
                       dataResults={{
@@ -238,6 +238,9 @@ function Dashboard({
                     </div>
                   )}
                 </div>
+              </div>
+              <div className="column is-6 ">
+                <div className="card-chart has-text-centered">ADVICE</div>{" "}
               </div>
             </div>
           </div>

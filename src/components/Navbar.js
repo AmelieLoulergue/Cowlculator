@@ -33,7 +33,7 @@ function Navbar({ login, setLogin, farmName }) {
               <div>
                 {login?.email && <h2>{login.email}</h2>}
                 {login.type === "farmer" && <>Project Name</>}
-                <p>{farmName ? farmName : "Farm name"}</p>
+                <p>{login.type === "farmer" && farmName ? farmName : <></>}</p>
                 <button className="btn" onClick={() => logout({ setLogin })}>
                   Log out
                 </button>

@@ -49,8 +49,6 @@ function funcMitigationsLTBreedingBeef({ datasForm, EFBeef, cattleBeef }) {
   }
 
   // EF emissions mitigated by the practice LTBreeding
-
-  let EFBeefLTBreeding = 0;
   let mitigatedEFBeefLTBreeding = 0;
   if (
     datasForm.find(
@@ -62,12 +60,7 @@ function funcMitigationsLTBreedingBeef({ datasForm, EFBeef, cattleBeef }) {
   ) {
     mitigatedEFBeefLTBreeding =
       numbBeefPracticesLTBreeding * EFBeef * coeffLTBreedingBeef;
-    EFBeefLTBreeding = EFBeef - mitigatedEFBeefLTBreeding;
-  } else {
-    EFBeefLTBreeding = 0;
   }
-  console.log(EFBeefLTBreeding);
-
   return mitigatedEFBeefLTBreeding;
 }
 export default funcMitigationsLTBreedingBeef;

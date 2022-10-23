@@ -39,7 +39,7 @@ function Login({
       <div className="center-flex">
         <div className="navbar">
           <Link to="../account">
-            <img src={back_arrow}></img>
+            <img src={back_arrow} alt=""></img>
           </Link>
         </div>
         <div className="content">

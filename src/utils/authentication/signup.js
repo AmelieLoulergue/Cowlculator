@@ -13,11 +13,10 @@ const signup = async ({
     body: JSON.stringify(rest),
   };
   const response = await fetch(
-    "https://cowlculatorback.herokuapp.com" + "/api/auth/signup",
+    "https://cowlculatorback.herokuapp.com/api/auth/signup",
     requestOptions
   );
   if (response.status === 200) {
-    const datas = await response.json();
     setDisplayAlert(true);
     setSeverity("success");
     setMessageAlert(
