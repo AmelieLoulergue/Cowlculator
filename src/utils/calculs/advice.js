@@ -1,6 +1,29 @@
 import coeff_reduction_ghg from "../../coeff/coeff_reduction_ghg.json";
 import regions from "../../coeff/regions.json";
+import enteric_EF from "../../coeff/enteric_EF.json";
+function funcTime({ startDate, endDate }) {
+  let start = new Date(startDate);
+  let end = new Date(endDate);
+  let time = round(
+    (end.getTime() - start.getTime()) / (1000 * 3600 * 24 * 7 * 52.25),
+    1
+  );
+
+  return time;
+}
+function round(value, precision) {
+  var multiplier = Math.pow(10, precision || 0);
+  return Math.round(value * multiplier) / multiplier;
+}
 const advices = ({ result }) => {
+  const endDate = result.find((data) => data.id === "end_date")?.response;
+  // check on the existence of the 2 dates
+  let time = 0;
+  const startDate = result.find((data) => data.id === "start_date")?.response;
+  if (startDate && endDate) {
+    time = funcTime({ startDate, endDate });
+  }
+
   let region = regions.find(
     (region) =>
       region.Code === result.find((element) => element.id === "state").response
@@ -65,6 +88,112 @@ const advices = ({ result }) => {
   )?.value
     ? Number(findAnimal("farm_animals_beef_cattle_bulls_numb").value)
     : 0;
+
+  region = region?.Regions_EPA.replace(" ", "_");
+  // keep only the coeff for the region
+  let coeffEF = [];
+  enteric_EF.map((selectRegion) =>
+    Object.entries(selectRegion).map((key, value) => {
+      if (key[0] !== "name" && key[0] === region) {
+        coeffEF.push({ name: selectRegion.name, coeff: key[1] });
+      }
+    })
+  );
+  let coeffEFNatAv = [];
+  enteric_EF.map((changeRegion) =>
+    Object.entries(changeRegion).map((key, value) => {
+      if (key[0] !== "name" && key[0] === "National_Average") {
+        coeffEFNatAv.push({ name: changeRegion.name, coeff: key[1] });
+      }
+    })
+  );
+  //Extract animals' coeff based on the region
+  let coeffDairyRep12EF =
+    findAnimal("farm_animals_dairy_cattle") &&
+    findAnimal("farm_animals_dairy_cattle_rep12")
+      ? Number(
+          coeffEF.find(
+            (element) => element.name === "farm_animals_dairy_cattle_rep12"
+          ).coeff
+        )
+      : 0;
+  let coeffDairyRep24EF =
+    findAnimal("farm_animals_dairy_cattle") &&
+    findAnimal("farm_animals_dairy_cattle_rep24")
+      ? Number(
+          coeffEF.find(
+            (element) => element.name === "farm_animals_dairy_cattle_rep24"
+          ).coeff
+        )
+      : 0;
+  let coeffDairyMatureEF =
+    findAnimal("farm_animals_dairy_cattle") &&
+    findAnimal("farm_animals_dairy_cattle_matur")
+      ? Number(
+          coeffEF.find(
+            (element) => element.name === "farm_animals_dairy_cattle_matur"
+          ).coeff
+        )
+      : 0;
+  let coeffBeefRep12EF =
+    findAnimal("farm_animals_beef_cattle") &&
+    findAnimal("farm_animals_beef_cattle_rep12")
+      ? Number(
+          coeffEF.find(
+            (element) => element.name === "farm_animals_beef_cattle_rep12"
+          ).coeff
+        )
+      : 0;
+  let coeffBeefRep24EF =
+    findAnimal("farm_animals_beef_cattle") &&
+    findAnimal("farm_animals_beef_cattle_rep24")
+      ? Number(
+          coeffEF.find(
+            (element) => element.name === "farm_animals_beef_cattle_rep24"
+          ).coeff
+        )
+      : 0;
+  let coeffBeefMatureEF =
+    findAnimal("farm_animals_beef_cattle") &&
+    findAnimal("farm_animals_beef_cattle_matur")
+      ? Number(
+          coeffEF.find(
+            (element) => element.name === "farm_animals_beef_cattle_matur"
+          ).coeff
+        )
+      : 0;
+  let coeffBeefWeanEF = coeffEF.find(
+    (element) => element.name === "farm_animals_beef_cattle_wealing"
+  ).coeff
+    ? Number(
+        coeffEF.find(
+          (element) => element.name === "farm_animals_beef_cattle_wealing"
+        ).coeff
+      )
+    : Number(
+        coeffEFNatAv.find(
+          (element) => element.name === "farm_animals_beef_cattle_wealing"
+        ).coeff
+      );
+  let coeffBeefYearnEF = coeffEF.find(
+    (element) => element.name === "farm_animals_beef_cattle_yearling"
+  ).coeff
+    ? Number(
+        coeffEF.find(
+          (element) => element.name === "farm_animals_beef_cattle_yearling"
+        ).coeff
+      )
+    : Number(
+        coeffEFNatAv.find(
+          (element) => element.name === "farm_animals_beef_cattle_yearling"
+        ).coeff
+      );
+
+  let coeffBeefBullsEF = Number(
+    coeffEFNatAv.find(
+      (element) => element.name === "farm_animals_beef_cattle_bulls"
+    ).coeff
+  );
   let cattleBeef =
     farm_animals_beef_cattle_rep12_numb +
     farm_animals_beef_cattle_rep24_numb +
@@ -73,18 +202,22 @@ const advices = ({ result }) => {
     farm_animals_beef_cattle_yearling_numb +
     farm_animals_beef_cattle_bulls_numb;
   let EFDairy =
-    result &&
-    result.entericFermentationCO2 &&
-    result.entericFermentationCO2.EFDairy;
+    ((farm_animals_dairy_cattle_rep12_numb * coeffDairyRep12EF * 25 +
+      farm_animals_dairy_cattle_rep24_numb * coeffDairyRep24EF * 25 +
+      farm_animals_dairy_cattle_matur_numb * coeffDairyMatureEF * 25) /
+      1000) *
+    time;
   let EFBeef =
-    result &&
-    result.entericFermentationCO2 &&
-    result.entericFermentationCO2.EFBeef;
-  let EFSheep =
-    result &&
-    result.entericFermentationCO2 &&
-    result.entericFermentationCO2.EFSheep;
+    ((farm_animals_beef_cattle_rep12_numb * coeffBeefRep12EF * 25 +
+      farm_animals_beef_cattle_rep24_numb * coeffBeefRep24EF * 25 +
+      farm_animals_beef_cattle_matur_numb * coeffBeefMatureEF * 25 +
+      farm_animals_beef_cattle_weanling_numb * coeffBeefWeanEF * 25 +
+      farm_animals_beef_cattle_yearling_numb * coeffBeefYearnEF * 25 +
+      farm_animals_beef_cattle_bulls_numb * coeffBeefBullsEF * 25) /
+      1000) *
+    time;
   const advices = [];
+  console.log(EFDairy);
   if (
     cattleDairy !== 0 &&
     !result.find(
@@ -92,11 +225,13 @@ const advices = ({ result }) => {
     )?.response
   ) {
     advices.push(
-      `If you implement improved feeding practices e.g.  replacing roughage with concentrate, feeding, extra dietary oil, for your dairy cattle you could mitigate ${
-        EFDairy * 0.16
-      } tonnes of CO₂ per year which represents $${
-        EFDairy * 0.16 * 73.05
-      } per year`
+      `If you implement improved feeding practices e.g.  replacing roughage with concentrate, feeding, extra dietary oil, for your dairy cattle you could mitigate ${round(
+        EFDairy * 0.16,
+        1
+      )} tonnes of CO₂ per year which represents $${round(
+        EFDairy * 0.16 * 73.05,
+        1
+      )} per year`
     );
   }
   if (
@@ -106,11 +241,13 @@ const advices = ({ result }) => {
     )?.response
   ) {
     advices.push(
-      `If you implement the use of specific agents and dietary additives e.g.  bST, growth hormones, ionophores, propionate precursors, for your dairy cattle you could mitigate ${
-        EFDairy * 0.11
-      } tonnes of CO₂ per year which represents $ ${
-        EFDairy * 0.11 * 73.05
-      } per year`
+      `If you implement the use of specific agents and dietary additives e.g.  bST, growth hormones, ionophores, propionate precursors, for your dairy cattle you could mitigate ${round(
+        EFDairy * 0.11,
+        1
+      )} tonnes of CO₂ per year which represents $ ${round(
+        EFDairy * 0.11 * 73.05,
+        1
+      )} per year`
     );
   }
   if (
@@ -120,11 +257,13 @@ const advices = ({ result }) => {
     )?.response
   ) {
     advices.push(
-      `If you implement improved feeding practices e.g.  replacing roughage with concentrate, feeding, extra dietary oil, for your beef cattle you could mitigate ${
-        EFBeef * 0.11
-      } tonnes of CO₂ per year which represents $ ${
-        EFBeef * 0.11 * 73.05
-      } per year`
+      `If you implement improved feeding practices e.g.  replacing roughage with concentrate, feeding, extra dietary oil, for your beef cattle you could mitigate ${round(
+        EFBeef * 0.11,
+        1
+      )} tonnes of CO₂ per year which represents $ ${round(
+        EFBeef * 0.11 * 73.05,
+        1
+      )} per year`
     );
   }
   let acre_to_ha = 0.404686;
@@ -322,24 +461,26 @@ const advices = ({ result }) => {
     )?.response
   ) {
     advices.push(
-      `If you implement degraded land restoration on your crops you could mitigate up to ${
+      `If you implement degraded land restoration on your crops you could mitigate up to ${round(
         (grassland_size +
           grain_size +
           forage_size +
           fv_size +
           flowers_size +
           herbs_size) *
-        deg_resto_coeff
-      } tonnes of CO₂ per year which represents $ ${
+          deg_resto_coeff,
+        1
+      )} tonnes of CO₂ per year which represents $ ${round(
         (grassland_size +
           grain_size +
           forage_size +
           fv_size +
           flowers_size +
           herbs_size) *
-        deg_resto_coeff *
-        15
-      } per year`
+          deg_resto_coeff *
+          15,
+        1
+      )} per year`
     );
   }
   let manure_bios_coeff = coeff_crops[9].GHG;
@@ -349,24 +490,26 @@ const advices = ({ result }) => {
       ?.response
   ) {
     advices.push(
-      `If you apply manure and biosolids on your crops you could mitigate up to ${
+      `If you apply manure and biosolids on your crops you could mitigate up to ${round(
         (grassland_size +
           grain_size +
           forage_size +
           fv_size +
           flowers_size +
           herbs_size) *
-        manure_bios_coeff
-      } tonnes of CO₂ per year which represents $ ${
+          manure_bios_coeff,
+        1
+      )} tonnes of CO₂ per year which represents $ ${round(
         (grassland_size +
           grain_size +
           forage_size +
           fv_size +
           flowers_size +
           herbs_size) *
-        manure_bios_coeff *
-        15
-      } per year`
+          manure_bios_coeff *
+          15,
+        1
+      )} per year`
     );
   }
   let crop_LUC_coeff = coeff_crops[4].GHG;
@@ -377,19 +520,21 @@ const advices = ({ result }) => {
     )?.response
   ) {
     advices.push(
-      ` If you implement set aside and lad-use change i.e. allow or encourage the reversion of croplamd to another land cover, typically one similar to the native vegetation on your crops you could mitigate up to ${
+      ` If you implement set aside and lad-use change i.e. allow or encourage the reversion of croplamd to another land cover, typically one similar to the native vegetation on your crops you could mitigate up to ${round(
         (grassland_size +
           grain_size +
           forage_size +
           fv_size +
           flowers_size +
           herbs_size) *
-        crop_LUC_coeff
-      } tonnes of CO₂ per year which represents $ ${
+          crop_LUC_coeff,
+        1
+      )} tonnes of CO₂ per year which represents $ ${round(
         (grain_size + forage_size + fv_size + flowers_size + herbs_size) *
-        crop_LUC_coeff *
-        15
-      } per year`
+          crop_LUC_coeff *
+          15,
+        1
+      )} per year`
     );
   }
   if (
