@@ -66,7 +66,7 @@ function App() {
     if (localStorage.getItem("indexQuestions")) {
       setIndexQuestions(Number(localStorage.getItem("indexQuestions")));
     }
-    if (login.userId && localStorage.getItem("results")) {
+    if (login.userId && localStorage.getItem(`results${login.userId}`)) {
       setResults(JSON.parse(localStorage.getItem(`results${login.userId}`)));
     }
     if (localStorage.getItem("allQuestions")) {
@@ -264,7 +264,6 @@ function App() {
         setAllQuestions([]);
       });
     }
-    localStorage.setItem("formIsCompleted", formIsCompleted);
   }, [formIsCompleted]);
   useEffect(() => {
     if (results !== {} && login.userId) {
