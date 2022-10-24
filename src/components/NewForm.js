@@ -169,8 +169,20 @@ const NewForm = ({
           return question;
         })
       );
-      setQuestionToDisplay(listOfQuestions.formQuestions[3]);
-      setIndexQuestions(3);
+      if (
+        localStorage.getItem("questionToDisplay") &&
+        localStorage.getItem("indexQuestions")
+      ) {
+        setQuestionToDisplay(
+          localStorage.getItem("questionToDisplay") === "undefined"
+            ? setQuestionToDisplay(listOfQuestions.formQuestions[3])
+            : JSON.parse(localStorage.getItem("questionToDisplay"))
+        );
+        setIndexQuestions(Number(localStorage.getItem("indexQuestions")));
+      } else {
+        setQuestionToDisplay(listOfQuestions.formQuestions[3]);
+        setIndexQuestions(3);
+      }
     }
   }, []);
   useEffect(() => {
