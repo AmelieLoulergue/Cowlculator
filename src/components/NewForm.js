@@ -139,7 +139,14 @@ const NewForm = ({
     document.getElementsByClassName("dash-nav")[0].classList.add("form-navbar");
 
     if (allResultsUser?.length) {
-      console.log(allResultsUser[0]);
+      console.log(
+        allResultsUser[0],
+        login?.farmName,
+        allResultsUser[0].find((element) => element.id === "farm_state")
+          ?.response,
+        allResultsUser[0].find((element) => element.id === "farm_zip_code")
+          ?.response
+      );
       setQuestions(
         questions.map((question) => {
           if (question.id === "farm_name") {
@@ -163,6 +170,7 @@ const NewForm = ({
         })
       );
       setQuestionToDisplay(listOfQuestions.formQuestions[3]);
+      setIndexQuestions(3);
     }
   }, []);
   useEffect(() => {
@@ -178,6 +186,7 @@ const NewForm = ({
   }, [counterQuestion]);
   useEffect(() => {
     if (questionToDisplay) {
+      console.log(questionToDisplay);
       setCounterQuestion(
         allQuestions.findIndex((element) => element.id === questionToDisplay.id)
       );
@@ -247,7 +256,7 @@ const NewForm = ({
         {initForm && questions.length > 0 && (
           <div id="questions-form" className="questions" ref={chatContainer}>
             {questions
-              .slice(allResultsUser?.length ? 3 : 0, indexQuestions)
+              .slice(allResultsUser[0]?.length ? 3 : 0, indexQuestions)
               .map((question, index) => (
                 <div
                   key={`question_form_${index}`}
