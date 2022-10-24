@@ -24,6 +24,9 @@ function Footer({ login }) {
             <li>
               <Link to="/About">Meet the team</Link>
             </li>
+            <li>
+              <Link to="/references">Learn more</Link>
+            </li>
             {!login && (
               <li>
                 <Link to="/account/register">Create your profile</Link>
