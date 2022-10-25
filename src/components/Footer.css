@@ -48,6 +48,8 @@
     position: relative;
     opacity: .6;
     transition: .3s ease-out;
+    max-width: max-content;
+    margin: auto;
 }
 #footer .links li::after {
     content: '';
