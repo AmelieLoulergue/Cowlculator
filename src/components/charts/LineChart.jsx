@@ -6,7 +6,7 @@ export const LineChart = ({ id, dataResults, labels }) => {
       title: {
         display: true,
         color: "white",
-        text: "Evolution of emissions and mitigations over time in tonne of CO<sub>2</sub>eq/year",
+        text: "Evolution of emissions and mitigations over time in tonne of CO₂eq/year",
         padding: {
           top: 10,
           bottom: 30,
@@ -39,14 +39,14 @@ export const LineChart = ({ id, dataResults, labels }) => {
     labels: labels,
     datasets: [
       {
-        label: "CO<sub>2</sub>eq emissions",
+        label: "CO₂eq emissions",
         data: dataResults.data1,
         fill: false,
         borderColor: "rgb(237, 120, 107)",
         tension: 0.1,
       },
       {
-        label: "CO<sub>2</sub>eq mitigations",
+        label: "CO₂eq mitigations",
         data: dataResults.data2,
         fill: false,
         borderColor: "rgb(75, 192, 192)",

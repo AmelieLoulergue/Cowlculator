@@ -31,15 +31,18 @@ function Login({
   let navigate = useNavigate();
   const noNav = `.dash-nav, .nav-margin, .dash-side {
     display: none !important;
-}`
+}`;
   const noFoot = `#footer {display: none !important}`;
   return (
     <>
-      <style>{noNav}{noFoot}</style>
+      <style>
+        {noNav}
+        {noFoot}
+      </style>
       <div className="center-flex">
         <div className="navbar">
           <Link to="../account">
-            <img src={back_arrow}></img>
+            <img src={back_arrow} alt=""></img>
           </Link>
         </div>
         <div className="content">

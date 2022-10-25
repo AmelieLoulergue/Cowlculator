@@ -54,7 +54,6 @@ function funcMitigationsAdditiveSheep({ datasForm, EFSheep }) {
   }
 
   //EF emissions from cattle portion concerned by additives
-  let EFSheepAdditive = 0;
   let mitigatedEFSheepAdditive = 0;
   if (
     datasForm.find(
@@ -64,11 +63,7 @@ function funcMitigationsAdditiveSheep({ datasForm, EFSheep }) {
   ) {
     mitigatedEFSheepAdditive =
       numbSheepPracticesAdditive * EFSheep * coeffAdditiveSheep;
-    EFSheepAdditive = EFSheep - mitigatedEFSheepAdditive;
-  } else {
-    EFSheepAdditive = 0;
   }
-  // Total EF emissions after mitigation
 
   return mitigatedEFSheepAdditive;
 }

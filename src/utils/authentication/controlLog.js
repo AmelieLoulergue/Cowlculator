@@ -6,8 +6,24 @@ export const logout = ({ login, setLogin }) => {
   setLogin(false);
 };
 
-export const isLogin = () => {
-  if (localStorage.getItem(TOKEN_KEY)) {
+export const isLogin = async ({ login, setLogin }) => {
+  if (localStorage.getItem(TOKEN_KEY) && login?.userId) {
+    let requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem(TOKEN_KEY)}`,
+      },
+    };
+    const response = await fetch(
+      `https://cowlculatorback.herokuapp.com/api/result/user/${login.userId}`,
+      requestOptions
+    );
+    const datas = await response.json();
+    if (datas.error) {
+      setLogin(false);
+      return false;
+    }
     return true;
   }
 

@@ -2,7 +2,6 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import NewForm from "./components/NewForm";
-import Account from "./components/logger/Logger";
 import Login from "./components/logger/Login";
 import Register from "./components/logger/Signup";
 import Dashboard from "./components/Dashboard";
@@ -22,6 +21,9 @@ import listOfQuestions from "./utils/listOfQuestions";
 import getUserDatas from "./utils/userDatas/getUserDatas";
 import getAllResults from "./utils/userDatas/getAllResults";
 import saveUserDatas from "./utils/userDatas/saveUserDatas";
+import updateUserDatas from "./utils/userDatas/updateUserDatas";
+import Logger from "./components/logger/Logger";
+import { CircularProgress } from "@mui/material";
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -29,25 +31,20 @@ const darkTheme = createTheme({
 });
 function App() {
   const [formIsCompleted, setFormIsCompleted] = useState(false);
-  const [viewHeight, setViewHeight] = useState(window.innerHeight);
   const [datasForm, setDatasForm] = useState([]);
   const [messageAlert, setMessageAlert] = useState("");
   const [severity, setSeverity] = useState("");
   const [initForm, setInitForm] = useState(false);
   const [displayAlert, setDisplayAlert] = useState(false);
   const [questionToDisplay, setQuestionToDisplay] = useState(null);
-  const [indexQuestions, setIndexQuestions] = useState(
-    localStorage.getItem("indexQuestions")
-      ? Number(localStorage.getItem("indexQuestions"))
-      : 0
-  );
+  const [indexQuestions, setIndexQuestions] = useState(0);
   const [counterQuestion, setCounterQuestion] = useState(0);
-  useEffect(() => setViewHeight(window.innerHeight), [window]);
 
   const [results, setResults] = useState({});
   const [questions, setQuestions] = useState([]);
   const [allQuestions, setAllQuestions] = useState([]);
   const [login, setLogin] = useState(false);
+  const [loggedUser, setLoggedUser] = useState(false);
   const [userProfile, setUserProfile] = useState({
     email: "",
     password: "",
@@ -55,18 +52,22 @@ function App() {
   const [farmName, setFarmName] = useState("");
   const [allResultsUser, setAllResultsUser] = useState([]);
   const [allResults, setAllResults] = useState([]);
+  const [timer, setTimer] = useState(true);
+  const goTimer = () => {
+    console.log("timer");
+    setTimeout(() => setTimer(false), 500);
+  };
   useEffect(() => {
-    console.log({ allResultsUser });
-  }, [allResultsUser]);
-  useEffect(() => {
-    console.log({ allResults });
-  }, [allResults]);
-  useEffect(() => {
-    if (localStorage.getItem("datasForm")) {
-      setDatasForm(JSON.parse(localStorage.getItem("datasForm")));
+    if (login.userId && localStorage.getItem(`datasForm${login.userId}`)) {
+      setDatasForm(
+        JSON.parse(localStorage.getItem(`datasForm${login.userId}`))
+      );
     }
-    if (localStorage.getItem("results")) {
-      setResults(JSON.parse(localStorage.getItem("results")));
+    if (localStorage.getItem("indexQuestions")) {
+      setIndexQuestions(Number(localStorage.getItem("indexQuestions")));
+    }
+    if (login.userId && localStorage.getItem(`results${login.userId}`)) {
+      setResults(JSON.parse(localStorage.getItem(`results${login.userId}`)));
     }
     if (localStorage.getItem("allQuestions")) {
       setAllQuestions(JSON.parse(localStorage.getItem("allQuestions")));
@@ -103,16 +104,24 @@ function App() {
         JSON.parse(localStorage.getItem("initForm")) === "true" ? true : false
       );
     }
+    if (timer) {
+      goTimer();
+    }
   }, []);
-  // useEffect(
-  //   () => console.log(allQuestions, questions),
-  //   [allQuestions, questions]
-  // );
   useEffect(() => {
-    if (questions.find((element) => element.id === "farm_name")) {
+    if (
+      questions.find((element) => element.id === "farm_name") &&
+      !login?.farmName
+    ) {
       setFarmName(
         questions.find((element) => element.id === "farm_name").response
       );
+      updateUserDatas({
+        login: login,
+        farmName: questions.find((element) => element.id === "farm_name")
+          .response,
+        setLogin: setLogin,
+      });
     }
   }, [questions]);
   useEffect(() => {
@@ -163,9 +172,8 @@ function App() {
 
       setAllQuestions(result);
     }
-  }, []);
+  }, [questions]);
 
-  // console.log({ allQuestions });
   useEffect(() => {
     if (initForm) {
       setDatasForm(
@@ -183,15 +191,21 @@ function App() {
     if (questions.length > 0) {
       localStorage.setItem("questions", JSON.stringify(questions));
     }
-  }, [questions]);
+  }, [questions, initForm]);
   useEffect(() => {
-    localStorage.setItem("indexQuestions", indexQuestions);
+    if (indexQuestions !== 0) {
+      localStorage.setItem("indexQuestions", JSON.stringify(indexQuestions));
+    }
   }, [indexQuestions]);
   useEffect(() => {
-    localStorage.setItem("counterQuestion", counterQuestion);
+    if (counterQuestion !== 0) {
+      localStorage.setItem("counterQuestion", counterQuestion);
+    }
   }, [counterQuestion]);
   useEffect(() => {
-    localStorage.setItem("initForm", initForm);
+    if (initForm !== undefined) {
+      localStorage.setItem("initForm", JSON.stringify(initForm));
+    }
   }, [initForm]);
   useEffect(() => {
     if (questionToDisplay !== null) {
@@ -204,7 +218,10 @@ function App() {
   useEffect(() => {
     calculs({ datasForm, results, setResults });
     if (datasForm.length > 0) {
-      localStorage.setItem("datasForm", JSON.stringify(datasForm));
+      localStorage.setItem(
+        `datasForm${login.userId}`,
+        JSON.stringify(datasForm)
+      );
     }
   }, [datasForm]);
   useEffect(() => {
@@ -214,8 +231,9 @@ function App() {
   }, [login]);
   useEffect(() => {
     if (formIsCompleted) {
-      console.log({ results }, { datasForm }, { questions });
-      localStorage.setItem("results", JSON.stringify(results));
+      if (login.userId) {
+        localStorage.setItem(`results${login.userId}`, JSON.stringify(results));
+      }
       saveUserDatas({ allQuestions, results, login }).then(() => {
         getUserDatas({ login })
           .then((result) => {
@@ -225,33 +243,31 @@ function App() {
           })
           // make sure to catch any error
           .catch(console.error);
-        localStorage.removeItem("results");
+        localStorage.removeItem(`results${login.userId}`);
         localStorage.removeItem("allQuestions");
         localStorage.removeItem("counterQuestion");
         localStorage.removeItem("formIsCompleted");
         localStorage.removeItem("indexQuestions");
-        localStorage.removeItem("initForm");
+        localStorage.setItem("initForm", "false");
         localStorage.removeItem("questionToDisplay");
         localStorage.removeItem("questions");
-        localStorage.removeItem("datasForm");
+        localStorage.removeItem(`datasForm${login.userId}`);
         setFormIsCompleted(false);
         setDatasForm([]);
         setInitForm(false);
-        setQuestionToDisplay(null);
-        setIndexQuestions(0);
-        setCounterQuestion(0);
+        setQuestionToDisplay(listOfQuestions.formQuestions[3]);
+        setIndexQuestions(3);
+        setCounterQuestion(3);
 
         setResults({});
-        setQuestions([]);
+        setQuestions(listOfQuestions.formQuestions);
         setAllQuestions([]);
       });
     }
-    localStorage.setItem("formIsCompleted", formIsCompleted);
   }, [formIsCompleted]);
   useEffect(() => {
-    console.log({ results });
-    if (results !== {}) {
-      localStorage.setItem("results", JSON.stringify(results));
+    if (results !== {} && login.userId) {
+      localStorage.setItem(`results${login.userId}`, JSON.stringify(results));
     }
   }, [results]);
   useEffect(() => {
@@ -262,7 +278,7 @@ function App() {
   useEffect(() => {
     getUserDatas({ login })
       .then((result) => {
-        if (result.result.length > 0) {
+        if (result?.result?.length > 0) {
           setAllResultsUser(result.result.map((item) => item.result));
         }
       })
@@ -277,8 +293,10 @@ function App() {
           ])
         );
       })
-      .catch(console.error); // call the function
-    // console.log(test);
+      .catch(console.error);
+  }, [login]);
+  useEffect(() => {
+    isLogin({ login, setLogin }).then((response) => setLoggedUser(response));
   }, [login]);
   return (
     <ThemeProvider theme={darkTheme}>
@@ -297,14 +315,14 @@ function App() {
                     login={login}
                     setLogin={setLogin}
                   ></Navbar>
-                  <Home />
+                  <Home /> <Footer login={login} />
                 </>
               }
             ></Route>
             <Route
               path="/form"
               element={
-                isLogin({ login }) ? (
+                loggedUser ? (
                   <>
                     <Navbar
                       farmName={farmName}
@@ -312,6 +330,7 @@ function App() {
                       setLogin={setLogin}
                     ></Navbar>
                     <NewForm
+                      login={login}
                       results={results}
                       setResults={setResults}
                       questions={questions}
@@ -333,16 +352,35 @@ function App() {
                       setAllQuestions={setAllQuestions}
                       counterQuestion={counterQuestion}
                       setCounterQuestion={setCounterQuestion}
-                    />
+                      allResultsUser={allResultsUser}
+                    />{" "}
+                    <Footer login={login} />
                   </>
                 ) : (
                   <>
-                    <Navbar
-                      farmName={farmName}
-                      login={login}
-                      setLogin={setLogin}
-                    ></Navbar>
-                    <Home />
+                    {timer && (
+                      <div
+                        style={{
+                          height: "100vh",
+                          width: "100%",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <CircularProgress />
+                      </div>
+                    )}
+                    {!timer && (
+                      <>
+                        <Navbar
+                          farmName={farmName}
+                          login={login}
+                          setLogin={setLogin}
+                        ></Navbar>
+                        <Home /> <Footer login={login} />
+                      </>
+                    )}
                   </>
                 )
               }
@@ -350,20 +388,51 @@ function App() {
             <Route
               path="/account"
               element={
-                <>
-                  <Navbar
-                    farmName={farmName}
-                    login={login}
-                    setLogin={setLogin}
-                  />
-                  <Account />
-                </>
+                !loggedUser ? (
+                  <>
+                    <Navbar
+                      farmName={farmName}
+                      login={login}
+                      setLogin={setLogin}
+                    />
+                    <Logger
+                      userProfile={userProfile}
+                      setUserProfile={setUserProfile}
+                      login={login}
+                      setLogin={setLogin}
+                      setMessageAlert={setMessageAlert}
+                      setSeverity={setSeverity}
+                      setDisplayAlert={setDisplayAlert}
+                    />{" "}
+                    <Footer login={login} />
+                  </>
+                ) : loggedUser && login.userType === "farmer" ? (
+                  <>
+                    <Navbar
+                      farmName={farmName}
+                      login={login}
+                      setLogin={setLogin}
+                    />
+                    <Dashboard allResultsUser={allResultsUser} />{" "}
+                    <Footer login={login} />
+                  </>
+                ) : (
+                  <>
+                    <Navbar
+                      farmName={farmName}
+                      login={login}
+                      setLogin={setLogin}
+                    />
+                    <ResearcherDatas allResults={allResults} login={login} />{" "}
+                    <Footer login={login} />
+                  </>
+                )
               }
             ></Route>
             <Route
               path="/account/login"
               element={
-                !isLogin({ login }) ? (
+                !loggedUser ? (
                   <>
                     <Navbar
                       farmName={farmName}
@@ -378,22 +447,18 @@ function App() {
                       setMessageAlert={setMessageAlert}
                       setSeverity={setSeverity}
                       setDisplayAlert={setDisplayAlert}
-                    />
+                    />{" "}
+                    <Footer login={login} />
                   </>
-                ) : isLogin({ login }) && login.userType === "farmer" ? (
+                ) : loggedUser && login.userType === "farmer" ? (
                   <>
                     <Navbar
                       farmName={farmName}
                       login={login}
                       setLogin={setLogin}
                     />
-                    <Dashboard
-                      login={login}
-                      results={results}
-                      allResultsUser={allResultsUser}
-                      formIsCompleted={formIsCompleted}
-                      datasForm={datasForm}
-                    />
+                    <Dashboard allResultsUser={allResultsUser} />{" "}
+                    <Footer login={login} />
                   </>
                 ) : (
                   <>
@@ -402,7 +467,8 @@ function App() {
                       login={login}
                       setLogin={setLogin}
                     />
-                    <ResearcherDatas allResults={allResults} login={login} />
+                    <ResearcherDatas allResults={allResults} login={login} />{" "}
+                    <Footer login={login} />
                   </>
                 )
               }
@@ -410,7 +476,7 @@ function App() {
             <Route
               path="/account/register"
               element={
-                !isLogin({ login }) ? (
+                !loggedUser ? (
                   <>
                     <Navbar
                       farmName={farmName}
@@ -423,9 +489,10 @@ function App() {
                       setMessageAlert={setMessageAlert}
                       setSeverity={setSeverity}
                       setDisplayAlert={setDisplayAlert}
-                    />
+                    />{" "}
+                    <Footer login={login} />
                   </>
-                ) : isLogin({ login }) && login.userType === "farmer" ? (
+                ) : loggedUser && login.userType === "farmer" ? (
                   <>
                     <Navbar
                       farmName={farmName}
@@ -437,7 +504,8 @@ function App() {
                       results={results}
                       formIsCompleted={formIsCompleted}
                       allResultsUser={allResultsUser}
-                    />
+                    />{" "}
+                    <Footer login={login} />
                   </>
                 ) : (
                   <>
@@ -447,6 +515,7 @@ function App() {
                       setLogin={setLogin}
                     />
                     <ResearcherDatas allResults={allResults} login={login} />
+                    <Footer login={login} />
                   </>
                 )
               }
@@ -454,7 +523,7 @@ function App() {
             <Route
               path="/dashboard"
               element={
-                isLogin({ login }) ? (
+                loggedUser ? (
                   <>
                     <Navbar
                       farmName={farmName}
@@ -467,15 +536,42 @@ function App() {
                       formIsCompleted={formIsCompleted}
                       allResultsUser={allResultsUser}
                     />
+                    <Footer login={login} />
                   </>
                 ) : (
                   <>
-                    <Navbar
-                      farmName={farmName}
-                      login={login}
-                      setLogin={setLogin}
-                    ></Navbar>
-                    <Home />
+                    {timer && (
+                      <div
+                        style={{
+                          height: "100vh",
+                          width: "100%",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <CircularProgress />
+                      </div>
+                    )}
+                    {!timer && (
+                      <>
+                        <Navbar
+                          farmName={farmName}
+                          login={login}
+                          setLogin={setLogin}
+                        ></Navbar>
+                        <Login
+                          userProfile={userProfile}
+                          setUserProfile={setUserProfile}
+                          login={login}
+                          setLogin={setLogin}
+                          setMessageAlert={setMessageAlert}
+                          setSeverity={setSeverity}
+                          setDisplayAlert={setDisplayAlert}
+                        />
+                        <Footer login={login} />
+                      </>
+                    )}
                   </>
                 )
               }
@@ -483,7 +579,7 @@ function App() {
             <Route
               path="/datas"
               element={
-                isLogin({ login }) ? (
+                loggedUser ? (
                   <>
                     <Navbar
                       farmName={farmName}
@@ -491,6 +587,7 @@ function App() {
                       setLogin={setLogin}
                     />
                     <ResearcherDatas allResults={allResults} login={login} />
+                    <Footer login={login} />
                   </>
                 ) : (
                   <>
@@ -500,6 +597,7 @@ function App() {
                       setLogin={setLogin}
                     />
                     <Home />
+                    <Footer login={login} />
                   </>
                 )
               }
@@ -514,6 +612,7 @@ function App() {
                     setLogin={setLogin}
                   />
                   <About />
+                  <Footer login={login} />
                 </>
               }
             ></Route>
@@ -532,6 +631,7 @@ function App() {
                     setSeverity={setSeverity}
                     setDisplayAlert={setDisplayAlert}
                   />
+                  <Footer login={login} />
                 </>
               }
             />
@@ -545,12 +645,13 @@ function App() {
                     setLogin={setLogin}
                   />
                   <References />
+                  <Footer login={login} />
                 </>
               }
             />
           </Routes>
         </BrowserRouter>
-        <Footer></Footer>
+
         <Bg></Bg>
       </div>
     </ThemeProvider>

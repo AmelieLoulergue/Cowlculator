@@ -2,7 +2,6 @@ import React from "react";
 import { Bar } from "react-chartjs-2";
 
 export const BarChart = ({ dataResults, id, labels }) => {
-  // console.log(dataResults);
   const data = {
     labels: labels,
     datasets: [
@@ -26,7 +25,7 @@ export const BarChart = ({ dataResults, id, labels }) => {
       title: {
         display: true,
         color: "white",
-        text: "Comparison of mitigated emissions and not mitigated emissions in tonne CO<sub>2</sub>eq/year",
+        text: "Comparison of mitigated emissions and not mitigated emissions in tonne CO₂eq/year",
         padding: {
           top: 10,
           bottom: 30,

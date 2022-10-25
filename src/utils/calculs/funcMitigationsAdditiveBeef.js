@@ -51,8 +51,6 @@ function funcMitigationsAdditiveBeef({ datasForm, EFBeef, cattleBeef }) {
   }
 
   // EF emissions mitigated by the practice additives
-
-  let EFBeefAdditive = 0;
   let mitigatedEFBeefAdditive = 0;
   if (
     datasForm.find(
@@ -64,11 +62,7 @@ function funcMitigationsAdditiveBeef({ datasForm, EFBeef, cattleBeef }) {
   ) {
     mitigatedEFBeefAdditive =
       numbBeefPracticesAdditive * EFBeef * coeffAdditiveBeef;
-    EFBeefAdditive = EFBeef - mitigatedEFBeefAdditive;
-  } else {
-    EFBeefAdditive = 0;
   }
-  console.log(EFBeefAdditive);
   return mitigatedEFBeefAdditive;
 }
 export default funcMitigationsAdditiveBeef;

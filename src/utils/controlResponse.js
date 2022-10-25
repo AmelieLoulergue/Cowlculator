@@ -81,8 +81,6 @@ const controlResponse = ({
       }
     }
   } else if (questionToDisplay.id === "farm_zip_code") {
-    console.log(answer.length);
-    console.log(Number(answer));
     if (answer.length !== 5 || isNaN(Number(answer))) {
       setSeverity("error");
       setMessageAlert("Please enter a valid zip code");

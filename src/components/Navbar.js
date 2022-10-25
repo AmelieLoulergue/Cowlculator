@@ -23,6 +23,7 @@ function Navbar({ login, setLogin, farmName }) {
 
   const [scroll, setScroll] = useState(window.scrollY);
   const navigate = useNavigate();
+  console.log(login);
   return (
     <>
       <div className="dash-side" id="dash-side">
@@ -32,8 +33,14 @@ function Navbar({ login, setLogin, farmName }) {
               <h1>Dashboard</h1>
               <div>
                 {login?.email && <h2>{login.email}</h2>}
-                {login.type === "farmer" && <>Project Name</>}
-                <p>{farmName ? farmName : "Farm name"}</p>
+                {login.userType === "farmer" && <>Farm Name</>}
+                <p>
+                  {login.userType === "farmer" && login.farmName ? (
+                    login.farmName
+                  ) : (
+                    <></>
+                  )}
+                </p>
                 <button className="btn" onClick={() => logout({ setLogin })}>
                   Log out
                 </button>
@@ -159,9 +166,19 @@ function Navbar({ login, setLogin, farmName }) {
           ></img>
         </div>
         <div className="nav-spacer">
-          <img src={account} onClick={() => {
-                  navigate("/account");
-                }}></img>
+          <img
+            src={account}
+            onClick={() => {
+              if (!login) {
+                navigate("/account");
+              } else if (login?.userType === "farmer") {
+                navigate("/dashboard");
+              } else {
+                navigate("/datas");
+              }
+            }}
+            alt=""
+          ></img>
         </div>
       </div>
       <div className="nav-margin"></div>
