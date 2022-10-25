@@ -113,26 +113,32 @@ function Register({
   const pass = useRef();
   const passConf = useRef();
 
-  const showPass = () => {
-    document.getElementById("password").type = "text";
-    document.getElementById("password").classList.add("borderGradient");
-    pass.current.goToAndPlay(0, true);
-  };
-  const hidePass = () => {
-    document.getElementById("password").type = "password";
-    document.getElementById("password").classList.remove("borderGradient");
-  };
+  var passHide = false;
+  var passConfHide = false;
 
-  const showPassConf = () => {
-    document.getElementById("passwordConfirm").type = "text";
-    document.getElementById("passwordConfirm").classList.add("borderGradient");
-    passConf.current.goToAndPlay(0, true);
+  const showPass = () => {
+    if (passHide) {
+      document.getElementById("password").type = "password"
+      document.getElementById("password").classList.remove("borderGradient")
+      passHide = false
+    } else {
+      document.getElementById("password").type = "text";
+      document.getElementById("password").classList.add("borderGradient");
+      pass.current.goToAndPlay(0, true);
+      passHide = true
+    }
   };
-  const hidePassConf = () => {
-    document.getElementById("passwordConfirm").type = "password";
-    document
-      .getElementById("passwordConfirm")
-      .classList.remove("borderGradient");
+  const showPassConf = () => {
+    if (passHide) {
+      document.getElementById("passwordConfirm").type = "password";
+      document.getElementById("passwordConfirm").classList.remove("borderGradient");
+      passHide = false
+    } else {
+      document.getElementById("passwordConfirm").type = "text";
+      document.getElementById("passwordConfirm").classList.add("borderGradient");
+      passConf.current.goToAndPlay(0, true);
+      passHide = true
+    }
   };
 
   const radioCheck = (e) => {
@@ -272,7 +278,6 @@ const noFoot = `#footer {display: none !important}`;
                     animationData={eyeBlink}
                     loop={false}
                     onMouseDown={showPass}
-                    onMouseUp={hidePass}
                     className="eye-pass"
                   />
                 </div>
@@ -309,7 +314,6 @@ const noFoot = `#footer {display: none !important}`;
                     animationData={eyeBlink}
                     loop={false}
                     onMouseDown={showPassConf}
-                    onMouseUp={hidePassConf}
                     className="eye-pass"
                   />
                 </div>

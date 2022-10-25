@@ -19,14 +19,19 @@ function Login({
 }) {
   const pass = useRef();
 
+  var passHide = false;
+
   const showPass = () => {
-    document.getElementById("password").type = "text";
-    document.getElementById("password").classList.add("borderGradient");
-    pass.current.goToAndPlay(0, true);
-  };
-  const hidePass = () => {
-    document.getElementById("password").type = "password";
-    document.getElementById("password").classList.remove("borderGradient");
+    if (passHide) {
+      document.getElementById("password").type = "password"
+      document.getElementById("password").classList.remove("borderGradient")
+      passHide = false
+    } else {
+      document.getElementById("password").type = "text";
+      document.getElementById("password").classList.add("borderGradient");
+      pass.current.goToAndPlay(0, true);
+      passHide = true
+    }
   };
   let navigate = useNavigate();
   const noNav = `.dash-nav, .nav-margin, .dash-side {
@@ -83,7 +88,6 @@ function Login({
                   animationData={eyeBlink}
                   loop={false}
                   onMouseDown={showPass}
-                  onMouseUp={hidePass}
                   className="eye-pass"
                 />
               </div>
