@@ -13,7 +13,7 @@ function Footer({ login }) {
           <h3>Links :</h3>
           <ul>
             <li>
-              <Link to="/">Home page</Link>
+              <Link to="/#tophome">Home page</Link>
             </li>
             <li>
               <Link to="/#app">About the app</Link>
@@ -22,10 +22,10 @@ function Footer({ login }) {
               <Link to="/#steps">How to get your results?</Link>
             </li>
             <li>
-              <Link to="/About">Meet the team</Link>
+              <Link to="/About#aboutus">Meet the team</Link>
             </li>
             <li>
-              <Link to="/references">Learn more</Link>
+              <Link to="/references#references">Learn more</Link>
             </li>
             {!login && (
               <li>
@@ -35,6 +35,11 @@ function Footer({ login }) {
             {login?.userType === "farmer" && (
               <li>
                 <Link to="/form">Fill the form</Link>
+              </li>
+            )}
+            {login?.userType === "farmer" && (
+              <li>
+                <Link to="/account/register">Access downloadable data</Link>
               </li>
             )}
             {login?.userType === "researcher" && (

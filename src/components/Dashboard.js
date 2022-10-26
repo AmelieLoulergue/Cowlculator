@@ -130,7 +130,7 @@ function Dashboard({ allResultsUser }) {
                             currentResult.find(
                               (element) => element.id === "CO2emmited"
                             )?.response * 1
-                          ) / 1}
+                          ) / 1}{" "}
                           Tonne CO2eq/year
                         </h2>
                       )}
@@ -196,6 +196,19 @@ function Dashboard({ allResultsUser }) {
               {currentResult && (
                 <div className="column is-6 is-12-touch">
                   <div className="card-chart has-text-centered">
+                    Take a look at the repartition of your emissions to know
+                    which part of your activity generates the most greenhouse
+                    gases Tip: Click on the name of a category to add it or
+                    remove it from the graph!
+                  </div>{" "}
+                </div>
+              )}
+              {currentResult && (
+                <div className="column is-6 is-hidden-mobile">
+                  <div className="card-chart has-text-centered">
+                    {" "}
+                    Watch your emissions decrease and your mitigation increase
+                    over time!{" "}
                     {advicesArray?.map((advice) => (
                       <>
                         {advice}
@@ -205,34 +218,7 @@ function Dashboard({ allResultsUser }) {
                   </div>{" "}
                 </div>
               )}
-              {currentResult && (
-                <div className="column is-6 is-hidden-mobile">
-                  <div className="card-chart has-text-centered">ADVICE</div>{" "}
-                </div>
-              )}
               <div className="column is-6 is-12-touch">
-                <div className="card-chart">
-                  {currentResult ? (
-                    <BarChart
-                      responsive={false}
-                      id={"chart2"}
-                      labels={labelPeriodChart2}
-                      dataResults={{
-                        data1: allTotalEmissionsArray,
-                        data2: allCO2emmitedArray,
-                      }}
-                    />
-                  ) : (
-                    <></>
-                  )}
-                </div>
-              </div>
-              {currentResult && (
-                <div className="column is-6 is-hidden-desktop">
-                  <div className="card-chart has-text-centered">ADVICE</div>{" "}
-                </div>
-              )}
-              <div className="column is-6 is-12-touch ">
                 <div className="card-chart">
                   {currentResult ? (
                     <LineChart
@@ -250,8 +236,34 @@ function Dashboard({ allResultsUser }) {
                 </div>
               </div>
               {currentResult && (
-                <div className="column is-6 ">
+                <div className="column is-6 is-hidden-desktop">
                   <div className="card-chart has-text-centered">ADVICE</div>{" "}
+                </div>
+              )}
+              <div className="column is-6 is-12-touch ">
+                <div className="card-chart">
+                  {currentResult ? (
+                    <BarChart
+                      responsive={false}
+                      id={"chart2"}
+                      labels={labelPeriodChart2}
+                      dataResults={{
+                        data1: allTotalEmissionsArray,
+                        data2: allCO2emmitedArray,
+                      }}
+                    />
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              </div>
+              {currentResult && (
+                <div className="column is-6 ">
+                  <div className="card-chart has-text-centered">
+                    Realize the importance of your efforts over time by
+                    comparing your unmitigated emissions with your mitigated
+                    emissions.
+                  </div>{" "}
                 </div>
               )}
             </div>
