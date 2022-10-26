@@ -1,6 +1,5 @@
 /* pannels section */
 .panel {
-  background-color: #111111;
   border-radius: 20px;
   margin: 20px;
   /* margin-top: 135px; */
@@ -22,19 +21,10 @@
 }
 .card {
   width: fit-content;
-  padding: 0 1rem;
+  padding: 1rem;
   min-width: 260px;
   flex: 1 1;
   margin: 20px;
-}
-.card-icon img {
-  height: 35px;
-  width: 35px;
-  padding: 15px;
-  border-radius: 15px;
-  margin: 15px 20px;
-}
-.card {
   border-radius: 10px;
   box-shadow: 0 0 40px 0px #000000b9;
   border-top: 1px solid rgba(255, 255, 255, 0.205);
@@ -43,73 +33,141 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+}
+.card-icon img {
+  height: 30px;
+  width: 30px;
+  padding: 10px;
+  border-radius: 15px;
+  /* margin: 15px 20px; */
 }
 .saved img {
   background-color: #20bfa9;
 }
-.saved h1 {
+.saved h2 {
   color: #20bfa9;
 }
 .saved {
-  background-image: linear-gradient(45deg, #121410 80%, #20bfaa5d 100%);
+  /* background-image: linear-gradient(45deg, #121410 80%, #20bfaa5d 100%); */
+  background-image: linear-gradient(45deg, transparent 80%, #20bfaa5d 100%);
   border-color: #20bfa95d;
 }
 .saved:hover {
-  background-image: linear-gradient(45deg, #121410 80%, #20bfaa 100%);
+  /* background-image: linear-gradient(45deg, #121410 80%, #20bfaa 100%); */
+  background-image: linear-gradient(45deg, transparent 80%, #20bfaa 100%);
   border-color: #20bfa9;
 }
 
 .impact img {
   background-color: #ed786b;
 }
-.impact h1 {
+.impact h2 {
   color: #ed786b;
 }
 .impact {
-  background-image: linear-gradient(45deg, #1a1515 80%, #ed786b5d 100%);
+  /* background-image: linear-gradient(45deg, #1a1515 80%, #ed786b5d 100%); */
+  background-image: linear-gradient(45deg, transparent 80%, #ed786b5d 100%);
   border-color: #ed786b5d;
 }
 .impact:hover {
-  background-image: linear-gradient(45deg, #1a1515 80%, #ed786b 100%);
+  /* background-image: linear-gradient(45deg, #1a1515 80%, #ed786b 100%); */
+  background-image: linear-gradient(45deg, transparent 80%, #ed786b 100%);
   border-color: #ed786b;
 }
 
 .income img {
   background-color: #fdb95a;
 }
-.income h1 {
+.income h2 {
   color: #fdb95a;
 }
 .income {
-  background-image: linear-gradient(45deg, #181813 80%, #fdb95a5d 100%);
+  /* background-image: linear-gradient(45deg, #181813 80%, #fdb95a5d 100%); */
+  background-image: linear-gradient(45deg, transparent 80%, #fdb95a5d 100%);
   border-color: #fdb95a5d;
 }
 .income:hover {
-  background-image: linear-gradient(45deg, #181813 80%, #fdb95a 100%);
+  /* background-image: linear-gradient(45deg, #181813 80%, #fdb95a 100%); */
+  background-image: linear-gradient(45deg, transparent 80%, #fdb95a 100%);
   border-color: #fdb95a;
 }
 
 .card-top {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 .card-top h1 {
-  margin-left: 10px;
-  font-size: 1.7rem;
+  margin-left: 1.2rem;
+  font-size: .9rem;
+  font-weight: 400;
+  width: max-content;
+  text-align: center;
+}
+#dash .card-top h1 b {
+  font-size: 2.3rem;
+  letter-spacing: .1rem;
+  font-weight: 900;
 }
 .card h2 {
   opacity: 0.9;
   margin-top: 0;
-  margin: 0 0 15px 20px;
+  margin: 10px 0 0 5px;
   text-align: center;
+  font-size: 1rem;
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: auto;
+  min-width: max-content;
 }
+#dash .card {
+  margin-bottom: 50px;
+}
+
+/* Charts section */
+
+.card-dash-line {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  column-gap: 5vw;
+  margin: 25px auto;
+  flex: 1 1;
+  flex-wrap: wrap;
+}
+.card-dash-line:nth-child(2n) .card-chart {
+  order: 2;
+}
+
+#dash-charts.card-section {
+  flex-direction: column;
+}
+
 #chart1 {
-  max-width: 350px;
-  max-height: 350px;
   margin: auto;
 }
 .card-chart {
-  padding: 3rem;
-  width: 80%;
+  position: relative;
+  min-width: 400px;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 0 40px 0px #00000051;
+}
+.card-chart, .card-advice {
+  width: calc(50% - 5vw);
+  margin: 12.5px auto;
+}
+
+@media screen and (max-width:1024px) {
+  .card-dash-line {
+    flex-direction: column;
+  }
+  .card-dash-line:nth-child(2n) .card-advice {
+    order: 2;
+  }
 }
