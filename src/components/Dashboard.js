@@ -219,76 +219,128 @@ function Dashboard({ allResultsUser }) {
                   advicesArray.length === 0 ? "is-hidden" : "card-advice"
                 }
               >
-                <h2>Want to improve your results?</h2>
-                {currentResult &&
-                  advicesArray.length > 0 &&
-                  advicesArray
-                    ?.filter((advice, index) => index === 0)
-                    .map((advice) => advice)}
+                {advicesArray.length === 0 ? (
+                  <>
+                    <h2>Impressive! You're doing great!</h2>
+                    We don't have any advice to provide to you. You are currently doing all recommended actions in our database to reduce CO2 emmisions. Keep going!
+                  </>
+                ) : (
+                  <>
+                    <h2>Want to improve your results?</h2>
+                    {currentResult &&
+                      advicesArray.length > 0 &&
+                      advicesArray
+                        ?.filter((advice, index) => index === 0)
+                        .map((advice) => advice)}
+                  </>
+                )}
               </div>
             </div>
 
-            <div className="card-dash-line">
-              <div className="card-chart">
-                {currentResult ? (
-                  <LineChart
-                    options={chartoption}
-                    labels={labelPeriodChart3}
-                    id={"chart3"}
-                    dataResults={{
-                      data1: allCO2emmitedArray,
-                      data2: allCO2mitigatedEmissions,
-                    }}
-                  />
-                ) : (
-                  <></>
-                )}
-              </div>
-              <div
-                className={
-                  advicesArray.length < 2 ? "is-hidden" : "card-advice"
-                }
-              >
-                <h2>Here is something you can do:</h2>
-                {currentResult &&
-                  advicesArray.length >= 2 &&
-                  advicesArray
-                    ?.filter((advice, index) => index === 1)
-                    .map((advice) => advice)}
-              </div>
-            </div>
+                  {advicesArray.length < 2 ? (
+                  <>
+                    <div className="card-dash-line">
+                      <div className="card-chart">
+                      {currentResult ? (
+                          <LineChart
+                            options={chartoption}
+                            labels={labelPeriodChart3}
+                            id={"chart3"}
+                            dataResults={{
+                              data1: allCO2emmitedArray,
+                              data2: allCO2mitigatedEmissions,
+                            }}
+                          />
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                      <div className="card-chart">
+                      {currentResult ? (
+                          <BarChart
+                            width={100}
+                            height={50}
+                            options={{ maintainAspectRatio: false, responsive: false }}
+                            id={"chart2"}
+                            labels={labelPeriodChart2}
+                            dataResults={{
+                              data1: allTotalEmissionsArray,
+                              data2: allCO2emmitedArray,
+                            }}
+                          />
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                    </div>
+                  </>
+                  ) : (
+                  <>
+                    <div className="card-dash-line">
+                      <div className="card-chart">
+                        {currentResult ? (
+                          <LineChart
+                            options={chartoption}
+                            labels={labelPeriodChart3}
+                            id={"chart3"}
+                            dataResults={{
+                              data1: allCO2emmitedArray,
+                              data2: allCO2mitigatedEmissions,
+                            }}
+                          />
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                      <div
+                        className={
+                          advicesArray.length < 2 ? "is-hidden" : "card-advice"
+                        }
+                      >
+                        <h2>Here is something you can do:</h2>
+                        {currentResult &&
+                          advicesArray.length >= 2 &&
+                          advicesArray
+                            ?.filter((advice, index) => index === 1)
+                            .map((advice) => advice)}
+                      </div>
+                    </div>
 
-            <div className="card-dash-line">
-              <div className="card-chart">
-                {currentResult ? (
-                  <BarChart
-                    width={100}
-                    height={50}
-                    options={{ maintainAspectRatio: false, responsive: false }}
-                    id={"chart2"}
-                    labels={labelPeriodChart2}
-                    dataResults={{
-                      data1: allTotalEmissionsArray,
-                      data2: allCO2emmitedArray,
-                    }}
-                  />
-                ) : (
-                  <></>
-                )}
-              </div>
-              <div
-                className={
-                  advicesArray.length < 3 ? "is-hidden" : "card-advice"
-                }
-              >
-                <h2>You're doing great!</h2>
-                {currentResult &&
-                  advicesArray.length >= 3 &&
-                  advicesArray
-                    ?.filter((advice, index) => index === 2)
-                    .map((advice) => advice)}
-              </div>
-              <div
+                    <div className="card-dash-line">
+                      <div className="card-chart">
+                        {currentResult ? (
+                          <BarChart
+                            width={100}
+                            height={50}
+                            options={{ maintainAspectRatio: false, responsive: false }}
+                            id={"chart2"}
+                            labels={labelPeriodChart2}
+                            dataResults={{
+                              data1: allTotalEmissionsArray,
+                              data2: allCO2emmitedArray,
+                            }}
+                          />
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                      <div
+                        className={
+                          advicesArray.length < 3 ? "is-hidden" : "card-advice"
+                        }
+                      >
+                        <h2>You're doing great!</h2>
+                        {currentResult &&
+                          advicesArray.length >= 3 &&
+                          advicesArray
+                            ?.filter((advice, index) => index === 2)
+                            .map((advice) => advice)}
+                      </div>
+                    </div>
+                  </>
+                  )}
+
+            <div
                 className={
                   advicesArray.length < 3 ? "is-hidden" : "card-advice"
                 }
@@ -300,12 +352,12 @@ function Dashboard({ allResultsUser }) {
                     ?.filter((advice, index) => index > 2)
                     .map((advice) => (
                       <>
-                        {advice}
-                        <br />
+                      <ul>
+                        <li>{advice}</li>
+                      </ul>
                       </>
                     ))}
               </div>
-            </div>
           </div>
         </div>
       </div>
