@@ -1,6 +1,6 @@
 import RenderInput from "./RenderInput";
 import RenderResponse from "./RenderResponse";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const RenderQuestion = ({
   question,
@@ -10,15 +10,33 @@ const RenderQuestion = ({
   answer,
   goPrecedentQuestion,
   questions,
+  other,
+  setOther,
 }) => {
-  if (question.id === "other_kerosene") {
-    console.log("j'y suis", questions);
+  let others = [];
+  if (question.id === "other_kerosene" && !others?.length) {
+    others = [
+      ...new Set(
+        questions
+          .filter(
+            (question) =>
+              question.parentId === "other" &&
+              !others.find((element) => element.id === question.id)
+          )
+          .map((element) => element.id)
+      ),
+    ];
   }
   const [unit, setUnit] = useState(null);
+
   return (
     <>
       <div id={`ask_${question.id}`} className="ask">
-        <p>{question.question}</p>
+        <p>
+          {question.parentId === "other"
+            ? "Select all other sources of energy :"
+            : question.question}
+        </p>
       </div>
 
       <div
@@ -56,6 +74,9 @@ const RenderQuestion = ({
             question={question}
             unit={unit}
             setUnit={setUnit}
+            others={others}
+            other={other}
+            setOther={setOther}
           />
         </div>
       )}
