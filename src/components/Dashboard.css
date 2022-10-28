@@ -139,6 +139,7 @@
   margin: 25px auto;
   flex: 1 1;
   flex-wrap: wrap;
+  width: 100%;
 }
 .card-dash-line:nth-child(2n) .card-chart {
   order: 2;
@@ -162,12 +163,20 @@
   width: calc(50% - 5vw);
   margin: 12.5px auto;
 }
+.card-advice {
+  font-size: 1.2rem;
+  text-align: justify;
+}
 
-@media screen and (max-width:1024px) {
+@media screen and (max-width:1050px) {
   .card-dash-line {
     flex-direction: column;
   }
   .card-dash-line:nth-child(2n) .card-advice {
     order: 2;
+  }
+  .card-chart, .card-advice {
+    width: 100%;
+    margin: 10px auto;
   }
 }

@@ -199,6 +199,7 @@ function Dashboard({ allResultsUser }) {
                   )}
                 </div>
                 <div className="card-advice">
+                  <h2>Want to improve your results?</h2>
                   {currentResult && (advicesArray?.map((advice) => (
                           advice
                       ))
@@ -223,6 +224,7 @@ function Dashboard({ allResultsUser }) {
                   )}
                 </div>
                 <div className="card-advice">
+                  <h2>Here is something you can do:</h2>
                   {currentResult && (advicesArray?.map((advice) => (
                           advice
                       ))
@@ -249,6 +251,7 @@ function Dashboard({ allResultsUser }) {
                   )}
                 </div>
                 <div className="card-advice">
+                  <h2>You're doing great!</h2>
                   {currentResult && (advicesArray?.map((advice) => (
                           advice
                       ))
