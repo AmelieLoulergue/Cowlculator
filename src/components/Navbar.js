@@ -23,7 +23,6 @@ function Navbar({ login, setLogin, farmName }) {
 
   const [scroll, setScroll] = useState(window.scrollY);
   const navigate = useNavigate();
-  console.log(login);
   return (
     <>
       <div className="dash-side" id="dash-side">

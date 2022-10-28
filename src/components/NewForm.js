@@ -35,7 +35,6 @@ const NewForm = ({
   allResultsUser,
   login,
 }) => {
-  console.log({ allResultsUser, questions });
   const stateList = elec_state_coeff.map((element) => element.State);
   const chatContainer = useRef(null);
   let navigate = useNavigate();
@@ -139,14 +138,6 @@ const NewForm = ({
     document.getElementsByClassName("dash-nav")[0].classList.add("form-navbar");
 
     if (allResultsUser?.length) {
-      console.log(
-        allResultsUser[0],
-        login?.farmName,
-        allResultsUser[0].find((element) => element.id === "farm_state")
-          ?.response,
-        allResultsUser[0].find((element) => element.id === "farm_zip_code")
-          ?.response
-      );
       setQuestions(
         questions.map((question) => {
           if (question.id === "farm_name") {
@@ -198,7 +189,6 @@ const NewForm = ({
   }, [counterQuestion]);
   useEffect(() => {
     if (questionToDisplay) {
-      console.log(questionToDisplay);
       setCounterQuestion(
         allQuestions.findIndex((element) => element.id === questionToDisplay.id)
       );
@@ -208,7 +198,6 @@ const NewForm = ({
   }, [questions, questionToDisplay]);
 
   const noFoot = `#footer {display: none !important}`;
-  console.log(questionToDisplay);
   return (
     <div className="">
       <style>{noFoot}</style>

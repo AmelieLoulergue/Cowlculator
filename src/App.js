@@ -54,9 +54,41 @@ function App() {
   const [allResults, setAllResults] = useState([]);
   const [timer, setTimer] = useState(true);
   const goTimer = () => {
-    console.log("timer");
     setTimeout(() => setTimer(false), 500);
   };
+  useEffect(() => {
+    if (formIsCompleted) {
+      saveUserDatas({ allQuestions, results, login }).then(() => {
+        getUserDatas({ login })
+          .then((result) => {
+            if (result.result.length > 0) {
+              setAllResultsUser(result.result.map((item) => item.result));
+            }
+          })
+          // make sure to catch any error
+          .catch(console.error);
+        localStorage.removeItem(`results${login.userId}`);
+        localStorage.removeItem("allQuestions");
+        localStorage.removeItem("counterQuestion");
+        localStorage.removeItem("formIsCompleted");
+        localStorage.removeItem("indexQuestions");
+        localStorage.setItem("initForm", "false");
+        localStorage.removeItem("questionToDisplay");
+        localStorage.removeItem("questions");
+        localStorage.removeItem(`datasForm${login.userId}`);
+        setFormIsCompleted(false);
+        setDatasForm([]);
+        setInitForm(false);
+        setQuestionToDisplay(listOfQuestions.formQuestions[3]);
+        setIndexQuestions(3);
+        setCounterQuestion(3);
+
+        setResults({});
+        setQuestions(listOfQuestions.formQuestions);
+        setAllQuestions([]);
+      });
+    }
+  }, [formIsCompleted, allResultsUser]);
   useEffect(() => {
     if (login.userId && localStorage.getItem(`datasForm${login.userId}`)) {
       setDatasForm(
@@ -229,42 +261,7 @@ function App() {
       localStorage.setItem("login", JSON.stringify(login));
     }
   }, [login]);
-  useEffect(() => {
-    if (formIsCompleted) {
-      if (login.userId) {
-        localStorage.setItem(`results${login.userId}`, JSON.stringify(results));
-      }
-      saveUserDatas({ allQuestions, results, login }).then(() => {
-        getUserDatas({ login })
-          .then((result) => {
-            if (result.result.length > 0) {
-              setAllResultsUser(result.result.map((item) => item.result));
-            }
-          })
-          // make sure to catch any error
-          .catch(console.error);
-        localStorage.removeItem(`results${login.userId}`);
-        localStorage.removeItem("allQuestions");
-        localStorage.removeItem("counterQuestion");
-        localStorage.removeItem("formIsCompleted");
-        localStorage.removeItem("indexQuestions");
-        localStorage.setItem("initForm", "false");
-        localStorage.removeItem("questionToDisplay");
-        localStorage.removeItem("questions");
-        localStorage.removeItem(`datasForm${login.userId}`);
-        setFormIsCompleted(false);
-        setDatasForm([]);
-        setInitForm(false);
-        setQuestionToDisplay(listOfQuestions.formQuestions[3]);
-        setIndexQuestions(3);
-        setCounterQuestion(3);
 
-        setResults({});
-        setQuestions(listOfQuestions.formQuestions);
-        setAllQuestions([]);
-      });
-    }
-  }, [formIsCompleted]);
   useEffect(() => {
     if (results !== {} && login.userId) {
       localStorage.setItem(`results${login.userId}`, JSON.stringify(results));

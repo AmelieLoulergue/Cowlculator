@@ -11,9 +11,6 @@ const RenderQuestion = ({
   goPrecedentQuestion,
   questions,
 }) => {
-  if (question.id === "other_kerosene") {
-    console.log("j'y suis", questions);
-  }
   const [unit, setUnit] = useState(null);
   return (
     <>

@@ -219,8 +219,6 @@ const advices = ({ result }) => {
         farm_animals_beef_cattle_bulls_numb * coeffBeefBullsEF * 25) /
         1000) *
       time;
-
-    console.log(EFDairy);
     if (
       cattleDairy !== 0 &&
       !result.find(

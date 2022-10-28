@@ -3,7 +3,6 @@ import regions from "../coeff/regions.json";
 import * as allFunctions from "./calculs/exportCalculsFunctions";
 
 function calculs({ datasForm, results, setResults }) {
-  console.log({ datasForm });
   const startDate = datasForm.find(
     (data) => data.id === "start_date"
   )?.response;

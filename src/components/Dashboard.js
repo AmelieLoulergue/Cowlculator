@@ -18,7 +18,6 @@ function Dashboard({ allResultsUser }) {
   });
   let currentResult = allResultsUser[allResultsUser.length - 1];
   let advicesArray = advices({ result: currentResult });
-  console.log(advicesArray);
   const allTotalEmissionsArray = allResultsUser
     .filter((element) => element !== null)
     .map(
