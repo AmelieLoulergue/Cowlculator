@@ -43,7 +43,7 @@ function Footer({ login }) {
         </div>
 
         <div className="copyright">
-          <img src={logo} alt=""></img>
+          <img src={logo} alt="Cowlculator logo"></img>
           <p>© Cowlculator 2022</p>
           <p>
             Made with 💙🤍❤️ by
