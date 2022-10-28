@@ -67,13 +67,19 @@ function Dashboard({ allResultsUser }) {
         ];
       }
     });
+  const grayscale = `#dash .panel {filter: grayscale(1)}`;
+  const chartoption = {
+    responsive: false,
+    maintainAspectRatio: false,
+  };
   return (
     <>
       <div id="dash">
         <div id="summary" className="panel">
           <div className="card-section">
-            <div className="columns is-multiline">
-              {!currentResult && (
+            {!currentResult && (
+              <>
+                <style>{grayscale}</style>
                 <div className="column is-12">
                   <div style={{ textAlign: "center" }}>
                     <button className="btn" onClick={() => navigate("/form")}>
@@ -81,191 +87,224 @@ function Dashboard({ allResultsUser }) {
                     </button>
                   </div>
                 </div>
-              )}
-              <div className="column is-4 is-12-touch">
-                <div className="is-flex is-centered">
-                  <div className="card saved">
-                    <div className="card-icon">
-                      <div className="card-top">
-                        <img src={plant} alt="plant icon"></img>
-                        <h1>
-                          CO<sub>2</sub> mitigated
-                        </h1>
-                      </div>
-                      {currentResult && (
-                        <h2>
-                          {isNaN(
-                            Math.round(
-                              currentResult.find(
-                                (element) => element.id === "CO2mitigated"
-                              )?.response * 10
-                            ) / 10
+              </>
+            )}
+            <div className="card saved">
+              <div className="card-icon">
+                <div className="card-top">
+                  <img src={plant} alt="plant icon"></img>
+                  <h1>
+                    <b>
+                      {isNaN(
+                        Intl.NumberFormat("en-US").format(
+                          Math.round(
+                            currentResult?.find(
+                              (element) => element.id === "CO2mitigated"
+                            )?.response
                           )
-                            ? 0
-                            : Math.round(
-                                currentResult.find(
-                                  (element) => element.id === "CO2mitigated"
-                                ).response * 1
-                              ) / 1}{" "}
-                          Tonne CO2eq/year
-                        </h2>
-                      )}
-                    </div>
-                  </div>
+                        )
+                      )
+                        ? 0
+                        : Intl.NumberFormat("en-US").format(
+                            Math.round(
+                              currentResult?.find(
+                                (element) => element.id === "CO2mitigated"
+                              ).response
+                            )
+                          )}
+                    </b>
+                    <br></br>
+                    Tonne CO2eq/year
+                  </h1>
                 </div>
+                {currentResult && (
+                  <h2>
+                    CO<sub>2</sub> mitigated
+                  </h2>
+                )}
               </div>
-              <div className="column is-4 is-12-touch">
-                <div className="is-flex is-centered">
-                  <div className="card impact">
-                    <div className="card-icon">
-                      <div className="card-top">
-                        <img src={footprint} alt="carbon footprint icon"></img>
-                        <h1>
-                          CO<sub>2</sub> emitted
-                        </h1>
-                      </div>
-                      {currentResult && (
-                        <h2>
-                          {Math.round(
-                            currentResult.find(
-                              (element) => element.id === "CO2emmited"
-                            )?.response * 1
-                          ) / 1}{" "}
-                          Tonne CO2eq/year
-                        </h2>
+            </div>
+
+            <div className="card impact">
+              <div className="card-icon">
+                <div className="card-top">
+                  <img src={footprint} alt="carbon footprint icon"></img>
+                  <h1>
+                    <b>
+                      {Intl.NumberFormat("en-US").format(
+                        Math.round(
+                          currentResult?.find(
+                            (element) => element.id === "CO2emmited"
+                          )?.response / 1000
+                        )
                       )}
-                    </div>{" "}
-                  </div>{" "}
+                      {" K"}
+                    </b>
+                    <br></br>
+                    Tonne CO2eq/year
+                  </h1>
                 </div>
+                {currentResult && (
+                  <h2>
+                    CO<sub>2</sub> emitted
+                  </h2>
+                )}
               </div>
-              <div className="column is-4 is-12-touch">
-                <div className="is-flex is-centered">
-                  <div className="card income">
-                    <div className="card-icon">
-                      <div className="card-top">
-                        <img src={dollar} alt="dollar sign icon"></img>
-                        <h1>Estimated carbon credits</h1>
-                      </div>
-                      {currentResult && (
-                        <h2>
-                          {Math.round(
-                            currentResult.find(
+            </div>
+
+            <div className="card income">
+              <div className="card-icon">
+                <div className="card-top">
+                  <img src={dollar} alt="dollar sign icon"></img>
+                  {currentResult && (
+                    <h1>
+                      <b>
+                        {Intl.NumberFormat("en-US", {
+                          style: "currency",
+                          currency: "USD",
+                          minimumFractionDigits: 0,
+                        }).format(
+                          Math.round(
+                            currentResult?.find(
                               (element) => element.id === "totalCarbonCredits"
-                            )?.response * 1
-                          ) / 1}{" "}
-                          $/year
-                        </h2>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="column is-6 is-12-touch">
-                <div className="card-chart">
-                  {currentResult ? (
-                    <DoughnutChart
-                      responsive={false}
-                      id={"chart1"}
-                      dataResults={[
-                        currentResult.find(
-                          (element) => element.id === "utilitiesGraph"
-                        )?.response,
-                        currentResult.find(
-                          (element) => element.id === "fuelGraph"
-                        )?.response,
-                        currentResult.find(
-                          (element) => element.id === "otherGraph"
-                        )?.response,
-                        currentResult.find(
-                          (element) =>
-                            element.id === "entericFermentationCO2Graph"
-                        )?.response,
-                        currentResult.find(
-                          (element) => element.id === "manureCO2Graph"
-                        )?.response,
-                        currentResult.find(
-                          (element) => element.id === "cropsGraph"
-                        )?.response,
-                      ]}
-                    />
-                  ) : (
-                    <></>
+                            )?.response
+                          )
+                        )}
+                      </b>
+                      <br></br>
+                      $/year
+                    </h1>
                   )}
                 </div>
+                <h2>Estimated carbon credits</h2>
               </div>
-              {currentResult && (
-                <div className="column is-6 is-12-touch">
-                  <div className="card-chart has-text-centered">
-                    Take a look at the repartition of your emissions to know
-                    which part of your activity generates the most greenhouse
-                    gases Tip: Click on the name of a category to add it or
-                    remove it from the graph!
-                  </div>{" "}
-                </div>
-              )}
-              {currentResult && (
-                <div className="column is-6 is-hidden-mobile">
-                  <div className="card-chart has-text-centered">
-                    {" "}
-                    Watch your emissions decrease and your mitigation increase
-                    over time!{" "}
-                    {advicesArray?.map((advice) => (
+            </div>
+          </div>
+
+          <div id="dash-charts" className="card-section container">
+            <div className="card-dash-line">
+              <div className="card-chart">
+                {currentResult ? (
+                  <DoughnutChart
+                    options={chartoption}
+                    id={"chart1"}
+                    dataResults={[
+                      currentResult.find(
+                        (element) => element.id === "utilitiesGraph"
+                      )?.response,
+                      currentResult.find(
+                        (element) => element.id === "fuelGraph"
+                      )?.response,
+                      currentResult.find(
+                        (element) => element.id === "otherGraph"
+                      )?.response,
+                      currentResult.find(
+                        (element) =>
+                          element.id === "entericFermentationCO2Graph"
+                      )?.response,
+                      currentResult.find(
+                        (element) => element.id === "manureCO2Graph"
+                      )?.response,
+                      currentResult.find(
+                        (element) => element.id === "cropsGraph"
+                      )?.response,
+                    ]}
+                  />
+                ) : (
+                  <></>
+                )}
+              </div>
+              <div
+                className={
+                  advicesArray.length === 0 ? "is-hidden" : "card-advice"
+                }
+              >
+                <h2>Want to improve your results?</h2>
+                {currentResult &&
+                  advicesArray.length > 0 &&
+                  advicesArray
+                    ?.filter((advice, index) => index === 0)
+                    .map((advice) => advice)}
+              </div>
+            </div>
+
+            <div className="card-dash-line">
+              <div className="card-chart">
+                {currentResult ? (
+                  <LineChart
+                    options={chartoption}
+                    labels={labelPeriodChart3}
+                    id={"chart3"}
+                    dataResults={{
+                      data1: allCO2emmitedArray,
+                      data2: allCO2mitigatedEmissions,
+                    }}
+                  />
+                ) : (
+                  <></>
+                )}
+              </div>
+              <div
+                className={
+                  advicesArray.length < 2 ? "is-hidden" : "card-advice"
+                }
+              >
+                <h2>Here is something you can do:</h2>
+                {currentResult &&
+                  advicesArray.length >= 2 &&
+                  advicesArray
+                    ?.filter((advice, index) => index === 1)
+                    .map((advice) => advice)}
+              </div>
+            </div>
+
+            <div className="card-dash-line">
+              <div className="card-chart">
+                {currentResult ? (
+                  <BarChart
+                    width={100}
+                    height={50}
+                    options={{ maintainAspectRatio: false, responsive: false }}
+                    id={"chart2"}
+                    labels={labelPeriodChart2}
+                    dataResults={{
+                      data1: allTotalEmissionsArray,
+                      data2: allCO2emmitedArray,
+                    }}
+                  />
+                ) : (
+                  <></>
+                )}
+              </div>
+              <div
+                className={
+                  advicesArray.length < 3 ? "is-hidden" : "card-advice"
+                }
+              >
+                <h2>You're doing great!</h2>
+                {currentResult &&
+                  advicesArray.length >= 3 &&
+                  advicesArray
+                    ?.filter((advice, index) => index === 2)
+                    .map((advice) => advice)}
+              </div>
+              <div
+                className={
+                  advicesArray.length < 3 ? "is-hidden" : "card-advice"
+                }
+              >
+                <h2>List of advices</h2>
+                {currentResult &&
+                  advicesArray.length >= 3 &&
+                  advicesArray
+                    ?.filter((advice, index) => index > 2)
+                    .map((advice) => (
                       <>
                         {advice}
                         <br />
                       </>
                     ))}
-                  </div>{" "}
-                </div>
-              )}
-              <div className="column is-6 is-12-touch">
-                <div className="card-chart">
-                  {currentResult ? (
-                    <LineChart
-                      responsive={false}
-                      labels={labelPeriodChart3}
-                      id={"chart3"}
-                      dataResults={{
-                        data1: allCO2emmitedArray,
-                        data2: allCO2mitigatedEmissions,
-                      }}
-                    />
-                  ) : (
-                    <></>
-                  )}
-                </div>
               </div>
-              {currentResult && (
-                <div className="column is-6 is-hidden-desktop">
-                  <div className="card-chart has-text-centered">ADVICE</div>{" "}
-                </div>
-              )}
-              <div className="column is-6 is-12-touch ">
-                <div className="card-chart">
-                  {currentResult ? (
-                    <BarChart
-                      responsive={false}
-                      id={"chart2"}
-                      labels={labelPeriodChart2}
-                      dataResults={{
-                        data1: allTotalEmissionsArray,
-                        data2: allCO2emmitedArray,
-                      }}
-                    />
-                  ) : (
-                    <></>
-                  )}
-                </div>
-              </div>
-              {currentResult && (
-                <div className="column is-6 ">
-                  <div className="card-chart has-text-centered">
-                    Realize the importance of your efforts over time by
-                    comparing your unmitigated emissions with your mitigated
-                    emissions.
-                  </div>{" "}
-                </div>
-              )}
             </div>
           </div>
         </div>

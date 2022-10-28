@@ -22,7 +22,7 @@
     grid-area: logos;
 }
 #footer .logos img {
-    max-width: 200px;
+    max-width: 160px;
     display: flex;
     align-items: center;
     filter: grayscale(1);
@@ -37,6 +37,9 @@
     text-align: center;
     grid-area: copy;
 }
+#footer .copyright img {
+    max-width: 80vw;
+}
 
 #footer .links {
     text-align: center;
@@ -48,6 +51,8 @@
     position: relative;
     opacity: .6;
     transition: .3s ease-out;
+    max-width: max-content;
+    margin: auto;
 }
 #footer .links li::after {
     content: '';

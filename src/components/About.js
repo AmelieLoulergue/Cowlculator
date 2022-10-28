@@ -8,7 +8,7 @@ import bertille from "../assets/img/bertille.jpg";
 function About() {
   return (
     <>
-      <div>
+      <div id="about">
         <div className="container">
           <div>
             <h1 id="aboutus" className="primaryTitle">

@@ -111,18 +111,16 @@ function Navbar({ login, setLogin, farmName }) {
               {((login && login.userType === "researcher") ||
                 (login && login.email === "cowlculator.example@gmail.com")) && (
                 <>
-                  <button
-                    className="btn"
-                    onClick={() => {
-                      navigate("/datas");
-                      toggleSideNav();
-                    }}
-                  >
-                    <div>
-                      <img src={download}></img>
-                      Download datas{" "}
-                    </div>
-                  </button>
+                  <li
+                      onClick={() => {
+                        navigate("/datas");
+                        toggleSideNav();
+                      }} className="hovered">
+                      <div>
+                        <img src={download}></img>
+                        Download datas{" "}
+                      </div>
+                  </li>
                 </>
               )}
               <li

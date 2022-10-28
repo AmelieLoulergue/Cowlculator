@@ -39,6 +39,7 @@ export const confirmEmail = async ({
   setSeverity,
   setDisplayAlert,
 }) => {
+  console.log("ici");
   const response = await fetch(
     `${url}/api/auth/confirm-email/${userId}/${resetToken}`,
     {
@@ -47,6 +48,7 @@ export const confirmEmail = async ({
     }
   );
   const res = await response.json();
+  console.log(res);
   if (res.error) {
     setMessageAlert(
       "There seems to be an error, invalid link or already confirmed 🧐"
@@ -63,5 +65,5 @@ export const confirmEmail = async ({
     setDisplayAlert(true);
     setTimeout(() => setDisplayAlert(false), 3000);
   }
-  navigate("/account/login");
+  // navigate("/account/login");
 };
