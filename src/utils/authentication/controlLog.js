@@ -48,22 +48,22 @@ export const confirmEmail = async ({
     }
   );
   const res = await response.json();
-  console.log(res);
-  if (res.error) {
-    setMessageAlert(
-      "There seems to be an error, invalid link or already confirmed 🧐"
-    );
-    setSeverity("error");
-    setDisplayAlert(true);
-    setTimeout(() => setDisplayAlert(false), 3000);
-  }
-  if (res.message) {
-    setMessageAlert(
-      "Congratulations and welcome! Your account is confirmed, you can sign in 🤩"
-    );
-    setSeverity("success");
-    setDisplayAlert(true);
-    setTimeout(() => setDisplayAlert(false), 3000);
-  }
-  // navigate("/account/login");
+  // console.log(res);
+  // if (res.error) {
+  //   setMessageAlert(
+  //     "There seems to be an error, invalid link or already confirmed 🧐"
+  //   );
+  //   setSeverity("error");
+  //   setDisplayAlert(true);
+  //   setTimeout(() => setDisplayAlert(false), 3000);
+  // }
+  // if (res.message) {
+  //   setMessageAlert(
+  //     "Congratulations and welcome! Your account is confirmed, you can sign in 🤩"
+  //   );
+  //   setSeverity("success");
+  //   setDisplayAlert(true);
+  //   setTimeout(() => setDisplayAlert(false), 3000);
+  // }
+  navigate("/account/login");
 };
