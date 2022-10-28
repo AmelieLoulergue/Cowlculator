@@ -39,7 +39,7 @@ const NewForm = ({
   const stateList = elec_state_coeff.map((element) => element.State);
   const chatContainer = useRef(null);
   let navigate = useNavigate();
-
+  const [other, setOther] = useState([]);
   const [numberOfResponse, setNumberOfResponse] = useState(
     localStorage.getItem("numberOfResponse")
       ? Number(JSON.parse(localStorage.getItem("numberOfResponse")))
@@ -319,6 +319,9 @@ const NewForm = ({
                     indexQuestions={indexQuestions}
                     setIndexQuestions={setIndexQuestions}
                     goPrecedentQuestion={goPrecedentQuestion}
+                    questions={questions}
+                    other={other}
+                    setOther={setOther}
                   />
                 </div>
               </>

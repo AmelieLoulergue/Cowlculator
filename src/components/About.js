@@ -11,7 +11,9 @@ function About() {
       <div id="about">
         <div className="container">
           <div>
-            <h1 className="primaryTitle">About us.</h1>
+            <h1 id="aboutus" className="primaryTitle">
+              About us.
+            </h1>
             <p className="subTitle">
               Cowlculator has been developed by a French team 💙🤍❤️, but beyond
               the business partnership, this is a family affair; linked by blood

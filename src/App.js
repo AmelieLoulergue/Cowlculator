@@ -618,7 +618,7 @@ function App() {
             ></Route>
 
             <Route
-              path="/confirm-email/:userId/:resetToken"
+              path="/confirm-email/:userId/:coucou"
               element={
                 <>
                   <Navbar
@@ -630,6 +630,10 @@ function App() {
                     setMessageAlert={setMessageAlert}
                     setSeverity={setSeverity}
                     setDisplayAlert={setDisplayAlert}
+                    userProfile={userProfile}
+                    setUserProfile={setUserProfile}
+                    login={login}
+                    setLogin={setLogin}
                   />
                   <Footer login={login} />
                 </>
