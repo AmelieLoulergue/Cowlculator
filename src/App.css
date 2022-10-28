@@ -545,7 +545,13 @@ a:active {
   width: 100%;
   display: flex;
   justify-content: center;
-  z-index: 1000;
+  z-index: 1000000;
+  transform: translateY(-100%);
+  animation: alertMessage 3s;
+}
+@keyframes alertMessage {
+  0%, 100% {transform: translateY(-100%);}
+  15%, 85% {transform: translateY(0);}
 }
 .researcher-datas {
   height: 17rem;

@@ -207,11 +207,17 @@ const NewForm = ({
     }
   }, [questions, questionToDisplay]);
 
+  const noNavMargin = `.nav-margin {
+    display: none !important;
+}`;
   const noFoot = `#footer {display: none !important}`;
   console.log(questionToDisplay);
   return (
-    <div className="">
-      <style>{noFoot}</style>
+    <div>
+      <style>
+        {noFoot}
+        {noNavMargin}
+      </style>
       {initForm && (
         <div className="buttons-skip-form">
           <button
