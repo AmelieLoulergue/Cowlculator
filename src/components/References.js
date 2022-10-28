@@ -62,7 +62,7 @@ function References() {
           <h2>State output emission rates and utility coefficients</h2>
           <div className="card-section">
             <div className="card">
-              <h3>United States Environmental Protection Agency (EPA)</h3>
+              <h3>Emissions & Generation Resource Integrated Database</h3>
               <p>
                 United States Environmental Protection Agency (EPA), 2020,
                 Emissions & Generation Resource Integrated Database (eGRID), 3.
@@ -79,7 +79,7 @@ function References() {
           </h2>
           <div className="card-section">
             <div className="card">
-              <h3>U.S. Energy Information Administration (EIA)</h3>
+              <h3>Carbon Dioxide Emissions Coefficients by Fuel</h3>
               <p>
                 U.S. Energy Information Administration (EIA), 2016, Carbon
                 Dioxide Emissions Coefficients by Fuel,{" "}
@@ -98,7 +98,7 @@ function References() {
           <h2>Enteric fermentation equations and factors</h2>
           <div className="card-section">
             <div className="card">
-              <h3>United States Environmental Protection Agency (EPA)</h3>
+              <h3>Enteric Fermentation—Greenhouse gases in AP 42</h3>
               <p>
                 United States Environmental Protection Agency (EPA), 2009, 14.4
                 Enteric Fermentation—Greenhouse gases in AP 42, Fifth Edition,
@@ -113,7 +113,7 @@ function References() {
             </div>
             <div className="card">
               <h3>
-                ICF for United States Environmental Protection Agency (EPA)
+              User’s guide for estimating carbon dioxide, methane, and nitrous oxide emissions from agriculture using the state inventory tool
               </h3>
               <p>
                 ICF for United States Environmental Protection Agency (EPA),
@@ -135,7 +135,7 @@ function References() {
           <h2>Manure data by animals</h2>
           <div className="card-section">
             <div className="card">
-              <h3>United States Environmental Protection Agency (EPA)</h3>
+              <h3>Technical support document for manure management systems</h3>
               <p>
                 United States Environmental Protection Agency (EPA), 2009,
                 Technical support document for manure management systems:
@@ -150,8 +150,7 @@ function References() {
           <div className="card-section">
             <div className="card">
               <h3>
-                Smith, P., D. Martino, Z. Cai, D. Gwary, H. Janzen, P. Kumar, B.
-                McCarl, S. Ogle, F. O’Mara, C. Rice, B. Scholes, O. Sirotenko
+              Climate Change 2007: Mitigation
               </h3>
               <p>
                 Smith, P., D. Martino, Z. Cai, D. Gwary, H. Janzen, P. Kumar, B.
@@ -171,7 +170,7 @@ function References() {
           <h2>Carbon credit price</h2>
           <div className="card-section">
             <div className="card">
-              <h3>Sellars S., Schnitkey G., Swanson K., Paulson N.</h3>
+              <h3>What Questions Should Farmers Ask About Selling Carbon Credit?</h3>
               <p>
                 Sellars S., Schnitkey G., Swanson K., Paulson N., 2021, What
                 Questions Should Farmers Ask About Selling Carbon Credit?,{" "}
@@ -204,7 +203,7 @@ function References() {
               </a>
             </div>
             <div className="card">
-              <h3>De Sousa A.</h3>
+              <h3> Cows join carbon market in quest to curb planet-warming burps</h3>
               <p>
                 De Sousa A. 2021. Cows join carbon market in quest to curb
                 planet-warming burps, Bloomberg,
@@ -227,10 +226,10 @@ function References() {
               </a>
             </div>
             <div className="card">
-              <h3>Whitehead D.</h3>
+              <h3>CowCredits: Firm behing low methane cattle feed launches CO2 offsetting scheme</h3>
               <p>
                 Whitehead D., 2021, CowCredits: Firm behing low methane cattle
-                feed launches CO@ offsetting scheme, Sky news
+                feed launches CO2 offsetting scheme, Sky news
               </p>
               <a
                 target="_blank"
@@ -241,7 +240,7 @@ function References() {
               </a>
             </div>
             <div className="card">
-              <h3>Dunn E.G.</h3>
+              <h3>The latest farm product: carbon credit</h3>
               <p>
                 Dunn E.G., 2021, The latest farm product: carbon credit, The
                 New-York Times,
@@ -260,7 +259,7 @@ function References() {
           <h2>Fertilizers</h2>
           <div className="card-section">
             <div className="card">
-              <h3>Environmental Protection Agency</h3>
+              <h3>Chapter 14-1 Emissions from soils- Greenhouse gases</h3>
               <p>
                 Environmental Protection Agency, Chapter 14-1 Emissions from
                 soils- Greenhouse gases, AP-42, Fifth Edition Compilation of Air
@@ -275,7 +274,7 @@ function References() {
               </a>
             </div>
             <div className="card">
-              <h3>Walling E., Vaneechkaute C.</h3>
+              <h3>Greenhouse gas emissions from inorganic fertilizer production and use</h3>
               <p>
                 Walling E., Vaneechkaute C., 2020, Greenhouse gas emissions from
                 inorganic fertilizer production and use: A review of emission

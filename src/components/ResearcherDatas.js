@@ -103,9 +103,10 @@ function ResearcherDatas({ login, allResults }) {
                   href="https://clous-storage-carbonb-cos-standard-26b.s3.eu-de.cloud-object-storage.appdomain.cloud/CowlculatorDB.csv"
                   className="btn"
                   style={{
-                    minHeight: "20px !important",
+                    minHeight: "30px",
                     height: "20px",
                     width: "fit-content",
+                    margin: "20px auto"
                   }}
                 >
                   DOWNLOAD ALL
@@ -114,6 +115,7 @@ function ResearcherDatas({ login, allResults }) {
               or filter and hide the columns that do not interest you then click
               on export and download only the table displayed here in csv!
             </p>
+            <br></br>
           </div>
           <div
             style={{

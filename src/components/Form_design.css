@@ -11,6 +11,8 @@
   flex-direction: column;
   text-align: center;
   min-height: 90vh;
+  height: 90vh;
+  margin-top: 10vh;
   justify-content: space-between;
   /* display: none; */
 }
@@ -57,17 +59,13 @@
   animation-delay: 1.5s;
 }
 
-.formChat {
-  max-height: 100vh;
-}
 .formChat .questions {
   display: flex;
   flex-direction: column;
   max-width: 80%;
   margin: auto;
-  min-height: 90vh;
-  margin-bottom: 100px;
-  margin-top: 8rem;
+  margin-bottom: 125.5px;
+  margin-top: 100px;
 }
 
 .formChat .ask,
@@ -191,6 +189,7 @@
   width: 100%;
   justify-content: center;
   background-color: #110f16;
+  cursor: pointer;
 }
 .buttons-skip-form > button {
   /* padding: 1rem; */
@@ -198,6 +197,7 @@
   background-color: #110f16;
   border: none;
   font-size: 1rem;
+  cursor: pointer;
 }
 .btn-back {
   background-color: transparent;
