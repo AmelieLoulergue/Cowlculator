@@ -57,7 +57,23 @@ function App() {
     setTimeout(() => setTimer(false), 500);
   };
   useEffect(() => {
+    console.log(formIsCompleted);
     if (formIsCompleted) {
+      console.log("je rentre ici");
+      if (
+        questions.find((element) => element.id === "farm_name") &&
+        !login?.farmName
+      ) {
+        setFarmName(
+          questions.find((element) => element.id === "farm_name").response
+        );
+        updateUserDatas({
+          login: login,
+          farmName: questions.find((element) => element.id === "farm_name")
+            .response,
+          setLogin: setLogin,
+        });
+      }
       saveUserDatas({ allQuestions, results, login }).then(() => {
         getUserDatas({ login })
           .then((result) => {
@@ -143,7 +159,8 @@ function App() {
   useEffect(() => {
     if (
       questions.find((element) => element.id === "farm_name") &&
-      !login?.farmName
+      !login?.farmName &&
+      formIsCompleted
     ) {
       setFarmName(
         questions.find((element) => element.id === "farm_name").response
@@ -154,6 +171,7 @@ function App() {
           .response,
         setLogin: setLogin,
       });
+      console.log(loggedUser);
     }
   }, [questions]);
   useEffect(() => {
@@ -293,7 +311,9 @@ function App() {
       .catch(console.error);
   }, [login]);
   useEffect(() => {
-    isLogin({ login, setLogin }).then((response) => setLoggedUser(response));
+    if (!loggedUser) {
+      isLogin({ login, setLogin }).then((response) => setLoggedUser(response));
+    }
   }, [login]);
   return (
     <ThemeProvider theme={darkTheme}>

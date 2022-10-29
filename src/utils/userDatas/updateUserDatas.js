@@ -14,7 +14,7 @@ const updateUserDatas = async ({ login, farmName, setLogin }) => {
     );
     const datas = await response.json();
     if (!datas.error) {
-      setLogin(datas);
+      setLogin({ ...datas, farmName: datas.farmName });
     }
     return datas;
   }
