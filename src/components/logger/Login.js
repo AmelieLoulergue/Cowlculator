@@ -8,29 +8,23 @@ import Lottie from "lottie-react";
 import eyeBlink from "../../assets/anim/eye-blink.json";
 import { useNavigate } from "react-router-dom";
 import loginFunc from "../../utils/authentication/login";
-function Login({
-  userProfile,
-  setUserProfile,
-  login,
-  setLogin,
-  setMessageAlert,
-  setSeverity,
-  setDisplayAlert,
-}) {
+import { useAuthContext } from "../../context/authContext";
+function Login({ setMessageAlert, setSeverity, setDisplayAlert }) {
   const pass = useRef();
-
+  const { authInformations, setAuthInformations } = useAuthContext();
+  console.log(authInformations);
   var passHide = false;
 
   const showPass = () => {
     if (passHide) {
-      document.getElementById("password").type = "password"
-      document.getElementById("password").classList.remove("borderGradient")
-      passHide = false
+      document.getElementById("password").type = "password";
+      document.getElementById("password").classList.remove("borderGradient");
+      passHide = false;
     } else {
       document.getElementById("password").type = "text";
       document.getElementById("password").classList.add("borderGradient");
       pass.current.goToAndPlay(0, true);
-      passHide = true
+      passHide = true;
     }
   };
   let navigate = useNavigate();
@@ -64,9 +58,19 @@ function Login({
               <input
                 type="email"
                 placeholder="Email"
-                value={userProfile?.email ? userProfile.email : ""}
+                value={
+                  authInformations?.userProfile?.email
+                    ? authInformations.userProfile.email
+                    : ""
+                }
                 onChange={(event) =>
-                  setUserProfile({ ...userProfile, email: event.target.value })
+                  setAuthInformations({
+                    ...authInformations,
+                    userProfile: {
+                      ...authInformations.userProfile,
+                      email: event.target.value,
+                    },
+                  })
                 }
               ></input>
               <div style={{ position: "relative" }}>
@@ -74,11 +78,18 @@ function Login({
                   type="password"
                   placeholder="Password"
                   id="password"
-                  value={userProfile?.password ? userProfile.password : ""}
+                  value={
+                    authInformations?.userProfile?.password
+                      ? authInformations.userProfile.password
+                      : ""
+                  }
                   onChange={(event) =>
-                    setUserProfile({
-                      ...userProfile,
-                      password: event.target.value,
+                    setAuthInformations({
+                      ...authInformations,
+                      userProfile: {
+                        ...authInformations.userProfile,
+                        password: event.target.value,
+                      },
                     })
                   }
                 ></input>
@@ -105,14 +116,12 @@ function Login({
                   event.preventDefault();
                   loginFunc({
                     event,
-                    userProfile,
-                    setUserProfile,
-                    login,
-                    setLogin,
                     url: "https://cowlculatorback.herokuapp.com",
                     setMessageAlert,
                     setSeverity,
                     setDisplayAlert,
+                    authInformations,
+                    setAuthInformations,
                     navigate,
                   });
                 }}

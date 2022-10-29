@@ -8,8 +8,11 @@ import { DoughnutChart } from "./charts/DoughnoutChart";
 import { BarChart } from "./charts/VerticalBarChart";
 import { LineChart } from "./charts/LineChart";
 import advices from "../utils/calculs/advice";
+import { useAuthContext } from "../context/authContext";
 function Dashboard({ allResultsUser }) {
   let navigate = useNavigate();
+  const { authInformations, setAuthInformations } = useAuthContext();
+  console.log(authInformations);
   allResultsUser.sort((a, b) => {
     return (
       Number(new Date(a.find((el) => el.id === "end_date").response)) -

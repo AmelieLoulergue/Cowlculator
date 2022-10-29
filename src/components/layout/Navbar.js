@@ -1,19 +1,21 @@
 import * as React from "react";
 import "./Navbar.css";
-import account from "../assets/svg/profile.svg";
-import home from "../assets/svg/home.svg";
-import dashboard from "../assets/svg/dashboard.svg";
-import form from "../assets/svg/form.svg";
-import download from "../assets/svg/download.svg";
-import book from "../assets/svg/book.svg";
-import group from "../assets/svg/group.svg";
+import account from "../../assets/svg/profile.svg";
+import home from "../../assets/svg/home.svg";
+import dashboard from "../../assets/svg/dashboard.svg";
+import form from "../../assets/svg/form.svg";
+import download from "../../assets/svg/download.svg";
+import book from "../../assets/svg/book.svg";
+import group from "../../assets/svg/group.svg";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-import cowlculator from "../assets/img/cowlculator.png";
-import { logout } from "../utils/authentication/controlLog";
+import cowlculator from "../../assets/img/cowlculator.png";
+import { logout } from "../../utils/authentication/controlLog";
 import { useNavigate } from "react-router-dom";
-function Navbar({ login, setLogin, farmName }) {
+import { useAuthContext } from "../../context/authContext";
+function Navbar() {
+  const { authInformations, setAuthInformations } = useAuthContext();
   const toggleSideNav = () => {
     document.getElementById("dash-side").classList.toggle("active");
     document.getElementById("dash-nav-icon-burger").classList.toggle("active");
@@ -22,31 +24,40 @@ function Navbar({ login, setLogin, farmName }) {
   };
 
   const [scroll, setScroll] = useState(window.scrollY);
+  useEffect(() => setScroll(window.scrollY), []);
   const navigate = useNavigate();
   return (
     <>
       <div className="dash-side" id="dash-side">
         <div className="dash-side-container">
-          {login && (
+          {authInformations?.login && (
             <div className="dash-profile">
               <h1>Dashboard</h1>
               <div>
-                {login?.email && <h2>{login.email}</h2>}
-                {login.userType === "farmer" && <>Farm Name</>}
+                {authInformations?.login?.email && (
+                  <h2>{authInformations?.login.email}</h2>
+                )}
+                {authInformations?.login.userType === "farmer" && (
+                  <>Farm Name</>
+                )}
                 <p>
-                  {login.userType === "farmer" && login.farmName ? (
-                    login.farmName
+                  {authInformations?.login.userType === "farmer" &&
+                  authInformations?.login.farmName ? (
+                    authInformations?.login.farmName
                   ) : (
                     <></>
                   )}
                 </p>
-                <button className="btn" onClick={() => logout({ setLogin })}>
+                <button
+                  className="btn"
+                  onClick={() => logout({ setAuthInformations })}
+                >
                   Log out
                 </button>
               </div>
             </div>
           )}
-          {!login && (
+          {!authInformations?.login && (
             <div className="dash-profile">
               <button
                 className="btn"
@@ -77,48 +88,54 @@ function Navbar({ login, setLogin, farmName }) {
                 }}
               >
                 <div>
-                  <img src={home}></img>
+                  <img alt="" src={home}></img>
                   Home{" "}
                 </div>
               </li>
-              {login && login.userType === "farmer" && (
-                <>
-                  <li
-                    onClick={() => {
-                      navigate("/dashboard");
-                      toggleSideNav();
-                    }}
-                  >
-                    <div>
-                      <img src={dashboard}></img>
-                      Dashboard{" "}
-                    </div>
-                  </li>
-                  <li
-                    onClick={() => {
-                      navigate("/form");
-                      toggleSideNav();
-                    }}
-                  >
-                    <div>
-                      <img src={form}></img>
-                      Form{" "}
-                    </div>
-                  </li>
-                </>
-              )}
-              {((login && login.userType === "researcher") ||
-                (login && login.email === "cowlculator.example@gmail.com")) && (
-                <>
-                  <li
+              {authInformations?.login &&
+                authInformations?.login.userType === "farmer" && (
+                  <>
+                    <li
                       onClick={() => {
-                        navigate("/datas");
+                        navigate("/dashboard");
                         toggleSideNav();
-                      }} className="hovered">
+                      }}
+                    >
                       <div>
-                        <img src={download}></img>
-                        Download datas{" "}
+                        <img alt="" src={dashboard}></img>
+                        Dashboard{" "}
                       </div>
+                    </li>
+                    <li
+                      onClick={() => {
+                        navigate("/form");
+                        toggleSideNav();
+                      }}
+                    >
+                      <div>
+                        <img alt="" src={form}></img>
+                        Form{" "}
+                      </div>
+                    </li>
+                  </>
+                )}
+              {((authInformations?.login &&
+                authInformations?.login.userType === "researcher") ||
+                (authInformations?.login &&
+                  authInformations?.login.email ===
+                    "cowlculator.example@gmail.com")) && (
+                <>
+                  <li
+                    onClick={() => {
+                      navigate("/datas");
+                      toggleSideNav();
+                    }}
+                    className="hovered"
+                  >
+                    <div>
+                      <img alt="" src={download}></img>
+                      Download datas{" "}
+                    </div>
                   </li>
                 </>
               )}
@@ -129,7 +146,7 @@ function Navbar({ login, setLogin, farmName }) {
                 }}
               >
                 <div>
-                  <img src={book}></img>
+                  <img alt="" src={book}></img>
                   References{" "}
                 </div>
               </li>
@@ -140,7 +157,7 @@ function Navbar({ login, setLogin, farmName }) {
                 }}
               >
                 <div>
-                  <img src={group}></img>
+                  <img alt="" src={group}></img>
                   About Us{" "}
                 </div>
               </li>
@@ -164,17 +181,17 @@ function Navbar({ login, setLogin, farmName }) {
         </div>
         <div className="nav-spacer">
           <img
+            alt=""
             src={account}
             onClick={() => {
-              if (!login) {
+              if (!authInformations?.login) {
                 navigate("/account");
-              } else if (login?.userType === "farmer") {
+              } else if (authInformations?.login?.userType === "farmer") {
                 navigate("/dashboard");
               } else {
                 navigate("/datas");
               }
             }}
-            alt=""
           ></img>
         </div>
       </div>

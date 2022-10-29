@@ -3,14 +3,12 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { GlobalContextWrapper } from "./context/globalContext";
+import { AuthContextWrapper } from "./context/authContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <GlobalContextWrapper>
-      <App />
-    </GlobalContextWrapper>
-  </React.StrictMode>
+  <AuthContextWrapper>
+    <App />
+  </AuthContextWrapper>
 );
 
 // If you want to start measuring performance in your app, pass a function

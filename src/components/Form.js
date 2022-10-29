@@ -1,17 +1,19 @@
 import React, { useEffect, useState, useRef } from "react";
 import listOfQuestions from "../utils/listOfQuestions";
 // import "./NewForm.css";
-import RenderQuestion from "./NewForm/RenderQuestion";
-import "./Form_design.css";
+import RenderQuestion from "./form/RenderQuestion";
+import "./Form.css";
 import back_arrow from "../assets/svg/back-arrow.svg";
 import Lottie from "lottie-react";
 import form_begin from "../assets/anim/form-begin.json";
 import home from "../assets/svg/home.svg";
 import { useNavigate } from "react-router-dom";
-import ProgressBarForm from "../components/form_components/ProgressBarForm.js";
+import ProgressBarForm from "./form/form_components/ProgressBarForm.js";
 import calculs from "../utils/calculs";
 import elec_state_coeff from "../coeff/elec_state_coeff.json";
 import controlResponse from "../utils/controlResponse";
+import { useFormContext } from "../context/formContext";
+import { useAuthContext } from "../context/authContext";
 const NewForm = ({
   results,
   setResults,
@@ -35,6 +37,9 @@ const NewForm = ({
   allResultsUser,
   login,
 }) => {
+  const formInformations = useFormContext();
+  const authContext = useAuthContext();
+  console.log(formInformations, authContext);
   const stateList = elec_state_coeff.map((element) => element.State);
   const chatContainer = useRef(null);
   let navigate = useNavigate();

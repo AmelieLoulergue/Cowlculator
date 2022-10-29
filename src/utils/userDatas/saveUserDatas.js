@@ -1,4 +1,4 @@
-const saveUserDatas = async ({ allQuestions, results, login }) => {
+const saveUserDatas = async ({ allQuestions, results, authInformations }) => {
   let newResults = Object.entries(results)
     .map((value) => {
       return { id: value[0], response: value[1] };
@@ -13,7 +13,7 @@ const saveUserDatas = async ({ allQuestions, results, login }) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${login.token}`,
+      Authorization: `Bearer ${authInformations?.login?.token}`,
     },
     body: JSON.stringify({ result: resultToSend }),
   };

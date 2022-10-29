@@ -1,9 +1,9 @@
-const getAllResults = async ({ login, filters }) => {
+const getAllResults = async ({ login, filters, authInformations }) => {
   let requestOptions = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${login.token}`,
+      Authorization: `Bearer ${authInformations?.login?.token}`,
     },
   };
   const response = await fetch(

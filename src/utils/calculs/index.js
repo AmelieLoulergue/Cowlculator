@@ -1,6 +1,6 @@
-import reductionEF_coeff from "../coeff/reductionEF_coeff.json";
-import regions from "../coeff/regions.json";
-import * as allFunctions from "./calculs/exportCalculsFunctions";
+import reductionEF_coeff from "../../coeff/reductionEF_coeff.json";
+import regions from "../../coeff/regions.json";
+import * as allFunctions from "./exportCalculsFunctions";
 
 function calculs({ datasForm, results, setResults }) {
   const startDate = datasForm.find(

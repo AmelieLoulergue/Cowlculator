@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import sendIcon from "../../assets/svg/send.svg";
 import back_arrow from "../../assets/svg/back-arrow.svg";
 import Box from "@mui/material/Box";
@@ -10,7 +10,6 @@ import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import OutlinedInput from "@mui/material/OutlinedInput";
 const AntSwitch = styled(Switch)(({ theme }) => ({
   width: 28,
   height: 16,

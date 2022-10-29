@@ -1,9 +1,9 @@
 import * as React from "react";
 import "./Footer.css";
 
-import mif from "../assets/img/mif.png";
-import wwc from "../assets/img/wwc-circle.png";
-import logo from "../assets/img/cowlculator.png";
+import mif from "../../assets/img/mif.png";
+import wwc from "../../assets/img/wwc-circle.png";
+import logo from "../../assets/img/cowlculator.png";
 import { HashLink as Link } from "react-router-hash-link";
 function Footer({ login }) {
   return (
@@ -71,8 +71,8 @@ function Footer({ login }) {
         </div>
 
         <div className="logos">
-          <img src={wwc}></img>
-          <img src={mif}></img>
+          <img alt="" src={wwc}></img>
+          <img alt="" src={mif}></img>
         </div>
       </div>
     </>
