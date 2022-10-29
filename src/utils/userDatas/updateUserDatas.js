@@ -13,7 +13,6 @@ const updateUserDatas = async ({ login, farmName, setLogin }) => {
       requestOptions
     );
     const datas = await response.json();
-    console.log(datas);
     if (!datas.error) {
       setLogin(datas);
     }

@@ -118,26 +118,30 @@ function Register({
 
   const showPass = () => {
     if (passHide) {
-      document.getElementById("password").type = "password"
-      document.getElementById("password").classList.remove("borderGradient")
-      passHide = false
+      document.getElementById("password").type = "password";
+      document.getElementById("password").classList.remove("borderGradient");
+      passHide = false;
     } else {
       document.getElementById("password").type = "text";
       document.getElementById("password").classList.add("borderGradient");
       pass.current.goToAndPlay(0, true);
-      passHide = true
+      passHide = true;
     }
   };
   const showPassConf = () => {
     if (passHide) {
       document.getElementById("passwordConfirm").type = "password";
-      document.getElementById("passwordConfirm").classList.remove("borderGradient");
-      passHide = false
+      document
+        .getElementById("passwordConfirm")
+        .classList.remove("borderGradient");
+      passHide = false;
     } else {
       document.getElementById("passwordConfirm").type = "text";
-      document.getElementById("passwordConfirm").classList.add("borderGradient");
+      document
+        .getElementById("passwordConfirm")
+        .classList.add("borderGradient");
       passConf.current.goToAndPlay(0, true);
-      passHide = true
+      passHide = true;
     }
   };
 
@@ -188,10 +192,13 @@ function Register({
   const noNav = `.dash-nav, .nav-margin, .dash-side {
     display: none !important;
 }`;
-const noFoot = `#footer {display: none !important}`;
+  const noFoot = `#footer {display: none !important}`;
   return (
     <>
-      <style>{noNav}{noFoot}</style>
+      <style>
+        {noNav}
+        {noFoot}
+      </style>
       <div className="center-flex">
         <div className="navbar">
           <Link to="../account">

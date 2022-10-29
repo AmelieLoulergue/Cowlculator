@@ -18,7 +18,6 @@ function Dashboard({ allResultsUser }) {
   });
   let currentResult = allResultsUser[allResultsUser.length - 1];
   let advicesArray = advices({ result: currentResult });
-  console.log(advicesArray);
   const allTotalEmissionsArray = allResultsUser
     .filter((element) => element !== null)
     .map(
@@ -342,7 +341,7 @@ function Dashboard({ allResultsUser }) {
 
             <div
                 className={
-                  advicesArray.length < 3 ? "is-hidden" : "card-advice"
+                  advicesArray.length === 0 ? "is-hidden" : "card-advice"
                 }
               >
                 <h2>List of advices</h2>
