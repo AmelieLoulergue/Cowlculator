@@ -75,10 +75,10 @@ You want to download locally ?
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)  
 ![Mongodb](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
 
-Our backend application : [Cowlculator back end](https://github.com/AmelieLoulergue/Cowlculator_back)
+Our backend application : [Cowlculator back end](https://github.com/AmelieLoulergue/CowlculatorBack#readme)
 
 You want to download locally ? 
-- https://github.com/AmelieLoulergue/Cowlculator_back.git
+- https://github.com/AmelieLoulergue/CowlculatorBack.git
 - npm i 
 - npm start
 
