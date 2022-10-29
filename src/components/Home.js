@@ -1,6 +1,6 @@
 import * as React from "react";
 import "./Home.css";
-import videoSrc from "../assets/video/720pmini.webm";
+import videoSrc from "../assets/video/720pmini.mp4";
 import arrow from "../assets/svg/arrow.svg";
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +8,6 @@ import survey from "../assets/svg/Storyset/survey.svg";
 import report from "../assets/svg/Storyset/report.svg";
 import choice from "../assets/svg/Storyset/choice.svg";
 import data from "../assets/svg/Storyset/data.svg";
-
 function Home({ viewHeight, scroll }) {
   let navigate = useNavigate();
   function scrollHero() {
@@ -50,7 +49,7 @@ function Home({ viewHeight, scroll }) {
             </div>
           </div>
           <video autoPlay muted loop id="hero-bg">
-            <source src={videoSrc} type="video/webm" />
+            <source src={videoSrc} type="video/mp4" />
           </video>
         </div>
 
