@@ -88,7 +88,7 @@ function Dashboard({ allResultsUser }) {
                 </div>
               </>
             )}
-            <Link className="card saved" to={"/dashboard#recommandations"}>
+            <Link className="card saved" to={"/dashboard#recommendations"}>
               <div className="card-icon">
                 <div className="card-top">
                   <img src={plant} alt="plant icon"></img>
@@ -124,7 +124,7 @@ function Dashboard({ allResultsUser }) {
               </div>
             </Link>
 
-            <Link className="card impact" to={"/dashboard#recommandations"}>
+            <Link className="card impact" to={"/dashboard#recommendations"}>
               <div className="card-icon">
                 <div className="card-top">
                   <img src={footprint} alt="carbon footprint icon"></img>
@@ -151,7 +151,7 @@ function Dashboard({ allResultsUser }) {
               </div>
             </Link>
 
-            <Link className="card income" to={"/dashboard#recommandations"}>
+            <Link className="card income" to={"/dashboard#recommendations"}>
               <div className="card-icon">
                 <div className="card-top">
                   <img src={dollar} alt="dollar sign icon"></img>

@@ -568,7 +568,7 @@ const Advices = ({ result }) => {
     <>
       {advices && advices.length && (
         <>
-          <h1 className={"primaryTitle"} id="recommandations">
+          <h1 className={"primaryTitle"} id="recommendations">
             Recommendations
           </h1>
           <div className="card-section">
