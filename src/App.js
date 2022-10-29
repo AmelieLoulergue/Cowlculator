@@ -143,7 +143,8 @@ function App() {
   useEffect(() => {
     if (
       questions.find((element) => element.id === "farm_name") &&
-      !login?.farmName
+      !login?.farmName &&
+      formIsCompleted
     ) {
       setFarmName(
         questions.find((element) => element.id === "farm_name").response
