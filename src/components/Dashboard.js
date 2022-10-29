@@ -229,9 +229,9 @@ function Dashboard({ allResultsUser }) {
               </div>
               <div className={"card-advice"}>
                 Take a look at the repartition of your emissions to know which
-                part of your activity generates the most greenhouse gases Tip:
-                Click on the name of a category to add it or remove it from the
-                graph!
+                part of your activity generates the most greenhouse gases.
+                <br></br> Tip: Click on the name of a category to add it or
+                remove it from the graph!
               </div>
             </div>
 
