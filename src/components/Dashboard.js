@@ -332,7 +332,7 @@ function Dashboard({ allResultsUser }) {
               {currentResult &&
                 advicesArray.map((advice) => (
                   <>
-                    <div className="card">{advice}</div>
+                    <div className="card card-advice">{advice}</div>
                   </>
                 ))}
             </div>
