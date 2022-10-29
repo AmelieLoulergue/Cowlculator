@@ -64,10 +64,6 @@ function RenderInput({
   goPrecedentQuestion,
   question,
   setUnit,
-  others,
-  setOthers,
-  other,
-  setOther,
 }) {
   const checkboxRef = useRef(false);
   return (
@@ -77,7 +73,7 @@ function RenderInput({
           <img src={back_arrow} alt="" width="40px"></img>
         </button>
       )}
-      {question.formInput.type === "checkbox" && !others.length ? (
+      {question.formInput.type === "checkbox" ? (
         <div className="switch-yes-no">
           <Stack direction="row" spacing={1} alignItems="center">
             <Typography>NO</Typography>
@@ -103,8 +99,7 @@ function RenderInput({
           </Stack>
         </div>
       ) : question.formInput.type === "select" &&
-        typeof question.userValue === "object" &&
-        !others.length ? (
+        typeof question.userValue === "object" ? (
         <Box sx={{ minWidth: 120 }}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Portion</InputLabel>
@@ -133,33 +128,6 @@ function RenderInput({
             </Select>
           </FormControl>
         </Box>
-      ) : others.length ? (
-        <FormControl sx={{ m: 1, width: 300 }}>
-          <InputLabel id="demo-multiple-name-label">Others</InputLabel>
-          <Select
-            labelId="demo-multiple-name-label"
-            id="demo-multiple-name"
-            multiple
-            value={other}
-            onChange={(event) => {
-              const {
-                target: { value },
-              } = event;
-              console.log(event.target.value);
-              setOther(
-                // On autofill we get a stringified value.
-                typeof value === "string" ? value.split(",") : value
-              );
-            }}
-            input={<OutlinedInput label="Others" />}
-          >
-            {others.map((other) => (
-              <MenuItem key={other} value={other}>
-                {other.split("other_")[1]}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
       ) : (
         <input
           type={formInput.type}

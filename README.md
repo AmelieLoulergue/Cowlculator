@@ -30,14 +30,25 @@ Farmers users can take actions on their farm to mitigate their carbon emissions.
 
 ## Goals and upcoming features APP V2
 
-### feature 1
-With this version of the application, the objective is to collect and consolidate knowledge and information on farmers' practices. The information will allow research and application to offer better advice to farmers to balance their emissions while obtaining financial aid to implement this advice.
+### Feature 1
+The current version of the Cowlculator application has for objective to collect and consolidate knowledge and information on farmers' practices. The information gathered will allow the future version of the app to display even more personalized advice to farmers to balance their emissions. Based on previous users' answersthe personalization of the advice will include the location (state, zip code) and the activities of the farm for example. 
 
-### feature 2 
-Give farmers a gamified experience with notifications and reminders to always seek improvement. To be able to compare yourself to other farmers in the same state for example and create a community platform allowing you to share your experience with other farmers or researchers.
 
-### feature 3
-The final objective is to become the reference application for the general public as well as for professionals about the involvement of farmers to reduce their emissions by releasing a Carbon Neutral label for example, according to well-defined criteria.
+### Feature 2 
+Give farmers a gamified experience with notifications and reminders to always seek improvement. This feature will enable farmers to compare themselves with other farmers in the same state for example and create a community platform allowing them to share your experience with other farmers or researchers.
+
+
+### Feature 3
+Cowlculator also aims to include free tools to facilitate the implementation of sustainable practices, such as satellite maps of properties to help with grazing management, fertilizer application and a shop with feeding improvement solutions. An estimate of the implementation costs as well as the available financial aids to implement sustainable practices will be added to the farmers' dashboard.
+
+
+### Feature 4
+A forum will be implemented for researchers allowing them to ask questions, publish the latestt news and discuss research topics with their peers. A "News" page will be added, available for both farmers and researchers users, displaying the latest news and policies about sustainable agricultural practices and related topics. In this page, researchers will also be able to publish their articles. 
+
+
+### Feature 5
+The final objective is for Cowlculator to become the reference tool in the validation process for the carbon credit market thanks to partnerships with carbon credit companies. Cowlculator can also be used as a tool for the validation process of a ‘carbon neutral food’ logo, which would require well-defined specifications and allow the farmers' efforts to be rewarded by a marketing claim.
+
 
 # [OUR TEAM](https://cowlculator.netlify.app/about)
 CALL FOR CODE 2022 :heavy_heart_exclamation:
@@ -52,6 +63,7 @@ Amélie LOULERGUE
 
 ## APPLICATIONS
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)  
+IBM Cloud Object Storage
 
 Our frontend application : 
 
@@ -63,10 +75,10 @@ You want to download locally ?
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)  
 ![Mongodb](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
 
-Our backend application : [Cowlculator back end](https://github.com/AmelieLoulergue/Cowlculator_back)
+Our backend application : [Cowlculator back end](https://github.com/AmelieLoulergue/CowlculatorBack#readme)
 
 You want to download locally ? 
-- https://github.com/AmelieLoulergue/Cowlculator_back.git
+- https://github.com/AmelieLoulergue/CowlculatorBack.git
 - npm i 
 - npm start
 

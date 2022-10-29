@@ -213,18 +213,14 @@ function Dashboard({ allResultsUser }) {
                   <></>
                 )}
               </div>
-              <div
-                className={
-                  advicesArray.length === 0 ? "is-hidden" : "card-advice"
-                }
-              >
-                <h2>Want to improve your results?</h2>
-                {currentResult &&
-                  advicesArray.length > 0 &&
-                  advicesArray
-                    ?.filter((advice, index) => index === 0)
-                    .map((advice) => advice)}
-              </div>
+              {currentResult && (
+                <div className={"card-advice"}>
+                  Take a look at the repartition of your emissions to know which
+                  part of your activity generates the most greenhouse gases Tip:
+                  Click on the name of a category to add it or remove it from
+                  the graph!
+                </div>
+              )}
             </div>
 
             <div className="card-dash-line">
@@ -242,18 +238,6 @@ function Dashboard({ allResultsUser }) {
                 ) : (
                   <></>
                 )}
-              </div>
-              <div
-                className={
-                  advicesArray.length < 2 ? "is-hidden" : "card-advice"
-                }
-              >
-                <h2>Here is something you can do:</h2>
-                {currentResult &&
-                  advicesArray.length >= 2 &&
-                  advicesArray
-                    ?.filter((advice, index) => index === 1)
-                    .map((advice) => advice)}
               </div>
             </div>
 
@@ -275,34 +259,25 @@ function Dashboard({ allResultsUser }) {
                   <></>
                 )}
               </div>
+              {currentResult && (
+                <div className={"card-advice"}>
+                  Realize the importance of your efforts over time by comparing
+                  your unmitigated emissions with your mitigated emissions.
+                </div>
+              )}
               <div
                 className={
-                  advicesArray.length < 3 ? "is-hidden" : "card-advice"
-                }
-              >
-                <h2>You're doing great!</h2>
-                {currentResult &&
-                  advicesArray.length >= 3 &&
-                  advicesArray
-                    ?.filter((advice, index) => index === 2)
-                    .map((advice) => advice)}
-              </div>
-              <div
-                className={
-                  advicesArray.length < 3 ? "is-hidden" : "card-advice"
+                  advicesArray.length === 0 ? "is-hidden" : "card-advice"
                 }
               >
                 <h2>List of advices</h2>
                 {currentResult &&
-                  advicesArray.length >= 3 &&
-                  advicesArray
-                    ?.filter((advice, index) => index > 2)
-                    .map((advice) => (
-                      <>
-                        {advice}
-                        <br />
-                      </>
-                    ))}
+                  advicesArray.map((advice) => (
+                    <>
+                      {advice}
+                      <br />
+                    </>
+                  ))}
               </div>
             </div>
           </div>
