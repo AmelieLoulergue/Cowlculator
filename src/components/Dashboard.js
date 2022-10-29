@@ -179,20 +179,6 @@ function Dashboard({ allResultsUser }) {
               </div>
             </div>
           </div>
-          <div
-            className={advicesArray.length === 0 ? "is-hidden" : "card-advice"}
-          >
-            <h2>List of advices</h2>
-            {currentResult &&
-              advicesArray.length >= 3 &&
-              advicesArray.map((advice) => (
-                <>
-                  <ul>
-                    <li>{advice}</li>
-                  </ul>
-                </>
-              ))}
-          </div>
 
           <div id="dash-charts" className="card-section container">
             <div className="card-dash-line">
@@ -329,6 +315,22 @@ function Dashboard({ allResultsUser }) {
               </>
             )}
           </div>
+
+          <div className="container">
+            <h1 className={advicesArray.length === 0 ? "is-hidden" : "primaryTitle"}>Recommendations</h1>
+            <div
+              className={advicesArray.length === 0 ? "is-hidden" : "card-section"}
+            >
+              {currentResult &&
+                advicesArray.length >= 3 &&
+                advicesArray.map((advice) => (
+                  <>
+                      <div className="card">{advice}</div>
+                  </>
+                ))}
+            </div>
+          </div>
+
         </div>
       </div>
     </>
