@@ -8,6 +8,7 @@ import { DoughnutChart } from "./charts/DoughnoutChart";
 import { BarChart } from "./charts/VerticalBarChart";
 import { LineChart } from "./charts/LineChart";
 import Advices from "../utils/calculs/Advice";
+import { HashLink as Link } from "react-router-hash-link";
 function Dashboard({ allResultsUser }) {
   let navigate = useNavigate();
   allResultsUser.sort((a, b) => {
@@ -87,7 +88,7 @@ function Dashboard({ allResultsUser }) {
                 </div>
               </>
             )}
-            <div className="card saved">
+            <Link className="card saved" to={"/dashboard#recommandations"}>
               <div className="card-icon">
                 <div className="card-top">
                   <img src={plant} alt="plant icon"></img>
@@ -121,9 +122,9 @@ function Dashboard({ allResultsUser }) {
                   </h2>
                 )}
               </div>
-            </div>
+            </Link>
 
-            <div className="card impact">
+            <Link className="card impact" to={"/dashboard#recommandations"}>
               <div className="card-icon">
                 <div className="card-top">
                   <img src={footprint} alt="carbon footprint icon"></img>
@@ -148,9 +149,9 @@ function Dashboard({ allResultsUser }) {
                   </h2>
                 )}
               </div>
-            </div>
+            </Link>
 
-            <div className="card income">
+            <Link className="card income" to={"/dashboard#recommandations"}>
               <div className="card-icon">
                 <div className="card-top">
                   <img src={dollar} alt="dollar sign icon"></img>
@@ -176,7 +177,7 @@ function Dashboard({ allResultsUser }) {
                 </div>
                 <h2>Estimated carbon credits</h2>
               </div>
-            </div>
+            </Link>
           </div>
 
           <div id="dash-charts" className="card-section container">

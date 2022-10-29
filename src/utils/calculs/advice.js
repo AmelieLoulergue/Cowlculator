@@ -568,7 +568,9 @@ const Advices = ({ result }) => {
     <>
       {advices && advices.length && (
         <>
-          <h1 className={"primaryTitle"}>Recommendations</h1>
+          <h1 className={"primaryTitle"} id="recommandations">
+            Recommendations
+          </h1>
           <div className="card-section">
             {advices.map((advice) => (
               <div className="card card-advice">
