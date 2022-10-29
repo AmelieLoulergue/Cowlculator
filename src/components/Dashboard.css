@@ -116,12 +116,14 @@
   margin: 10px 0 0 5px;
   text-align: center;
   font-size: 1rem;
+  margin: auto;
+  min-width: max-content;
+}
+#dash .card h2 {
   position: absolute;
   bottom: -30px;
   left: 50%;
   transform: translateX(-50%);
-  margin: auto;
-  min-width: max-content;
 }
 #dash .card {
   margin-bottom: 50px;

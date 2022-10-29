@@ -216,74 +216,124 @@ function Dashboard({ allResultsUser }) {
                   <></>
                 )}
               </div>
-              {currentResult && (
-                <div className={"card-advice"}>
-                  Take a look at the repartition of your emissions to know which
-                  part of your activity generates the most greenhouse gases Tip:
-                  Click on the name of a category to add it or remove it from
-                  the graph!
-                </div>
-              )}
-            </div>
-
-            <div className="card-dash-line">
-              <div className="card-chart">
-                {currentResult ? (
-                  <LineChart
-                    options={chartoption}
-                    labels={labelPeriodChart3}
-                    id={"chart3"}
-                    dataResults={{
-                      data1: allCO2emmitedArray,
-                      data2: allCO2mitigatedEmissions,
-                    }}
-                  />
-                ) : (
-                  <></>
-                )}
+              <div className={"card-advice"}>
+                Take a look at the repartition of your emissions to know which
+                part of your activity generates the most greenhouse gases.
+                <br></br> Tip: Click on the name of a category to add it or
+                remove it from the graph!
               </div>
             </div>
 
-            <div className="card-dash-line">
-              <div className="card-chart">
-                {currentResult ? (
-                  <BarChart
-                    width={100}
-                    height={50}
-                    options={{ maintainAspectRatio: false, responsive: false }}
-                    id={"chart2"}
-                    labels={labelPeriodChart2}
-                    dataResults={{
-                      data1: allTotalEmissionsArray,
-                      data2: allCO2emmitedArray,
-                    }}
-                  />
-                ) : (
-                  <></>
-                )}
-              </div>
-              {currentResult && (
-                <div className={"card-advice"}>
-                  Realize the importance of your efforts over time by comparing
-                  your unmitigated emissions with your mitigated emissions.
+            {advicesArray.length < 2 ? (
+              <>
+                <div className="card-dash-line">
+                  <div className="card-chart">
+                    {currentResult ? (
+                      <LineChart
+                        options={chartoption}
+                        labels={labelPeriodChart3}
+                        id={"chart3"}
+                        dataResults={{
+                          data1: allCO2emmitedArray,
+                          data2: allCO2mitigatedEmissions,
+                        }}
+                      />
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                  <div className="card-chart">
+                    {currentResult ? (
+                      <BarChart
+                        width={100}
+                        height={50}
+                        options={{
+                          maintainAspectRatio: false,
+                          responsive: false,
+                        }}
+                        id={"chart2"}
+                        labels={labelPeriodChart2}
+                        dataResults={{
+                          data1: allTotalEmissionsArray,
+                          data2: allCO2emmitedArray,
+                        }}
+                      />
+                    ) : (
+                      <></>
+                    )}
+                  </div>
                 </div>
-              )}
-              <div
-                className={
-                  advicesArray.length === 0 ? "is-hidden" : "card-advice"
-                }
-              >
-                <h2>List of advices</h2>
-                {currentResult &&
-                  advicesArray.map((advice) => (
-                    <>
-                      {advice}
-                      <br />
-                    </>
-                  ))}
-              </div>
+              </>
+            ) : (
+              <>
+                <div className="card-dash-line">
+                  <div className="card-chart">
+                    {currentResult ? (
+                      <LineChart
+                        options={chartoption}
+                        labels={labelPeriodChart3}
+                        id={"chart3"}
+                        dataResults={{
+                          data1: allCO2emmitedArray,
+                          data2: allCO2mitigatedEmissions,
+                        }}
+                      />
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                  <div className={"card-advice"}>
+                    Watch your emissions decrease and your mitigation increase
+                    over time!
+                  </div>
+                </div>
+
+                <div className="card-dash-line">
+                  <div className="card-chart">
+                    {currentResult ? (
+                      <BarChart
+                        width={100}
+                        height={50}
+                        options={{
+                          maintainAspectRatio: false,
+                          responsive: false,
+                        }}
+                        id={"chart2"}
+                        labels={labelPeriodChart2}
+                        dataResults={{
+                          data1: allTotalEmissionsArray,
+                          data2: allCO2emmitedArray,
+                        }}
+                      />
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                  <div className={"card-advice"}>
+                    Realize the importance of your efforts over time by
+                    comparing your unmitigated emissions with your mitigated
+                    emissions.
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+
+          <div className="container">
+            <h1 className={advicesArray.length === 0 ? "is-hidden" : "primaryTitle"}>Recommendations</h1>
+            <div
+              className={advicesArray.length === 0 ? "is-hidden" : "card-section"}
+            >
+              {currentResult &&
+                advicesArray.length >= 3 &&
+                advicesArray.map((advice) => (
+                  <>
+                      <div className="card">{advice}</div>
+                  </>
+                ))}
             </div>
           </div>
+
         </div>
       </div>
     </>
