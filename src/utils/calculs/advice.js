@@ -15,7 +15,7 @@ function round(value, precision) {
   var multiplier = Math.pow(10, precision || 0);
   return Math.round(value * multiplier) / multiplier;
 }
-const advices = ({ result }) => {
+const Advices = ({ result }) => {
   const advices = [];
   if (result) {
     const endDate = result.find((data) => data.id === "end_date")?.response;
@@ -550,6 +550,17 @@ const advices = ({ result }) => {
       );
     }
   }
-  return advices;
+  return (
+    <>
+      {advices && advices.length && (
+        <>
+          <h1 className={"primaryTitle"}>Recommendations</h1>
+          {advices.map((advice) => (
+            <div className="card card-advice">{advice}</div>
+          ))}
+        </>
+      )}
+    </>
+  );
 };
-export default advices;
+export default Advices;

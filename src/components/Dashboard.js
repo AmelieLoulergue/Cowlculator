@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { DoughnutChart } from "./charts/DoughnoutChart";
 import { BarChart } from "./charts/VerticalBarChart";
 import { LineChart } from "./charts/LineChart";
-import advices from "../utils/calculs/advice";
+import Advices from "../utils/calculs/Advice";
 function Dashboard({ allResultsUser }) {
   let navigate = useNavigate();
   allResultsUser.sort((a, b) => {
@@ -17,7 +17,6 @@ function Dashboard({ allResultsUser }) {
     );
   });
   let currentResult = allResultsUser[allResultsUser.length - 1];
-  let advicesArray = advices({ result: currentResult });
   const allTotalEmissionsArray = allResultsUser
     .filter((element) => element !== null)
     .map(
@@ -220,122 +219,60 @@ function Dashboard({ allResultsUser }) {
                 remove it from the graph!
               </div>
             </div>
+            <>
+              <div className="card-dash-line">
+                <div className="card-chart">
+                  {currentResult ? (
+                    <LineChart
+                      options={chartoption}
+                      labels={labelPeriodChart3}
+                      id={"chart3"}
+                      dataResults={{
+                        data1: allCO2emmitedArray,
+                        data2: allCO2mitigatedEmissions,
+                      }}
+                    />
+                  ) : (
+                    <></>
+                  )}
+                </div>
+                <div className={"card-advice"}>
+                  Watch your emissions decrease and your mitigation increase
+                  over time!
+                </div>
+              </div>
 
-            {advicesArray.length < 2 ? (
-              <>
-                <div className="card-dash-line">
-                  <div className="card-chart">
-                    {currentResult ? (
-                      <LineChart
-                        options={chartoption}
-                        labels={labelPeriodChart3}
-                        id={"chart3"}
-                        dataResults={{
-                          data1: allCO2emmitedArray,
-                          data2: allCO2mitigatedEmissions,
-                        }}
-                      />
-                    ) : (
-                      <></>
-                    )}
-                  </div>
-                  <div className="card-chart">
-                    {currentResult ? (
-                      <BarChart
-                        width={100}
-                        height={50}
-                        options={{
-                          maintainAspectRatio: false,
-                          responsive: false,
-                        }}
-                        id={"chart2"}
-                        labels={labelPeriodChart2}
-                        dataResults={{
-                          data1: allTotalEmissionsArray,
-                          data2: allCO2emmitedArray,
-                        }}
-                      />
-                    ) : (
-                      <></>
-                    )}
-                  </div>
+              <div className="card-dash-line">
+                <div className="card-chart">
+                  {currentResult ? (
+                    <BarChart
+                      width={100}
+                      height={50}
+                      options={{
+                        maintainAspectRatio: false,
+                        responsive: false,
+                      }}
+                      id={"chart2"}
+                      labels={labelPeriodChart2}
+                      dataResults={{
+                        data1: allTotalEmissionsArray,
+                        data2: allCO2emmitedArray,
+                      }}
+                    />
+                  ) : (
+                    <></>
+                  )}
                 </div>
-              </>
-            ) : (
-              <>
-                <div className="card-dash-line">
-                  <div className="card-chart">
-                    {currentResult ? (
-                      <LineChart
-                        options={chartoption}
-                        labels={labelPeriodChart3}
-                        id={"chart3"}
-                        dataResults={{
-                          data1: allCO2emmitedArray,
-                          data2: allCO2mitigatedEmissions,
-                        }}
-                      />
-                    ) : (
-                      <></>
-                    )}
-                  </div>
-                  <div className={"card-advice"}>
-                    Watch your emissions decrease and your mitigation increase
-                    over time!
-                  </div>
+                <div className={"card-advice"}>
+                  Realize the importance of your efforts over time by comparing
+                  your unmitigated emissions with your mitigated emissions.
                 </div>
-
-                <div className="card-dash-line">
-                  <div className="card-chart">
-                    {currentResult ? (
-                      <BarChart
-                        width={100}
-                        height={50}
-                        options={{
-                          maintainAspectRatio: false,
-                          responsive: false,
-                        }}
-                        id={"chart2"}
-                        labels={labelPeriodChart2}
-                        dataResults={{
-                          data1: allTotalEmissionsArray,
-                          data2: allCO2emmitedArray,
-                        }}
-                      />
-                    ) : (
-                      <></>
-                    )}
-                  </div>
-                  <div className={"card-advice"}>
-                    Realize the importance of your efforts over time by
-                    comparing your unmitigated emissions with your mitigated
-                    emissions.
-                  </div>
-                </div>
-              </>
-            )}
+              </div>
+            </>
           </div>
 
           <div className="container">
-            <h1
-              className={
-                advicesArray.length === 0 ? "is-hidden" : "primaryTitle"
-              }
-            >
-              Recommendations
-            </h1>
-            <div
-              className={
-                advicesArray.length === 0 ? "is-hidden" : "card-section"
-              }
-            >
-              {currentResult &&
-                advicesArray.map((advice) => (
-                  <>
-                    <div className="card card-advice">{advice}</div>
-                  </>
-                ))}
-            </div>
+            <Advices result={currentResult} />
           </div>
         </div>
       </div>
