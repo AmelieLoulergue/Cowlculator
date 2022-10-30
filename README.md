@@ -45,7 +45,7 @@ Cowlculator also aims to include free tools to facilitate the implementation of 
 
 
 ### Feature 4
-A forum will be implemented for researchers allowing them to ask questions, publish the latestt news and discuss research topics with their peers. A "News" page will be added, available for both farmers and researchers users, displaying the latest news and policies about sustainable agricultural practices and related topics. In this page, researchers will also be able to publish their articles. 
+A forum will be implemented for researchers allowing them to ask questions, publish the latest news and discuss research topics with their peers. A "News" page will be added, available for both farmers and researchers users, displaying the latest news and policies about sustainable agricultural practices and related topics. In this page, researchers will also be able to publish their articles. 
 
 
 
@@ -59,7 +59,7 @@ Specific agricultural modules will be added to the form in order to estimate the
 
 
 ### Feature 7
-Switch the web application to Android et iOS.
+Switch the web application to Android and iOS.
 
 
 # [OUR TEAM](https://cowlculator.netlify.app/about)
