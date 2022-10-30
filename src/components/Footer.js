@@ -1,7 +1,9 @@
 import * as React from "react";
 import "./Footer.css";
 
-import mif from "../assets/img/mif.png";
+import Lottie from "lottie-react";
+import liberty from "../assets/anim/liberty.json"
+import libertyc from "../assets/anim/liberty-c.json"
 import wwc from "../assets/img/wwc-circle.png";
 import logo from "../assets/img/cowlculator.png";
 import { HashLink as Link } from "react-router-hash-link";
@@ -72,7 +74,11 @@ function Footer({ login }) {
 
         <div className="logos">
           <img src={wwc}></img>
-          <img src={mif}></img>
+          <div>
+            <Lottie animationData={libertyc} loop={true} />
+            <h3>Made by french in america</h3>
+          </div>
+
         </div>
       </div>
     </>

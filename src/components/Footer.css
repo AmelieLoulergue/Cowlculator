@@ -12,15 +12,17 @@
 @media screen and (max-width:950px) {
     #footer {
         grid-template-columns: 1fr;
-        grid-template:  "links"
-                        "logos"
-                        "copy";
+        grid-template: "links"
+            "logos"
+            "copy";
     }
 }
 
 #footer .logos {
     grid-area: logos;
+    display: inline-block;
 }
+
 #footer .logos img {
     max-width: 160px;
     display: flex;
@@ -29,14 +31,24 @@
     transition: .2s ease-out;
     padding: 10px;
 }
-#footer .logos img:hover {
+
+#footer .logos img:hover,
+#footer .logos div svg:hover {
     filter: grayscale(0);
+}
+
+#footer .logos div svg {
+    max-width: 140px;
+    margin: auto;
+    filter: grayscale(1);
+    transition: .2s ease-out;
 }
 
 #footer .copyright {
     text-align: center;
     grid-area: copy;
 }
+
 #footer .copyright img {
     max-width: 80vw;
 }
@@ -45,6 +57,7 @@
     text-align: center;
     grid-area: links;
 }
+
 #footer .links li {
     list-style: none;
     cursor: pointer;
@@ -54,6 +67,7 @@
     max-width: max-content;
     margin: auto;
 }
+
 #footer .links li::after {
     content: '';
     height: 2px;
@@ -66,12 +80,15 @@
     right: 0;
     transition: .3s ease-out;
 }
+
 #footer .links li:hover {
     opacity: 1;
 }
+
 #footer .links li:hover::after {
     width: 100%;
 }
+
 #footer .links ul {
     padding-inline: 0;
 }
