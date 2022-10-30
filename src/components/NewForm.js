@@ -245,17 +245,24 @@ const NewForm = ({
             </div>
             <div className="btns" style={{ marginBottom: "5rem" }}>
               <img src={back_arrow} alt=""></img>
-              <button
-                className="btn"
-                onClick={() => {
-                  setInitForm(true);
-                  setTimeout(() => {
-                    window.scrollBy(0, document.body.scrollHeight - 100);
-                  }, 50);
-                }}
-              >
-                Let's get started
-              </button>
+              <div>
+                <button
+                  className="btn"
+                  onClick={() => {
+                    setInitForm(true);
+                    setTimeout(() => {
+                      window.scrollBy(0, document.body.scrollHeight - 100);
+                    }, 50);
+                  }}
+                >
+                  Let's get started
+                </button>
+                <h3>
+                  By clicking on "Let's get started" you agree that the
+                  information collected are anonymously shared and used for
+                  research purpose.
+                </h3>
+              </div>
               <img src={home} alt=""></img>
             </div>
           </div>
