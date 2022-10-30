@@ -47,9 +47,10 @@ Cowlculator also aims to include free tools to facilitate the implementation of 
 ### Feature 4
 A forum will be implemented for researchers allowing them to ask questions, publish the latestt news and discuss research topics with their peers. A "News" page will be added, available for both farmers and researchers users, displaying the latest news and policies about sustainable agricultural practices and related topics. In this page, researchers will also be able to publish their articles. 
 
-<img src="https://clous-storage-carbonb-cos-standard-26b.s3.eu-de.cloud-object-storage.appdomain.cloud/carbon_neutral_logo.png" width="150" alt=""/>
 
-### Feature 5 !
+
+### Feature 5 
+<img src="https://clous-storage-carbonb-cos-standard-26b.s3.eu-de.cloud-object-storage.appdomain.cloud/carbon_neutral_logo.png" width="150" alt=""/>
 The final objective is for Cowlculator to become the reference tool in the validation process for the carbon credit market thanks to partnerships with carbon credit companies. Cowlculator can also be used as a tool for the validation process of a ‘carbon neutral food’ logo, which would require well-defined specifications and allow the farmers' efforts to be rewarded by a marketing claim.
 
 
