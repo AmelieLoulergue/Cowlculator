@@ -6,25 +6,25 @@ Helps US farmers to manage their carbon footprint, generate carbon credits & pro
 
 Cowlculator is a free app that helps American farmers to generate carbon credits more efficiently by understanding and managing their carbon balance. Researchers can access farmers' securely stored data to conduct agricultural research which could influence policy makers.
 
-You can try our app : [Cowlculator Online URL](https://cowlculator.netlify.app/)
+You can try our app: [Cowlculator Online URL](https://cowlculator.netlify.app/)
 
-### **STEP 1** : Farmers take the survey :farmer: :woman_farmer:
+### **STEP 1**: Farmers take the survey :farmer: :woman_farmer:
 
 When logged in as a farmer, users can take a survey about their farm and the practices implemented to mitigate carbon emissions. If any change occurs on the farm, the user can take it again.
 
-### **STEP 2** : Calculations :abacus:
+### **STEP 2**: Calculations :abacus:
 
 Cowlculator calculates the carbon emissions, mitigations thanks to the practices implemented on the farm and potential earnings under the form of carbon credits for each tonne of carbon mitigated.
 
-### **STEP 3** : Results communicated :computer: :iphone:
+### **STEP 3**: Results communicated :computer: :iphone:
 
 The farmers users can access a personalized, clear and elegant dashboard displaying the current emissions, mitigations and earning of the farm. An evolution of these information is also displayed.
 
-### **STEP 4** : Data stored anonymously on IBM Cloud :cloud:
+### **STEP 4**: Data stored anonymously on IBM Cloud :cloud:
 
 When a Farmer user takes the survey their information are sent and stored anonymously on a database on the IBM Cloud accessible by an authorized Researcher user for agricultural research purpose.
 
-### **STEP 5** : Actions taken :dart:
+### **STEP 5**: Actions taken :dart:
 
 Farmers users can take actions on their farm to mitigate their carbon emissions. Researcher users can conduct agricultural research leading to improved agricultural carbon mitigations.
 
@@ -54,24 +54,28 @@ The final objective is for Cowlculator to become the reference tool in the valid
 Specific agricultural modules will be added to the form in order to estimate the emissions and potential mitigations in a more precise way. Each module will be composed of questions specific to an agricultural product such as vineyard or aquaculture. Before taking the form, the user will be able to select a module and the questions of the module will be added to the core questions list of the form.
 
 
+### Feature 7
+Switch the web application to Android et iOS.
+
+
 # [OUR TEAM](https://cowlculator.netlify.app/about)
 CALL FOR CODE 2022 :heavy_heart_exclamation:
 
 WE ARE ALL [HERE](https://cowlculator.netlify.app/about)
 
-Bertille DORMOY SMITH : [github](https://github.com/bertillesmith) [linkedIn](https://www.linkedin.com/in/bertille-smith-b815b6125/)
+Bertille DORMOY SMITH: [github](https://github.com/bertillesmith) [LinkedIn](https://www.linkedin.com/in/bertille-smith-b815b6125/)
 
-Clément LOULERGUE : [github](https://github.com/LoulergueC)
+Clément LOULERGUE: [github](https://github.com/LoulergueC) [LinkedIn](https://www.linkedin.com/in/clément-loulergue-a125911ab/)
 
-Amélie LOULERGUE 
+Amélie LOULERGUE: [LinkedIn](https://www.linkedin.com/in/amélie-loulergue-845a25148/)
 
 ## APPLICATIONS
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)  
 IBM Cloud Object Storage
 
-Our frontend application : 
+Our frontend application: 
 
-You want to download locally ? 
+You want to download locally? 
 - git clone https://github.com/AmelieLoulergue/Cowlculator.git
 - npm i 
 - npm start
@@ -79,9 +83,9 @@ You want to download locally ?
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)  
 ![Mongodb](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
 
-Our backend application : [Cowlculator back end](https://github.com/AmelieLoulergue/CowlculatorBack#readme)
+Our backend application: [Cowlculator back end](https://github.com/AmelieLoulergue/CowlculatorBack#readme)
 
-You want to download locally ? 
+You want to download locally? 
 - https://github.com/AmelieLoulergue/CowlculatorBack.git
 - npm i 
 - npm start
