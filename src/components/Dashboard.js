@@ -178,7 +178,7 @@ function Dashboard({ allResultsUser }) {
                     </h1>
                   )}
                 </div>
-                <h2>Estimated carbon credits</h2>
+                {currentResult && <h2>Estimated carbon credits</h2>}
               </div>
             </Link>
           </div>
@@ -216,17 +216,19 @@ function Dashboard({ allResultsUser }) {
                   <></>
                 )}
               </div>
-              <div className={"card-advice"}>
-                Take a look at the repartition of your emissions to know which
-                part of your activity generates the most greenhouse gases.
-                <br></br> Tip: Click on the name of a category to add it or
-                remove it from the graph!
-              </div>
+              {currentResult && (
+                <div className={"card-advice"}>
+                  Take a look at the repartition of your emissions to know which
+                  part of your activity generates the most greenhouse gases.
+                  <br></br> Tip: Click on the name of a category to add it or
+                  remove it from the graph!
+                </div>
+              )}
             </div>
             <>
               <div className="card-dash-line">
                 <div className="card-chart">
-                  {currentResult ? (
+                  {currentResult && (
                     <LineChart
                       options={chartoption}
                       labels={labelPeriodChart3}
@@ -236,19 +238,19 @@ function Dashboard({ allResultsUser }) {
                         data2: allCO2mitigatedEmissions,
                       }}
                     />
-                  ) : (
-                    <></>
                   )}
                 </div>
-                <div className={"card-advice"}>
-                  Watch your emissions decrease and your mitigation increase
-                  over time!
-                </div>
+                {currentResult && (
+                  <div className={"card-advice"}>
+                    Watch your emissions decrease and your mitigation increase
+                    over time!
+                  </div>
+                )}
               </div>
 
               <div className="card-dash-line">
                 <div className="card-chart">
-                  {currentResult ? (
+                  {currentResult && (
                     <BarChart
                       width={100}
                       height={50}
@@ -263,14 +265,15 @@ function Dashboard({ allResultsUser }) {
                         data2: allCO2emmitedArray,
                       }}
                     />
-                  ) : (
-                    <></>
                   )}
                 </div>
-                <div className={"card-advice"}>
-                  Realize the importance of your efforts over time by comparing
-                  your unmitigated emissions with your mitigated emissions.
-                </div>
+                {currentResult && (
+                  <div className={"card-advice"}>
+                    Realize the importance of your efforts over time by
+                    comparing your unmitigated emissions with your mitigated
+                    emissions.
+                  </div>
+                )}
               </div>
             </>
           </div>
