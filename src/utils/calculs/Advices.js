@@ -16,7 +16,6 @@ function round(value, precision) {
   return Math.round(value * multiplier) / multiplier;
 }
 const Advices = ({ result }) => {
-  console.log(result);
   const advices = [];
   if (result) {
     const endDate = result.find((data) => data.id === "end_date")?.response;

@@ -14,8 +14,11 @@ import cowlculator from "../../assets/img/cowlculator.png";
 import { logout } from "../../utils/authentication/controlLog";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/authContext";
+import { useResultContext } from "../../context/resultContext";
 function Navbar() {
   const { authInformations, setAuthInformations } = useAuthContext();
+  const { setResultInformations } = useResultContext();
+  console.log(authInformations);
   const toggleSideNav = () => {
     document.getElementById("dash-side").classList.toggle("active");
     document.getElementById("dash-nav-icon-burger").classList.toggle("active");
@@ -26,6 +29,7 @@ function Navbar() {
   const [scroll, setScroll] = useState(window.scrollY);
   useEffect(() => setScroll(window.scrollY), []);
   const navigate = useNavigate();
+  console.log("ici");
   return (
     <>
       <div className="dash-side" id="dash-side">
@@ -50,7 +54,9 @@ function Navbar() {
                 </p>
                 <button
                   className="btn"
-                  onClick={() => logout({ setAuthInformations })}
+                  onClick={() =>
+                    logout({ setAuthInformations, setResultInformations })
+                  }
                 >
                   Log out
                 </button>

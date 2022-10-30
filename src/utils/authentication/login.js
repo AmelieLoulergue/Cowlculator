@@ -2,53 +2,59 @@ const TOKEN_KEY = "jwt";
 const loginFunc = async ({
   url,
   navigate,
-  setMessageAlert,
-  setSeverity,
-  setDisplayAlert,
-  authInformations,
+  setAlertInformations,
+  userProfile,
   setAuthInformations,
 }) => {
-  console.log(authInformations);
   const response = await fetch(`${url}/api/auth/login`, {
     method: "POST",
-    body: JSON.stringify(authInformations?.userProfile),
+    body: JSON.stringify(userProfile),
     headers: { "Content-Type": "application/json" },
   });
   const res = await response.json();
   if (!res.error) {
-    setAuthInformations({
-      ...authInformations,
+    setAuthInformations((currentAuthInformations) => ({
+      ...currentAuthInformations,
       login: res.user,
       loggedUser: true,
-      userProfile: {
-        email: "",
-        password: "",
-      },
-    });
+    }));
     localStorage.setItem(TOKEN_KEY, res.user.token);
-    setMessageAlert("Great to see you !");
-    setSeverity("success");
-    setDisplayAlert(true);
+    setAlertInformations({
+      severity: "success",
+      messageAlert: "Great to see you !",
+      displayAlert: true,
+    });
     setTimeout(() => {
-      setDisplayAlert(false);
+      setAlertInformations({
+        severity: "",
+        messageAlert: "",
+        displayAlert: false,
+      });
     }, 3000);
-
-    res.user.userType === "farmer"
-      ? navigate("/dashboard")
-      : navigate("/datas");
+    if (res.user.userType === "farmer") {
+      navigate("/dashboard");
+    } else if (res.user.userType === "researcher") {
+      navigate("/datas");
+    }
   }
   if (res.error) {
-    setMessageAlert("Seems to be invalid user ...");
-    setSeverity("error");
-    setDisplayAlert(true);
-    setAuthInformations({
-      ...authInformations,
-      login: false,
-      loggedUser: false,
+    setAlertInformations({
+      severity: "error",
+      messageAlert: "Seems to be invalid user ...",
+      displayAlert: true,
     });
     setTimeout(() => {
-      setDisplayAlert(false);
+      setAlertInformations({
+        severity: "",
+        messageAlert: "",
+        displayAlert: false,
+      });
     }, 3000);
+    setAuthInformations((currentAuthInformations) => ({
+      ...currentAuthInformations,
+      login: false,
+      loggedUser: false,
+    }));
   }
 };
 

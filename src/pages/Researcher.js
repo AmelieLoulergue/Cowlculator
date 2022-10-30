@@ -2,9 +2,9 @@ import ResearcherDatas from "../components/ResearcherDatas";
 import { useAuthContext } from "../context/authContext";
 import { Navigate } from "react-router-dom";
 const ResearcherPage = () => {
-  const { authInformations } = useAuthContext;
+  const { authInformations } = useAuthContext();
   if (!authInformations?.loggedUser) {
-    return Navigate("/account/login");
+    return <Navigate to="/account/login" />;
   }
   return <ResearcherDatas />;
 };

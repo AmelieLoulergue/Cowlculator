@@ -3,18 +3,19 @@ import "./Login.css";
 import "./GetStarted.css";
 import back_arrow from "../../assets/svg/back-arrow.svg";
 import { Link } from "react-router-dom";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Lottie from "lottie-react";
 import eyeBlink from "../../assets/anim/eye-blink.json";
 import { useNavigate } from "react-router-dom";
 import loginFunc from "../../utils/authentication/login";
 import { useAuthContext } from "../../context/authContext";
-function Login({ setMessageAlert, setSeverity, setDisplayAlert }) {
+import { useAlertContext } from "../../context/alertContext";
+function Login() {
   const pass = useRef();
-  const { authInformations, setAuthInformations } = useAuthContext();
-  console.log(authInformations);
+  const { setAuthInformations } = useAuthContext();
+  const { setAlertInformations } = useAlertContext();
+  const [userProfile, setUserProfile] = useState({ email: "", password: "" });
   var passHide = false;
-
   const showPass = () => {
     if (passHide) {
       document.getElementById("password").type = "password";
@@ -58,19 +59,9 @@ function Login({ setMessageAlert, setSeverity, setDisplayAlert }) {
               <input
                 type="email"
                 placeholder="Email"
-                value={
-                  authInformations?.userProfile?.email
-                    ? authInformations.userProfile.email
-                    : ""
-                }
+                value={userProfile?.email ? userProfile.email : ""}
                 onChange={(event) =>
-                  setAuthInformations({
-                    ...authInformations,
-                    userProfile: {
-                      ...authInformations.userProfile,
-                      email: event.target.value,
-                    },
-                  })
+                  setUserProfile({ ...userProfile, email: event.target.value })
                 }
               ></input>
               <div style={{ position: "relative" }}>
@@ -78,18 +69,11 @@ function Login({ setMessageAlert, setSeverity, setDisplayAlert }) {
                   type="password"
                   placeholder="Password"
                   id="password"
-                  value={
-                    authInformations?.userProfile?.password
-                      ? authInformations.userProfile.password
-                      : ""
-                  }
+                  value={userProfile?.password ? userProfile.password : ""}
                   onChange={(event) =>
-                    setAuthInformations({
-                      ...authInformations,
-                      userProfile: {
-                        ...authInformations.userProfile,
-                        password: event.target.value,
-                      },
+                    setUserProfile({
+                      ...userProfile,
+                      password: event.target.value,
                     })
                   }
                 ></input>
@@ -117,10 +101,8 @@ function Login({ setMessageAlert, setSeverity, setDisplayAlert }) {
                   loginFunc({
                     event,
                     url: "https://cowlculatorback.herokuapp.com",
-                    setMessageAlert,
-                    setSeverity,
-                    setDisplayAlert,
-                    authInformations,
+                    setAlertInformations,
+                    userProfile,
                     setAuthInformations,
                     navigate,
                   });

@@ -1,7 +1,5 @@
 const updateUserDatas = async ({
-  login,
   farmName,
-  setLogin,
   authInformations,
   setAuthInformations,
 }) => {
@@ -24,7 +22,6 @@ const updateUserDatas = async ({
     );
     const datas = await response.json();
     if (!datas.error) {
-      setLogin({ ...datas, farmName: datas.farmName });
       setAuthInformations({
         ...authInformations,
         login: { ...authInformations.login, farmName: datas.farmName },

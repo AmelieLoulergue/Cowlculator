@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import Navbar from "./layout/Navbar";
 import listOfQuestions from "../utils/listOfQuestions";
 import RenderQuestion from "./form/RenderQuestion";
 import "./Form.css";
@@ -9,218 +10,118 @@ import home from "../assets/svg/home.svg";
 import { useNavigate } from "react-router-dom";
 import ProgressBarForm from "./form/form_components/ProgressBarForm.js";
 import calculs from "../utils/calculs";
-import elec_state_coeff from "../coeff/elec_state_coeff.json";
-import controlResponse from "../utils/controlResponse";
 import { useFormContext } from "../context/formContext";
 import { useAuthContext } from "../context/authContext";
-const NewForm = ({
-  results,
-  setResults,
-  datasForm,
-  questions,
-  setQuestions,
-  setMessageAlert,
-  setDisplayAlert,
-  setSeverity,
-  setFormIsCompleted,
-  initForm,
-  setInitForm,
-  questionToDisplay,
-  setQuestionToDisplay,
-  indexQuestions,
-  setIndexQuestions,
-  allQuestions,
-  setAllQuestions,
-  counterQuestion,
-  setCounterQuestion,
-  allResultsUser,
-  login,
-}) => {
-  const formInformations = useFormContext();
-  const authContext = useAuthContext();
-  console.log(formInformations, authContext);
-  const stateList = elec_state_coeff.map((element) => element.State);
+import { useAlertContext } from "../context/alertContext";
+import { useResultContext } from "../context/resultContext";
+import sendAnswer from "../utils/formFunctions/sendAnswer";
+import goPrecedentQuestion from "../utils/formFunctions/goPrecedentQuestion";
+import updateProgressForm from "../utils/formFunctions/updateProgressForm";
+import updateCounterQuestion from "../utils/formFunctions/updateCounterQuestion";
+import saveCompletedForm from "../utils/formFunctions/saveCompletedForm";
+import updateFarmNameUser from "../utils/formFunctions/updateFarmNameUser";
+import updateAllExistingQuestions from "../utils/formFunctions/updateAllExistingQuestions";
+import generateDatasFormOnInitForm from "../utils/formFunctions/generateDatasFormOnInitForm";
+import capitalize from "../utils/capitalize";
+const NewForm = () => {
+  const { formInformations, setFormInformations } = useFormContext();
+  const { authInformations, setAuthInformations } = useAuthContext();
+  const { setAlertInformations } = useAlertContext();
+  const { resultInformations, setResultsInformations } = useResultContext();
   const chatContainer = useRef(null);
   let navigate = useNavigate();
-  const [other, setOther] = useState([]);
-  const [numberOfResponse, setNumberOfResponse] = useState(
-    localStorage.getItem("numberOfResponse")
-      ? Number(JSON.parse(localStorage.getItem("numberOfResponse")))
-      : 0
-  );
   const [answer, setAnswer] = useState(null);
   const [progress, setProgress] = useState(0);
 
-  const sendAnswer = () => {
-    const responseIsOk = controlResponse({
-      setSeverity,
-      answer,
-      questionToDisplay,
-      setMessageAlert,
-      setDisplayAlert,
-      stateList,
-      datasForm,
+  useEffect(() => {
+    updateProgressForm({
+      resultInformations,
+      setProgress,
+      formInformations,
     });
-    if (responseIsOk) {
-      setAllQuestions(
-        allQuestions.map((question) => {
-          if (question.id === questionToDisplay.id) {
-            return {
-              ...question,
-              response: answer,
-            };
-          } else {
-            return question;
-          }
-        })
-      );
-      const newQuestionsList = questions;
-
-      if (questionToDisplay?.linked_questions?.length) {
-        const questionsLinked = questionToDisplay.linked_questions.filter(
-          (question) =>
-            questionToDisplay.formInput.type === "number"
-              ? question.answerParentQuestion === answer.value
-              : question.answerParentQuestion === answer
-        );
-
-        newQuestionsList.splice(indexQuestions + 1, 0, ...questionsLinked);
-      }
-
-      newQuestionsList.splice(indexQuestions, 1, {
-        ...questionToDisplay,
-        response: answer,
+  }, [
+    resultInformations?.allResultsUser?.length,
+    formInformations,
+    resultInformations,
+  ]);
+  useEffect(() => {
+    updateCounterQuestion({
+      questionToDisplay: formInformations?.questionToDisplay,
+      setFormInformations,
+    });
+  }, [formInformations?.questionToDisplay, setFormInformations]);
+  useEffect(() => {
+    if (formInformations?.formIsCompleted) {
+      saveCompletedForm({
+        results: formInformations?.results,
+        allQuestions: formInformations?.allQuestions,
+        questions: formInformations?.questions,
+        authInformations,
+        setAuthInformations,
+        setResultsInformations,
       });
-      const getAllIdsToDelete = (value) => {
-        const finalQuestions = value.newQuestionsList.filter(
-          (question) =>
-            question.answerParentQuestion !== answer &&
-            value.idsToDelete.includes(question.parentId)
-        );
-
-        if (!finalQuestions?.length) {
-          return value.idsDeleted;
-        }
-
-        return getAllIdsToDelete({
-          ...value,
-          idsDeleted: [...value.idsDeleted, ...value.idsToDelete],
-          idsToDelete: finalQuestions.map(({ id }) => id),
-        });
-      };
-
-      const idsToDelete = getAllIdsToDelete({
-        newQuestionsList,
-        idsDeleted: [],
-        idsToDelete: [questionToDisplay.id],
-      });
-      const finalQuestions = newQuestionsList.filter(
-        (question) => !idsToDelete.includes(question.parentId)
-      );
-      setQuestions(finalQuestions);
-      setIndexQuestions(indexQuestions + 1);
-      setQuestionToDisplay(finalQuestions[indexQuestions + 1]);
-      setAnswer(
-        finalQuestions[indexQuestions + 1].formInput.type === "checkbox"
-          ? false
-          : null
-      );
     }
-  };
-
-  const goPrecedentQuestion = () => {
-    setIndexQuestions(indexQuestions - 1);
-    setCounterQuestion(
-      allQuestions.findIndex(
-        (element) => element.id === questions[indexQuestions - 1].id
-      )
-    );
-    setQuestionToDisplay(questions[indexQuestions - 1]);
-    setAnswer(questions[indexQuestions - 1].response);
-  };
+  }, [
+    authInformations,
+    formInformations?.allQuestions,
+    formInformations?.formIsCompleted,
+    formInformations?.questions,
+    formInformations?.results,
+    setAuthInformations,
+    setFormInformations,
+    setResultsInformations,
+  ]);
   useEffect(() => {
-    document.getElementsByClassName("dash-nav")[0].classList.add("form-navbar");
-
-    if (allResultsUser?.length) {
-      
-      setQuestions(
-        questions.map((question) => {
-          if (question.id === "farm_name") {
-            return { ...question, response: login?.farmName };
-          } else if (question.id === "farm_state") {
-            return {
-              ...question,
-              response:
-                allResultsUser[0].find((element) => element.id === "farm_state")
-                  ?.response || "FL",
-            };
-          } else if (question.id === "farm_zip_code") {
-            return {
-              ...question,
-              response:
-                allResultsUser[0].find(
-                  (element) => element.id === "farm_zip_code"
-                )?.response || "32601",
-            };
-          }
-          return question;
-        })
-      );
-      if (
-        localStorage.getItem("questionToDisplay") &&
-        localStorage.getItem("indexQuestions")
-      ) {
-        setQuestionToDisplay(
-          localStorage.getItem("questionToDisplay") === "undefined"
-            ? setQuestionToDisplay(listOfQuestions.formQuestions[3])
-            : JSON.parse(localStorage.getItem("questionToDisplay"))
-        );
-        setIndexQuestions(Number(localStorage.getItem("indexQuestions")));
-      } else {
-        setQuestionToDisplay(listOfQuestions.formQuestions[3]);
-        setIndexQuestions(3);
-      }
+    if (resultInformations?.allResultsUser?.length > 0) {
+      setFormInformations((currentFormInformations) => ({
+        ...currentFormInformations,
+        formIsCompleted: false,
+        datasForm: [],
+        initForm: false,
+        questionToDisplay: listOfQuestions.formQuestions[3],
+        indexQuestions: 3,
+        counterQuestion: 3,
+        results: {},
+        questions: listOfQuestions.formQuestions,
+        allQuestions: [],
+      }));
     }
-  }, []);
+  }, [resultInformations, setFormInformations]);
   useEffect(() => {
-    if (allResultsUser?.length) {
-      setProgress(
-        Math.round(((counterQuestion * 100) / allQuestions.length) * 10) / 10
-      );
-    } else {
-      setProgress(
-        Math.round(((counterQuestion * 100) / allQuestions.length) * 10) / 10
-      );
+    updateFarmNameUser({
+      questions: formInformations?.questions,
+      formIsCompleted: formInformations?.formIsCompleted,
+      authInformations,
+      setAuthInformations,
+    });
+    if (
+      !localStorage.getItem(`allQuestions${authInformations?.login?.userId}`)
+    ) {
+      updateAllExistingQuestions({ setFormInformations });
     }
-  }, [counterQuestion]);
-  useEffect(() => {
-    if (questionToDisplay) {
-      setCounterQuestion(
-        allQuestions.findIndex((element) => element.id === questionToDisplay.id)
-      );
-    } else {
-      setCounterQuestion(allQuestions.length);
-    }
-  }, [questions, questionToDisplay]);
+  }, [
+    authInformations,
+    formInformations?.formIsCompleted,
+    formInformations?.questions,
+    setAuthInformations,
+    setFormInformations,
+  ]);
 
-  const noNavMargin = `.nav-margin {
-    display: none !important;
-}`;
-  const noFoot = `#footer {display: none !important}`;
+  useEffect(() => {
+    generateDatasFormOnInitForm({
+      initForm: formInformations?.initForm,
+      setFormInformations,
+    });
+  }, [formInformations?.initForm, setFormInformations]);
   return (
     <div>
-      <style>
-        {noFoot}
-        {noNavMargin}
-      </style>
-      {initForm && (
+      {formInformations?.initForm && (
         <div className="buttons-skip-form">
           <button
             onClick={() => {
               calculs({
-                datasForm,
-                results,
-                setResults,
+                formInformations: formInformations,
+                setFormInformations: setFormInformations,
               });
               navigate("/dashboard");
             }}
@@ -231,13 +132,13 @@ const NewForm = ({
         </div>
       )}
       <div className="formChat">
-        {!initForm && (
+        {!formInformations?.initForm && (
           <div className="beginin">
             <div className="LottieContainer">
               <Lottie animationData={form_begin} loop={true} />
             </div>
             <div>
-              {datasForm.length > 0 ? (
+              {formInformations?.datasForm?.length > 0 ? (
                 <>
                   <h3>Nice to see you again !</h3>
                   <h1>Keep filling the form today</h1>
@@ -250,11 +151,16 @@ const NewForm = ({
               )}
             </div>
             <div className="btns" style={{ marginBottom: "5rem" }}>
-              <img src={back_arrow} alt=""></img>
+              <img
+                src={back_arrow}
+                alt=""
+                onClick={() => navigate("/dashboard")}
+                style={{ cursor: "pointer" }}
+              ></img>
               <button
                 className="btn"
                 onClick={() => {
-                  setInitForm(true);
+                  setFormInformations({ ...formInformations, initForm: true });
                   setTimeout(() => {
                     window.scrollBy(0, document.body.scrollHeight - 100);
                   }, 50);
@@ -262,86 +168,125 @@ const NewForm = ({
               >
                 Let's get started
               </button>
-              <img src={home} alt=""></img>
+              <img
+                src={home}
+                alt=""
+                onClick={() => navigate("/")}
+                style={{ cursor: "pointer" }}
+              />
             </div>
           </div>
         )}
-        {initForm && questions.length > 0 && (
-          <div id="questions-form" className="questions" ref={chatContainer}>
-            {questions
-              .slice(allResultsUser[0]?.length ? 3 : 0, indexQuestions)
-              .map((question, index) => (
+        {formInformations?.initForm && formInformations?.questions?.length > 0 && (
+          <>
+            <Navbar />
+            <div id="questions-form" className="questions" ref={chatContainer}>
+              {console.log(formInformations.questionToDisplay)}
+              {formInformations?.questions
+                .slice(
+                  resultInformations?.allResultsUser[0]?.length ? 3 : 0,
+                  formInformations?.indexQuestions
+                )
+                .map((question, index) => (
+                  <div
+                    key={`question_form_${index}`}
+                    className={question.is_hidden ? "is-hidden" : ""}
+                  >
+                    {question.bloc_name && (
+                      <div className="nav">
+                        <h1>
+                          {capitalize(question.bloc_name.replace("_", " "))}
+                        </h1>
+                      </div>
+                    )}
+                    {question.question && (
+                      <div key={question.id} id={question.id}>
+                        <RenderQuestion
+                          question={question}
+                          response={question.response}
+                          indexQuestionArray={index}
+                        />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              {formInformations?.questionToDisplay && (
+                <>
+                  <div className="nav">
+                    <h1>
+                      {formInformations?.questionToDisplay.bloc_name &&
+                        formInformations?.questionToDisplay.bloc_name.replace(
+                          "_",
+                          " "
+                        )}
+                    </h1>
+                  </div>
+                  <div
+                    key={formInformations?.questionToDisplay.id}
+                    id={formInformations?.questionToDisplay.id}
+                  >
+                    <RenderQuestion
+                      question={formInformations?.questionToDisplay}
+                      setAnswer={setAnswer}
+                      sendAnswer={() =>
+                        sendAnswer({
+                          setAlertInformations,
+                          answer,
+                          setAnswer,
+                          formInformations,
+                          setFormInformations,
+                        })
+                      }
+                      answer={answer}
+                      indexQuestions={formInformations?.indexQuestions}
+                      setFormInformations={setFormInformations}
+                      goPrecedentQuestion={() =>
+                        goPrecedentQuestion({
+                          formInformations,
+                          setAnswer,
+                          setFormInformations,
+                        })
+                      }
+                      questions={formInformations?.questions}
+                    />
+                  </div>
+                </>
+              )}
+              {formInformations?.questions?.length ===
+                formInformations?.indexQuestions && (
                 <div
-                  key={`question_form_${index}`}
-                  className={question.is_hidden ? "is-hidden" : ""}
+                  className="inputField"
+                  style={{ display: "flex", justifyContent: "center" }}
                 >
-                  {question.bloc_name && (
-                    <div className="nav">
-                      <h1>{question.bloc_name.replace("_", " ")}</h1>
-                    </div>
-                  )}
-                  {question.question && (
-                    <div key={question.id} id={question.id}>
-                      <RenderQuestion
-                        numberOfResponse={numberOfResponse}
-                        setNumberOfResponse={setNumberOfResponse}
-                        question={question}
-                        response={question.response}
-                        questions={questions}
-                        setQuestions={setQuestions}
-                        indexQuestionArray={index}
-                      />
-                    </div>
-                  )}
+                  <button
+                    className="btn-back"
+                    onClick={() =>
+                      goPrecedentQuestion({
+                        formInformations,
+                        setAnswer,
+                        setFormInformations,
+                      })
+                    }
+                  >
+                    <img src={back_arrow} alt="" width="40px"></img>
+                  </button>
+                  <button
+                    className="btn"
+                    onClick={() => {
+                      setFormInformations({
+                        ...formInformations,
+                        formIsCompleted: true,
+                      });
+                      window.scrollTo(0, 0);
+                      navigate("/dashboard");
+                    }}
+                  >
+                    VIEW RESULTS
+                  </button>
                 </div>
-              ))}
-            {questionToDisplay && (
-              <>
-                <div className="nav">
-                  <h1>
-                    {questionToDisplay.bloc_name &&
-                      questionToDisplay.bloc_name.replace("_", " ")}
-                  </h1>
-                </div>
-                <div key={questionToDisplay.id} id={questionToDisplay.id}>
-                  <RenderQuestion
-                    numberOfResponse={numberOfResponse}
-                    setNumberOfResponse={setNumberOfResponse}
-                    question={questionToDisplay}
-                    setAnswer={setAnswer}
-                    sendAnswer={sendAnswer}
-                    answer={answer}
-                    indexQuestions={indexQuestions}
-                    setIndexQuestions={setIndexQuestions}
-                    goPrecedentQuestion={goPrecedentQuestion}
-                    questions={questions}
-                    other={other}
-                    setOther={setOther}
-                  />
-                </div>
-              </>
-            )}
-            {questions?.length === indexQuestions && (
-              <div
-                className="inputField"
-                style={{ display: "flex", justifyContent: "center" }}
-              >
-                <button className="btn-back" onClick={goPrecedentQuestion}>
-                  <img src={back_arrow} alt="" width="40px"></img>
-                </button>
-                <button
-                  className="btn"
-                  onClick={() => {
-                    setFormIsCompleted(true);
-                    window.scrollTo(0, 0);
-                    navigate("/dashboard");
-                  }}
-                >
-                  VIEW RESULTS
-                </button>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          </>
         )}
       </div>
     </div>

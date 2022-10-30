@@ -9,9 +9,6 @@ const RenderQuestion = ({
   response,
   answer,
   goPrecedentQuestion,
-  questions,
-  other,
-  setOther,
 }) => {
   const [unit, setUnit] = useState(null);
 
@@ -56,8 +53,6 @@ const RenderQuestion = ({
             question={question}
             unit={unit}
             setUnit={setUnit}
-            other={other}
-            setOther={setOther}
           />
         </div>
       )}

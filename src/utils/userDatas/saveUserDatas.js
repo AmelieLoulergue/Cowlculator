@@ -1,4 +1,4 @@
-const saveUserDatas = async ({ allQuestions, results, authInformations }) => {
+const saveUserDatas = async ({ results, allQuestions, authInformations }) => {
   let newResults = Object.entries(results)
     .map((value) => {
       return { id: value[0], response: value[1] };

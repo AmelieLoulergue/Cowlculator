@@ -8,35 +8,40 @@ import { DoughnutChart } from "./charts/DoughnoutChart";
 import { BarChart } from "./charts/VerticalBarChart";
 import { LineChart } from "./charts/LineChart";
 import { useAuthContext } from "../context/authContext";
-import Advices from "../utils/calculs/Advice";
+import Advices from "../utils/calculs/Advices";
 import { HashLink as Link } from "react-router-hash-link";
+import { useResultContext } from "../context/resultContext";
 function Dashboard({ allResultsUser }) {
   let navigate = useNavigate();
   const { authInformations, setAuthInformations } = useAuthContext();
+  const { resultInformations, setResultInformations } = useResultContext();
   console.log(authInformations);
-  allResultsUser.sort((a, b) => {
+  resultInformations?.allResultsUser?.sort((a, b) => {
     return (
       Number(new Date(a.find((el) => el.id === "end_date").response)) -
       Number(new Date(b.find((el) => el.id === "end_date").response))
     );
   });
-  let currentResult = allResultsUser[allResultsUser.length - 1];
-  const allTotalEmissionsArray = allResultsUser
-    .filter((element) => element !== null)
-    .map(
+  let currentResult =
+    resultInformations?.allResultsUser[
+      resultInformations?.allResultsUser?.length - 1
+    ];
+  const allTotalEmissionsArray = resultInformations?.allResultsUser
+    ?.filter((element) => element !== null)
+    ?.map(
       (element) =>
         element.find((el) => el.id === "totalEmissionsGraph").response
     );
-  const allCO2emmitedArray = allResultsUser
-    .filter((element) => element !== null)
-    .map((element) => element.find((el) => el.id === "CO2emmited").response);
+  const allCO2emmitedArray = resultInformations?.allResultsUser
+    ?.filter((element) => element !== null)
+    ?.map((element) => element.find((el) => el.id === "CO2emmited").response);
 
-  const allCO2mitigatedEmissions = allResultsUser
-    .filter((element) => element !== null)
-    .map((element) => element.find((el) => el.id === "CO2mitigated").response);
-  const labelPeriodChart2 = allResultsUser
-    .filter((element) => element !== null)
-    .map((element, index) => {
+  const allCO2mitigatedEmissions = resultInformations?.allResultsUser
+    ?.filter((element) => element !== null)
+    ?.map((element) => element.find((el) => el.id === "CO2mitigated").response);
+  const labelPeriodChart2 = resultInformations?.allResultsUser
+    ?.filter((element) => element !== null)
+    ?.map((element, index) => {
       if (
         element.find((el) => el.id === "start_date")?.response &&
         element.find((el) => el.id === "end_date")?.response
@@ -53,9 +58,9 @@ function Dashboard({ allResultsUser }) {
         ];
       }
     });
-  const labelPeriodChart3 = allResultsUser
-    .filter((element) => element !== null)
-    .map((element, index) => {
+  const labelPeriodChart3 = resultInformations?.allResultsUser
+    ?.filter((element) => element !== null)
+    ?.map((element, index) => {
       if (
         element.find((el) => el.id === "start_date")?.response &&
         element.find((el) => el.id === "end_date")?.response
@@ -133,13 +138,23 @@ function Dashboard({ allResultsUser }) {
                   <img src={footprint} alt="carbon footprint icon"></img>
                   <h1>
                     <b>
-                      {Intl.NumberFormat("en-US").format(
-                        Math.round(
-                          currentResult?.find(
-                            (element) => element.id === "CO2emmited"
-                          )?.response / 1000
+                      {isNaN(
+                        Intl.NumberFormat("en-US").format(
+                          Math.round(
+                            currentResult?.find(
+                              (element) => element.id === "CO2emmited"
+                            )?.response / 1000
+                          )
                         )
-                      )}
+                      )
+                        ? 0
+                        : Intl.NumberFormat("en-US").format(
+                            Math.round(
+                              currentResult?.find(
+                                (element) => element.id === "CO2emmited"
+                              )?.response / 1000
+                            )
+                          )}
                       {" K"}
                     </b>
                     <br></br>

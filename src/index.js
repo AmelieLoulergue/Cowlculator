@@ -4,10 +4,13 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { AuthContextWrapper } from "./context/authContext";
+import { AlertContextWrapper } from "./context/alertContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <AuthContextWrapper>
-    <App />
+    <AlertContextWrapper>
+      <App />
+    </AlertContextWrapper>
   </AuthContextWrapper>
 );
 

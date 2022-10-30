@@ -11,6 +11,8 @@ import fandr from "../../assets/anim/fandr2.json";
 import { useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import signup from "../../utils/authentication/signup";
+import { useAuthContext } from "../../context/authContext";
+import { useAlertContext } from "../../context/alertContext";
 const validateEmail = ({ userProfile }) => {
   if (
     String(userProfile.email)
@@ -52,17 +54,16 @@ const validatePassword = ({ password, strength, userProfile }) => {
     return false;
   }
 };
-function Register({
-  userProfile,
-  setUserProfile,
-  messageAlert,
-  setMessageAlert,
-  severity,
-  setSeverity,
-  displayAlert,
-  setDisplayAlert,
-}) {
+function Register() {
   let navigate = useNavigate();
+  const { authInformations, setAuthInformations } = useAuthContext();
+  const { alertInformations, setAlertInformations } = useAlertContext();
+  const [userProfile, setUserProfile] = useState({
+    email: "",
+    password: "",
+    passwordConfirmation: "",
+    userType: "",
+  });
   const [strengthVal, setStrengthVal] = useState("");
   const [registrationIsValid, setRegistrationIsValid] = useState(false);
   let strength;
@@ -151,24 +152,19 @@ function Register({
     document.getElementById("animresearcher").classList.toggle("active");
     document.getElementById("animfarmer").classList.toggle("active");
   };
-  const [isFarmer, setIsFarmer] = useState(
-    (localStorage.getItem("category_choosed") &&
-      localStorage.getItem("category_choosed") === "farmer") ||
-      !localStorage.getItem("category_choosed")
-      ? true
-      : false
-  );
-  const [isResearcher, setIsResearcher] = useState(
-    localStorage.getItem("category_choosed") &&
-      localStorage.getItem("category_choosed") === "researcher"
-      ? true
-      : false
-  );
+  const [isFarmer, setIsFarmer] = useState(true);
+  const [isResearcher, setIsResearcher] = useState(false);
   useEffect(() => {
     if (isFarmer) {
-      setUserProfile({ ...userProfile, userType: "farmer" });
+      setUserProfile((currentUserProfile) => ({
+        ...currentUserProfile,
+        userType: "farmer",
+      }));
     } else if (isResearcher) {
-      setUserProfile({ ...userProfile, userType: "researcher" });
+      setUserProfile((currentUserProfile) => ({
+        ...currentUserProfile,
+        userType: "researcher",
+      }));
     }
   }, [isFarmer, isResearcher]);
   useEffect(() => {
@@ -188,7 +184,7 @@ function Register({
     } else {
       setRegistrationIsValid(false);
     }
-  }, [userProfile]);
+  }, [strengthVal, userProfile]);
   const noNav = `.dash-nav, .nav-margin, .dash-side {
     display: none !important;
 }`;
@@ -338,12 +334,7 @@ function Register({
                     event.preventDefault();
                     signup({
                       userProfile,
-                      messageAlert,
-                      setMessageAlert,
-                      severity,
-                      setSeverity,
-                      displayAlert,
-                      setDisplayAlert,
+                      setAlertInformations,
                       navigate,
                     });
                   }}

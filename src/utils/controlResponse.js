@@ -1,51 +1,66 @@
 const controlResponse = ({
-  setSeverity,
+  setAlertInformations,
   answer,
   questionToDisplay,
-  setMessageAlert,
-  setDisplayAlert,
   stateList,
   datasForm,
 }) => {
+  const goodResponse = () => {
+    setAlertInformations({
+      severity: "success",
+      messageAlert: "Response saved !",
+      displayAlert: true,
+    });
+    setTimeout(
+      () =>
+        setAlertInformations({
+          messageAlert: "",
+          severity: "",
+          displayAlert: false,
+        }),
+      3000
+    );
+  };
+  const wrongResponse = (message) => {
+    setAlertInformations({
+      severity: "error",
+      messageAlert: message,
+      displayAlert: true,
+    });
+    setTimeout(
+      () =>
+        setAlertInformations({
+          messageAlert: "",
+          severity: "",
+          displayAlert: false,
+        }),
+      3000
+    );
+  };
   if (answer === null) {
-    setSeverity("error");
-    setMessageAlert("Invalid Response");
-    setDisplayAlert(true);
-    setTimeout(() => setDisplayAlert(false), 3000);
+    wrongResponse("Invalid Response");
     return false;
   } else if (
     (answer && answer.unit === "") ||
     (answer && answer.unit && !answer.value)
   ) {
-    setSeverity("error");
-    setMessageAlert("Please select an unit and fill value");
-    setDisplayAlert(true);
-    setTimeout(() => setDisplayAlert(false), 3000);
+    wrongResponse("Please select an unit and fill value");
     return false;
   } else if (
     questionToDisplay.id === "farm_state" &&
     answer &&
     !stateList.find((element) => element === answer)
   ) {
-    setSeverity("error");
-    setMessageAlert("Please enter a valid state");
-    setDisplayAlert(true);
-    setTimeout(() => setDisplayAlert(false), 3000);
+    wrongResponse("Please enter a valid state");
     return false;
   } else if (questionToDisplay.formInput.type === "date") {
     if (questionToDisplay.id === "start_date") {
       let start = new Date(answer);
       if (new Date(Date.now()) <= start) {
-        setSeverity("error");
-        setMessageAlert("Please enter a valid date in past");
-        setDisplayAlert(true);
-        setTimeout(() => setDisplayAlert(false), 3000);
+        wrongResponse("Please enter a valid date in past");
         return false;
       } else {
-        setSeverity("success");
-        setMessageAlert("Response saved !");
-        setDisplayAlert(true);
-        setTimeout(() => setDisplayAlert(false), 3000);
+        goodResponse();
         return true;
       }
     } else if (questionToDisplay.id === "end_date") {
@@ -54,51 +69,32 @@ const controlResponse = ({
       );
       let end = new Date(answer);
       if (start > end) {
-        setSeverity("error");
-        setMessageAlert("End date must be after start date");
-        setDisplayAlert(true);
-        setTimeout(() => setDisplayAlert(false), 3000);
+        wrongResponse("End date must be after start date");
         return false;
       } else if (end - start <= 2628000000) {
-        setSeverity("error");
-        setMessageAlert(
-          " The chosen period must be greater than or equal to 1 month"
+        wrongResponse(
+          "The chosen period must be greater than or equal to 1 month"
         );
-        setDisplayAlert(true);
-        setTimeout(() => setDisplayAlert(false), 3000);
+        return false;
       } else if (new Date(Date.now()) <= end) {
-        setSeverity("error");
-        setMessageAlert("Please enter a valid date in past");
-        setDisplayAlert(true);
-        setTimeout(() => setDisplayAlert(false), 3000);
+        wrongResponse("Please enter a valid date in past");
         return false;
       } else {
-        setSeverity("success");
-        setMessageAlert("Response saved !");
-        setDisplayAlert(true);
-        setTimeout(() => setDisplayAlert(false), 3000);
+        goodResponse();
         return true;
       }
     }
   } else if (questionToDisplay.id === "farm_zip_code") {
     if (answer.length !== 5 || isNaN(Number(answer))) {
-      setSeverity("error");
-      setMessageAlert("Please enter a valid zip code");
-      setDisplayAlert(true);
-      setTimeout(() => setDisplayAlert(false), 3000);
+      wrongResponse("Please enter a valid zip code");
       return false;
     } else {
-      setSeverity("success");
-      setMessageAlert("Response saved !");
-      setDisplayAlert(true);
-      setTimeout(() => setDisplayAlert(false), 3000);
+      goodResponse();
+
       return true;
     }
   } else {
-    setSeverity("success");
-    setMessageAlert("Response saved !");
-    setDisplayAlert(true);
-    setTimeout(() => setDisplayAlert(false), 3000);
+    goodResponse();
     return true;
   }
 };

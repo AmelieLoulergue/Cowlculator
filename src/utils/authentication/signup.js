@@ -1,8 +1,6 @@
 const signup = async ({
   userProfile: { passwordConfirmation, ...rest },
-  setMessageAlert,
-  setSeverity,
-  setDisplayAlert,
+  setAlertInformations,
   navigate,
 }) => {
   let requestOptions = {
@@ -17,20 +15,38 @@ const signup = async ({
     requestOptions
   );
   if (response.status === 200) {
-    setDisplayAlert(true);
-    setSeverity("success");
-    setMessageAlert(
-      "We are almost there ! Confirm your email via your mailbox and log in"
+    setAlertInformations({
+      severity: "success",
+      displayAlert: true,
+      messageAlert:
+        "We are almost there ! Confirm your email via your mailbox and log in",
+    });
+    setTimeout(
+      () =>
+        setAlertInformations({
+          severity: "",
+          displayAlert: false,
+          messageAlert: "",
+        }),
+      3000
     );
-    setTimeout(() => setDisplayAlert(false), 3000);
     navigate("/account/login");
   } else if (response.status === 400) {
-    setDisplayAlert(true);
-    setSeverity("error");
-    setMessageAlert(
-      "Email incorrect or already used! Please enter another email 🧐"
+    setAlertInformations({
+      severity: "error",
+      displayAlert: true,
+      messageAlert:
+        "Email incorrect or already used! Please enter another email 🧐",
+    });
+    setTimeout(
+      () =>
+        setAlertInformations({
+          severity: "",
+          displayAlert: false,
+          messageAlert: "",
+        }),
+      3000
     );
-    setTimeout(() => setDisplayAlert(false), 3000);
   }
 };
 export default signup;

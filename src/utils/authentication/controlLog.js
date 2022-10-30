@@ -1,19 +1,27 @@
 const TOKEN_KEY = "jwt";
 
-export const logout = ({ login, setLogin }) => {
-  localStorage.removeItem(TOKEN_KEY);
-  localStorage.removeItem("login");
-  setLogin(false);
+export const logout = ({ setAuthInformations, setResultInformations }) => {
+  setAuthInformations((currentAuthInformations) => ({
+    ...currentAuthInformations,
+    loggedUser: false,
+    login: false,
+  }));
+  setResultInformations({ allResultsUser: [], allResults: [] });
 };
 
-export const isLogin = async ({ authInformations, setAuthInformation }) => {
+export const isLogin = async ({ authInformations, setAuthInformations }) => {
   let logInformations = null;
   if (!authInformations?.token && !authInformations?.userId) {
-    logInformations = JSON.parse(localStorage.getItem("login"));
+    let localStorageItems = JSON.parse(localStorage.getItem("cowlculator"));
+    let isUser = localStorageItems?.find((item) => item.loggedUser);
+    if (isUser.loggedUser) {
+      logInformations = isUser.login;
+    }
   } else {
-    logInformations = authInformations;
+    logInformations = authInformations?.login;
   }
   if (logInformations) {
+    console.log(logInformations);
     let requestOptions = {
       method: "GET",
       headers: {
@@ -27,14 +35,14 @@ export const isLogin = async ({ authInformations, setAuthInformation }) => {
     );
     const datas = await response.json();
     if (datas.error) {
-      setAuthInformation({
+      setAuthInformations({
         ...authInformations,
         login: false,
         loggedUser: false,
       });
       return false;
     }
-    setAuthInformation({
+    setAuthInformations({
       ...authInformations,
       login: logInformations,
       loggedUser: true,
