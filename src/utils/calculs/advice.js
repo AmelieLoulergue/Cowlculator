@@ -565,36 +565,32 @@ const Advices = ({ result }) => {
     }
   }
   return (
-    <>
-      {advices && advices.length && (
-        <>
-          <h1 className={"primaryTitle"} id="recommendations">
-            Recommendations
-          </h1>
-          <div className="card-section">
-            {advices.map((advice) => (
-              <div className="card card-advice">
-                {advice.mitigatedCo2 ? (
-                  <div>
-                    {advice.firstText}
-                    <span style={{ color: "#20bfa9", padding: "0 0.7rem" }}>
-                      {advice.mitigatedCo2}
-                    </span>
-                    {advice.secondText}
-                    <span style={{ color: "#fdb95a", padding: "0 0.7rem" }}>
-                      {advice.money}
-                    </span>
-                    {advice.thirdText}
-                  </div>
-                ) : (
-                  <>{advice.firstText}</>
-                )}
+    <div className={advices.length ? "" : "is-hidden"}>
+      <h1 className={"primaryTitle"} id="recommendations">
+        Recommendations
+      </h1>
+      <div className="card-section">
+        {advices.map((advice) => (
+          <div className="card card-advice">
+            {advice.mitigatedCo2 ? (
+              <div>
+                {advice.firstText}
+                <span style={{ color: "#20bfa9", padding: "0 0.7rem" }}>
+                  {advice.mitigatedCo2}
+                </span>
+                {advice.secondText}
+                <span style={{ color: "#fdb95a", padding: "0 0.7rem" }}>
+                  {advice.money}
+                </span>
+                {advice.thirdText}
               </div>
-            ))}
+            ) : (
+              <>{advice.firstText}</>
+            )}
           </div>
-        </>
-      )}
-    </>
+        ))}
+      </div>
+    </div>
   );
 };
 export default Advices;
