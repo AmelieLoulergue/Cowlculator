@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { DoughnutChart } from "./charts/DoughnoutChart";
 import { BarChart } from "./charts/VerticalBarChart";
 import { LineChart } from "./charts/LineChart";
-import Advices from "../utils/calculs/Advice";
+import Advices from "../utils/calculs/Advices";
 import { HashLink as Link } from "react-router-hash-link";
 function Dashboard({ allResultsUser }) {
   let navigate = useNavigate();
