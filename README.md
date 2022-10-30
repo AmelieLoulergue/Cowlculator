@@ -50,6 +50,10 @@ A forum will be implemented for researchers allowing them to ask questions, publ
 The final objective is for Cowlculator to become the reference tool in the validation process for the carbon credit market thanks to partnerships with carbon credit companies. Cowlculator can also be used as a tool for the validation process of a ‘carbon neutral food’ logo, which would require well-defined specifications and allow the farmers' efforts to be rewarded by a marketing claim.
 
 
+### Feature 6
+Specific agricultural modules will be added to the form in order to estimate the emissions and potential mitigations in a more precise way. Each module will be composed of questions specific to an agricultural product such as vineyard or aquaculture. Before taking the form, the user will be able to select a module and the questions of the module will be added to the core questions list of the form.
+
+
 # [OUR TEAM](https://cowlculator.netlify.app/about)
 CALL FOR CODE 2022 :heavy_heart_exclamation:
 
