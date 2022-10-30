@@ -1,6 +1,6 @@
 import * as React from "react";
 import "./Login.css";
-import "./Logger.css";
+import "./GetStarted.css";
 import back_arrow from "../../assets/svg/back-arrow.svg";
 import { Link } from "react-router-dom";
 import { useRef } from "react";

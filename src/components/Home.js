@@ -8,7 +8,7 @@ import survey from "../assets/svg/Storyset/survey.svg";
 import report from "../assets/svg/Storyset/report.svg";
 import choice from "../assets/svg/Storyset/choice.svg";
 import data from "../assets/svg/Storyset/data.svg";
-function Home({ viewHeight, scroll }) {
+function Home() {
   let navigate = useNavigate();
   function scrollHero() {
     window.scrollTo({
@@ -110,7 +110,7 @@ function Home({ viewHeight, scroll }) {
 
           <div className="land-hiw">
             <div className="land-hiw-svg">
-              <img src={survey}></img>
+              <img src={survey} alt=""></img>
             </div>
             <div>
               <div className="number">1</div>
@@ -125,7 +125,7 @@ function Home({ viewHeight, scroll }) {
 
           <div className="land-hiw">
             <div className="land-hiw-svg">
-              <img src={report}></img>
+              <img src={report} alt=""></img>
             </div>
             <div>
               <div className="number">2</div>
@@ -141,7 +141,7 @@ function Home({ viewHeight, scroll }) {
 
           <div className="land-hiw">
             <div className="land-hiw-svg">
-              <img src={choice}></img>
+              <img src={choice} alt=""></img>
             </div>
             <div>
               <div className="number">3</div>
@@ -155,7 +155,7 @@ function Home({ viewHeight, scroll }) {
 
           <div className="land-hiw">
             <div className="land-hiw-svg">
-              <img src={data}></img>
+              <img src={data} alt=""></img>
             </div>
             <div>
               <div className="number">4</div>

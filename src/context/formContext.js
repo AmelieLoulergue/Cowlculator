@@ -1,7 +1,8 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
+import { localStorageSetItems } from "../utils/localStorage/localStorageFunctions";
 const FormContext = createContext();
 
-export function FormContextWrapper({ children }) {
+export function FormContextWrapper({ children, authInformations }) {
   const [formInformations, setFormInformations] = useState({
     formIsCompleted: false,
     datasForm: [],
@@ -12,6 +13,23 @@ export function FormContextWrapper({ children }) {
     questions: [],
     allQuestions: [],
   });
+  useEffect(
+    () =>
+      localStorageSetItems({
+        items: {
+          datasForm: formInformations?.datasForm,
+          indexQuestions: formInformations?.indexQuestions,
+          allQuestions: formInformations?.allQuestions,
+          questions: formInformations?.questions,
+          counterQuestion: formInformations?.counterQuestion,
+          formIsCompleted: formInformations?.formIsCompleted,
+          initForm: formInformations?.initForm,
+          questionToDisplay: formInformations?.questionToDisplay,
+        },
+        userId: authInformations?.login.userId,
+      }),
+    [formInformations]
+  );
   let sharedState = {
     formInformations: formInformations,
     setFormInformations: setFormInformations,

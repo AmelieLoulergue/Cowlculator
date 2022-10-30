@@ -1,6 +1,6 @@
 import * as React from "react";
 import "./Signup.css";
-import "./Logger.css";
+import "./GetStarted.css";
 import back_arrow from "../../assets/svg/back-arrow.svg";
 import { Link } from "react-router-dom";
 import { passwordStrength } from "check-password-strength";

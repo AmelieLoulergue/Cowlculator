@@ -1,5 +1,5 @@
 import * as React from "react";
-import "./Logger.css";
+import "./GetStarted.css";
 import { Link } from "react-router-dom";
 import Lottie from "lottie-react";
 import fandr from "../../assets/anim/fandr.json";
@@ -9,10 +9,13 @@ function Logger() {
   const noNav = `.dash-nav, .nav-margin, .dash-side {
     display: none !important;
 }`;
-const noFoot = `#footer {display: none !important}`;
+  const noFoot = `#footer {display: none !important}`;
   return (
     <>
-      <style>{noNav}{noFoot}</style>
+      <style>
+        {noNav}
+        {noFoot}
+      </style>
       <div className="navbar">
         <Link to={"../"}>
           <img src={home}></img>

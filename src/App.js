@@ -1,29 +1,28 @@
 import "./App.css";
 import { FormContextWrapper } from "./context/formContext";
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./components/Home";
-import NewForm from "./components/Form";
-import Login from "./components/logger/Login";
-import Register from "./components/logger/Signup";
-import Dashboard from "./components/Dashboard";
-import About from "./components/About";
-import Navbar from "./components/layout/Navbar";
-import Footer from "./components/layout/Footer";
+import {
+  About,
+  Form,
+  GetStarted,
+  Home,
+  Login,
+  References,
+  Register,
+  Researcher,
+  Dashboard,
+} from "./pages/index";
 import Bg from "./components/layout/Bg";
 import { useState, useEffect } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import AlertComponent from "./components/alerts/Alert";
 import ConfirmEmail from "./utils/authentication/ConfirmEmail";
 import { isLogin } from "./utils/authentication/controlLog";
-import ResearcherDatas from "./components/ResearcherDatas";
-import References from "./components/References";
 import listOfQuestions from "./utils/listOfQuestions";
 import getUserDatas from "./utils/userDatas/getUserDatas";
 import getAllResults from "./utils/userDatas/getAllResults";
 import saveUserDatas from "./utils/userDatas/saveUserDatas";
 import updateUserDatas from "./utils/userDatas/updateUserDatas";
-import Logger from "./components/logger/Logger";
 import { CircularProgress } from "@mui/material";
 import {
   localStorageGetItems,
@@ -47,23 +46,10 @@ function App() {
     questions: [],
     allQuestions: [],
   });
-  const {authInformations, setAuthInformations } = useAuthContext();
-  const [formIsCompleted, setFormIsCompleted] = useState(false);
-  const [datasForm, setDatasForm] = useState([]);
+  const { authInformations, setAuthInformations } = useAuthContext();
   const [messageAlert, setMessageAlert] = useState("");
   const [severity, setSeverity] = useState("");
-  const [initForm, setInitForm] = useState(false);
   const [displayAlert, setDisplayAlert] = useState(false);
-  const [questionToDisplay, setQuestionToDisplay] = useState(null);
-  const [indexQuestions, setIndexQuestions] = useState(0);
-  const [counterQuestion, setCounterQuestion] = useState(0);
-
-  const [results, setResults] = useState({});
-  const [questions, setQuestions] = useState([]);
-  const [allQuestions, setAllQuestions] = useState([]);
-  const [allResultsUser, setAllResultsUser] = useState([]);
-  const [allResults, setAllResults] = useState([]);
-  const [timer, setTimer] = useState(true);
   useEffect(() => {
     console.log("initApp");
 
@@ -296,266 +282,22 @@ function App() {
         )}
         <BrowserRouter>
           <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <Navbar></Navbar>
-                  <Home /> <Footer />
-                </>
-              }
-            ></Route>
-            <Route
-              path="/form"
-              element={
-                authInformations?.loggedUser ? (
-                  <>
-                    <Navbar></Navbar>
-
-                    <FormContextWrapper>
-                      <NewForm
-                        results={results}
-                        setResults={setResults}
-                        questions={questions}
-                        setQuestions={setQuestions}
-                        datasForm={datasForm}
-                        setDatasForm={setDatasForm}
-                        setMessageAlert={setMessageAlert}
-                        setSeverity={setSeverity}
-                        setDisplayAlert={setDisplayAlert}
-                        formIsCompleted={formIsCompleted}
-                        setFormIsCompleted={setFormIsCompleted}
-                        initForm={initForm}
-                        setInitForm={setInitForm}
-                        questionToDisplay={questionToDisplay}
-                        setQuestionToDisplay={setQuestionToDisplay}
-                        indexQuestions={indexQuestions}
-                        setIndexQuestions={setIndexQuestions}
-                        allQuestions={allQuestions}
-                        setAllQuestions={setAllQuestions}
-                        counterQuestion={counterQuestion}
-                        setCounterQuestion={setCounterQuestion}
-                        allResultsUser={allResultsUser}
-                      />
-                    </FormContextWrapper>
-
-                    <Footer />
-                  </>
-                ) : (
-                  <>
-                    {timer && (
-                      <div
-                        style={{
-                          height: "100vh",
-                          width: "100%",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        <CircularProgress />
-                      </div>
-                    )}
-                    {!timer && (
-                      <>
-                        <Navbar></Navbar>
-                        <Home /> <Footer />
-                      </>
-                    )}
-                  </>
-                )
-              }
-            ></Route>
-            <Route
-              path="/account"
-              element={
-                !authInformations?.loggedUser ? (
-                  <>
-                    <Navbar />
-                    <Logger
-                      setMessageAlert={setMessageAlert}
-                      setSeverity={setSeverity}
-                      setDisplayAlert={setDisplayAlert}
-                    />{" "}
-                    <Footer />
-                  </>
-                ) : authInformations?.loggedUser &&
-                  authInformations?.login.userType === "farmer" ? (
-                  <>
-                    <Navbar />
-                    <Dashboard allResultsUser={allResultsUser} /> <Footer />
-                  </>
-                ) : (
-                  <>
-                    <Navbar />
-                    <ResearcherDatas allResults={allResults} /> <Footer />
-                  </>
-                )
-              }
-            ></Route>
-            <Route
-              path="/account/login"
-              element={
-                !authInformations?.loggedUser ? (
-                  <>
-                    <Navbar />
-                    <Login
-                      setMessageAlert={setMessageAlert}
-                      setSeverity={setSeverity}
-                      setDisplayAlert={setDisplayAlert}
-                    />{" "}
-                    <Footer />
-                  </>
-                ) : authInformations?.loggedUser &&
-                  authInformations?.login.userType === "farmer" ? (
-                  <>
-                    <Navbar />
-                    <Dashboard allResultsUser={allResultsUser} /> <Footer />
-                  </>
-                ) : (
-                  <>
-                    <Navbar />
-                    <ResearcherDatas allResults={allResults} /> <Footer />
-                  </>
-                )
-              }
-            ></Route>
-            <Route
-              path="/account/register"
-              element={
-                !authInformations?.loggedUser ? (
-                  <>
-                    <Navbar />
-                    <Register
-                      setMessageAlert={setMessageAlert}
-                      setSeverity={setSeverity}
-                      setDisplayAlert={setDisplayAlert}
-                    />{" "}
-                    <Footer />
-                  </>
-                ) : authInformations?.loggedUser &&
-                  authInformations?.login.userType === "farmer" ? (
-                  <>
-                    <Navbar />
-                    <Dashboard
-                      results={results}
-                      formIsCompleted={formIsCompleted}
-                      allResultsUser={allResultsUser}
-                    />{" "}
-                    <Footer />
-                  </>
-                ) : (
-                  <>
-                    <Navbar />
-                    <ResearcherDatas allResults={allResults} />
-                    <Footer />
-                  </>
-                )
-              }
-            ></Route>
-            <Route
-              path="/dashboard"
-              element={
-                authInformations?.loggedUser ? (
-                  <>
-                    <Navbar />
-
-                    <Dashboard
-                      results={results}
-                      formIsCompleted={formIsCompleted}
-                      allResultsUser={allResultsUser}
-                    />
-                    <Footer />
-                  </>
-                ) : (
-                  <>
-                    {timer && (
-                      <div
-                        style={{
-                          height: "100vh",
-                          width: "100%",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        <CircularProgress />
-                      </div>
-                    )}
-                    {!timer && (
-                      <>
-                        <Navbar></Navbar>
-
-                        <Login
-                          setMessageAlert={setMessageAlert}
-                          setSeverity={setSeverity}
-                          setDisplayAlert={setDisplayAlert}
-                        />
-
-                        <Footer />
-                      </>
-                    )}
-                  </>
-                )
-              }
-            ></Route>
-            <Route
-              path="/datas"
-              element={
-                authInformations?.loggedUser ? (
-                  <>
-                    <Navbar />
-                    <ResearcherDatas allResults={allResults} />
-                    <Footer />
-                  </>
-                ) : (
-                  <>
-                    <Navbar />
-                    <Home />
-                    <Footer />
-                  </>
-                )
-              }
-            ></Route>
-            <Route
-              path="/about"
-              element={
-                <>
-                  <Navbar />
-                  <About />
-                  <Footer />
-                </>
-              }
-            ></Route>
-
+            <Route path="/" element={<Home />}></Route>{" "}
+            <Route path="/about" element={<About />}></Route>
+            <Route path="/references" element={<References />} />
+            <Route path="/form" element={<Form />}></Route>
+            <Route path="/account" element={<GetStarted />}></Route>
+            <Route path="/account/login" element={<Login />}></Route>
+            <Route path="/account/register" element={<Register />}></Route>
+            <Route path="/dashboard" element={<Dashboard />}></Route>
+            <Route path="/datas" element={<Researcher />}></Route>
             <Route
               path="/confirm-email/:userId/:coucou"
-              element={
-                <>
-                  <Navbar />
-                  <ConfirmEmail
-                    setMessageAlert={setMessageAlert}
-                    setSeverity={setSeverity}
-                    setDisplayAlert={setDisplayAlert}
-                  />
-                  <Footer />
-                </>
-              }
-            />
-            <Route
-              path="/references"
-              element={
-                <>
-                  <Navbar />
-                  <References />
-                  <Footer />
-                </>
-              }
-            />
+              element={<Login />}
+            />{" "}
           </Routes>
         </BrowserRouter>
-
-        <Bg></Bg>
+        <Bg />
       </div>
     </ThemeProvider>
   );

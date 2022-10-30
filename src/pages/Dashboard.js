@@ -1,11 +1,11 @@
-import ResearcherDatas from "../components/ResearcherDatas";
+import Dashboard from "../components/Dashboard";
 import { useAuthContext } from "../context/authContext";
 import { Navigate } from "react-router-dom";
-const ResearcherPage = () => {
+const DashboardPage = () => {
   const { authInformations } = useAuthContext;
   if (!authInformations?.loggedUser) {
     return Navigate("/account/login");
   }
-  return <ResearcherDatas />;
+  return <Dashboard />;
 };
-export default ResearcherPage;
+export default DashboardPage;

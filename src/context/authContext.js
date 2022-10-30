@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { localStorageSetItems } from "../utils/localStorage/localStorageFunctions";
 const AuthContext = createContext();
 
 export function AuthContextWrapper({ children }) {
@@ -12,6 +13,18 @@ export function AuthContextWrapper({ children }) {
     allResultsUser: [],
     allResults: [],
   });
+  useEffect(
+    () =>
+      localStorageSetItems({
+        items: {
+          login: authInformations?.login,
+          allResultsUser: authInformations?.allResultsUser,
+          allResults: authInformations?.allResults,
+        },
+        userId: authInformations?.login.userId,
+      }),
+    [authInformations]
+  );
   let sharedState = {
     authInformations: authInformations,
     setAuthInformations: setAuthInformations,
