@@ -55,7 +55,7 @@ CALL FOR CODE 2022 :heavy_heart_exclamation:
 
 WE ARE ALL [HERE](https://cowlculator.netlify.app/about)
 
-Bertille SMITH : [github](https://github.com/bertillesmith)
+Bertille DORMOY SMITH : [github](https://github.com/bertillesmith) [linkedIn](https://www.linkedin.com/in/bertille-smith-b815b6125/)
 
 Clément LOULERGUE : [github](https://github.com/LoulergueC)
 
