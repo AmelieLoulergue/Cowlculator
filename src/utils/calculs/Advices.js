@@ -15,7 +15,8 @@ function round(value, precision) {
   var multiplier = Math.pow(10, precision || 0);
   return Math.round(value * multiplier) / multiplier;
 }
-const advices = ({ result }) => {
+const Advices = ({ result }) => {
+  console.log(result);
   const advices = [];
   if (result) {
     const endDate = result.find((data) => data.id === "end_date")?.response;
@@ -225,16 +226,16 @@ const advices = ({ result }) => {
         (data) => data.id === "farm_animals_dairy_cattle_feeding_practice"
       )?.response
     ) {
-      advices.push(
-        `If you implement improved feeding practices e.g.  replacing roughage with concentrate, feeding, extra dietary oil, for your dairy cattle you could mitigate ${round(
-          EFDairy * 0.16,
-          1
-        )} tonnes of CO₂ per year which represents $${round(
-          EFDairy * 0.16 * 73.05,
-          1
-        )} per year`
-      );
+      advices.push({
+        firstText:
+          "If you implement improved feeding practices e.g.  replacing roughage with concentrate, feeding, extra dietary oil, for your dairy cattle you could mitigate",
+        mitigatedCo2: `${round(EFDairy * 0.16, 0)} tonnes of CO₂`,
+        secondText: "per year which represents ",
+        money: `$${(EFDairy * 0.16 * 73.05, 0)}`,
+        thirdText: "per year",
+      });
     }
+
     if (
       cattleDairy !== 0 &&
       !result.find(
@@ -242,15 +243,14 @@ const advices = ({ result }) => {
           data.id === "farm_animals_dairy_cattle_specific_agent_practice"
       )?.response
     ) {
-      advices.push(
-        `If you implement the use of specific agents and dietary additives e.g.  bST, growth hormones, ionophores, propionate precursors, for your dairy cattle you could mitigate ${round(
-          EFDairy * 0.11,
-          1
-        )} tonnes of CO₂ per year which represents $ ${round(
-          EFDairy * 0.11 * 73.05,
-          1
-        )} per year`
-      );
+      advices.push({
+        firstText:
+          "If you implement the use of specific agents and dietary additives e.g.  bST, growth hormones, ionophores, propionate precursors, for your dairy cattle you could mitigate",
+        mitigatedCo2: `${round(EFDairy * 0.11, 0)} tonnes of CO₂`,
+        secondText: " per year which represents ",
+        money: `$${round(EFDairy * 0.11 * 73.05, 0)}`,
+        thirdText: "per year",
+      });
     }
     if (
       cattleBeef !== 0 &&
@@ -258,15 +258,14 @@ const advices = ({ result }) => {
         (data) => data.id === "farm_animals_beef_cattle_feeding_practice"
       )?.response
     ) {
-      advices.push(
-        `If you implement improved feeding practices e.g.  replacing roughage with concentrate, feeding, extra dietary oil, for your beef cattle you could mitigate ${round(
-          EFBeef * 0.11,
-          1
-        )} tonnes of CO₂ per year which represents $ ${round(
-          EFBeef * 0.11 * 73.05,
-          1
-        )} per year`
-      );
+      advices.push({
+        firstText:
+          "If you implement improved feeding practices e.g.  replacing roughage with concentrate, feeding, extra dietary oil, for your beef cattle you could mitigate",
+        mitigatedCo2: `${round(EFBeef * 0.11, 0)} tonnes of CO₂ `,
+        secondText: "per year which represents ",
+        money: `$${round(EFBeef * 0.11 * 73.05, 0)}`,
+        thirdText: "per year",
+      });
     }
     let acre_to_ha = 0.404686;
     let sqfeet_to_ha = 0.000009290304;
@@ -465,8 +464,10 @@ const advices = ({ result }) => {
           element.id === "farm_crops_degraded_land_restoration_practice"
       )?.response
     ) {
-      advices.push(
-        `If you implement degraded land restoration on your crops you could mitigate up to ${round(
+      advices.push({
+        firstText:
+          "If you implement degraded land restoration on your crops you could mitigate up to",
+        mitigatedCo2: `${round(
           (grassland_size +
             grain_size +
             forage_size +
@@ -474,8 +475,10 @@ const advices = ({ result }) => {
             flowers_size +
             herbs_size) *
             deg_resto_coeff,
-          1
-        )} tonnes of CO₂ per year which represents $ ${round(
+          0
+        )} tonnes of CO₂`,
+        secondText: " per year which represents ",
+        money: `$${round(
           (grassland_size +
             grain_size +
             forage_size +
@@ -484,9 +487,10 @@ const advices = ({ result }) => {
             herbs_size) *
             deg_resto_coeff *
             15,
-          1
-        )} per year`
-      );
+          0
+        )}`,
+        thirdText: "per year",
+      });
     }
     let manure_bios_coeff = coeff_crops[9].GHG;
     if (
@@ -494,8 +498,10 @@ const advices = ({ result }) => {
       !result.find((element) => element.id === "farm_crops_manure_practice")
         ?.response
     ) {
-      advices.push(
-        `If you apply manure and biosolids on your crops you could mitigate up to ${round(
+      advices.push({
+        firstText:
+          "If you apply manure and biosolids on your crops you could mitigate up to",
+        mitigatedCo2: `${round(
           (grassland_size +
             grain_size +
             forage_size +
@@ -503,8 +509,10 @@ const advices = ({ result }) => {
             flowers_size +
             herbs_size) *
             manure_bios_coeff,
-          1
-        )} tonnes of CO₂ per year which represents $ ${round(
+          0
+        )} tonnes of CO₂`,
+        secondText: " per year which represents ",
+        money: `$${round(
           (grassland_size +
             grain_size +
             forage_size +
@@ -513,9 +521,10 @@ const advices = ({ result }) => {
             herbs_size) *
             manure_bios_coeff *
             15,
-          1
-        )} per year`
-      );
+          0
+        )}`,
+        thirdText: "per year",
+      });
     }
     let crop_LUC_coeff = coeff_crops[4].GHG;
     if (
@@ -524,8 +533,10 @@ const advices = ({ result }) => {
         (element) => element.id === "farm_crops_land_use_change_practice"
       )?.response
     ) {
-      advices.push(
-        ` If you implement set aside and lad-use change i.e. allow or encourage the reversion of croplamd to another land cover, typically one similar to the native vegetation on your crops you could mitigate up to ${round(
+      advices.push({
+        firstText:
+          "If you implement set aside and lad-use change i.e. allow or encourage the reversion of croplamd to another land cover, typically one similar to the native vegetation on your crops you could mitigate up to",
+        mitigatedCo2: `${round(
           (grassland_size +
             grain_size +
             forage_size +
@@ -533,23 +544,53 @@ const advices = ({ result }) => {
             flowers_size +
             herbs_size) *
             crop_LUC_coeff,
-          1
-        )} tonnes of CO₂ per year which represents $ ${round(
+          0
+        )} tonnes of CO₂`,
+        secondText: " per year which represents ",
+        money: `$${round(
           (grain_size + forage_size + fv_size + flowers_size + herbs_size) *
             crop_LUC_coeff *
             15,
-          1
-        )} per year`
-      );
+          0
+        )}`,
+        thirdText: "per year",
+      });
     }
     if (
       result.find((element) => element.id === "farm_crops_fertilizer")?.response
     ) {
-      advices.push(
-        `Reducing your use of synthetic fertilizer would reduce your CO₂ emissions.`
-      );
+      advices.push({
+        firstText: `Reducing your use of synthetic fertilizer would reduce your CO₂ emissions.`,
+      });
     }
   }
-  return advices;
+  return (
+    <div className={advices.length ? "" : "is-hidden"}>
+      <h1 className={"primaryTitle"} id="recommendations">
+        Recommendations
+      </h1>
+      <div className="card-section">
+        {advices.map((advice) => (
+          <div className="card card-advice">
+            {advice.mitigatedCo2 ? (
+              <div>
+                {advice.firstText}
+                <span style={{ color: "#20bfa9", padding: "0 0.7rem" }}>
+                  {advice.mitigatedCo2}
+                </span>
+                {advice.secondText}
+                <span style={{ color: "#fdb95a", padding: "0 0.7rem" }}>
+                  {advice.money}
+                </span>
+                {advice.thirdText}
+              </div>
+            ) : (
+              <>{advice.firstText}</>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
-export default advices;
+export default Advices;

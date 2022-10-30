@@ -18,11 +18,7 @@ const RenderQuestion = ({
   return (
     <>
       <div id={`ask_${question.id}`} className="ask">
-        <p>
-          {question.parentId === "other"
-            ? "Select all other sources of energy :"
-            : question.question}
-        </p>
+        <p>{question.question}</p>
       </div>
 
       <div

@@ -138,6 +138,7 @@ const NewForm = ({
     document.getElementsByClassName("dash-nav")[0].classList.add("form-navbar");
 
     if (allResultsUser?.length) {
+      
       setQuestions(
         questions.map((question) => {
           if (question.id === "farm_name") {
@@ -145,16 +146,17 @@ const NewForm = ({
           } else if (question.id === "farm_state") {
             return {
               ...question,
-              response: allResultsUser[0].find(
-                (element) => element.id === "farm_state"
-              )?.response,
+              response:
+                allResultsUser[0].find((element) => element.id === "farm_state")
+                  ?.response || "FL",
             };
           } else if (question.id === "farm_zip_code") {
             return {
               ...question,
-              response: allResultsUser[0].find(
-                (element) => element.id === "farm_zip_code"
-              )?.response,
+              response:
+                allResultsUser[0].find(
+                  (element) => element.id === "farm_zip_code"
+                )?.response || "32601",
             };
           }
           return question;

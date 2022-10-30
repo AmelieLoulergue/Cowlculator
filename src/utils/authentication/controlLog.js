@@ -39,7 +39,6 @@ export const confirmEmail = async ({
   setSeverity,
   setDisplayAlert,
 }) => {
-  console.log("ici");
   const response = await fetch(
     `${url}/api/auth/confirm-email/${userId}/${resetToken}`,
     {
