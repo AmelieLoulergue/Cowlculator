@@ -74,7 +74,7 @@ Clément LOULERGUE: [github](https://github.com/LoulergueC) [LinkedIn](https://w
 Amélie LOULERGUE: [LinkedIn](https://www.linkedin.com/in/amélie-loulergue-845a25148/)
 
 ## APPLICATIONS
-![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)  
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) <img src="https://clous-storage-carbonb-cos-standard-26b.s3.eu-de.cloud-object-storage.appdomain.cloud/IBM_logo.png" width="60" alt=""/>
 IBM Cloud Object Storage
 
 Our frontend application: 
