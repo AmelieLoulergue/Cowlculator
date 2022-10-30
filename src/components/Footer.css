@@ -20,7 +20,8 @@
 
 #footer .logos {
     grid-area: logos;
-    display: inline-block;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 #footer .logos img {
@@ -30,6 +31,7 @@
     filter: grayscale(1);
     transition: .2s ease-out;
     padding: 10px;
+    margin: auto;
 }
 
 #footer .logos img:hover,
@@ -37,11 +39,21 @@
     filter: grayscale(0);
 }
 
+#footer .logos div {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
 #footer .logos div svg {
     max-width: 140px;
     margin: auto;
     filter: grayscale(1);
     transition: .2s ease-out;
+}
+#footer .logos div h3 {
+    margin-block-start: 5px;
+    font-weight: 200;
 }
 
 #footer .copyright {
