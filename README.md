@@ -1,4 +1,4 @@
-![alt Cowlculator logo](https://clous-storage-carbonb-cos-standard-26b.s3.eu-de.cloud-object-storage.appdomain.cloud/cowlculator.png)
+<p align="center"><img src="https://clous-storage-carbonb-cos-standard-26b.s3.eu-de.cloud-object-storage.appdomain.cloud/cowlculator.png" width="300" alt=""/></p>
 
 :pig2: :cow2: :sheep: :bison: :seedling: :deciduous_tree: :corn:
 # COWLCULATOR 
