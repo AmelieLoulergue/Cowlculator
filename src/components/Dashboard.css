@@ -5,13 +5,40 @@
   /* margin-top: 135px; */
   padding: 20px;
   box-shadow: 0 0 40px 0px #0000007c;
+  position: relative;
 }
+
 @media only screen and (max-width: 425px) {
   .panel {
     margin: 0;
     padding: 0;
   }
 }
+
+.panel .btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  filter: grayscale(0) !important;
+  z-index: 20;
+  transform: scale(2) translate(-50%, -50%);
+  transform-origin: center;
+  opacity: .9;
+  animation: clickBtn 4s ease infinite both;
+}
+
+@keyframes clickBtn {
+
+  0%,
+  100% {
+    transform: scale(1) translate(-50%, -50%);
+  }
+
+  50% {
+    transform: scale(2) translate(-25%, -25%);
+  }
+}
+
 .card-section {
   display: flex;
   justify-content: center;
@@ -19,6 +46,7 @@
   align-content: center;
   flex-wrap: wrap;
 }
+
 .card {
   width: fit-content;
   padding: 1rem;
@@ -35,6 +63,7 @@
   align-items: center;
   position: relative;
 }
+
 .card-icon img {
   height: 30px;
   width: 30px;
@@ -42,17 +71,21 @@
   border-radius: 15px;
   /* margin: 15px 20px; */
 }
+
 .saved img {
   background-color: #20bfa9;
 }
+
 .saved h2 {
   color: #20bfa9;
 }
+
 .saved {
   /* background-image: linear-gradient(45deg, #121410 80%, #20bfaa5d 100%); */
   background-image: linear-gradient(45deg, transparent 80%, #20bfaa5d 100%);
   border-color: #20bfa95d;
 }
+
 .saved:hover {
   /* background-image: linear-gradient(45deg, #121410 80%, #20bfaa 100%); */
   background-image: linear-gradient(45deg, transparent 80%, #20bfaa 100%);
@@ -62,14 +95,17 @@
 .impact img {
   background-color: #ed786b;
 }
+
 .impact h2 {
   color: #ed786b;
 }
+
 .impact {
   /* background-image: linear-gradient(45deg, #1a1515 80%, #ed786b5d 100%); */
   background-image: linear-gradient(45deg, transparent 80%, #ed786b5d 100%);
   border-color: #ed786b5d;
 }
+
 .impact:hover {
   /* background-image: linear-gradient(45deg, #1a1515 80%, #ed786b 100%); */
   background-image: linear-gradient(45deg, transparent 80%, #ed786b 100%);
@@ -79,14 +115,17 @@
 .income img {
   background-color: #fdb95a;
 }
+
 .income h2 {
   color: #fdb95a;
 }
+
 .income {
   /* background-image: linear-gradient(45deg, #181813 80%, #fdb95a5d 100%); */
   background-image: linear-gradient(45deg, transparent 80%, #fdb95a5d 100%);
   border-color: #fdb95a5d;
 }
+
 .income:hover {
   /* background-image: linear-gradient(45deg, #181813 80%, #fdb95a 100%); */
   background-image: linear-gradient(45deg, transparent 80%, #fdb95a 100%);
@@ -98,6 +137,7 @@
   align-items: center;
   justify-content: space-between;
 }
+
 .card-top h1 {
   margin-left: 1.2rem;
   font-size: .9rem;
@@ -105,11 +145,13 @@
   width: max-content;
   text-align: center;
 }
+
 #dash .card-top h1 b {
   font-size: 2.3rem;
   letter-spacing: .1rem;
   font-weight: 900;
 }
+
 .card h2 {
   opacity: 0.9;
   margin-top: 0;
@@ -119,12 +161,14 @@
   margin: auto;
   min-width: max-content;
 }
+
 #dash .card h2 {
   position: absolute;
   bottom: -30px;
   left: 50%;
   transform: translateX(-50%);
 }
+
 #dash .card {
   margin-bottom: 50px;
 }
@@ -143,6 +187,7 @@
   flex-wrap: wrap;
   width: 100%;
 }
+
 .card-dash-line:nth-child(2n) .card-chart {
   order: 2;
 }
@@ -154,6 +199,7 @@
 #chart1 {
   margin: auto;
 }
+
 .card-chart {
   position: relative;
   min-width: 400px;
@@ -161,10 +207,13 @@
   padding: 10px;
   box-shadow: 0 0 40px 0px #00000051;
 }
-.card-chart, .card-advice {
+
+.card-chart,
+.card-advice {
   width: calc(50% - 5vw);
   margin: 12.5px auto;
 }
+
 .card-advice {
   font-size: 1.2rem;
   text-align: justify;
@@ -174,10 +223,13 @@
   .card-dash-line {
     flex-direction: column;
   }
+
   .card-dash-line:nth-child(2n) .card-advice {
     order: 2;
   }
-  .card-chart, .card-advice {
+
+  .card-chart,
+  .card-advice {
     width: 100%;
     margin: 10px auto;
   }
