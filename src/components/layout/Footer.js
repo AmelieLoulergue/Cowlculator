@@ -2,7 +2,6 @@ import * as React from "react";
 import "./Footer.css";
 
 import Lottie from "lottie-react";
-import liberty from "../../assets/anim/liberty.json";
 import libertyc from "../../assets/anim/liberty-c.json";
 import wwc from "../../assets/img/wwc-circle.png";
 import logo from "../../assets/img/cowlculator.png";
@@ -73,7 +72,7 @@ function Footer({ login }) {
         </div>
 
         <div className="logos">
-          <img src={wwc}></img>
+          <img alt="" src={wwc}></img>
           <div>
             <Lottie animationData={libertyc} loop={true} />
             <h3>Made by french in america</h3>

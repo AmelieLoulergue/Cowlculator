@@ -1,8 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import {
-  localStorageSetItems,
-  localStorageGetItems,
-} from "../utils/localStorage/localStorageFunctions";
+import { localStorageSetItems } from "../utils/localStorage/localStorageFunctions";
 const AuthContext = createContext();
 
 export function AuthContextWrapper({ children }) {

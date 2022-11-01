@@ -18,7 +18,7 @@ function Logger() {
       </style>
       <div className="navbar">
         <Link to={"../"}>
-          <img src={home}></img>
+          <img alt="" src={home}></img>
         </Link>
       </div>
       <div id="logger">

@@ -47,8 +47,8 @@ function Dashboard() {
           `${element
             .find((el) => el.id === "start_date")
             ?.response.replaceAll("-", "/")} - ${element
-              .find((el) => el.id === "end_date")
-              ?.response.replaceAll("-", "/")}`,
+            .find((el) => el.id === "end_date")
+            ?.response.replaceAll("-", "/")}`,
           `${Math.round(
             (allCO2mitigatedEmissions[index] / allCO2emmitedArray[index]) * 100
           )}% of mitigation`,
@@ -66,8 +66,8 @@ function Dashboard() {
           `${element
             .find((el) => el.id === "start_date")
             ?.response.replaceAll("-", "/")} - ${element
-              .find((el) => el.id === "end_date")
-              ?.response.replaceAll("-", "/")}`,
+            .find((el) => el.id === "end_date")
+            ?.response.replaceAll("-", "/")}`,
         ];
       }
     });
@@ -106,12 +106,12 @@ function Dashboard() {
                       )
                         ? 162
                         : Intl.NumberFormat("en-US").format(
-                          Math.round(
-                            currentResult?.find(
-                              (element) => element.id === "CO2mitigated"
-                            ).response
-                          )
-                        )}
+                            Math.round(
+                              currentResult?.find(
+                                (element) => element.id === "CO2mitigated"
+                              ).response
+                            )
+                          )}
                     </b>
                     <br></br>
                     Tonne CO2eq/year
@@ -129,16 +129,15 @@ function Dashboard() {
                   <img src={footprint} alt="carbon footprint icon"></img>
                   <h1>
                     <b>
-                      {currentResult ?
-                        Intl.NumberFormat("en-US").format(
-                          Math.round(
-                            currentResult?.find(
-                              (element) => element.id === "CO2emmited"
-                            )?.response / 1000
-
+                      {currentResult
+                        ? Intl.NumberFormat("en-US").format(
+                            Math.round(
+                              currentResult?.find(
+                                (element) => element.id === "CO2emmited"
+                              )?.response / 1000
+                            )
                           )
-                        ) : 557
-                      }
+                        : 557}
                       {" K"}
                     </b>
                     <br></br>
@@ -157,17 +156,19 @@ function Dashboard() {
                   <img src={dollar} alt="dollar sign icon"></img>
                   <h1>
                     <b>
-                      {currentResult ? Intl.NumberFormat("en-US", {
-                        style: "currency",
-                        currency: "USD",
-                        minimumFractionDigits: 0,
-                      }).format(
-                        Math.round(
-                          currentResult?.find(
-                            (element) => element.id === "totalCarbonCredits"
-                          )?.response
-                        )
-                      ) : 11613}
+                      {currentResult
+                        ? Intl.NumberFormat("en-US", {
+                            style: "currency",
+                            currency: "USD",
+                            minimumFractionDigits: 0,
+                          }).format(
+                            Math.round(
+                              currentResult?.find(
+                                (element) => element.id === "totalCarbonCredits"
+                              )?.response
+                            )
+                          )
+                        : 11613}
                     </b>
                     <br></br>
                     $/year
@@ -211,12 +212,7 @@ function Dashboard() {
                   <DoughnutChart
                     options={chartoption}
                     id={"chart1"}
-                    dataResults={[
-                      520263,
-                      26652,
-                      7345,
-                      2743
-                    ]}
+                    dataResults={[520263, 26652, 7345, 2743]}
                   />
                 )}
               </div>
@@ -227,7 +223,7 @@ function Dashboard() {
                 remove it from the graph!
               </div>
             </div>
-            {currentResult ?
+            {currentResult ? (
               <>
                 <div className="card-dash-line">
                   <div className="card-chart">
@@ -271,7 +267,17 @@ function Dashboard() {
                   </div>
                 </div>
               </>
-              : <h1 style={{ 'text-align': 'center', 'font-size': '3rem', 'letter-spacing': '2rem' }}>...</h1>}
+            ) : (
+              <h1
+                style={{
+                  textAlign: "center",
+                  fontSize: "3rem",
+                  letterSpacing: "2rem",
+                }}
+              >
+                ...
+              </h1>
+            )}
           </div>
 
           <div className="container">

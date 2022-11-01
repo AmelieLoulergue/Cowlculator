@@ -11,7 +11,6 @@ import fandr from "../../assets/anim/fandr2.json";
 import { useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import signup from "../../utils/authentication/signup";
-import { useAuthContext } from "../../context/authContext";
 import { useAlertContext } from "../../context/alertContext";
 const validateEmail = ({ userProfile }) => {
   if (
@@ -44,7 +43,7 @@ const validateEmail = ({ userProfile }) => {
     return false;
   }
 };
-const validatePassword = ({ password, strength, userProfile }) => {
+const validatePassword = ({ password, strength }) => {
   if (
     (strength !== "Weak" || strength !== "Too weak") &&
     password.length >= 8
@@ -56,8 +55,7 @@ const validatePassword = ({ password, strength, userProfile }) => {
 };
 function Register() {
   let navigate = useNavigate();
-  const { authInformations, setAuthInformations } = useAuthContext();
-  const { alertInformations, setAlertInformations } = useAlertContext();
+  const { setAlertInformations } = useAlertContext();
   const [userProfile, setUserProfile] = useState({
     email: "",
     password: "",
@@ -115,7 +113,6 @@ function Register() {
   const passConf = useRef();
 
   var passHide = false;
-  var passConfHide = false;
 
   const showPass = () => {
     if (passHide) {

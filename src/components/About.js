@@ -22,7 +22,7 @@ function About() {
           </div>
           <div className="card-section">
             <div className="card">
-              <img src={amelie}></img>
+              <img alt="" src={amelie}></img>
               <h2>Amélie</h2>
               <p>
                 Fullstack web developer for 2 years (React/Node JS), Amelie
@@ -41,7 +41,7 @@ function About() {
               </p>
             </div>
             <div className="card">
-              <img src={clement}></img>
+              <img alt="" src={clement}></img>
               <h2>Clément</h2>
               <p>
                 Creative and talented, Clement is a young undergrad student in
@@ -60,7 +60,7 @@ function About() {
               </p>
             </div>
             <div className="card">
-              <img src={bertille}></img>
+              <img alt="" src={bertille}></img>
               <h2>Bertille</h2>
               <p>
                 Engineer in the food industry, Bertille moved to the USA in

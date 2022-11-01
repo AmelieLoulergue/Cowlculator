@@ -1,4 +1,3 @@
-import coeff_reduction_ghg from "../../coeff/coeff_reduction_ghg.json";
 import regions from "../../coeff/regions.json";
 import funcTime from "./funcTime";
 import findResponseElementById from "../global/findResponseElementById";

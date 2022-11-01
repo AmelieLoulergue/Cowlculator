@@ -17,7 +17,6 @@ import sendAnswer from "../utils/formFunctions/sendAnswer";
 import goPrecedentQuestion from "../utils/formFunctions/goPrecedentQuestion";
 import updateProgressForm from "../utils/formFunctions/updateProgressForm";
 import updateCounterQuestion from "../utils/formFunctions/updateCounterQuestion";
-import saveCompletedForm from "../utils/formFunctions/saveCompletedForm";
 import updateFarmNameUser from "../utils/formFunctions/updateFarmNameUser";
 import updateAllExistingQuestions from "../utils/formFunctions/updateAllExistingQuestions";
 import generateDatasFormOnInitForm from "../utils/formFunctions/generateDatasFormOnInitForm";
@@ -31,6 +30,7 @@ const NewForm = () => {
   let navigate = useNavigate();
   const [answer, setAnswer] = useState(null);
   const [progress, setProgress] = useState(0);
+  useEffect(() => console.log(formInformations.questions));
   useEffect(() => {
     generateDatasFormOnInitForm({
       initForm: formInformations?.initForm,
@@ -56,27 +56,7 @@ const NewForm = () => {
       setFormInformations,
     });
   }, [formInformations?.questionToDisplay, setFormInformations]);
-  // useEffect(() => {
-  //   if (formInformations?.formIsCompleted) {
-  //     saveCompletedForm({
-  //       results: formInformations?.results,
-  //       allQuestions: formInformations?.allQuestions,
-  //       questions: formInformations?.questions,
-  //       authInformations,
-  //       setAuthInformations,
-  //       setResultsInformations,
-  //     });
-  //   }
-  // }, [
-  //   authInformations,
-  //   formInformations?.allQuestions,
-  //   formInformations?.formIsCompleted,
-  //   formInformations?.questions,
-  //   formInformations?.results,
-  //   setAuthInformations,
-  //   setFormInformations,
-  //   setResultsInformations,
-  // ]);
+
   useEffect(() => {
     if (resultInformations?.allResultsUser?.length > 0) {
       setFormInformations((currentFormInformations) => ({

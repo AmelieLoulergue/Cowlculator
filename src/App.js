@@ -36,7 +36,7 @@ function App() {
         });
       }
     }
-  }, []);
+  });
   return (
     <ThemeProvider theme={darkTheme}>
       <div className="App">

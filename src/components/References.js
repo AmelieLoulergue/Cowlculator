@@ -19,7 +19,7 @@ function References() {
                 AR6 Climate Change 2021: The Physical Science Basis, 2021,
                 Intergovernmental panel on climate change,{" "}
               </p>
-              <a href="https://www.ipcc.ch/report/ar6/wg1/" target="_blank">
+              <a href="https://www.ipcc.ch/report/ar6/wg1/" rel="noreferrer">
                 https://www.ipcc.ch/report/ar6/wg1/
               </a>
             </div>
@@ -30,7 +30,7 @@ function References() {
                 Policymakers, 2021, Intergovernmental panel on climate change,{" "}
               </p>
               <a
-                target="_blank"
+                rel="noreferrer"
                 href="https://www.ipcc.ch/report/ar6/wg1/downloads/report/IPCC_AR6_WGI_SPM.pdf"
               >
                 https://www.ipcc.ch/report/ar6/wg1/downloads/report/IPCC_AR6_WGI_SPM.pdf
@@ -49,7 +49,7 @@ function References() {
                 Environmental Protection Agency,{" "}
               </p>
               <a
-                target="_blank"
+                rel="noreferrer"
                 href="https://www.epa.gov/ghgemissions/global-greenhouse-gas-emissions-data"
               >
                 https://www.epa.gov/ghgemissions/global-greenhouse-gas-emissions-data
@@ -85,7 +85,7 @@ function References() {
                 Dioxide Emissions Coefficients by Fuel,{" "}
               </p>
               <a
-                target="_blank"
+                rel="noreferrer"
                 href="https://www.eia.gov/environment/emissions/co2_vol_mass.php"
               >
                 https://www.eia.gov/environment/emissions/co2_vol_mass.php
@@ -105,7 +105,7 @@ function References() {
                 Volume I Chapter 14: Greenhouse Gas Biogenic Sources,{" "}
               </p>
               <a
-                target="_blank"
+                rel="noreferrer"
                 href="https://www3.epa.gov/ttn/chief/ap42/ch14/final/c14s04.pdf"
               >
                 https://www3.epa.gov/ttn/chief/ap42/ch14/final/c14s04.pdf
@@ -122,7 +122,7 @@ function References() {
                 inventory tool,{" "}
               </p>
               <a
-                target="_blank"
+                rel="noreferrer"
                 href="https://www.epa.gov/sites/default/files/2017-12/documents/ag_module_users_guide.pdf"
               >
                 https://www.epa.gov/sites/default/files/2017-12/documents/ag_module_users_guide.pdf
@@ -176,7 +176,7 @@ function References() {
                 Questions Should Farmers Ask About Selling Carbon Credit?,{" "}
               </p>
               <a
-                target="_blank"
+                rel="noreferrer"
                 href="https://farmdocdaily.illinois.edu/2021/04/what-questions-should-farmers-ask-about-selling-carbon-credits.html"
               >
                 https://farmdocdaily.illinois.edu/2021/04/what-questions-should-farmers-ask-about-selling-carbon-credits.html
@@ -186,7 +186,7 @@ function References() {
               <h3>Carbon By Indigo</h3>
               <p>How much can I earn carbon farming</p>
               <a
-                target="_blank"
+                rel="noreferrer"
                 href="https://carbon.indigoag.com/how-much-can-i-earn-carbon-farming?utm_medium=paid&utm_source=semgn&utm_campaign=us-mql-carbon_grower-ad-search_nonbranded-q3.2022&utm_term=carbon%20credit%20farmers&_bt=558173900121&_bm=b&_bn=g&gclid=CjwKCAjwrZOXBhACEiwA0EoRD_4M5toD8uXoKiu65vWIW3MKTNk1RjWa0oyRsZugSzQ5JTqu1d3KHhoC57MQAvD_BwE"
               >
                 https://carbon.indigoag.com/how-much-can-i-earn-carbon-farming?utm_medium=paid&utm_source=semgn&utm_campaign=us-mql-carbon_grower-ad-search_nonbranded-q3.2022&utm_term=carbon%20credit%20farmers&_bt=558173900121&_bm=b&_bn=g&gclid=CjwKCAjwrZOXBhACEiwA0EoRD_4M5toD8uXoKiu65vWIW3MKTNk1RjWa0oyRsZugSzQ5JTqu1d3KHhoC57MQAvD_BwE
@@ -196,7 +196,7 @@ function References() {
               <h3>Carbon by Indigo</h3>
               <p>For farmers</p>
               <a
-                target="_blank"
+                rel="noreferrer"
                 href="https://www.indigoag.com/carbon/for-farmers"
               >
                 https://www.indigoag.com/carbon/for-farmers
@@ -209,7 +209,7 @@ function References() {
                 planet-warming burps, Bloomberg,
               </p>
               <a
-                target="_blank"
+                rel="noreferrer"
                 href="https://www.bloomberg.com/news/articles/2021-04-13/cows-join-carbon-market-in-quest-to-curb-planet-warming-burps"
               >
                 https://www.bloomberg.com/news/articles/2021-04-13/cows-join-carbon-market-in-quest-to-curb-planet-warming-burps
@@ -219,7 +219,7 @@ function References() {
               <h3>Mootral</h3>
               <p>Carbon projects and credits</p>
               <a
-                target="_blank"
+                rel="noreferrer"
                 href="https://mootral.com/carbon/carbon-projects-carbon-credits/"
               >
                 https://mootral.com/carbon/carbon-projects-carbon-credits/
@@ -232,7 +232,7 @@ function References() {
                 feed launches CO2 offsetting scheme, Sky news
               </p>
               <a
-                target="_blank"
+                rel="noreferrer"
                 href=" https://news.sky.com/story/cowcredits-firm-behind-low-methane-cattle-feed-launches-co2-offsetting-scheme-12275760"
               >
                 {" "}
@@ -246,7 +246,7 @@ function References() {
                 New-York Times,
               </p>
               <a
-                target="_blank"
+                rel="noreferrer"
                 href="https://www.nytimes.com/2021/11/23/business/dealbook/farm-carbon-credits.html"
               >
                 https://www.nytimes.com/2021/11/23/business/dealbook/farm-carbon-credits.html
@@ -267,7 +267,7 @@ function References() {
                 Sources,
               </p>
               <a
-                target="_blank"
+                rel="noreferrer"
                 href="https://www3.epa.gov/ttnchie1/ap42/ch14/final/c14s01.pdf"
               >
                 https://www3.epa.gov/ttnchie1/ap42/ch14/final/c14s01.pdf

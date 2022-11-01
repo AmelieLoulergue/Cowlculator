@@ -1,6 +1,5 @@
 export const logout = ({ setAuthInformations, setResultInformations }) => {
   let localStorageItems = JSON.parse(localStorage.getItem("cowlculator"));
-  let isUser = localStorageItems?.find((item) => item.loggedUser);
   localStorage.setItem(
     "cowlculator",
     JSON.stringify(

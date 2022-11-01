@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import sendIcon from "../../assets/svg/send.svg";
 import back_arrow from "../../assets/svg/back-arrow.svg";
 import Box from "@mui/material/Box";
@@ -75,7 +75,7 @@ function RenderInput({
           <img src={back_arrow} alt="" width="40px"></img>
         </button>
       )}
-      {question.formInput.type === "checkbox" ? (
+      {question.formInput?.type === "checkbox" ? (
         <div className="switch-yes-no">
           <Stack direction="row" spacing={1} alignItems="center">
             <Typography>NO</Typography>
@@ -99,7 +99,7 @@ function RenderInput({
             <Typography>YES</Typography>
           </Stack>
         </div>
-      ) : question.formInput.type === "select" &&
+      ) : question.formInput?.type === "select" &&
         typeof question.userValue === "object" ? (
         <Box sx={{ minWidth: 120 }}>
           <FormControl fullWidth>
@@ -131,7 +131,7 @@ function RenderInput({
         </Box>
       ) : (
         <input
-          type={formInput.type}
+          type={formInput?.type}
           onKeyUp={(event) => {
             if (event.code === "Enter") {
               sendAnswer();
@@ -143,21 +143,21 @@ function RenderInput({
           autoFocus
           onChange={(event) => {
             setAnswer(
-              answer && formInput.type === "number"
+              answer && formInput?.type === "number"
                 ? { ...answer, value: event.target.value }
-                : formInput.type === "number"
+                : formInput?.type === "number"
                 ? {
                     value: event.target.value,
                     unit:
-                      typeof question.userValue.unit === "string"
-                        ? question.userValue.unit
+                      typeof question?.userValue?.unit === "string"
+                        ? question?.userValue?.unit
                         : "",
                   }
                 : event.target.value
             );
           }}
           value={
-            formInput.type === "number" && answer ? answer.value : answer || ""
+            formInput?.type === "number" && answer ? answer.value : answer || ""
           }
         />
       )}
