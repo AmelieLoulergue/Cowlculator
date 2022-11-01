@@ -3,8 +3,8 @@ import findResponseElementById from "../global/findResponseElementById";
 const getCoeffAnimals = ({ datasForm, region }) => {
   // keep only the coeff for the region
   let coeffEF = [];
-  enteric_EF.map((selectRegion) =>
-    Object.entries(selectRegion).map((key, value) => {
+  enteric_EF.forEach((selectRegion) =>
+    Object.entries(selectRegion).forEach((key, value) => {
       if (key[0] !== "name" && key[0] === region) {
         coeffEF.push({ name: selectRegion.name, coeff: key[1] });
       }
@@ -13,8 +13,8 @@ const getCoeffAnimals = ({ datasForm, region }) => {
 
   // National average coeff for beef yearnling and weanling
   let coeffEFNatAv = [];
-  enteric_EF.map((changeRegion) =>
-    Object.entries(changeRegion).map((key, value) => {
+  enteric_EF.forEach((changeRegion) =>
+    Object.entries(changeRegion).forEach((key, value) => {
       if (key[0] !== "name" && key[0] === "National_Average") {
         coeffEFNatAv.push({ name: changeRegion.name, coeff: key[1] });
       }
@@ -108,7 +108,8 @@ const getCoeffAnimals = ({ datasForm, region }) => {
     )?.coeff
   );
   let coeffSheepEF = Number(
-    coeffEFNatAv.find((element) => element.name === "farm_animals_sheeps")?.coeff
+    coeffEFNatAv.find((element) => element.name === "farm_animals_sheeps")
+      ?.coeff
   );
   let coeffGoatEF = Number(
     coeffEFNatAv.find((element) => element.name === "farm_animals_goats")?.coeff
@@ -117,7 +118,8 @@ const getCoeffAnimals = ({ datasForm, region }) => {
     coeffEFNatAv.find((element) => element.name === "farm_animals_swine")?.coeff
   );
   let coeffHorseEF = Number(
-    coeffEFNatAv.find((element) => element.name === "farm_animals_horses")?.coeff
+    coeffEFNatAv.find((element) => element.name === "farm_animals_horses")
+      ?.coeff
   );
   let coeffMulesEF = Number(
     coeffEFNatAv.find((element) => element.name === "farm_animals_mules")?.coeff

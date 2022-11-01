@@ -30,7 +30,6 @@ const NewForm = () => {
   let navigate = useNavigate();
   const [answer, setAnswer] = useState(null);
   const [progress, setProgress] = useState(0);
-  useEffect(() => console.log(formInformations.questions));
   useEffect(() => {
     generateDatasFormOnInitForm({
       initForm: formInformations?.initForm,

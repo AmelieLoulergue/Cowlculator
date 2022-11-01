@@ -7,7 +7,7 @@ function calculs({
   authInformations,
   setAuthInformations,
   setResultInformations,
-  setFormInformations
+  setFormInformations,
 }) {
   const datasForm = JSON.parse(localStorage.getItem("cowlculator"))?.find(
     (element) =>
@@ -149,8 +149,8 @@ function calculs({
     if (others.length > 0) {
       other = allFunctions.funcOther({ others });
     }
-      // Emissions from enteric fermentation of dairies, beed and sheep
-      // Emissions from manure of dairies, beed and sheep
+    // Emissions from enteric fermentation of dairies, beed and sheep
+    // Emissions from manure of dairies, beed and sheep
 
     let entericFermentationCO2 = 0;
     let entericFermentationCO2Total = 0;
@@ -204,8 +204,8 @@ function calculs({
         state,
         time: time,
       });
-
-      cropsMitigationsTotal = Object.values(cropsMitigations).reduce(
+      const { coeffs, size, ...cropMitigationsToSum } = cropsMitigations;
+      cropsMitigationsTotal = Object.values(cropMitigationsToSum).reduce(
         (partialSum, a) => partialSum + a,
         0
       );
@@ -237,7 +237,21 @@ function calculs({
         fertilizerCO2 -
         (animalsMitigations + cropsMitigationsTotal)) /
       time;
+    console.log({
+      elecCO2,
+      natGasCO2,
+      gasCO2,
+      water,
+      fuelCO2,
+      other,
+      entericFermentationCO2Total,
+      manureCO2,
+      fertilizerCO2,
+      animalsMitigations,
+      cropsMitigationsTotal,
+    });
     const CO2mitigated = (animalsMitigations + cropsMitigationsTotal) / time;
+    console.log({ animalsMitigations, cropsMitigationsTotal });
     const totalCarbonCredits = carbonCreditsAnimals + carbonCreditsCrops;
     const utilitiesGraph =
       elecCO2 / time + natGasCO2 / time + gasCO2 / time + water / time;
@@ -249,6 +263,7 @@ function calculs({
     const cropsGraph = cropsMitigationsTotal
       ? (fertilizerCO2 - cropsMitigationsTotal) / time
       : fertilizerCO2 / time;
+    console.log(CO2mitigated, CO2emmited, totalCarbonCredits);
     saveCompletedForm({
       results: [
         ...datasForm,
