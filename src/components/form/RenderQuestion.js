@@ -23,7 +23,7 @@ const RenderQuestion = ({
         id={`response_${question.id}`}
         className={response || response === false ? "" : "is-hidden"}
       >
-        {question.formInput.label && (
+        {question?.formInput?.label && (
           <div className="response ">
             <div>{question.formInput.label}</div>
           </div>
