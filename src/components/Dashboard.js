@@ -76,7 +76,6 @@ function Dashboard() {
     responsive: false,
     maintainAspectRatio: false,
   };
-  console.log(currentResult);
   return (
     <>
       <div id="dash">

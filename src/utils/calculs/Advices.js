@@ -169,15 +169,10 @@ const Advices = ({ result }) => {
     ) {
       advices.push({
         firstText:
-          "If you implement set aside and lad-use change i.e. allow or encourage the reversion of croplamd to another land cover, typically one similar to the native vegetation on your crops you could mitigate up to",
+          "If you implement set aside and land-use change i.e. allow or encourage the reversion of cropland to another land cover, typically one similar to the native vegetation on your crops you could mitigate up to",
         mitigatedCo2: `${round(sumCrops * crop_LUC_coeff, 0)} tonnes of CO₂`,
         secondText: " per year which represents ",
-        money: `$${round(
-          (grain_size + forage_size + fv_size + flowers_size + herbs_size) *
-            crop_LUC_coeff *
-            15,
-          0
-        )}`,
+        money: `$${round(sumCrops * crop_LUC_coeff * 15, 0)}`,
         thirdText: "per year",
       });
     }

@@ -237,21 +237,7 @@ function calculs({
         fertilizerCO2 -
         (animalsMitigations + cropsMitigationsTotal)) /
       time;
-    console.log({
-      elecCO2,
-      natGasCO2,
-      gasCO2,
-      water,
-      fuelCO2,
-      other,
-      entericFermentationCO2Total,
-      manureCO2,
-      fertilizerCO2,
-      animalsMitigations,
-      cropsMitigationsTotal,
-    });
     const CO2mitigated = (animalsMitigations + cropsMitigationsTotal) / time;
-    console.log({ animalsMitigations, cropsMitigationsTotal });
     const totalCarbonCredits = carbonCreditsAnimals + carbonCreditsCrops;
     const utilitiesGraph =
       elecCO2 / time + natGasCO2 / time + gasCO2 / time + water / time;
@@ -263,7 +249,6 @@ function calculs({
     const cropsGraph = cropsMitigationsTotal
       ? (fertilizerCO2 - cropsMitigationsTotal) / time
       : fertilizerCO2 / time;
-    console.log(CO2mitigated, CO2emmited, totalCarbonCredits);
     saveCompletedForm({
       results: [
         ...datasForm,
