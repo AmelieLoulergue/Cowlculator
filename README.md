@@ -55,7 +55,7 @@ The final objective is for Cowlculator to become the reference tool in the valid
 
 
 ### Feature 6
-Specific agricultural modules will be added to the form in order to estimate the emissions and potential mitigations in a more precise way. Each module will be composed of questions specific to an agricultural product such as vineyard or aquaculture. Before taking the form, the user will be able to select a module and the questions of the module will be added to the core questions list of the form.
+Specific agricultural modules will be added to the form in order to estimate the emissions and potential mitigations in a more precise way. Each module will be composed of questions specific to an agricultural product such as vineyard or aquaculture. Before taking the form, the user will be able to select a module and the questions of the module will be added to the core questions list of the form. Organic agriculture will also be included.
 
 
 ### Feature 7

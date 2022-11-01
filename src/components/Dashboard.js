@@ -47,8 +47,8 @@ function Dashboard() {
           `${element
             .find((el) => el.id === "start_date")
             ?.response.replaceAll("-", "/")} - ${element
-            .find((el) => el.id === "end_date")
-            ?.response.replaceAll("-", "/")}`,
+              .find((el) => el.id === "end_date")
+              ?.response.replaceAll("-", "/")}`,
           `${Math.round(
             (allCO2mitigatedEmissions[index] / allCO2emmitedArray[index]) * 100
           )}% of mitigation`,
@@ -66,12 +66,12 @@ function Dashboard() {
           `${element
             .find((el) => el.id === "start_date")
             ?.response.replaceAll("-", "/")} - ${element
-            .find((el) => el.id === "end_date")
-            ?.response.replaceAll("-", "/")}`,
+              .find((el) => el.id === "end_date")
+              ?.response.replaceAll("-", "/")}`,
         ];
       }
     });
-  const grayscale = `#dash .panel {filter: grayscale(1)}`;
+  const grayscale = `#dash .card-section {filter: grayscale(1); cursor: not-allowed; opacity: .4} #dash .card {cursor: not-allowed}`;
   const chartoption = {
     responsive: false,
     maintainAspectRatio: false,
@@ -80,19 +80,15 @@ function Dashboard() {
     <>
       <div id="dash">
         <div id="summary" className="panel">
+          {!currentResult && (
+            <>
+              <style>{grayscale}</style>
+              <button className="btn" onClick={() => navigate("/form")}>
+                FILL THE FORM
+              </button>
+            </>
+          )}
           <div className="card-section">
-            {!currentResult && (
-              <>
-                <style>{grayscale}</style>
-                <div className="column is-12">
-                  <div style={{ textAlign: "center" }}>
-                    <button className="btn" onClick={() => navigate("/form")}>
-                      FILL THE FORM
-                    </button>
-                  </div>
-                </div>
-              </>
-            )}
             <Link className="card saved" to={"/dashboard#recommendations"}>
               <div className="card-icon">
                 <div className="card-top">
@@ -108,24 +104,22 @@ function Dashboard() {
                           )
                         )
                       )
-                        ? 0
+                        ? 162
                         : Intl.NumberFormat("en-US").format(
-                            Math.round(
-                              currentResult?.find(
-                                (element) => element.id === "CO2mitigated"
-                              ).response
-                            )
-                          )}
+                          Math.round(
+                            currentResult?.find(
+                              (element) => element.id === "CO2mitigated"
+                            ).response
+                          )
+                        )}
                     </b>
                     <br></br>
                     Tonne CO2eq/year
                   </h1>
                 </div>
-                {currentResult && (
-                  <h2>
-                    CO<sub>2</sub> mitigated
-                  </h2>
-                )}
+                <h2>
+                  CO<sub>2</sub> mitigated
+                </h2>
               </div>
             </Link>
 
@@ -135,34 +129,25 @@ function Dashboard() {
                   <img src={footprint} alt="carbon footprint icon"></img>
                   <h1>
                     <b>
-                      {isNaN(
+                      {currentResult ?
                         Intl.NumberFormat("en-US").format(
                           Math.round(
                             currentResult?.find(
                               (element) => element.id === "CO2emmited"
                             )?.response / 1000
+
                           )
-                        )
-                      )
-                        ? 0
-                        : Intl.NumberFormat("en-US").format(
-                            Math.round(
-                              currentResult?.find(
-                                (element) => element.id === "CO2emmited"
-                              )?.response / 1000
-                            )
-                          )}
+                        ) : 557
+                      }
                       {" K"}
                     </b>
                     <br></br>
                     Tonne CO2eq/year
                   </h1>
                 </div>
-                {currentResult && (
-                  <h2>
-                    CO<sub>2</sub> emitted
-                  </h2>
-                )}
+                <h2>
+                  CO<sub>2</sub> emitted
+                </h2>
               </div>
             </Link>
 
@@ -170,27 +155,25 @@ function Dashboard() {
               <div className="card-icon">
                 <div className="card-top">
                   <img src={dollar} alt="dollar sign icon"></img>
-                  {currentResult && (
-                    <h1>
-                      <b>
-                        {Intl.NumberFormat("en-US", {
-                          style: "currency",
-                          currency: "USD",
-                          minimumFractionDigits: 0,
-                        }).format(
-                          Math.round(
-                            currentResult?.find(
-                              (element) => element.id === "totalCarbonCredits"
-                            )?.response
-                          )
-                        )}
-                      </b>
-                      <br></br>
-                      $/year
-                    </h1>
-                  )}
+                  <h1>
+                    <b>
+                      {currentResult ? Intl.NumberFormat("en-US", {
+                        style: "currency",
+                        currency: "USD",
+                        minimumFractionDigits: 0,
+                      }).format(
+                        Math.round(
+                          currentResult?.find(
+                            (element) => element.id === "totalCarbonCredits"
+                          )?.response
+                        )
+                      ) : 11613}
+                    </b>
+                    <br></br>
+                    $/year
+                  </h1>
                 </div>
-                {currentResult && <h2>Estimated carbon credits</h2>}
+                <h2>Estimated carbon credits</h2>
               </div>
             </Link>
           </div>
@@ -225,22 +208,29 @@ function Dashboard() {
                     ]}
                   />
                 ) : (
-                  <></>
+                  <DoughnutChart
+                    options={chartoption}
+                    id={"chart1"}
+                    dataResults={[
+                      520263,
+                      26652,
+                      7345,
+                      2743
+                    ]}
+                  />
                 )}
               </div>
-              {currentResult && (
-                <div className={"card-advice"}>
-                  Take a look at the repartition of your emissions to know which
-                  part of your activity generates the most greenhouse gases.
-                  <br></br> Tip: Click on the name of a category to add it or
-                  remove it from the graph!
-                </div>
-              )}
+              <div className={"card-advice"}>
+                Take a look at the repartition of your emissions to know which
+                part of your activity generates the most greenhouse gases.
+                <br></br> Tip: Click on the name of a category to add it or
+                remove it from the graph!
+              </div>
             </div>
-            <>
-              <div className="card-dash-line">
-                <div className="card-chart">
-                  {currentResult && (
+            {currentResult ?
+              <>
+                <div className="card-dash-line">
+                  <div className="card-chart">
                     <LineChart
                       options={chartoption}
                       labels={labelPeriodChart3}
@@ -250,19 +240,15 @@ function Dashboard() {
                         data2: allCO2mitigatedEmissions,
                       }}
                     />
-                  )}
-                </div>
-                {currentResult && (
+                  </div>
                   <div className={"card-advice"}>
                     Watch your emissions decrease and your mitigation increase
                     over time!
                   </div>
-                )}
-              </div>
+                </div>
 
-              <div className="card-dash-line">
-                <div className="card-chart">
-                  {currentResult && (
+                <div className="card-dash-line">
+                  <div className="card-chart">
                     <BarChart
                       width={100}
                       height={50}
@@ -277,17 +263,15 @@ function Dashboard() {
                         data2: allCO2emmitedArray,
                       }}
                     />
-                  )}
-                </div>
-                {currentResult && (
+                  </div>
                   <div className={"card-advice"}>
                     Realize the importance of your efforts over time by
                     comparing your unmitigated emissions with your mitigated
                     emissions.
                   </div>
-                )}
-              </div>
-            </>
+                </div>
+              </>
+              : <h1 style={{ 'text-align': 'center', 'font-size': '3rem', 'letter-spacing': '2rem' }}>...</h1>}
           </div>
 
           <div className="container">
