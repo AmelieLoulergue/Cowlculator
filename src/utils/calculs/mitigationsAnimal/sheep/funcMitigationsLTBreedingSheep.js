@@ -1,5 +1,5 @@
 // Function sheep: mitigations LTBreeding
-import reductionEF_coeff from "../../coeff/reductionEF_coeff.json";
+import reductionEF_coeff from "../../../../coeff/reductionEF_coeff.json";
 function funcMitigationsLTBreedingSheep({ datasForm, EFSheep }) {
   //Coeff
   let coeffLTBreedingSheep = reductionEF_coeff[2].longterm_change_and_breeding;

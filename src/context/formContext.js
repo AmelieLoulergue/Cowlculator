@@ -43,6 +43,25 @@ export function FormContextWrapper({
     }));
   }, [authInformations?.login?.userId]);
   useEffect(() => {
+    setFormInformations((currentFormInformations) => ({
+      ...currentFormInformations,
+      datasForm: currentFormInformations?.questions
+        ?.filter((question) => question.response)
+        .map((question) => ({
+          id: question.id,
+          response: question.response,
+        })),
+      indexQuestions: currentFormInformations?.questions?.filter(
+        (question) => question.response
+      )?.length,
+      counterQuestion:
+        currentFormInformations?.allQuestions
+          ?.map((question) => question.id)
+          ?.indexOf(currentFormInformations?.questionToDisplay?.id) ||
+        currentFormInformations?.allQuestions?.length,
+    }));
+  }, [formInformations?.questions]);
+  useEffect(() => {
     isTheFirstForm({
       allResultsUser: resultInformations?.allResultsUser,
       setFormInformations,
@@ -50,22 +69,35 @@ export function FormContextWrapper({
     });
   }, [authInformations, resultInformations?.allResultsUser]);
   useEffect(() => {
-    localStorageSetItems({
-      items: {
-        datasForm: formInformations?.datasForm,
-        indexQuestions: formInformations?.indexQuestions,
-        allQuestions: formInformations?.allQuestions,
-        questions: formInformations?.questions,
-        counterQuestion: formInformations?.counterQuestion,
-        formIsCompleted: formInformations?.formIsCompleted,
-        initForm: formInformations?.initForm,
-        questionToDisplay: formInformations?.questionToDisplay,
-        results: formInformations?.results,
-      },
-      userId: authInformations?.login.userId,
-    });
-  }, [authInformations?.login.userId, formInformations]);
-  useEffect(() => console.log(formInformations), [formInformations]);
+    if (formInformations?.datasForm?.length !== 0) {
+      localStorageSetItems({
+        items: {
+          datasForm: formInformations?.datasForm,
+          indexQuestions: formInformations?.indexQuestions,
+          allQuestions: formInformations?.allQuestions,
+          questions: formInformations?.questions,
+          counterQuestion: formInformations?.counterQuestion,
+          formIsCompleted: formInformations?.formIsCompleted,
+          initForm: formInformations?.initForm,
+          questionToDisplay: formInformations?.questionToDisplay,
+          results: formInformations?.results,
+        },
+        userId: authInformations?.login.userId,
+      });
+    }
+  }, [
+    authInformations?.login.userId,
+    formInformations?.allQuestions,
+    formInformations?.counterQuestion,
+    formInformations?.datasForm,
+    formInformations?.formIsCompleted,
+    formInformations?.indexQuestions,
+    formInformations?.initForm,
+    formInformations?.questionToDisplay,
+    formInformations?.questions,
+    formInformations?.results,
+  ]);
+
   let sharedState = {
     formInformations: formInformations,
     setFormInformations: setFormInformations,

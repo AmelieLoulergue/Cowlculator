@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import sendIcon from "../../assets/svg/send.svg";
 import back_arrow from "../../assets/svg/back-arrow.svg";
 import Box from "@mui/material/Box";
@@ -64,7 +64,10 @@ function RenderInput({
   question,
   setUnit,
 }) {
-  const checkboxRef = useRef(false);
+  const [checked, setChecked] = useState(
+    typeof answer === "boolean" ? answer : false
+  );
+
   return (
     <div id={"input_" + indexQuestion} className={"response-input"}>
       {isButtonDisplay && indexQuestion !== "farm_state" && (
@@ -78,20 +81,19 @@ function RenderInput({
             <Typography>NO</Typography>
             <AntSwitch
               autoFocus
-              ref={checkboxRef}
               onKeyUp={(event) => {
                 if (event.code === "Enter") {
                   sendAnswer();
-                  checkboxRef.current.value = false;
                   setTimeout(() => {
                     window.scrollTo(0, document.body.scrollHeight);
                   }, 50);
                 }
               }}
-              checked={answer}
+              checked={checked}
               inputProps={{ "aria-label": "ant design" }}
               onChange={(event) => {
-                setAnswer(event.target.checked);
+                setChecked(event.target.checked);
+                setAnswer(event.target.checked ? true : "NO");
               }}
             />
             <Typography>YES</Typography>

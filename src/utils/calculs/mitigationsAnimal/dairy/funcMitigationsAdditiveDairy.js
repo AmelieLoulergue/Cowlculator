@@ -1,5 +1,5 @@
 // Function dairy: mitigations additives
-import reductionEF_coeff from "../../coeff/reductionEF_coeff.json";
+import reductionEF_coeff from "../../../../coeff/reductionEF_coeff.json";
 function funcMitigationsAdditiveDairy({ datasForm, EFDairy, cattleDairy }) {
   //Coeff
   let coeffAdditiveDairy = reductionEF_coeff[0].Spec_agents_and_diet_additives;

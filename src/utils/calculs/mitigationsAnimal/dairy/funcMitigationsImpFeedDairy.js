@@ -1,5 +1,5 @@
 // Function dairy: mitigations improved feeding
-import reductionEF_coeff from "../../coeff/reductionEF_coeff.json";
+import reductionEF_coeff from "../../../../coeff/reductionEF_coeff.json";
 function funcMitigationsImpFeedDairy({ datasForm, EFDairy, cattleDairy }) {
   //Coeff
   let coeffImpFeedDairy = reductionEF_coeff[0].Improved_feeding;

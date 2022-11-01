@@ -1,6 +1,12 @@
-const TOKEN_KEY = "jwt";
-
 export const logout = ({ setAuthInformations, setResultInformations }) => {
+  let localStorageItems = JSON.parse(localStorage.getItem("cowlculator"));
+  let isUser = localStorageItems?.find((item) => item.loggedUser);
+  localStorage.setItem(
+    "cowlculator",
+    JSON.stringify(
+      localStorageItems.map((item) => ({ ...item, loggedUser: false }))
+    )
+  );
   setAuthInformations((currentAuthInformations) => ({
     ...currentAuthInformations,
     loggedUser: false,
@@ -14,14 +20,13 @@ export const isLogin = async ({ authInformations, setAuthInformations }) => {
   if (!authInformations?.token && !authInformations?.userId) {
     let localStorageItems = JSON.parse(localStorage.getItem("cowlculator"));
     let isUser = localStorageItems?.find((item) => item.loggedUser);
-    if (isUser.loggedUser) {
+    if (isUser?.loggedUser) {
       logInformations = isUser.login;
     }
   } else {
     logInformations = authInformations?.login;
   }
   if (logInformations) {
-    console.log(logInformations);
     let requestOptions = {
       method: "GET",
       headers: {

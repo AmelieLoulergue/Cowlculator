@@ -265,6 +265,7 @@ function Register() {
                   <input
                     type="password"
                     placeholder="Password"
+                    autoComplete="on"
                     value={userProfile?.password ? userProfile.password : ""}
                     onKeyUp={passChange}
                     onChange={(event) => {
@@ -297,6 +298,7 @@ function Register() {
                 <div style={{ position: "relative" }}>
                   <input
                     type="password"
+                    autoComplete="on"
                     placeholder="Confirm password"
                     id="passwordConfirm"
                     value={

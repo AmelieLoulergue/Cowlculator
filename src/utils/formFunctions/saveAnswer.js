@@ -69,9 +69,10 @@ const saveAnswer = ({
     questions: finalQuestions,
     indexQuestions: formInformations?.indexQuestions + 1,
     questionToDisplay: finalQuestions[formInformations?.indexQuestions + 1],
+    datasForm: finalQuestions.filter((question) => question.response),
   });
   setAnswer(
-    finalQuestions[formInformations?.indexQuestions + 1].formInput.type ===
+    finalQuestions[formInformations?.indexQuestions + 1]?.formInput?.type ===
       "checkbox"
       ? false
       : null

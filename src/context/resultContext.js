@@ -29,28 +29,32 @@ export function ResultContextWrapper({ children, authInformations }) {
   ]);
   useEffect(() => {
     if (authInformations?.loggedUser && authInformations?.login) {
-      getUserDatas({ authInformations })
-        .then((result) => {
-          if (result?.result?.length > 0) {
+      if (authInformations?.login.userType === "farmer") {
+        getUserDatas({ authInformations })
+          .then((result) => {
+            if (result?.result?.length > 0) {
+              setResultInformations((currentResultInformations) => ({
+                ...currentResultInformations,
+                allResultsUser: result.result.map((item) => item.result),
+              }));
+            }
+          })
+          // make sure to catch any error
+          .catch(console.error);
+      }
+      if (authInformations?.login.userType === "researcher") {
+        getAllResults({ authInformations })
+          .then((result) => {
             setResultInformations((currentResultInformations) => ({
               ...currentResultInformations,
-              allResultsUser: result.result.map((item) => item.result),
+              allResults: result.result.map((item) => [
+                { id: "userId", response: item.user },
+                ...item.result,
+              ]),
             }));
-          }
-        })
-        // make sure to catch any error
-        .catch(console.error);
-      getAllResults({ authInformations })
-        .then((result) => {
-          setResultInformations((currentResultInformations) => ({
-            ...currentResultInformations,
-            allResults: result.result.map((item) => [
-              { id: "userId", response: item.user },
-              ...item.result,
-            ]),
-          }));
-        })
-        .catch(console.error);
+          })
+          .catch(console.error);
+      }
     }
   }, [authInformations, setResultInformations]);
   let sharedState = {

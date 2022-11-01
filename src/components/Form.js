@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import Navbar from "./layout/Navbar";
 import listOfQuestions from "../utils/listOfQuestions";
 import RenderQuestion from "./form/RenderQuestion";
 import "./Form.css";
@@ -22,17 +21,22 @@ import saveCompletedForm from "../utils/formFunctions/saveCompletedForm";
 import updateFarmNameUser from "../utils/formFunctions/updateFarmNameUser";
 import updateAllExistingQuestions from "../utils/formFunctions/updateAllExistingQuestions";
 import generateDatasFormOnInitForm from "../utils/formFunctions/generateDatasFormOnInitForm";
-import capitalize from "../utils/capitalize";
+import capitalize from "../utils/global/capitalize";
 const NewForm = () => {
   const { formInformations, setFormInformations } = useFormContext();
   const { authInformations, setAuthInformations } = useAuthContext();
   const { setAlertInformations } = useAlertContext();
-  const { resultInformations, setResultsInformations } = useResultContext();
+  const { resultInformations, setResultInformations } = useResultContext();
   const chatContainer = useRef(null);
   let navigate = useNavigate();
   const [answer, setAnswer] = useState(null);
   const [progress, setProgress] = useState(0);
-
+  useEffect(() => {
+    generateDatasFormOnInitForm({
+      initForm: formInformations?.initForm,
+      setFormInformations,
+    });
+  }, [formInformations?.initForm, setFormInformations]);
   useEffect(() => {
     updateProgressForm({
       resultInformations,
@@ -40,37 +44,39 @@ const NewForm = () => {
       formInformations,
     });
   }, [
-    resultInformations?.allResultsUser?.length,
-    formInformations,
+    resultInformations.allResultsUser.length,
+    formInformations.counterQuestion,
     resultInformations,
+    formInformations,
   ]);
+
   useEffect(() => {
     updateCounterQuestion({
       questionToDisplay: formInformations?.questionToDisplay,
       setFormInformations,
     });
   }, [formInformations?.questionToDisplay, setFormInformations]);
-  useEffect(() => {
-    if (formInformations?.formIsCompleted) {
-      saveCompletedForm({
-        results: formInformations?.results,
-        allQuestions: formInformations?.allQuestions,
-        questions: formInformations?.questions,
-        authInformations,
-        setAuthInformations,
-        setResultsInformations,
-      });
-    }
-  }, [
-    authInformations,
-    formInformations?.allQuestions,
-    formInformations?.formIsCompleted,
-    formInformations?.questions,
-    formInformations?.results,
-    setAuthInformations,
-    setFormInformations,
-    setResultsInformations,
-  ]);
+  // useEffect(() => {
+  //   if (formInformations?.formIsCompleted) {
+  //     saveCompletedForm({
+  //       results: formInformations?.results,
+  //       allQuestions: formInformations?.allQuestions,
+  //       questions: formInformations?.questions,
+  //       authInformations,
+  //       setAuthInformations,
+  //       setResultsInformations,
+  //     });
+  //   }
+  // }, [
+  //   authInformations,
+  //   formInformations?.allQuestions,
+  //   formInformations?.formIsCompleted,
+  //   formInformations?.questions,
+  //   formInformations?.results,
+  //   setAuthInformations,
+  //   setFormInformations,
+  //   setResultsInformations,
+  // ]);
   useEffect(() => {
     if (resultInformations?.allResultsUser?.length > 0) {
       setFormInformations((currentFormInformations) => ({
@@ -86,14 +92,28 @@ const NewForm = () => {
         allQuestions: [],
       }));
     }
-  }, [resultInformations, setFormInformations]);
+  }, [resultInformations?.allResultsUser, setFormInformations]);
   useEffect(() => {
-    updateFarmNameUser({
-      questions: formInformations?.questions,
-      formIsCompleted: formInformations?.formIsCompleted,
-      authInformations,
-      setAuthInformations,
-    });
+    if (formInformations?.formIsCompleted) {
+      updateFarmNameUser({
+        questions: formInformations?.questions,
+        formIsCompleted: formInformations?.formIsCompleted,
+        authInformations,
+        setAuthInformations,
+      });
+      setFormInformations((currentFormInformations) => ({
+        ...currentFormInformations,
+        formIsCompleted: false,
+        datasForm: [],
+        initForm: false,
+        questionToDisplay: listOfQuestions.formQuestions[3],
+        indexQuestions: 3,
+        counterQuestion: 3,
+        results: {},
+        questions: listOfQuestions.formQuestions,
+        allQuestions: [],
+      }));
+    }
     if (
       !localStorage.getItem(`allQuestions${authInformations?.login?.userId}`)
     ) {
@@ -106,23 +126,12 @@ const NewForm = () => {
     setAuthInformations,
     setFormInformations,
   ]);
-
-  useEffect(() => {
-    generateDatasFormOnInitForm({
-      initForm: formInformations?.initForm,
-      setFormInformations,
-    });
-  }, [formInformations?.initForm, setFormInformations]);
   return (
     <div>
       {formInformations?.initForm && (
         <div className="buttons-skip-form">
           <button
             onClick={() => {
-              calculs({
-                formInformations: formInformations,
-                setFormInformations: setFormInformations,
-              });
               navigate("/dashboard");
             }}
           >
@@ -147,6 +156,11 @@ const NewForm = () => {
                 <>
                   <h3>Are you ready ?</h3>
                   <h1>Start filling the form today</h1>
+                  <h4>
+                    By clicking on "Let's get started" you agree that the
+                    information collected are anonymously shared and used for
+                    research purpose.
+                  </h4>
                 </>
               )}
             </div>
@@ -179,9 +193,8 @@ const NewForm = () => {
         )}
         {formInformations?.initForm && formInformations?.questions?.length > 0 && (
           <>
-            <Navbar />
+            {/* <Navbar /> */}
             <div id="questions-form" className="questions" ref={chatContainer}>
-              {console.log(formInformations.questionToDisplay)}
               {formInformations?.questions
                 .slice(
                   resultInformations?.allResultsUser[0]?.length ? 3 : 0,
@@ -273,9 +286,11 @@ const NewForm = () => {
                   <button
                     className="btn"
                     onClick={() => {
-                      setFormInformations({
-                        ...formInformations,
-                        formIsCompleted: true,
+                      calculs({
+                        authInformations,
+                        setAuthInformations,
+                        setResultInformations,
+                        setFormInformations,
                       });
                       window.scrollTo(0, 0);
                       navigate("/dashboard");

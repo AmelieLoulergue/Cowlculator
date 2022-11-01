@@ -7,7 +7,6 @@ import { Navigate } from "react-router-dom";
 const FormPage = () => {
   const { authInformations } = useAuthContext();
   const { resultInformations } = useResultContext();
-  console.log("coucou", authInformations);
   if (!authInformations?.loggedUser) {
     return <Navigate to="/account/login" />;
   }

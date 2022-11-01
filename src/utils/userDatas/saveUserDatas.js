@@ -1,14 +1,6 @@
-const saveUserDatas = async ({ results, allQuestions, authInformations }) => {
-  let newResults = Object.entries(results)
-    .map((value) => {
-      return { id: value[0], response: value[1] };
-    })
-    .flat();
+const saveUserDatas = async ({ results, authInformations }) => {
+  const resultToSend = results.filter((element) => element.id !== "farm_name");
 
-  const resultToSend = [
-    ...allQuestions.filter((element) => element.id !== "farm_name"),
-    ...newResults,
-  ];
   let requestOptions = {
     method: "POST",
     headers: {

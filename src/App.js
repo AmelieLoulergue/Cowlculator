@@ -12,16 +12,13 @@ import {
   Dashboard,
 } from "./pages/index";
 import Bg from "./components/layout/Bg";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import AlertComponent from "./components/alerts/Alert";
 import { isLogin } from "./utils/authentication/controlLog";
-import getUserDatas from "./utils/userDatas/getUserDatas";
-import getAllResults from "./utils/userDatas/getAllResults";
 import { useAuthContext } from "./context/authContext";
 import { useAlertContext } from "./context/alertContext";
 import { ResultContextWrapper } from "./context/resultContext";
-import { FormContextWrapper } from "./context/formContext";
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -32,12 +29,8 @@ function App() {
   const { alertInformations } = useAlertContext();
 
   useEffect(() => {
-    console.log("initApp");
-
     if (!authInformations.loggedUser) {
-      console.log("function contrôle connexion user");
       if (!authInformations.login) {
-        console.log("il n'y a pas de login, on regarde le localstorage");
         isLogin({
           setAuthInformations,
         });

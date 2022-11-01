@@ -2,6 +2,7 @@ const localStorageSetItems = ({ items, userId }) => {
   if (userId) {
     const valuesToNotSave = [null, undefined, "null", "undefined", "[]", "{}"];
     const datasForLocalStorage = Object.entries(items);
+
     const initialDatasToStoreInLocalStorage = [];
     const datasToStoreInLocalStorage = datasForLocalStorage.reduce(
       (previousValue, item) => {
@@ -18,7 +19,7 @@ const localStorageSetItems = ({ items, userId }) => {
       },
       initialDatasToStoreInLocalStorage
     );
-    console.log(datasToStoreInLocalStorage);
+
     let currentLocalStorage = null;
     if (localStorage.getItem("cowlculator")) {
       currentLocalStorage = JSON.parse(localStorage.getItem("cowlculator"));
@@ -30,13 +31,11 @@ const localStorageSetItems = ({ items, userId }) => {
         localStorage.setItem(
           "cowlculator",
           JSON.stringify(
-            [
-              currentLocalStorage.map((element) =>
-                element.login?.userId === userId
-                  ? Object.assign(element, datasToStoreInLocalStorage)
-                  : element
-              ),
-            ].flat()
+            currentLocalStorage.map((element) =>
+              element.login?.userId === userId
+                ? Object.assign(element, datasToStoreInLocalStorage)
+                : element
+            )
           )
         );
       } else if (
@@ -48,7 +47,6 @@ const localStorageSetItems = ({ items, userId }) => {
         );
       }
     } else {
-      console.log("pas de cowlculator LCOALSTORAG");
       localStorage.setItem(
         "cowlculator",
         JSON.stringify([datasToStoreInLocalStorage])
@@ -56,23 +54,34 @@ const localStorageSetItems = ({ items, userId }) => {
     }
   }
 };
-const localStorageRemoveItems = ({ items, userId }) => {
-  if (userId) {
-    const datasToDeleteInLocalStorage = items;
-    const initialDatasToDeleteLocalStorage = [];
-    const datasToBeDeletedFromLocalStorage = datasToDeleteInLocalStorage.reduce(
-      (previousValue, item) => {
-        if (localStorage.getItem(item + userId)) {
-          return [...previousValue, item + userId];
-        }
-        return previousValue;
-      },
-      initialDatasToDeleteLocalStorage
+const localStorageRemoveItems = ({ userId }) => {
+  let currentLocalStorage = JSON.parse(localStorage.getItem("cowlculator"));
+  if (
+    userId &&
+    JSON.parse(localStorage.getItem("cowlculator")).find(
+      (item) => item.loggedUser && item.login?.userId === userId
+    )
+  ) {
+    let localStorageItem = JSON.parse(
+      localStorage.getItem("cowlculator")
+    )?.find((item) => item.loggedUser && item.login?.userId === userId);
+    const {
+      datasForm,
+      indexQuestions,
+      counterQuestion,
+      initForm,
+      questions,
+      questionToDisplay,
+      ...rest
+    } = localStorageItem;
+    localStorage.setItem(
+      "cowlculator",
+      JSON.stringify(
+        currentLocalStorage.map((element) =>
+          element.login?.userId === userId ? rest : element
+        )
+      )
     );
-    datasToBeDeletedFromLocalStorage.forEach((data) => {
-      localStorage.removeItem(data);
-      console.log(localStorage.getItem(data));
-    });
   }
 };
 const localStorageGetItems = ({ items, userId }) => {

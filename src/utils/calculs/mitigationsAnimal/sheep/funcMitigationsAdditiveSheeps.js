@@ -1,5 +1,5 @@
 // Function sheep: mitigations additives
-import reductionEF_coeff from "../../coeff/reductionEF_coeff.json";
+import reductionEF_coeff from "../../../../coeff/reductionEF_coeff.json";
 function funcMitigationsAdditiveSheep({ datasForm, EFSheep }) {
   //Coeff
   let coeffAdditiveSheep = reductionEF_coeff[2].Spec_agents_and_diet_additives;

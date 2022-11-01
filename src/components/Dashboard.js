@@ -7,15 +7,12 @@ import { useNavigate } from "react-router-dom";
 import { DoughnutChart } from "./charts/DoughnoutChart";
 import { BarChart } from "./charts/VerticalBarChart";
 import { LineChart } from "./charts/LineChart";
-import { useAuthContext } from "../context/authContext";
 import Advices from "../utils/calculs/Advices";
 import { HashLink as Link } from "react-router-hash-link";
 import { useResultContext } from "../context/resultContext";
-function Dashboard({ allResultsUser }) {
+function Dashboard() {
   let navigate = useNavigate();
-  const { authInformations, setAuthInformations } = useAuthContext();
-  const { resultInformations, setResultInformations } = useResultContext();
-  console.log(authInformations);
+  const { resultInformations } = useResultContext();
   resultInformations?.allResultsUser?.sort((a, b) => {
     return (
       Number(new Date(a.find((el) => el.id === "end_date").response)) -

@@ -1,4 +1,4 @@
-import findElementById from "../findElementById";
+import findResponseElementById from "../global/findResponseElementById";
 import updateUserDatas from "../userDatas/updateUserDatas";
 const updateFarmNameUser = ({
   questions,
@@ -6,26 +6,13 @@ const updateFarmNameUser = ({
   authInformations,
   setAuthInformations,
 }) => {
-  console.log(
-    questions,
-    findElementById({
-      id: "farm_name",
-      array: questions,
-    })
-  );
   if (
-    findElementById({
-      id: "farm_name",
-      array: questions,
-    }) &&
+    findResponseElementById(questions, "farm_name") &&
     !authInformations?.login?.farmName &&
     formIsCompleted
   ) {
     updateUserDatas({
-      farmName: findElementById({
-        id: "farm_name",
-        array: questions,
-      }),
+      farmName: findResponseElementById(questions, "farm_name"),
       authInformations,
       setAuthInformations,
     });

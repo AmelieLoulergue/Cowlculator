@@ -2,7 +2,7 @@ const listOfQuestions = {
   formQuestions: [
     {
       id: "farm_name",
-      bloc_name: "farm_information",
+      bloc_name: "Farm information",
       question: "What is the name of the farm ?",
       formInput: {
         type: "text",
@@ -39,7 +39,7 @@ const listOfQuestions = {
     },
     {
       id: "elec_total",
-      bloc_name: "electricity",
+      bloc_name: "Electricity",
       index_id: 2,
       question: "What is your total electricity consumption? ",
       formInput: { type: "number" },
@@ -64,7 +64,7 @@ const listOfQuestions = {
     },
     {
       id: "gas_butane_cons",
-      bloc_name: "gas",
+      bloc_name: "Gas",
       question: "What is the butane consumption ?",
       formInput: { type: "number" },
       userValue: { value: 0, unit: "Gal" },
@@ -102,7 +102,7 @@ const listOfQuestions = {
     },
     {
       id: "vehicles_type_cars",
-      bloc_name: "fuel",
+      bloc_name: "Fuel",
       question:
         "Do you use cars on your production, transformation, distribution business area?",
       formInput: { type: "checkbox" },
@@ -241,7 +241,7 @@ const listOfQuestions = {
     },
     {
       id: "water_drink_cons",
-      bloc_name: "water",
+      bloc_name: "Water",
       question: "What is the tap water consumption ?",
       nb: "NB: this data can be found on the utility bill or from meters. If you have a well and the date about you well water flow, do not include them in this total, leave blank. e.g if your well water covers the totality of your water needs, leave blank.",
       formInput: { type: "number" },
@@ -256,7 +256,7 @@ const listOfQuestions = {
     },
     {
       id: "other",
-      bloc_name: "other",
+      bloc_name: "Other",
       question:
         "Do you use other sources of energy that would lead to co2 emissions? e.g. kerosene, coal, residual heating fuel...",
       formInput: { type: "checkbox" },
@@ -664,7 +664,7 @@ const listOfQuestions = {
 
     {
       id: "farm_crops",
-      bloc_name: "crops",
+      bloc_name: "Crops",
       question: "Do you produce crops?",
       formInput: { type: "checkbox" },
       userValue: false,
@@ -687,14 +687,6 @@ const listOfQuestions = {
                 unit: ["acre", "sq feet"],
               },
             },
-            // {
-            //   answerParentQuestion: true,
-            //   id: "farm_crops_grassland_organic",
-            //   parentId: "farm_crops_grassland",
-            //   question: "Is it organically grown ?",
-            //   formInput: { type: "checkbox" },
-            //   userValue: false,
-            // },
             {
               answerParentQuestion: true,
               id: "farm_crops_grassland_grazing_practice",
@@ -746,14 +738,6 @@ const listOfQuestions = {
                 unit: ["acre", "sq feet"],
               },
             },
-            // {
-            //   answerParentQuestion: true,
-            //   id: "farm_crops_grain_organic",
-            //   parentId: "farm_crops_grain",
-            //   question: "Is it organically grown ?",
-            //   formInput: { type: "checkbox" },
-            //   userValue: false,
-            // },
           ],
         },
         {
@@ -774,14 +758,6 @@ const listOfQuestions = {
                 unit: ["acre", "sq feet"],
               },
             },
-            // {
-            //   answerParentQuestion: true,
-            //   id: "farm_crops_forage_organic",
-            //   parentId: "farm_crops_forage",
-            //   question: "Is it organically grown ?",
-            //   formInput: { type: "checkbox" },
-            //   userValue: false,
-            // },
           ],
         },
         {
@@ -802,14 +778,6 @@ const listOfQuestions = {
                 unit: ["acre", "sq feet"],
               },
             },
-            // {
-            //   answerParentQuestion: true,
-            //   id: "farm_crops_fv_organic",
-            //   parentId: "farm_crops_fv",
-            //   question: "Is it organically grown ?",
-            //   formInput: { type: "checkbox" },
-            //   userValue: false,
-            // },
           ],
         },
         {
@@ -830,14 +798,6 @@ const listOfQuestions = {
                 unit: ["acre", "sq feet"],
               },
             },
-            // {
-            //   answerParentQuestion: true,
-            //   id: "farm_crops_flowers_organic",
-            //   parentId: "farm_crops_flowers",
-            //   question: "Is it organically grown ?",
-            //   formInput: { type: "checkbox" },
-            //   userValue: false,
-            // },
           ],
         },
         {
@@ -858,14 +818,6 @@ const listOfQuestions = {
                 unit: ["acre", "sq feet"],
               },
             },
-            // {
-            //   answerParentQuestion: true,
-            //   id: "farm_crops_herbs_organic",
-            //   parentId: "farm_crops_herbs",
-            //   question: "Is it organically grown ?",
-            //   formInput: { type: "checkbox" },
-            //   userValue: false,
-            // },
           ],
         },
         {
@@ -1054,38 +1006,6 @@ const listOfQuestions = {
             },
           ],
         },
-        // {
-        //   answerParentQuestion: true,
-        //   id: "farm_crops_organic_soils_restoration_practice",
-        //   parentId: "farm_crops",
-        //   question:
-        //     "For your crop(s), have you implemented restoration ( applies for organic soils) to reduce emissions & increase sequestration?",
-        //   formInput: { type: "checkbox" },
-        //   userValue: false,
-        //   linked_questions: [
-        //     {
-        //       answerParentQuestion: true,
-        //       parentId: "farm_crops_organic_soils_restoration_practice",
-        //       id: "farm_crops_organic_soils_restoration_practice_portion",
-        //       question: "Did you implement this/these practice(s) for:",
-
-        //       formInput: { type: "select" },
-        //       userValue: ["A portion of them", "All of them"],
-        //       linked_questions: [
-        //         {
-        //           answerParentQuestion: "A portion of them",
-        //           parentId:
-        //             "farm_crops_organic_soils_restoration_practice_portion",
-        //           id: "farm_crops_organic_soils_restoration_practice_portion_numb",
-        //           question: "% of them",
-
-        //           formInput: { type: "number" },
-        //           userValue: { value: "100", unit: "%" },
-        //         },
-        //       ],
-        //     },
-        //   ],
-        // },
         {
           answerParentQuestion: true,
           id: "farm_crops_degraded_lands_restoration_practice",
@@ -1107,27 +1027,7 @@ const listOfQuestions = {
             },
           ],
         },
-        // {
-        //   answerParentQuestion: true,
-        //   id: "farm_crops_soils_bioenergy_practice",
-        //   parentId: "farm_crops",
-        //   question:
-        //     "For your crop(s), have you implemented soils under bio-energy to reduce emissions & increase sequestration?",
-        //   formInput: { type: "checkbox" },
-        //   userValue: false,
-        //   linked_questions: [
-        //     {
-        //       answerParentQuestion: true,
-        //       parentId: "farm_crops_soils_bioenergy_practice",
-        //       id: "farm_crops_soils_bioenergy_practice_size",
-        //       question: "What is the size of your lands under bio-energy ? ",
-        //       formInput: { type: "number" },
-        //       userValue: {
-        //         unit: ["acre", "sq feet"],
-        //       },
-        //     },
-        //   ],
-        // },
+
         {
           answerParentQuestion: true,
           id: "farm_crops_manure_practice",
@@ -1152,7 +1052,7 @@ const listOfQuestions = {
         {
           answerParentQuestion: true,
           parentId: "farm_crops",
-          bloc_name: "fertilizer",
+          bloc_name: "Fertilizer",
           id: "farm_crops_fertilizer",
           question: "Do you apply synthetic fertilizer?",
           formInput: { type: "checkbox" },
@@ -1411,27 +1311,7 @@ const listOfQuestions = {
                 },
               ],
             },
-            // {
-            //   answerParentQuestion: true,
-            //   parentId: "farm_crops_fertilizer",
-            //   id: "farm_crops_fertilizer_basic_slag",
-            //   question: "Do you use basic slag, open hearth?",
 
-            //   formInput: { type: "checkbox" },
-            //   userValue: false,
-            //   linked_questions: [
-            //     {
-            //       answerParentQuestion: true,
-            //       parentId: "farm_crops_fertilizer_basic_slag",
-            //       id: "farm_crops_fertilizer_basic_slag_cons",
-            //       question:
-            //         "During the period of time indicated at the beginning of this questionnaire, how many ton of basic slag, open hearth did you apply?",
-
-            //       formInput: { type: "number" },
-            //       userValue: { value: 0, unit: "ton" },
-            //     },
-            //   ],
-            // },
             {
               answerParentQuestion: true,
               parentId: "farm_crops_fertilizer",
@@ -1453,195 +1333,7 @@ const listOfQuestions = {
                 },
               ],
             },
-            // {
-            //   answerParentQuestion: true,
-            //   parentId: "farm_crops_fertilizer",
-            //   id: "farm_crops_fertilizer_phosphoric_acid",
-            //   question: "Do you use phosphoric acid?",
 
-            //   formInput: { type: "checkbox" },
-            //   userValue: false,
-            //   linked_questions: [
-            //     {
-            //       answerParentQuestion: true,
-            //       parentId: "farm_crops_fertilizer_phosphoric_acid",
-            //       id: "farm_crops_fertilizer_phosphoric_acid_cons",
-            //       question:
-            //         "During the period of time indicated at the beginning of this questionnaire, how many ton of phosphoric acid did you apply?",
-
-            //       formInput: { type: "number" },
-            //       userValue: { value: 0, unit: "ton" },
-            //     },
-            //   ],
-            // },
-            // {
-            //   answerParentQuestion: true,
-            //   parentId: "farm_crops_fertilizer",
-            //   id: "farm_crops_fertilizer_rock_phosphate",
-            //   question: "Do you use rock phosphate?",
-
-            //   formInput: { type: "checkbox" },
-            //   userValue: false,
-            //   linked_questions: [
-            //     {
-            //       answerParentQuestion: true,
-            //       parentId: "farm_crops_fertilizer_rock_phosphate",
-            //       id: "farm_crops_fertilizer_rock_phosphate_cons",
-            //       question:
-            //         "During the period of time indicated at the beginning of this questionnaire, how many ton of rock phosphate did you apply?",
-
-            //       formInput: { type: "number" },
-            //       userValue: { value: 0, unit: "ton" },
-            //     },
-            //   ],
-            // },
-            // {
-            //   answerParentQuestion: true,
-            //   parentId: "farm_crops_fertilizer",
-            //   id: "farm_crops_fertilizer_superphosphate_normal",
-            //   question: "Do you use superphosphate normal?",
-
-            //   formInput: { type: "checkbox" },
-            //   userValue: false,
-            //   linked_questions: [
-            //     {
-            //       answerParentQuestion: true,
-            //       parentId: "farm_crops_fertilizer_superphosphate_normal",
-            //       id: "farm_crops_fertilizer_superphosphate_normal_cons",
-            //       question:
-            //         "During the period of time indicated at the beginning of this questionnaire, how many ton of superphosphate normal did you apply?",
-
-            //       formInput: { type: "number" },
-            //       userValue: { value: 0, unit: "ton" },
-            //     },
-            //   ],
-            // },
-            // {
-            //   answerParentQuestion: true,
-            //   parentId: "farm_crops_fertilizer",
-            //   id: "farm_crops_fertilizer_superphosphate_concentrated",
-            //   question: "Do you use superphosphate concentrated?",
-
-            //   formInput: { type: "checkbox" },
-            //   userValue: false,
-            //   linked_questions: [
-            //     {
-            //       answerParentQuestion: true,
-            //       parentId: "farm_crops_fertilizer_superphosphate_concentrated",
-            //       id: "farm_crops_fertilizer_superphosphate_concentrated_cons",
-            //       question:
-            //         "During the period of time indicated at the beginning of this questionnaire, how many ton of superphosphate concentrated did you apply?",
-
-            //       formInput: { type: "number" },
-            //       userValue: { value: 0, unit: "ton" },
-            //     },
-            //   ],
-            // },
-            // {
-            //   answerParentQuestion: true,
-            //   parentId: "farm_crops_fertilizer",
-            //   id: "farm_crops_fertilizer_superphosphoric_acid",
-            //   question: "Do you use superphosphoric acid?",
-
-            //   formInput: { type: "checkbox" },
-            //   userValue: false,
-            //   linked_questions: [
-            //     {
-            //       answerParentQuestion: true,
-            //       parentId: "farm_crops_fertilizer_superphosphoric_acid",
-            //       id: "farm_crops_fertilizer_superphosphoric_acid_cons",
-            //       question:
-            //         "During the period of time indicated at the beginning of this questionnaire, how many ton of superphosphoric acid did you apply?",
-
-            //       formInput: { type: "number" },
-            //       userValue: { value: 0, unit: "ton" },
-            //     },
-            //   ],
-            // },
-            // {
-            //   answerParentQuestion: true,
-            //   parentId: "farm_crops_fertilizer",
-            //   id: "farm_crops_fertilizer_potash",
-            //   question: "Do you use potash?",
-
-            //   formInput: { type: "checkbox" },
-            //   userValue: false,
-            //   linked_questions: [
-            //     {
-            //       answerParentQuestion: true,
-            //       parentId: "farm_crops_fertilizer_potash",
-            //       id: "farm_crops_fertilizer_potash_cons",
-            //       question:
-            //         "During the period of time indicated at the beginning of this questionnaire, how many ton of potash did you apply?",
-
-            //       formInput: { type: "number" },
-            //       userValue: { value: 0, unit: "ton" },
-            //     },
-            //   ],
-            // },
-            // {
-            //   answerParentQuestion: true,
-            //   parentId: "farm_crops_fertilizer",
-            //   id: "farm_crops_fertilizer_potassium_chloride",
-            //   question: "Do you use potassium chloride (muriate)?",
-
-            //   formInput: { type: "checkbox" },
-            //   userValue: false,
-            //   linked_questions: [
-            //     {
-            //       answerParentQuestion: true,
-            //       parentId: "farm_crops_fertilizer_potassium_chloride",
-            //       id: "farm_crops_fertilizer_potassium_chloride_cons",
-            //       question:
-            //         "During the period of time indicated at the beginning of this questionnaire, how many ton of potassium chloride did you apply?",
-
-            //       formInput: { type: "number" },
-            //       userValue: { value: 0, unit: "ton" },
-            //     },
-            //   ],
-            // },
-            // {
-            //   answerParentQuestion: true,
-            //   parentId: "farm_crops_fertilizer",
-            //   id: "farm_crops_fertilizer_potassium_magnesium_sulfate",
-            //   question: "Do you use potassium magnesium sulfate?",
-
-            //   formInput: { type: "checkbox" },
-            //   userValue: false,
-            //   linked_questions: [
-            //     {
-            //       answerParentQuestion: true,
-            //       parentId: "farm_crops_fertilizer_potassium_magnesium_sulfate",
-            //       id: "farm_crops_fertilizer_potassium_magnesium_sulfate_cons",
-            //       question:
-            //         "During the period of time indicated at the beginning of this questionnaire, how many ton of potassium magnesium sulfate did you apply?",
-
-            //       formInput: { type: "number" },
-            //       userValue: { value: 0, unit: "ton" },
-            //     },
-            //   ],
-            // },
-            // {
-            //   answerParentQuestion: true,
-            //   parentId: "farm_crops_fertilizer",
-            //   id: "farm_crops_fertilizer_potassium_sulfate",
-            //   question: "Do you use potassium sulfate?",
-
-            //   formInput: { type: "checkbox" },
-            //   userValue: false,
-            //   linked_questions: [
-            //     {
-            //       answerParentQuestion: true,
-            //       parentId: "farm_crops_fertilizer_potassium_sulfate",
-            //       id: "farm_crops_fertilizer_potassium_sulfate_cons",
-            //       question:
-            //         "During the period of time indicated at the beginning of this questionnaire, how many ton of potassium sulfate did you apply?",
-
-            //       formInput: { type: "number" },
-            //       userValue: { value: 0, unit: "ton" },
-            //     },
-            //   ],
-            // },
             {
               answerParentQuestion: true,
               parentId: "farm_crops_fertilizer",
@@ -1810,195 +1502,6 @@ const listOfQuestions = {
                 },
               ],
             },
-            // {
-            //   answerParentQuestion: true,
-            //   parentId: "farm_crops_fertilizer",
-            //   id: "farm_crops_fertilizer_wood_ashes",
-            //   question: "Do you use wood ashes?",
-
-            //   formInput: { type: "checkbox" },
-            //   userValue: false,
-            //   linked_questions: [
-            //     {
-            //       answerParentQuestion: true,
-            //       parentId: "farm_crops_fertilizer_wood_ashes",
-            //       id: "farm_crops_fertilizer_wood_ashes_cons",
-            //       question:
-            //         "During the period of time indicated at the beginning of this questionnaire, how many ton of wood ashes did you apply?",
-
-            //       formInput: { type: "number" },
-            //       userValue: { value: 0, unit: "ton" },
-            //     },
-            //   ],
-            // },
-            // {
-            //   answerParentQuestion: true,
-            //   parentId: "farm_crops_fertilizer",
-            //   id: "farm_crops_fertilizer_blast_furnace_slag",
-            //   question: "Do you use Blast furnace slag?",
-
-            //   formInput: { type: "checkbox" },
-            //   userValue: false,
-            //   linked_questions: [
-            //     {
-            //       answerParentQuestion: true,
-            //       parentId: "farm_crops_fertilizer_blast_furnace_slag",
-            //       id: "farm_crops_fertilizer_blast_furnace_slag_cons",
-            //       question:
-            //         "During the period of time indicated at the beginning of this questionnaire, how many ton of Blast furnace slag did you apply?",
-
-            //       formInput: { type: "number" },
-            //       userValue: { value: 0, unit: "ton" },
-            //     },
-            //   ],
-            // },
-            // {
-            //   answerParentQuestion: true,
-            //   parentId: "farm_crops_fertilizer",
-            //   id: "farm_crops_fertilizer_dolomite",
-            //   question: "Do you use dolomite?",
-
-            //   formInput: { type: "checkbox" },
-            //   userValue: false,
-            //   linked_questions: [
-            //     {
-            //       answerParentQuestion: true,
-            //       parentId: "farm_crops_fertilizer_dolomite",
-            //       id: "farm_crops_fertilizer_dolomite_cons",
-            //       question:
-            //         "During the period of time indicated at the beginning of this questionnaire, how many ton of dolomite did you apply?",
-
-            //       formInput: { type: "number" },
-            //       userValue: { value: 0, unit: "ton" },
-            //     },
-            //   ],
-            // },
-            // {
-            //   answerParentQuestion: true,
-            //   parentId: "farm_crops_fertilizer",
-            //   id: "farm_crops_fertilizer_gypsum",
-            //   question: "Do you use gypsum?",
-
-            //   formInput: { type: "checkbox" },
-            //   userValue: false,
-            //   linked_questions: [
-            //     {
-            //       answerParentQuestion: true,
-            //       parentId: "farm_crops_fertilizer_gypsum",
-            //       id: "farm_crops_fertilizer_gypsum_cons",
-            //       question:
-            //         "During the period of time indicated at the beginning of this questionnaire, how many ton of gypsum did you apply?",
-
-            //       formInput: { type: "number" },
-            //       userValue: { value: 0, unit: "ton" },
-            //     },
-            //   ],
-            // },
-            // {
-            //   answerParentQuestion: true,
-            //   parentId: "farm_crops_fertilizer",
-            //   id: "farm_crops_fertilizer_kiesserite",
-            //   question: "Do you use kiesserite(emjeo)?",
-
-            //   formInput: { type: "checkbox" },
-            //   userValue: false,
-            //   linked_questions: [
-            //     {
-            //       answerParentQuestion: true,
-            //       parentId: "farm_crops_fertilizer_kiesserite",
-            //       id: "farm_crops_fertilizer_kiesserite_cons",
-            //       question:
-            //         "During the period of time indicated at the beginning of this questionnaire, how many ton of kiesserite did you apply?",
-
-            //       formInput: { type: "number" },
-            //       userValue: { value: 0, unit: "ton" },
-            //     },
-            //   ],
-            // },
-            // {
-            //   answerParentQuestion: true,
-            //   parentId: "farm_crops_fertilizer",
-            //   id: "farm_crops_fertilizer_limestone",
-            //   question: "Do you use limestone?",
-
-            //   formInput: { type: "checkbox" },
-            //   userValue: false,
-            //   linked_questions: [
-            //     {
-            //       answerParentQuestion: true,
-            //       parentId: "farm_crops_fertilizer_limestone",
-            //       id: "farm_crops_fertilizer_limestone_cons",
-            //       question:
-            //         "During the period of time indicated at the beginning of this questionnaire, how many ton of limestone did you apply?",
-
-            //       formInput: { type: "number" },
-            //       userValue: { value: 0, unit: "ton" },
-            //     },
-            //   ],
-            // },
-            // {
-            //   answerParentQuestion: true,
-            //   parentId: "farm_crops_fertilizer",
-            //   id: "farm_crops_fertilizer_lime_sulfur_solution",
-            //   question: "Do you use lime-sulfur solution?",
-
-            //   formInput: { type: "checkbox" },
-            //   userValue: false,
-            //   linked_questions: [
-            //     {
-            //       answerParentQuestion: true,
-            //       parentId: "farm_crops_fertilizer_lime_sulfur_solution",
-            //       id: "farm_crops_fertilizer_lime_sulfur_solution_cons",
-            //       question:
-            //         "During the period of time indicated at the beginning of this questionnaire, how many ton of lime-sulfur solution did you apply?",
-
-            //       formInput: { type: "number" },
-            //       userValue: { value: 0, unit: "ton" },
-            //     },
-            //   ],
-            // },
-            // {
-            //   answerParentQuestion: true,
-            //   parentId: "farm_crops_fertilizer",
-            //   id: "farm_crops_fertilizer_magnesium_sulfate",
-            //   question: "Do you use magnesium sulfate (Epsom salt)?",
-
-            //   formInput: { type: "checkbox" },
-            //   userValue: false,
-            //   linked_questions: [
-            //     {
-            //       answerParentQuestion: true,
-            //       parentId: "farm_crops_fertilizer_magnesium_sulfate",
-            //       id: "farm_crops_fertilizer_magnesium_sulfate_cons",
-            //       question:
-            //         "During the period of time indicated at the beginning of this questionnaire, how many ton of magnesium sulfate did you apply?",
-
-            //       formInput: { type: "number" },
-            //       userValue: { value: 0, unit: "ton" },
-            //     },
-            //   ],
-            // },
-            // {
-            //   answerParentQuestion: true,
-            //   parentId: "farm_crops_fertilizer",
-            //   id: "farm_crops_fertilizer_sulfur",
-            //   question: "Do you use sulfur?",
-
-            //   formInput: { type: "checkbox" },
-            //   userValue: false,
-            //   linked_questions: [
-            //     {
-            //       answerParentQuestion: true,
-            //       parentId: "farm_crops_fertilizer_sulfur",
-            //       id: "farm_crops_fertilizer_sulfur_cons",
-            //       question:
-            //         "During the period of time indicated at the beginning of this questionnaire, how many ton of sulfur did you apply?",
-
-            //       formInput: { type: "number" },
-            //       userValue: { value: 0, unit: "ton" },
-            //     },
-            //   ],
-            // },
           ],
         },
       ],
@@ -2006,7 +1509,7 @@ const listOfQuestions = {
 
     {
       id: "farm_animals",
-      bloc_name: "animals",
+      bloc_name: "Animals",
       question: "Do you produce animals?",
       formInput: { type: "checkbox" },
       userValue: false,

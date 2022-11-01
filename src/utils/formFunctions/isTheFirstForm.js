@@ -5,31 +5,42 @@ const isTheFirstForm = ({
   authInformations,
 }) => {
   if (allResultsUser?.length > 0) {
-    console.log(
-      "check if first FORM",
-      authInformations?.login?.farmName,
-      allResultsUser[0]?.find((element) => element.id === "farm_state")
-        ?.response,
-      allResultsUser[0]?.find((element) => element.id === "farm_zip_code")
-        ?.response
+    let formLocalStorage = JSON.parse(
+      localStorage.getItem("cowlculator")
+    )?.find(
+      (element) =>
+        element.login?.userId === authInformations?.login.userId &&
+        element.loggedUser
     );
-    console.log(allResultsUser[0].filter((element, index) => index < 3));
-    setFormInformations((currentFormInformations) => ({
-      ...currentFormInformations,
-      indexQuestions: 3,
-      counterQuestion: 3,
-      questionToDisplay: listOfQuestions.formQuestions[3],
-      questions: [
-        {
-          ...currentFormInformations.questions[0],
-          response: authInformations?.login?.farmName,
-        },
-        allResultsUser[0].filter((element, index) => index < 2),
-        currentFormInformations.questions.filter(
-          (question, index) => index >= 3
-        ),
-      ].flat(),
-    }));
+
+    setFormInformations((currentFormInformations) => {
+      return {
+        ...currentFormInformations,
+        indexQuestions:
+          formLocalStorage?.indexQuestions > 0
+            ? formLocalStorage.indexQuestions
+            : 3,
+        counterQuestion:
+          formLocalStorage?.counterQuestion > 0
+            ? formLocalStorage.counterQuestion
+            : 3,
+        questionToDisplay: formLocalStorage?.questionToDisplay
+          ? formLocalStorage?.questionToDisplay
+          : listOfQuestions.formQuestions[3],
+        questions: formLocalStorage?.questions
+          ? formLocalStorage?.questions
+          : [
+              {
+                ...currentFormInformations.questions[0],
+                response: authInformations?.login?.farmName,
+              },
+              allResultsUser[0].filter((element, index) => index < 2),
+              currentFormInformations.questions.filter(
+                (question, index) => index >= 3
+              ),
+            ].flat(),
+      };
+    });
   }
 };
 

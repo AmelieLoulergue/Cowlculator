@@ -25,7 +25,6 @@ export function AuthContextWrapper({ children }) {
     authInformations: authInformations,
     setAuthInformations: setAuthInformations,
   };
-  useEffect(() => console.log(authInformations), [authInformations]);
   return (
     <AuthContext.Provider value={sharedState}>{children}</AuthContext.Provider>
   );

@@ -18,7 +18,6 @@ import { useResultContext } from "../../context/resultContext";
 function Navbar() {
   const { authInformations, setAuthInformations } = useAuthContext();
   const { setResultInformations } = useResultContext();
-  console.log(authInformations);
   const toggleSideNav = () => {
     document.getElementById("dash-side").classList.toggle("active");
     document.getElementById("dash-nav-icon-burger").classList.toggle("active");
@@ -29,7 +28,6 @@ function Navbar() {
   const [scroll, setScroll] = useState(window.scrollY);
   useEffect(() => setScroll(window.scrollY), []);
   const navigate = useNavigate();
-  console.log("ici");
   return (
     <>
       <div className="dash-side" id="dash-side">

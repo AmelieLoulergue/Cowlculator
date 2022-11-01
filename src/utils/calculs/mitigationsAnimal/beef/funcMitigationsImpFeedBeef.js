@@ -1,4 +1,4 @@
-import reductionEF_coeff from "../../coeff/reductionEF_coeff.json";
+import reductionEF_coeff from "../../../../coeff/reductionEF_coeff.json";
 function funcMitigationsImpFeedBeef({ datasForm, EFBeef, cattleBeef }) {
   //Coeff
   let coeffImpFeedBeef = reductionEF_coeff[1].Improved_feeding;

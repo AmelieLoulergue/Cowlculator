@@ -69,6 +69,7 @@ function Login() {
                   type="password"
                   placeholder="Password"
                   id="password"
+                  autoComplete="on"
                   value={userProfile?.password ? userProfile.password : ""}
                   onChange={(event) =>
                     setUserProfile({

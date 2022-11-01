@@ -504,6 +504,19 @@ function funcCropsMitigations({
     mitigationCropAgro;
   cropsMitigationsTotal = mitigationCropsTotal;
   return {
+    coeffs: {
+      deg_resto_coeff,
+      manure_bios_coeff,
+      crop_LUC_coeff,
+    },
+    size: {
+      grassland_size,
+      grain_size,
+      forage_size,
+      fv_size,
+      flowers_size,
+      herbs_size,
+    },
     mitigationCropAgro: mitigationCropAgro,
     mitigationCropNut: mitigationCropNut,
     mitigationCropTillage: mitigationCropTillage,

@@ -1,5 +1,5 @@
 // Function dairy: long term breeding
-import reductionEF_coeff from "../../coeff/reductionEF_coeff.json";
+import reductionEF_coeff from "../../../../coeff/reductionEF_coeff.json";
 function funcMitigationsLTBreedingDairy({ datasForm, EFDairy, cattleDairy }) {
   //Coeff
   let coeffLTBreedingDairy = reductionEF_coeff[0].longterm_change_and_breeding;
