@@ -39,9 +39,8 @@ function Navbar() {
                 {authInformations?.login?.email && (
                   <h2>{authInformations?.login.email}</h2>
                 )}
-                {authInformations?.login.userType === "farmer" && (
-                  <>Farm Name</>
-                )}
+                {authInformations?.login.userType === "farmer" &&
+                  authInformations?.login.farmName && <>Farm Name</>}
                 <p>
                   {authInformations?.login.userType === "farmer" &&
                   authInformations?.login.farmName ? (

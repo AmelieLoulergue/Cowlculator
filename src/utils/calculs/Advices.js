@@ -77,10 +77,10 @@ const Advices = ({ result }) => {
 
     if (
       cattleDairy !== 0 &&
-      !findResponseElementById(
+      findResponseElementById(
         result,
         "farm_animals_dairy_cattle_feeding_practice"
-      )
+      ) === "NO"
     ) {
       advices.push({
         firstText:
@@ -94,10 +94,10 @@ const Advices = ({ result }) => {
 
     if (
       cattleDairy !== 0 &&
-      !findResponseElementById(
+      findResponseElementById(
         result,
         "farm_animals_dairy_cattle_specific_agent_practice"
-      )
+      ) === "NO"
     ) {
       advices.push({
         firstText:
@@ -110,10 +110,10 @@ const Advices = ({ result }) => {
     }
     if (
       cattleBeef !== 0 &&
-      !findResponseElementById(
+      findResponseElementById(
         result,
         "farm_animals_beef_cattle_feeding_practice"
-      )
+      ) === "NO"
     ) {
       advices.push({
         firstText:
@@ -129,10 +129,10 @@ const Advices = ({ result }) => {
       result.find((element) => element.id === "farm_crops")?.response &&
       result.find((element) => element.id === "farm_crops")?.response !==
         "NO" &&
-      !result.find(
+      result.find(
         (element) =>
           element.id === "farm_crops_degraded_land_restoration_practice"
-      )?.response
+      )?.response === "NO"
     ) {
       advices.push({
         firstText:
@@ -147,8 +147,8 @@ const Advices = ({ result }) => {
       result.find((element) => element.id === "farm_crops")?.response &&
       result.find((element) => element.id === "farm_crops")?.response !==
         "NO" &&
-      !result.find((element) => element.id === "farm_crops_manure_practice")
-        ?.response
+      result.find((element) => element.id === "farm_crops_manure_practice")
+        ?.response === "NO"
     ) {
       advices.push({
         firstText:
@@ -163,9 +163,9 @@ const Advices = ({ result }) => {
       result.find((element) => element.id === "farm_crops")?.response &&
       result.find((element) => element.id === "farm_crops")?.response !==
         "NO" &&
-      !result.find(
+      result.find(
         (element) => element.id === "farm_crops_land_use_change_practice"
-      )?.response
+      )?.response === "NO"
     ) {
       advices.push({
         firstText:
@@ -183,7 +183,7 @@ const Advices = ({ result }) => {
     }
     if (
       result.find((element) => element.id === "farm_crops_fertilizer")
-        ?.response &&
+        ?.response !== "NO" &&
       result.find((element) => element.id === "farm_crops")?.response !== "NO"
     ) {
       advices.push({
@@ -198,7 +198,7 @@ const Advices = ({ result }) => {
       </h1>
       <div className="card-section">
         {advices.map((advice, index) => (
-          <div className="card card-advice" key={index}>
+          <div className="card " key={index}>
             {advice.mitigatedCo2 ? (
               <div>
                 {advice.firstText}
